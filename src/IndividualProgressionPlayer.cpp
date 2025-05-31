@@ -1,9 +1,15 @@
+#include "GameTime.h"
 #include "IndividualProgression.h"
+#include "shared_mutex"
+#include "Playerbots.h"
 
 class IndividualPlayerProgression : public PlayerScript
 {
 
 private:
+    uint32 lastUpdateTime = 0;
+    std::unordered_map<ObjectGuid, uint32> lastCheckTime;
+    std::shared_mutex lastCheckTimeMutex;
     static bool IsTBCRaceStartingZone(uint32 mapid, float x, float y, float z)
     {
         Map const *map = sMapMgr->FindMap(mapid, 0);
@@ -18,20 +24,113 @@ public:
 
     void OnPlayerLogin(Player* player) override
     {
-        if (player->getClass() == CLASS_DEATH_KNIGHT && sIndividualProgression->deathKnightStartingProgression && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression)))
+        if (sIndividualProgression->deathKnightStartingProgression && player->getClass() == CLASS_DEATH_KNIGHT && (int32)player->GetLevel() == sConfigMgr->GetOption<int32>("StartHeroicPlayerLevel", 55) && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression)))
         {
             sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression));
         }
-        if (sIndividualProgression->startingProgression && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression)))
+        else if (sIndividualProgression->tbcRacesStartingProgression && (player->getRace() == RACE_BLOODELF || player->getRace() == RACE_DRAENEI) && (int32)player->GetLevel() == sConfigMgr->GetOption<int32>("StartPlayerLevel", 1) && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->tbcRacesStartingProgression)))
+        {
+            sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->tbcRacesStartingProgression));
+        }
+        else if (sIndividualProgression->cataRacesStartingProgression && (player->getRace() == RACE_GOBLIN || player->getRace() == RACE_WORGEN) && (int32)player->GetLevel() == sConfigMgr->GetOption<int32>("StartPlayerLevel", 1) && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->cataRacesStartingProgression)))
+        {
+            sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->cataRacesStartingProgression));
+        }
+        else if (!sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression)))
         {
             sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression));
         }
         sIndividualProgression->CheckAdjustments(player);
     }
 
+    void OnPlayerAfterUpdate(Player* player, uint32 /*diff*/) override
+    {
+        if (!sIndividualProgression->enabled)
+            return;
+
+        if (!player || player->IsDuringRemoveFromWorld() || !player->IsInWorld())
+            return;
+
+        if (!player->GetSession()->IsBot())
+            return;
+
+        uint32 now = GameTime::GetGameTimeMS().count();
+        ObjectGuid guid = player->GetGUID();
+
+        {
+            std::shared_lock<std::shared_mutex> readLock(lastCheckTimeMutex);
+
+            auto it = lastCheckTime.find(guid);
+            if (it != lastCheckTime.end() && it->second + 5000 > now)
+                return;
+        }
+        {
+            std::unique_lock<std::shared_mutex> writeLock(lastCheckTimeMutex);
+            lastCheckTime[guid] = now;
+        }
+
+        Player* master = player->GetGroup() && GET_PLAYERBOT_AI(player) ? GET_PLAYERBOT_AI(player)->GetMaster() : nullptr;
+        if (master && master != player && master->IsInWorld())
+        {
+            ProgressionState masterState = sIndividualProgression->GetCurrentProgressionState(master);
+            ProgressionState myState = sIndividualProgression->GetCurrentProgressionState(player);
+
+            if (myState != masterState)
+            {
+                sIndividualProgression->ForceUpdateProgressionState(player, masterState);
+            }
+
+            return;
+        }
+
+        if (!player->GetMapId() || !player->GetZoneId())
+            return;
+
+        ProgressionState progressionState;
+        std::vector<uint32> validAuras;
+        uint8 level = player->GetLevel();
+        ContentLevels mapEntryExpansion = CONTENT_1_60;
+        mapEntryExpansion = GetContentLevelsForMapAndZone(player->GetMapId(), player->GetZoneId());
+        if (level >= 81 || mapEntryExpansion == CONTENT_81_90)
+        {
+            progressionState = PROGRESSION_CATA_TIER_4;
+            validAuras = { 98652, 98653, 98654, 98655 };
+        }
+        else if ((level <= 80 && level >= 70) || mapEntryExpansion == CONTENT_71_80)
+        {
+            progressionState = PROGRESSION_WOTLK_TIER_4;
+            validAuras = { 98647, 98648, 98649, 98650, 98651 };
+        }
+        else if ((level <= 69 && level >= 60) || mapEntryExpansion == CONTENT_61_70)
+        {
+            progressionState = PROGRESSION_TBC_TIER_4;
+            validAuras = { 98642, 98643, 98644, 98645, 98646 };
+        }
+        else
+        {
+            progressionState = PROGRESSION_AQ;
+            validAuras = { 98636, 98637, 98638, 98639, 98640, 98641 };
+        }
+
+        bool hasValid = false;
+        for (uint32 auraId : validAuras)
+        {
+            if (player->HasAura(auraId))
+            {
+                hasValid = true;
+                break;
+            }
+        }
+
+        if (!hasValid)
+        {
+            sIndividualProgression->ForceUpdateProgressionState(player, progressionState);
+        }
+    }
+
     void OnPlayerSetMaxLevel(Player* player, uint32& maxPlayerLevel) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled)
         {
             return;
         }
@@ -48,6 +147,13 @@ public:
             if (sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL) > 70)
             {
                 maxPlayerLevel = 70;
+            }
+        }
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+        {
+            if (sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL) > 80)
+            {
+                maxPlayerLevel = 80;
             }
         }
     }
@@ -81,7 +187,9 @@ public:
         // Player is still in Vanilla content - give money at 60 level cap
         return ((!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && player->GetLevel() == 60) ||
                 // Player is in TBC content - give money at 70 level cap
-                (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && player->GetLevel() == 70));
+                (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && player->GetLevel() == 70) ||
+                // Player is in WotLK content - give money at 80 level cap
+                (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5) && player->GetLevel() == 80));
     }
 
     void OnPlayerAfterUpdateMaxHealth(Player* player, float& value) override
@@ -91,6 +199,15 @@ public:
         {
             return;
         }
+        if (!player)
+        {
+            return;
+        }
+        if (player->GetMap()->IsBattlegroundOrArena())
+        {
+            value *= 1;
+            return;
+        }
         float gearAdjustment = 0.0;
         for (uint8 i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
         {
@@ -98,15 +215,12 @@ public:
                 sIndividualProgression->ComputeGearTuning(player, gearAdjustment, item->GetTemplate());
         }
         // Player is still in Vanilla content - give Vanilla health adjustment
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
         {
-            float adjustmentAmount = 1.0f - sIndividualProgression->vanillaHealthAdjustment;
-            float applyPercent = ((player->GetLevel() - 10.0f) / 50.0f);
-            float computedAdjustment = player->GetLevel() > 10 ? 1.0f - applyPercent * adjustmentAmount : 1.0f;
-            value *= computedAdjustment;
+            value *= (sIndividualProgression->vanillaHealthAdjustment - gearAdjustment);
         }
             // Player is in TBC content - give TBC health adjustment
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
             value *= (sIndividualProgression->tbcHealthAdjustment - gearAdjustment);
         }
@@ -119,24 +233,28 @@ public:
 
     void OnPlayerQuestComputeXP(Player* player, Quest const* quest, uint32& xpValue) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->questXpFix || isExcludedFromProgression(player))
-        {
+        if (!sIndividualProgression->enabled)
             return;
-        }
-        if (sIndividualProgression->questXpMap.count(quest->GetQuestId()))
+
+        if (sIndividualProgression->questXpFix && sIndividualProgression->questXpMap.count(quest->GetQuestId()))
         {
             uint32 vanillaXpValue = sIndividualProgression->questXpMap[quest->GetQuestId()];
             if (player)
             {
                 uint32 originalXpValue = quest->XPValue(quest->GetQuestLevel() == -1 ? player->GetLevel() : quest->GetQuestLevel());
                 xpValue *= vanillaXpValue * 1.0 / originalXpValue;
+                xpValue = player->CalculateModulesXpExtras(xpValue);
             }
+        }
+        else if (!sIndividualProgression->questXpFix && player)
+        {
+            xpValue = player->CalculateModulesXpExtras(xpValue);
         }
     }
 
     void OnPlayerGiveXP(Player* player, uint32& amount, Unit* /*victim*/, uint8 xpSource) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled)
         {
             return;
         }
@@ -158,22 +276,20 @@ public:
                 pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
             amount = 0;
         }
-    }
-
-    bool isExcludedFromProgression(Player* player)
-    {
-        if(!sIndividualProgression->excludeAccounts) {
-            return false;
+            // Player is in WotLK content - do not give XP past level 80
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_CATA_TIER_1) && player->GetLevel() >= 80)
+        {
+            // Still award XP to pets - they won't be able to pass the player's level
+            Pet* pet = player->GetPet();
+            if (pet && xpSource == XPSOURCE_KILL)
+                pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
+            amount = 0;
         }
-        std::string accountName;
-        bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
-        std::regex excludedAccountsRegex (sIndividualProgression->excludedAccountsRegex);
-        return (accountNameFound && std::regex_match(accountName, excludedAccountsRegex));
     }
 
     bool OnPlayerBeforeTeleport(Player* player, uint32 mapid, float x, float y, float z, float /*orientation*/, uint32 /*options*/, Unit* /*target*/) override
     {
-        if (!sIndividualProgression->enabled || player->IsGameMaster() || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || player->IsGameMaster() || player->GetSession()->IsBot())
         {
             return true;
         }
@@ -211,6 +327,14 @@ public:
         {
             return false;
         }
+        if (mapid == MAP_MAGISTER_TERRACE && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
+        {
+            return false;
+        }
+        if (mapid == MAP_SUNWELL && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
+        {
+            return false;
+        }
         if (mapid == MAP_NORTHREND && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
             return false;
@@ -219,15 +343,34 @@ public:
         {
             return false;
         }
-        if ((mapid == MAP_TRIAL_OF_THE_CHAMPION || mapid == MAP_TRIAL_OF_THE_CRUSADER) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_2)){
-            return false;
-        }
-        // This will also restrict other Frozen Halls dungeons, because Forge of Souls must be completed first to access them
-        if ((mapid == MAP_ICECROWN_CITADEL || mapid == MAP_THE_FORGE_OF_SOULS) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        if (mapid == MAP_HALLS_OF_LIGHTNING && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_1))
         {
             return false;
         }
-        if (mapid == MAP_THE_RUBY_SANCTUM && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
+        if (mapid == MAP_HALLS_OF_STONE && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_1))
+        {
+            return false;
+        }
+        if ((mapid == MAP_TRIAL_OF_THE_CHAMPION || mapid == MAP_TRIAL_OF_THE_CRUSADER) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_2)){
+            return false;
+        }
+        if ((mapid == MAP_FORGE_OF_SOULS) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        {
+            return false;
+        }
+        if ((mapid == MAP_PIT_OF_SARON) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        {
+            return false;
+        }
+        if ((mapid == MAP_HALLS_OF_REFLECTION) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        {
+            return false;
+        }
+        if ((mapid == MAP_ICC) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        {
+            return false;
+        }
+        if (mapid == MAP_RUBY_SANCTUM && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
         {
             return false;
         }
@@ -249,7 +392,7 @@ public:
 
     void OnPlayerCompleteQuest(Player* player, Quest const* quest) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled)
         {
             return;
         }
@@ -288,7 +431,7 @@ public:
 
     bool OnPlayerCanGroupInvite(Player* player, std::string& membername) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->enforceGroupRules || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->enforceGroupRules || player->GetSession()->IsBot())
         {
             return true;
         }
@@ -300,7 +443,7 @@ public:
 
     bool OnPlayerCanGroupAccept(Player* player, Group* group) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->enforceGroupRules || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->enforceGroupRules || player->GetSession()->IsBot())
         {
             return true;
         }
@@ -309,8 +452,6 @@ public:
         uint8 otherPlayerState = groupLeader->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
         return (currentState == otherPlayerState);
     }
-
-
 
     void OnPlayerCreatureKill(Player* killer, Creature* killed) override
     {
@@ -331,9 +472,14 @@ public:
         }
     }
 
+    void OnPlayerAchievementComplete(Player* player, AchievementEntry const* achievement) override
+    {
+        sIndividualProgression->checkAchievementProgression(player, achievement);
+    }
+
     bool OnPlayerUpdateFishingSkill(Player* player, int32 /*skill*/, int32 /*zone_skill*/, int32 chance, int32 roll) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->fishingFix || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->fishingFix)
             return true;
         if (chance < roll)
             return false;
@@ -342,8 +488,10 @@ public:
 
     void OnPlayerUpdateArea(Player* player, uint32 /*oldArea*/, uint32 newArea) override
     {
+        sIndividualProgression->CheckAdjustments(player);
+
         switch (newArea) {
-			case AREA_DARKSHORE:
+            case AREA_DARKSHORE:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
@@ -358,7 +506,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_WILDBEND_RIVER:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
@@ -375,7 +523,7 @@ public:
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;            
-			case AREA_SILITHUS:
+            case AREA_SILITHUS:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
@@ -388,7 +536,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE_AQ, false);
                 }
-                break;	
+                break;    
             case AREA_HIVE_ASHI:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
@@ -402,7 +550,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE_AQ, false);
                 }
-                break;	
+                break;    
             case AREA_HIVE_ZORA:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
@@ -416,7 +564,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE_AQ, false);
                 }
-                break;	
+                break;    
             case AREA_HIVE_REGAL:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
@@ -430,7 +578,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE_AQ, false);
                 }
-                break;	
+                break;    
             case AREA_BOUGH_SHADOW:
                 if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
                 {
@@ -478,7 +626,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_ROCKTUSK_FARM:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -486,7 +634,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_TIRISFAL_GLADES:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -494,7 +642,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_RUINS_OF_LORDAERON:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -502,7 +650,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_MULGORE:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -510,7 +658,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_VALLEY_OF_HEROES:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -518,7 +666,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_ELWYNN_FOREST:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -526,7 +674,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_DUN_MOROGH:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -534,7 +682,7 @@ public:
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
-                break;	
+                break;    
             case AREA_TELDRASSIL:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40)))
                 {
@@ -776,45 +924,59 @@ public:
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
+            case AREA_DREADMIST_PEAK:
+            case AREA_FELFIRE_HILL:
+            case AREA_DEMON_FALL_CANYON:
+            case AREA_DEMON_FALL_RIDGE:
+            case AREA_STONEWATCH:
+            case AREA_STONEWATCH_TOWER:
+            case AREA_STONEWATCH_KEEP:
+            case AREA_VUL_GOL_OGRE_MOUND:
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
+                {
+                    player->PlayDirectMusic(MUSIC_RAGEFIRE_CHASM_HEROIC_LIGHT, player);
+                    player->GetMap()->SetZoneWeather(player->GetZoneId(), WEATHER_STATE_MEDIUM_RAIN, 0.5f);
+                }
+                break;
             default:
                 
-				uint32 mapid = player->GetMapId();
-			
-		        if (mapid == MAP_SHADOWFANG_KEEP && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                uint32 mapid = player->GetMapId();
+            
+                if (mapid == MAP_SHADOWFANG_KEEP && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_AQ);
                     player->CastSpell(player, IPP_PHASE, false);
                     break;
-                }	
-		        if (mapid == MAP_RAZORFEN_DOWNS && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                }    
+                if (mapid == MAP_RAZORFEN_DOWNS && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
                 {
                     player->RemoveAura(IPP_PHASE);
-					player->RemoveAura(IPP_PHASE_AQ);
-					player->CastSpell(player, IPP_PHASE, false);
-					break;
-				}	
-				if (mapid == MAP_SCARLET_MONASTERY && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
-				{
-					player->RemoveAura(IPP_PHASE);
-					player->RemoveAura(IPP_PHASE_AQ);
-					player->CastSpell(player, IPP_PHASE, false);
-					break;
-				}					
-				if (mapid == MAP_STRATHOLME && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
-				{
-					player->RemoveAura(IPP_PHASE);
-					player->RemoveAura(IPP_PHASE_AQ);
-					player->CastSpell(player, IPP_PHASE, false);
-					break;
-				}					
-				if (mapid == MAP_DIRE_MAUL && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
-				{
-					player->RemoveAura(IPP_PHASE);
-					player->RemoveAura(IPP_PHASE_AQ);
-					player->CastSpell(player, IPP_PHASE, false);
-					break;
-				}
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE, false);
+                    break;
+                }    
+                if (mapid == MAP_SCARLET_MONASTERY && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                {
+                    player->RemoveAura(IPP_PHASE);
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE, false);
+                    break;
+                }                    
+                if (mapid == MAP_STRATHOLME && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                {
+                    player->RemoveAura(IPP_PHASE);
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE, false);
+                    break;
+                }                    
+                if (mapid == MAP_DIRE_MAUL && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                {
+                    player->RemoveAura(IPP_PHASE);
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE, false);
+                    break;
+                }
                 
                 player->RemoveAura(IPP_PHASE);
                 player->RemoveAura(IPP_PHASE_AQ);
@@ -837,19 +999,6 @@ public:
             rDungeonId = 1000; // Set dungeon ID to an invalid value to cancel the queuing
             return;
         }
-
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
-        {
-            rDungeonId = RDF_CLASSIC;
-        }
-        else if ((rDungeonId == RDF_WRATH_OF_THE_LICH_KING && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
-        {
-            rDungeonId = RDF_THE_BURNING_CRUSADE;
-        }
-        else if ((rDungeonId == RDF_WRATH_OF_THE_LICH_KING_HEROIC && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
-        {
-            rDungeonId = RDF_THE_BURNING_CRUSADE_HEROIC;
-        }
     }
 
     bool OnPlayerCanEquipItem(Player* player, uint8 /*slot*/, uint16& /*dest*/, Item* pItem, bool /*swap*/, bool /*not_loading*/) override
@@ -859,150 +1008,150 @@ public:
             switch (pItem->GetTemplate()->RequiredHonorRank)
             {
                 case 5:
-                    if (!(player->HasTitle(PRIVATE) || player->HasTitle(SCOUT) || 
-                        player->HasTitle(CORPORAL) || player->HasTitle(GRUNT) || 
-                        player->HasTitle(SERGEANT) || player->HasTitle(SERGEANT_H) || 
-                        player->HasTitle(MASTER_SERGEANT) || player->HasTitle(SENIOR_SERGEANT) || 
-                        player->HasTitle(SERGEANT_MAJOR) || player->HasTitle(FIRST_SERGEANT) || 
-                        player->HasTitle(KNIGHT) || player->HasTitle(STONE_GUARD) || 
-                        player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) || 
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_PRIVATE) || player->HasTitle(TITLE_SCOUT) || 
+                        player->HasTitle(TITLE_CORPORAL) || player->HasTitle(TITLE_GRUNT) || 
+                        player->HasTitle(TITLE_SERGEANT) || player->HasTitle(TITLE_SERGEANT_H) || 
+                        player->HasTitle(TITLE_MASTER_SERGEANT) || player->HasTitle(TITLE_SENIOR_SERGEANT) || 
+                        player->HasTitle(TITLE_SERGEANT_MAJOR) || player->HasTitle(TITLE_FIRST_SERGEANT) || 
+                        player->HasTitle(TITLE_KNIGHT) || player->HasTitle(TITLE_STONE_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 6:
-                    if (!(player->HasTitle(CORPORAL) || player->HasTitle(GRUNT) ||
-                        player->HasTitle(SERGEANT) || player->HasTitle(SERGEANT_H) || 
-                        player->HasTitle(MASTER_SERGEANT) || player->HasTitle(SENIOR_SERGEANT) || 
-                        player->HasTitle(SERGEANT_MAJOR) || player->HasTitle(FIRST_SERGEANT) || 
-                        player->HasTitle(KNIGHT) || player->HasTitle(STONE_GUARD) || 
-                        player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) || 
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_CORPORAL) || player->HasTitle(TITLE_GRUNT) ||
+                        player->HasTitle(TITLE_SERGEANT) || player->HasTitle(TITLE_SERGEANT_H) || 
+                        player->HasTitle(TITLE_MASTER_SERGEANT) || player->HasTitle(TITLE_SENIOR_SERGEANT) || 
+                        player->HasTitle(TITLE_SERGEANT_MAJOR) || player->HasTitle(TITLE_FIRST_SERGEANT) || 
+                        player->HasTitle(TITLE_KNIGHT) || player->HasTitle(TITLE_STONE_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 7:
-                    if (!(player->HasTitle(SERGEANT) || player->HasTitle(SERGEANT_H) ||
-                        player->HasTitle(MASTER_SERGEANT) || player->HasTitle(SENIOR_SERGEANT) || 
-                        player->HasTitle(SERGEANT_MAJOR) || player->HasTitle(FIRST_SERGEANT) || 
-                        player->HasTitle(KNIGHT) || player->HasTitle(STONE_GUARD) || 
-                        player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) || 
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_SERGEANT) || player->HasTitle(TITLE_SERGEANT_H) ||
+                        player->HasTitle(TITLE_MASTER_SERGEANT) || player->HasTitle(TITLE_SENIOR_SERGEANT) || 
+                        player->HasTitle(TITLE_SERGEANT_MAJOR) || player->HasTitle(TITLE_FIRST_SERGEANT) || 
+                        player->HasTitle(TITLE_KNIGHT) || player->HasTitle(TITLE_STONE_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 8:
-                    if (!(player->HasTitle(MASTER_SERGEANT) || player->HasTitle(SENIOR_SERGEANT) ||
-                        player->HasTitle(SERGEANT_MAJOR) || player->HasTitle(FIRST_SERGEANT) || 
-                        player->HasTitle(KNIGHT) || player->HasTitle(STONE_GUARD) || 
-                        player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) || 
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_MASTER_SERGEANT) || player->HasTitle(TITLE_SENIOR_SERGEANT) ||
+                        player->HasTitle(TITLE_SERGEANT_MAJOR) || player->HasTitle(TITLE_FIRST_SERGEANT) || 
+                        player->HasTitle(TITLE_KNIGHT) || player->HasTitle(TITLE_STONE_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 9:
-                    if (!(player->HasTitle(SERGEANT_MAJOR) || player->HasTitle(FIRST_SERGEANT) ||
-                        player->HasTitle(KNIGHT) || player->HasTitle(STONE_GUARD) || 
-                        player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) || 
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_SERGEANT_MAJOR) || player->HasTitle(TITLE_FIRST_SERGEANT) ||
+                        player->HasTitle(TITLE_KNIGHT) || player->HasTitle(TITLE_STONE_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 10:
-                    if (!(player->HasTitle(KNIGHT) || player->HasTitle(STONE_GUARD) ||
-                        player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) || 
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_KNIGHT) || player->HasTitle(TITLE_STONE_GUARD) ||
+                        player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) || 
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 11:
-                    if (!(player->HasTitle(KNIGHT_LIEUTENANT) || player->HasTitle(BLOOD_GUARD) ||
-                        player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) || 
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_KNIGHT_LIEUTENANT) || player->HasTitle(TITLE_BLOOD_GUARD) ||
+                        player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) || 
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 12:
-                    if (!(player->HasTitle(KNIGHT_CAPTAIN) || player->HasTitle(LEGIONNAIRE) ||
-                        player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) || 
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_KNIGHT_CAPTAIN) || player->HasTitle(TITLE_LEGIONNAIRE) ||
+                        player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) || 
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 13:
-                    if (!(player->HasTitle(KNIGHT_CHAMPION) || player->HasTitle(CENTURION) ||
-                        player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) || 
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_KNIGHT_CHAMPION) || player->HasTitle(TITLE_CENTURION) ||
+                        player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) || 
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 14:
-                    if (!(player->HasTitle(LIEUTENANT_COMMANDER) || player->HasTitle(CHAMPION) ||
-                        player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) || 
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_LIEUTENANT_COMMANDER) || player->HasTitle(TITLE_CHAMPION) ||
+                        player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) || 
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 15:
-                    if (!(player->HasTitle(COMMANDER) || player->HasTitle(LIEUTENANT_GENERAL) ||
-                        player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) || 
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_COMMANDER) || player->HasTitle(TITLE_LIEUTENANT_GENERAL) ||
+                        player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) || 
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 16:
-                    if (!(player->HasTitle(MARSHAL) || player->HasTitle(GENERAL) ||
-                        player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) || 
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_MARSHAL) || player->HasTitle(TITLE_GENERAL) ||
+                        player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) || 
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 17:
-                    if (!(player->HasTitle(FIELD_MARSHAL) || player->HasTitle(WARLORD) ||
-                        player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_FIELD_MARSHAL) || player->HasTitle(TITLE_WARLORD) ||
+                        player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 case 18:
-                    if (!(player->HasTitle(GRAND_MARSHAL) || player->HasTitle(HIGH_WARLORD)))
+                    if (!(player->HasTitle(TITLE_GRAND_MARSHAL) || player->HasTitle(TITLE_HIGH_WARLORD)))
                         return false;
                     break;
                 default:
@@ -1022,7 +1171,7 @@ public:
     bool CanAccountCreateCharacter(uint32 accountId, uint8 charRace, uint8 charClass) override
     {
         if ((!sIndividualProgression->enabled) ||
-            (charRace != RACE_DRAENEI && charRace != RACE_BLOODELF && charClass != CLASS_DEATH_KNIGHT) ||
+            (charRace != RACE_DRAENEI && charRace != RACE_BLOODELF && charRace != RACE_GOBLIN && charRace != RACE_WORGEN && charClass != CLASS_DEATH_KNIGHT) ||
             (!sIndividualProgression->tbcRacesProgressionLevel && !sIndividualProgression->deathKnightProgressionLevel))
         {
             return true;
@@ -1033,6 +1182,16 @@ public:
             if (sIndividualProgression->tbcRacesProgressionLevel)
             {
                 if (highestProgression < sIndividualProgression->tbcRacesProgressionLevel)
+                {
+                    return false;
+                }
+            }
+        }
+        if (charRace == RACE_GOBLIN || charRace == RACE_WORGEN)
+        {
+            if (sIndividualProgression->cataRacesProgressionLevel)
+            {
+                if (highestProgression < sIndividualProgression->cataRacesProgressionLevel)
                 {
                     return false;
                 }
@@ -1063,12 +1222,15 @@ private:
         {
             return;
         }
-		
-        if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_NAXX40) || ((!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_NAXX40)) && (pet->GetLevel() < 61)))
+        if (pet->GetMap()->IsBattlegroundOrArena())
+        {
+            return;
+        }
+        if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_NAXX40))
         {
             AdjustVanillaStats(pet);
         }
-        else if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_TBC_TIER_5) || ((!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_TBC_TIER_5)) && (pet->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_TBC_TIER_5))
         {
             AdjustTBCStats(pet);
         }
@@ -1077,7 +1239,7 @@ private:
     static void AdjustVanillaStats(Pet* pet)
     {
         float adjustmentValue = -100.0f * (1.0f - sIndividualProgression->vanillaPowerAdjustment);
-        float adjustmentApplyPercent = (pet->GetLevel() - 10.0f) / 50.0f;
+        float adjustmentApplyPercent = 1;
         float computedAdjustment = pet->GetLevel() > 10 ? (adjustmentValue * adjustmentApplyPercent) : 0;
         float hpAdjustmentValue = -100.0f * (1.0f - sIndividualProgression->vanillaHealthAdjustment);
         float hpAdjustment = pet->GetLevel() > 10 ? (hpAdjustmentValue * adjustmentApplyPercent) : 0;
@@ -1136,7 +1298,7 @@ public:
     void ModifyHealReceived(Unit* /*target*/, Unit *healer, uint32 &heal, SpellInfo const *spellInfo) override
     {
         // Skip potions, bandages, percentage based heals like Rune Tap, etc.
-        if (!sIndividualProgression->enabled || spellInfo->HasAttribute(SPELL_ATTR0_NO_IMMUNITIES) || spellInfo->Mechanic == MECHANIC_BANDAGE)
+        if (!sIndividualProgression->enabled || !healer || !heal || !spellInfo || spellInfo->HasAttribute(SPELL_ATTR0_NO_IMMUNITIES) || spellInfo->Mechanic == MECHANIC_BANDAGE)
         {
             return;
         }
@@ -1154,8 +1316,10 @@ public:
             return;
         }
 
-        if (!healer)
+        if (healer->GetMap()->IsBattlegroundOrArena())
+        {
             return;
+        }
 
         bool isPet = healer->GetOwner() && healer->GetOwner()->GetTypeId() == TYPEID_PLAYER;
         if (!isPet && healer->GetTypeId() != TYPEID_PLAYER)
@@ -1164,11 +1328,11 @@ public:
         }
         Player* player = isPet ? healer->GetOwner()->ToPlayer() : healer->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)))
         {
             heal *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaHealingAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
         {
             heal *= (sIndividualProgression->tbcHealingAdjustment - gearAdjustment);
         }
@@ -1180,20 +1344,24 @@ public:
 
     void ModifySpellDamageTaken(Unit* /*target*/, Unit* attacker, int32& damage, SpellInfo const* /*spellInfo*/) override
     {
-        if (!sIndividualProgression->enabled || !attacker)
+        if (!sIndividualProgression->enabled || !attacker || !damage)
             return;
         bool isPet = attacker->GetOwner() && attacker->GetOwner()->GetTypeId() == TYPEID_PLAYER;
         if (!isPet && attacker->GetTypeId() != TYPEID_PLAYER)
         {
             return;
         }
+        if (attacker->GetMap()->IsBattlegroundOrArena())
+        {
+            return;
+        }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -1205,7 +1373,7 @@ public:
 
     void ModifyMeleeDamage(Unit* /*target*/, Unit* attacker, uint32& damage) override
     {
-        if (!sIndividualProgression->enabled || !attacker)
+        if (!sIndividualProgression->enabled || !attacker || !damage)
             return;
 
         bool isPet = attacker->GetOwner() && attacker->GetOwner()->GetTypeId() == TYPEID_PLAYER;
@@ -1215,11 +1383,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -1231,7 +1399,7 @@ public:
 
     void ModifyPeriodicDamageAurasTick(Unit* /*target*/, Unit* attacker, uint32& damage, SpellInfo const* spellInfo) override
     {
-        if (!sIndividualProgression->enabled || !attacker)
+        if (!sIndividualProgression->enabled || !attacker || !damage || !spellInfo)
             return;
 
         // Do not apply reductions to healing auras - these are already modified in the ModifyHeal hook
@@ -1250,11 +1418,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -1263,7 +1431,6 @@ public:
             damage *= 1.0f - gearAdjustment;
         }
     }
-		
 };
 
 void AddSC_mod_individual_progression_player()

@@ -3,6 +3,7 @@
  */
 
 #include "IndividualProgression.h"
+#include "Unit.h"
 
 IndividualProgression* IndividualProgression::instance()
 {
@@ -10,11 +11,21 @@ IndividualProgression* IndividualProgression::instance()
     return &instance;
 }
 
+ProgressionState IndividualProgression::GetCurrentProgressionState(Player* player) const
+{
+    if (!player)
+        return PROGRESSION_START;
+
+    uint32 val = player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
+    return static_cast<ProgressionState>(val);
+}
+
 
 bool IndividualProgression::hasPassedProgression(Player* player, ProgressionState state) const
 {
     if (progressionLimit && state >= progressionLimit)
         return false;
+
     return player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value >= state;
 }
 
@@ -25,18 +36,29 @@ bool IndividualProgression::isBeforeProgression(Player* player, ProgressionState
 
 void IndividualProgression::UpdateProgressionState(Player* player, ProgressionState newState) const
 {
+    if (!player || !newState)
+        return;
+
     if (progressionLimit && newState > progressionLimit)
         return;
+
     uint8 currentState = player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
     if (newState > currentState)
     {
         player->UpdatePlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE, newState);
     }
+    sIndividualProgression->removeAllProgressionSpells(player);
+    sIndividualProgression->setProgressionSpell(player, newState);
 }
 
 void IndividualProgression::ForceUpdateProgressionState(Player* player, ProgressionState newState)
 {
+    if (!player || !newState)
+        return;
+
     player->UpdatePlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE, newState);
+    sIndividualProgression->removeAllProgressionSpells(player);
+    sIndividualProgression->setProgressionSpell(player, newState);
 }
 
 void IndividualProgression::CheckAdjustments(Player* player) const
@@ -45,11 +67,16 @@ void IndividualProgression::CheckAdjustments(Player* player) const
     {
         return;
     }
-    if (!hasPassedProgression(player, PROGRESSION_NAXX40) || (!hasPassedProgression(player, PROGRESSION_NAXX40) && (player->GetLevel() < 61)))
+    if (player->GetMap()->IsBattlegroundOrArena())
+    {
+        AdjustWotLKStats(player);
+        return;
+    }
+    if (!hasPassedProgression(player, PROGRESSION_NAXX40))
     {
         AdjustVanillaStats(player);
     }
-    else if (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (player->GetLevel() < 71)))
+    else if (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
     {
         AdjustTBCStats(player);
     }
@@ -91,11 +118,11 @@ void IndividualProgression::ComputeGearTuning(Player* player, float& computedAdj
 void IndividualProgression::AdjustVanillaStats(Player* player) const
 {
     float adjustmentValue = -100.0f * (1.0f - vanillaPowerAdjustment);
-    float adjustmentApplyPercent = (player->GetLevel() - 10.0f) / 50.0f;
+    float adjustmentApplyPercent = 1;
     float computedAdjustment = player->GetLevel() > 10 ? (adjustmentValue * adjustmentApplyPercent) : 0;
 
     float adjustmentHealingValue = -100.0f * (1.0f - vanillaHealingAdjustment);
-    float adjustmentHealingApplyPercent = (player->GetLevel() - 10.0f) / 50.0f;
+    float adjustmentHealingApplyPercent = 1;
     float computedHealingAdjustment = player->GetLevel() > 10 ? (adjustmentHealingValue * adjustmentHealingApplyPercent) : 0;
 
     AdjustStats(player, computedAdjustment, computedHealingAdjustment);
@@ -135,9 +162,12 @@ void IndividualProgression::AdjustWotLKStats(Player* player) const
 
 void IndividualProgression::AdjustStats(Player* player, float computedAdjustment, float /*computedHealingAdjustment*/)
 {
-    // int32 bp0 = 0; // This would be the damage taken adjustment value, but we are already adjusting health
+    if (!player || player->IsDuringRemoveFromWorld() || !player->IsInWorld())
+        return;
+
+    //int32 bp0 = 0; // This would be the damage taken adjustment value, but we are already adjusting health
     auto bp1 = static_cast<int32>(computedAdjustment);
-    // auto bp1Healing = static_cast<int32>(computedHealingAdjustment);
+    //auto bp1Healing = static_cast<int32>(computedHealingAdjustment);
 
     player->RemoveAura(ABSORB_SPELL);
     player->CastCustomSpell(player, ABSORB_SPELL, &bp1, nullptr, nullptr, false);
@@ -145,7 +175,7 @@ void IndividualProgression::AdjustStats(Player* player, float computedAdjustment
 
 float IndividualProgression::ComputeVanillaAdjustment(uint8 playerLevel, float configAdjustmentValue)
 {
-    float adjustmentApplyPercent = (float(playerLevel) - 10.0f) / 50.0f;
+    float adjustmentApplyPercent = 1;
     return playerLevel > 10 ? 1.0f - ((1.0f - configAdjustmentValue) * adjustmentApplyPercent) : 1;
 }
 
@@ -210,14 +240,99 @@ bool IndividualProgression::hasCustomProgressionValue(uint32 creatureEntry)
 
 void IndividualProgression::checkKillProgression(Player* killer, Creature* killed)
 {
+    if (!enabled)
+    {
+        return;
+    }
+
+    if (hasCustomProgressionValue(killed->GetEntry()))
+    {
+        UpdateProgressionState(killer, static_cast<ProgressionState>(customProgressionMap[killed->GetEntry()]));
+        return;
+    }
+
+    if (disableDefaultProgression)
+    {
+        return;
+    }
+    switch (killed->GetEntry())
+    {
+        case PB_RAGNAROS:
+            UpdateProgressionState(killer, PROGRESSION_MOLTEN_CORE);
+            break;
+        case PB_ONYXIA:
+            UpdateProgressionState(killer, PROGRESSION_ONYXIA);
+            break;
+        case PB_NEFARIAN:
+            UpdateProgressionState(killer, PROGRESSION_BLACKWING_LAIR);
+            break;
+        case PB_CTHUN:
+            UpdateProgressionState(killer, PROGRESSION_AQ);
+            break;
+        case PB_KELTHUZAD_40:
+            UpdateProgressionState(killer, PROGRESSION_NAXX40);
+            break;
+        case PB_MALCHEZAAR:
+            UpdateProgressionState(killer, PROGRESSION_TBC_TIER_1);
+            break;
+        case PB_KAELTHAS:
+            UpdateProgressionState(killer, PROGRESSION_TBC_TIER_2);
+            break;
+        case PB_ILLIDAN:
+            UpdateProgressionState(killer, PROGRESSION_TBC_TIER_3);
+            break;
+        case PB_ZULJIN:
+            UpdateProgressionState(killer, PROGRESSION_TBC_TIER_4);
+            break;
+        case PB_KILJAEDEN:
+            UpdateProgressionState(killer, PROGRESSION_TBC_TIER_5);
+            break;
+        case PB_KELTHUZAD:
+            UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_1);
+            break;
+        case PB_YOGGSARON:
+            UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_2);
+            break;
+        case PB_ANUBARAK:
+            UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_3);
+            break;
+        case PB_LICH_KING:
+            UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_4);
+            break;
+        case PB_HALION:
+            UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_5);
+            break;
+    }
+}
+
+
+void IndividualProgression::setProgressionSpell(Player* player, ProgressionState newState)
+{
+    if (!player || player->IsDuringRemoveFromWorld() || !player->IsInWorld())
+        return;
+
+    uint32 spellId = 98636 + static_cast<uint32>(newState);
+    player->CastSpell(player, spellId, true);
+}
+
+
+void IndividualProgression::removeAllProgressionSpells(Player* player)
+{
+    if (!player || player->IsDuringRemoveFromWorld() || !player->IsInWorld())
+        return;
+
+    for (uint32 spellId = 98636; spellId <= 98655; ++spellId)
+    {
+        if (player->HasAura(spellId))
+            player->RemoveAurasDueToSpell(spellId);
+    }
+}
+
+
+void IndividualProgression::checkAchievementProgression(Player* player, AchievementEntry const* achievement)
+{
         if (!enabled)
         {
-            return;
-        }
-
-        if (hasCustomProgressionValue(killed->GetEntry()))
-        {
-            UpdateProgressionState(killer, static_cast<ProgressionState>(customProgressionMap[killed->GetEntry()]));
             return;
         }
 
@@ -225,52 +340,54 @@ void IndividualProgression::checkKillProgression(Player* killer, Creature* kille
         {
             return;
         }
-        switch (killed->GetEntry())
+        switch (achievement->ID)
         {
-            case RAGNAROS:
-                UpdateProgressionState(killer, PROGRESSION_MOLTEN_CORE);
+            case PA_RAGNAROS:
+                UpdateProgressionState(player, PROGRESSION_MOLTEN_CORE);
                 break;
-            case ONYXIA:
-                UpdateProgressionState(killer, PROGRESSION_ONYXIA);
+            case PA_ONYXIA:
+                UpdateProgressionState(player, PROGRESSION_ONYXIA);
                 break;
-            case NEFARIAN:
-                UpdateProgressionState(killer, PROGRESSION_BLACKWING_LAIR);
+            case PA_NEFARIAN:
+                UpdateProgressionState(player, PROGRESSION_BLACKWING_LAIR);
                 break;
-            case CTHUN:
-                UpdateProgressionState(killer, PROGRESSION_AQ);
+            case PA_CTHUN:
+                UpdateProgressionState(player, PROGRESSION_AQ);
                 break;
-            case KELTHUZAD_40:
-                UpdateProgressionState(killer, PROGRESSION_NAXX40);
+            case PA_MALCHEZAAR:
+                UpdateProgressionState(player, PROGRESSION_TBC_TIER_1);
                 break;
-            case MALCHEZAAR:
-                UpdateProgressionState(killer, PROGRESSION_TBC_TIER_1);
+            case PA_KAELTHAS:
+                UpdateProgressionState(player, PROGRESSION_TBC_TIER_2);
                 break;
-            case KAELTHAS:
-                UpdateProgressionState(killer, PROGRESSION_TBC_TIER_2);
+            case PA_ILLIDAN:
+                UpdateProgressionState(player, PROGRESSION_TBC_TIER_3);
                 break;
-            case ILLIDAN:
-                UpdateProgressionState(killer, PROGRESSION_TBC_TIER_3);
+            case PA_ZULJIN:
+                UpdateProgressionState(player, PROGRESSION_TBC_TIER_4);
                 break;
-            case ZULJIN:
-                UpdateProgressionState(killer, PROGRESSION_TBC_TIER_4);
+            case PA_KILJAEDEN:
+                UpdateProgressionState(player, PROGRESSION_TBC_TIER_5);
                 break;
-            case KILJAEDEN:
-                UpdateProgressionState(killer, PROGRESSION_TBC_TIER_5);
+            case PA_KELTHUZAD_10:
+            case PA_KELTHUZAD_25:
+                UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_1);
                 break;
-            case KELTHUZAD:
-                UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_1);
+            case PA_YOGGSARON_10:
+            case PA_YOGGSARON_25:
+                UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_2);
                 break;
-            case YOGGSARON:
-                UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_2);
+            case PA_ANUBARAK_10:
+            case PA_ANUBARAK_25:
+                UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_3);
                 break;
-            case ANUBARAK:
-                UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_3);
+            case PA_LICH_KING_10:
+            case PA_LICH_KING_25:
+                UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_4);
                 break;
-            case LICH_KING:
-                UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_4);
-                break;
-            case HALION:
-                UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_5);
+            case PA_HALION_10:
+            case PA_HALION_25:
+                UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_5);
                 break;
         }
 }
@@ -302,6 +419,9 @@ private:
         sIndividualProgression->repeatableVanillaQuestsXp = sConfigMgr->GetOption<bool>("IndividualProgression.RepeatableVanillaQuestsXP", true);
         sIndividualProgression->disableDefaultProgression = sConfigMgr->GetOption<bool>("IndividualProgression.DisableDefaultProgression", false);
         sIndividualProgression->tbcRacesProgressionLevel = sConfigMgr->GetOption<uint8>("IndividualProgression.TbcRacesUnlockProgression", 0);
+        sIndividualProgression->tbcRacesStartingProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.TbcRacesStartingProgression", 6);
+        sIndividualProgression->cataRacesProgressionLevel = sConfigMgr->GetOption<uint8>("IndividualProgression.CataRacesUnlockProgression", 0);
+        sIndividualProgression->cataRacesStartingProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.CataRacesStartingProgression", 6);
         sIndividualProgression->deathKnightProgressionLevel = sConfigMgr->GetOption<uint8>("IndividualProgression.DeathKnightUnlockProgression", 11);
         sIndividualProgression->deathKnightStartingProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.DeathKnightStartingProgression", 11);
         sIndividualProgression->LoadCustomProgressionEntries(sConfigMgr->GetOption<std::string>("IndividualProgression.CustomProgression", ""));
@@ -309,6 +429,7 @@ private:
         sIndividualProgression->pvpGearRequirements = sConfigMgr->GetOption<bool>("IndividualProgression.PvPGearRequirements", true);
         sIndividualProgression->excludeAccounts = sConfigMgr->GetOption<bool>("IndividualProgression.ExcludeAccounts", false);
         sIndividualProgression->excludedAccountsRegex = sConfigMgr->GetOption<std::string>("IndividualProgression.ExcludedAccountsRegex", "");
+        sIndividualProgression->progressionSetterAlwaysVisible = sConfigMgr->GetOption<bool>("IndividualProgression.ProgressionSetterAlwaysVisible", false);
     }
 
     static void LoadXpValues()

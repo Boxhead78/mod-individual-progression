@@ -3,10 +3,6 @@
 -- creature_template 351097
 -- Add MapDifficulty DBC Override
 -- https://wow.tools/dbc/?dbc=mapdifficulty&build=10.0.0.44895#page=1&search=533
-DELETE FROM `mapdifficulty_dbc` WHERE `ID` = 754;
-INSERT INTO `mapdifficulty_dbc` (`ID`, `MapID`, `Difficulty`, `Message_Lang_enUS`, `Message_Lang_Mask`, `RaidDuration`, `MaxPlayers`, `Difficultystring`) VALUES
-(754, 533, 2, 'You must be level 60 and in a raid group to enter.', 16712190, 604800, 40, 'RAID_DIFFICULTY_40PLAYER');
-
 -- Remove exit teleport and replace with script
 DELETE FROM `areatrigger_teleport` WHERE `ID` IN (5196, 5197, 5198, 5199, 4156);
 
@@ -19,10 +15,10 @@ INSERT INTO `areatrigger_scripts` (`entry`, `ScriptName`) VALUES
 
 DELETE FROM `areatrigger_scripts` WHERE `entry` IN (5191, 5192, 5193, 5194);
 INSERT INTO `areatrigger_scripts` (`entry`, `ScriptName`) VALUES
-(5191, 'naxx_northrend_entrance'),
-(5192, 'naxx_northrend_entrance'),
-(5193, 'naxx_northrend_entrance'),
-(5194, 'naxx_northrend_entrance');
+(5191, 'naxx_entrance'),
+(5192, 'naxx_entrance'),
+(5193, 'naxx_entrance'),
+(5194, 'naxx_entrance');
 
 -- Update spawnMask of all creatures to 10man + 25man
 UPDATE `creature` SET `spawnMask` = 3 WHERE `spawnMask` = 7 AND `map` = 533;
@@ -37,11 +33,6 @@ UPDATE `gameobject` SET `spawnMask` = 3 WHERE `id` IN (202278, 202277);
 
 DELETE FROM `dungeon_access_template` WHERE `id`=122;
 INSERT INTO `dungeon_access_template` (`id`, `map_id`, `difficulty`, `min_level`, `max_level`, `min_avg_item_level`, `comment`) VALUES (122, 533, 2, 60, 0, 0, 'Naxxramas - 40man');
-
--- Naxx40 Dungeon DBC entries (helps Autobalance work correctly)
-DELETE FROM `lfgdungeons_dbc` WHERE `ID` = 1001;
-INSERT INTO `lfgdungeons_dbc` VALUES
-(1001,"Naxxramas (Vanilla)","","","","","","","","","","","","","","","",16712190,60,83,60,60,83,533,2,0,2,-1,"",2,0,9,"","","","","","","","","","","","","","","","",16712188);
 
 DELETE FROM `dungeonencounter_dbc` WHERE `ID` BETWEEN 1001 AND 1015;
 INSERT INTO `dungeonencounter_dbc` (`ID`, `MapID`, `Difficulty`, `OrderIndex`, `Bit`, `Name_Lang_enUS`, `Name_Lang_enGB`, `Name_Lang_koKR`, `Name_Lang_frFR`, `Name_Lang_deDE`, `Name_Lang_enCN`, `Name_Lang_zhCN`, `Name_Lang_enTW`, `Name_Lang_zhTW`, `Name_Lang_esES`, `Name_Lang_esMX`, `Name_Lang_ruRU`, `Name_Lang_ptPT`, `Name_Lang_ptBR`, `Name_Lang_itIT`, `Name_Lang_Unk`, `Name_Lang_Mask`, `SpellIconID`) VALUES

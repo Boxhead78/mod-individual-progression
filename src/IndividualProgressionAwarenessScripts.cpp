@@ -1,5 +1,5 @@
 #include "IndividualProgression.h"
-
+#include "SmartAI.h"
 
 class gobject_ipp_preaq : public GameObjectScript
 {
@@ -215,13 +215,24 @@ class npc_ipp_preaq : public CreatureScript
 public:
     npc_ipp_preaq() : CreatureScript("npc_ipp_preaq") { }
 
-    struct npc_ipp_preaqAI: ScriptedAI
+    struct npc_ipp_preaqAI: SmartAI
     {
-        explicit npc_ipp_preaqAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_preaqAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -241,13 +252,24 @@ class npc_ipp_we : public CreatureScript
 public:
     npc_ipp_we() : CreatureScript("npc_ipp_we") { }
 
-    struct npc_ipp_weAI: ScriptedAI
+    struct npc_ipp_weAI: SmartAI
     {
-        explicit npc_ipp_weAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_weAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -276,13 +298,24 @@ class npc_ipp_aq : public CreatureScript
 public:
     npc_ipp_aq() : CreatureScript("npc_ipp_aq") { }
 
-    struct npc_ipp_aqAI: ScriptedAI
+    struct npc_ipp_aqAI: SmartAI
     {
-        explicit npc_ipp_aqAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_aqAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -302,9 +335,20 @@ class npc_ipp_si : public CreatureScript
 public:
     npc_ipp_si() : CreatureScript("npc_ipp_si") { }
 
-    struct npc_ipp_siAI: ScriptedAI
+    struct npc_ipp_siAI: SmartAI
     {
-        explicit npc_ipp_siAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_siAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
@@ -337,13 +381,24 @@ class npc_ipp_pre_naxx40 : public CreatureScript
 public:
     npc_ipp_pre_naxx40() : CreatureScript("npc_ipp_pre_naxx40") { }
 
-    struct npc_ipp_pre_naxx40AI: ScriptedAI
+    struct npc_ipp_pre_naxx40AI: SmartAI
     {
-        explicit npc_ipp_pre_naxx40AI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_pre_naxx40AI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -363,13 +418,24 @@ class npc_ipp_naxx40 : public CreatureScript
 public:
     npc_ipp_naxx40() : CreatureScript("npc_ipp_naxx40") { }
 
-    struct npc_ipp_naxx40AI: ScriptedAI
+    struct npc_ipp_naxx40AI: SmartAI
     {
-        explicit npc_ipp_naxx40AI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_naxx40AI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -389,13 +455,24 @@ class npc_ipp_tbc : public CreatureScript
 public:
     npc_ipp_tbc() : CreatureScript("npc_ipp_tbc") { }
 
-    struct npc_ipp_tbcAI: ScriptedAI
+    struct npc_ipp_tbcAI: SmartAI
     {
-        explicit npc_ipp_tbcAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_tbcAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -415,13 +492,24 @@ class npc_ipp_tbc_pre_t4 : public CreatureScript
 public:
     npc_ipp_tbc_pre_t4() : CreatureScript("npc_ipp_tbc_pre_t4") { }
 
-    struct npc_ipp_tbc_pre_t4AI: ScriptedAI
+    struct npc_ipp_tbc_pre_t4AI: SmartAI
     {
-        explicit npc_ipp_tbc_pre_t4AI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_tbc_pre_t4AI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -441,13 +529,24 @@ class npc_ipp_tbc_t4 : public CreatureScript
 public:
     npc_ipp_tbc_t4() : CreatureScript("npc_ipp_tbc_t4") { }
 
-    struct npc_ipp_tbc_t4AI: ScriptedAI
+    struct npc_ipp_tbc_t4AI: SmartAI
     {
-        explicit npc_ipp_tbc_t4AI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_tbc_t4AI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -467,13 +566,24 @@ class npc_ipp_tbc_t5 : public CreatureScript
 public:
     npc_ipp_tbc_t5() : CreatureScript("npc_ipp_tbc_t5") { }
 
-    struct npc_ipp_tbc_t5AI: ScriptedAI
+    struct npc_ipp_tbc_t5AI: SmartAI
     {
-        explicit npc_ipp_tbc_t5AI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_tbc_t5AI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -493,13 +603,24 @@ class npc_ipp_wotlk : public CreatureScript
 public:
     npc_ipp_wotlk() : CreatureScript("npc_ipp_wotlk") { }
 
-    struct npc_ipp_wotlkAI: ScriptedAI
+    struct npc_ipp_wotlkAI: SmartAI
     {
-        explicit npc_ipp_wotlkAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_wotlkAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -519,13 +640,24 @@ class npc_ipp_wotlk_ulduar : public CreatureScript
 public:
     npc_ipp_wotlk_ulduar() : CreatureScript("npc_ipp_wotlk_ulduar") { }
 
-    struct npc_ipp_wotlk_ulduarAI: ScriptedAI
+    struct npc_ipp_wotlk_ulduarAI: SmartAI
     {
-        explicit npc_ipp_wotlk_ulduarAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_wotlk_ulduarAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -545,13 +677,24 @@ class npc_ipp_wotlk_totc : public CreatureScript
 public:
     npc_ipp_wotlk_totc() : CreatureScript("npc_ipp_wotlk_totc") { }
 
-    struct npc_ipp_wotlk_totcAI: ScriptedAI
+    struct npc_ipp_wotlk_totcAI: SmartAI
     {
-        explicit npc_ipp_wotlk_totcAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_wotlk_totcAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -571,13 +714,24 @@ class npc_ipp_wotlk_icc : public CreatureScript
 public:
     npc_ipp_wotlk_icc() : CreatureScript("npc_ipp_wotlk_icc") { }
 
-    struct npc_ipp_wotlk_iccAI: ScriptedAI
+    struct npc_ipp_wotlk_iccAI: SmartAI
     {
-        explicit npc_ipp_wotlk_iccAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_wotlk_iccAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -597,13 +751,24 @@ class npc_ipp_ds2 : public CreatureScript
 public:
     npc_ipp_ds2() : CreatureScript("npc_ipp_ds2") { }
 
-    struct npc_ipp_ds2AI: ScriptedAI
+    struct npc_ipp_ds2AI: SmartAI
     {
-        explicit npc_ipp_ds2AI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_ds2AI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
@@ -619,6 +784,263 @@ public:
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_ipp_ds2AI(creature);
+    }
+};
+
+class npc_ipp_ragefire_chasm : public CreatureScript
+{
+public:
+    npc_ipp_ragefire_chasm() : CreatureScript("npc_ipp_ragefire_chasm") { }
+
+    struct npc_ipp_ragefire_chasmAI: SmartAI
+    {
+        explicit npc_ipp_ragefire_chasmAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            if (target->GetTypeId() == TYPEID_UNIT && target->GetEntry() == 3986)
+            {
+                return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_4);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_ragefire_chasmAI(creature);
+    }
+};
+
+class npc_ipp_ragefire_chasm_remove : public CreatureScript
+{
+public:
+    npc_ipp_ragefire_chasm_remove() : CreatureScript("npc_ipp_ragefire_chasm_remove") { }
+
+    struct npc_ipp_ragefire_chasm_removeAI: SmartAI
+    {
+        explicit npc_ipp_ragefire_chasm_removeAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return !sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_4);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_ragefire_chasm_removeAI(creature);
+    }
+};
+
+class npc_ipp_individual_progression_setter : public CreatureScript
+{
+public:
+    npc_ipp_individual_progression_setter() : CreatureScript("npc_ipp_individual_progression_setter") { }
+
+    struct npc_ipp_individual_progression_setterAI: ScriptedAI
+    {
+        explicit npc_ipp_individual_progression_setterAI(Creature* creature) : ScriptedAI(creature) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || sIndividualProgression->progressionSetterAlwaysVisible)
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            uint8 highestProgression = sIndividualProgression->GetAccountProgression(target->GetSession()->GetAccountId());
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_CATA_TIER_1) || (sIndividualProgression->progressionLimit && highestProgression >= sIndividualProgression->progressionLimit))
+                return true;
+            else
+                return false;
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_individual_progression_setterAI(creature);
+    }
+};
+
+class npc_ipp_westfall_riot : public CreatureScript
+{
+public:
+    npc_ipp_westfall_riot() : CreatureScript("npc_ipp_westfall_riot") { }
+
+    struct npc_ipp_westfall_riotAI: SmartAI
+    {
+        explicit npc_ipp_westfall_riotAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->GetQuestRewardStatus(50109);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_westfall_riotAI(creature);
+    }
+};
+
+class npc_ipp_duskwood_worgen : public CreatureScript
+{
+public:
+    npc_ipp_duskwood_worgen() : CreatureScript("npc_ipp_duskwood_worgen") { }
+
+    struct npc_ipp_duskwood_worgenAI: SmartAI
+    {
+        explicit npc_ipp_duskwood_worgenAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->HasAura(98927);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_duskwood_worgenAI(creature);
+    }
+};
+
+class npc_ipp_hillsbrad_presence : public CreatureScript
+{
+public:
+npc_ipp_hillsbrad_presence() : CreatureScript("npc_ipp_hillsbrad_presence") { }
+
+    struct npc_ipp_hillsbrad_presenceAI: SmartAI
+    {
+        explicit npc_ipp_hillsbrad_presenceAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->HasAura(98997);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_hillsbrad_presenceAI(creature);
+    }
+};
+
+class npc_ipp_magatha_tn : public CreatureScript
+{
+public:
+    npc_ipp_magatha_tn() : CreatureScript("npc_ipp_magatha_tn") { }
+
+    struct npc_ipp_magatha_tnAI: SmartAI
+    {
+        explicit npc_ipp_magatha_tnAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->GetQuestRewardStatus(50233);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_magatha_tnAI(creature);
     }
 };
 
@@ -647,4 +1069,11 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_wotlk_totc();
     new npc_ipp_wotlk_icc();
     new npc_ipp_ds2();
+    new npc_ipp_individual_progression_setter();
+    new npc_ipp_ragefire_chasm();
+    new npc_ipp_ragefire_chasm_remove();
+    new npc_ipp_westfall_riot();
+    new npc_ipp_duskwood_worgen();
+    new npc_ipp_hillsbrad_presence();
+    new npc_ipp_magatha_tn();
 }

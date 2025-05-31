@@ -159,6 +159,7 @@ enum NXNPCs
     // Frogger
     NPC_LIVING_POISON               = 16027,
     NPC_NAXXRAMAS_TRIGGER           = 16082,
+    NPC_NAXXRAMAS_TRIGGER_60        = 351042,
     NPC_MR_BIGGLESWORTH             = 16998,
 
     // Patchwerk

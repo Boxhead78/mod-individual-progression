@@ -790,13 +790,14 @@ INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSki
 /*-- Riding --*/
 DELETE FROM `npc_trainer` WHERE `ID`=450000;
 INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`) VALUES
-(450000, 33388, 900000, 762, 0, 40),
+(450000, 33388, 900000, 762, 0, 30),
 (450000, 33391, 9000000, 762, 75, 60);
 
+/*
 -- Delete added riding trainers
 DELETE FROM creature WHERE `id1` IN (35093, 35100);
 DELETE FROM creature_addon WHERE `guid` IN (88165, 88166);
-
+*/
 
 -- Optional - delete TBC trainers added in WotLK 3.1
 DELETE FROM creature WHERE `id1` IN 
