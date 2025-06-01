@@ -327,11 +327,11 @@ public:
         {
             return false;
         }
-        if (mapid == MAP_MAGISTER_TERRACE && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
+        if (mapid == MAP_MAGISTERS_TERRACE && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
         {
             return false;
         }
-        if (mapid == MAP_SUNWELL && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
+        if (mapid == MAP_THE_SUNWELL && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
         {
             return false;
         }
@@ -354,7 +354,7 @@ public:
         if ((mapid == MAP_TRIAL_OF_THE_CHAMPION || mapid == MAP_TRIAL_OF_THE_CRUSADER) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_2)){
             return false;
         }
-        if ((mapid == MAP_FORGE_OF_SOULS) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        if ((mapid == MAP_THE_FORGE_OF_SOULS) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
         {
             return false;
         }
@@ -366,11 +366,11 @@ public:
         {
             return false;
         }
-        if ((mapid == MAP_ICC) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+        if ((mapid == MAP_ICECROWN_CITADEL) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
         {
             return false;
         }
-        if (mapid == MAP_RUBY_SANCTUM && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
+        if (mapid == MAP_THE_RUBY_SANCTUM && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
         {
             return false;
         }
@@ -1328,11 +1328,11 @@ public:
         }
         Player* player = isPet ? healer->GetOwner()->ToPlayer() : healer->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
         {
             heal *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaHealingAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
             heal *= (sIndividualProgression->tbcHealingAdjustment - gearAdjustment);
         }
@@ -1361,7 +1361,7 @@ public:
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -1383,11 +1383,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -1418,11 +1418,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }

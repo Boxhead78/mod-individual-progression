@@ -85,31 +85,6 @@ enum ProgressionQuestIDs
     QUEST_WINTERFALL      = 6241
 };
 
-enum ProgressionMaps
-{
-    MAP_BLACKWING_LAIR        = 469,
-    MAP_ZUL_GURUB             = 309,
-    MAP_AQ_20                 = 509,
-    MAP_AQ_40                 = 531,
-    MAP_OUTLANDS              = 530,
-    MAP_NAXXRAMAS             = 533,
-    MAP_ZUL_AMAN              = 568,
-    MAP_MAGISTER_TERRACE      = 585,
-    MAP_SUNWELL               = 580,
-    MAP_NORTHREND             = 571,
-    MAP_HALLS_OF_LIGHTNING    = 602,
-    MAP_HALLS_OF_STONE        = 599,
-    MAP_ULDUAR                = 603,
-    MAP_TRIAL_OF_THE_CRUSADER = 649,
-    MAP_TRIAL_OF_THE_CHAMPION = 650,
-    MAP_HALLS_OF_REFLECTION   = 668,
-    MAP_FORGE_OF_SOULS        = 632,
-    MAP_PIT_OF_SARON          = 658,
-    MAP_ICC                   = 631,
-    MAP_RAGEFIRE_CHASM        = 389,
-    MAP_RUBY_SANCTUM          = 724
-};
-
 enum ProgressionZones
 {
     ZONE_AZUREMYST       = 3524,
@@ -196,7 +171,7 @@ enum ProgressionState : uint8
     PROGRESSION_WOTLK_TIER_2    = 14, // Ulduar
     PROGRESSION_WOTLK_TIER_3    = 15, // TotC
     PROGRESSION_WOTLK_TIER_4    = 16, // ICC
-    PROGRESSION_WOTLK_TIER_5    = 17  // Ruby Sanctum
+    PROGRESSION_WOTLK_TIER_5    = 17, // Ruby Sanctum
     PROGRESSION_CATA_TIER_1     = 18, // Baradin Hold, Blackwing Descent
     PROGRESSION_CATA_TIER_2     = 19, // The Bastion of Twilight, Throne of the Four Winds
     PROGRESSION_CATA_TIER_3     = 20, // Firelands
