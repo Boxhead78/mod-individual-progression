@@ -321,7 +321,7 @@ void IndividualProgression::removeAllProgressionSpells(Player* player)
     if (!player || player->IsDuringRemoveFromWorld() || !player->IsInWorld())
         return;
 
-    for (uint32 spellId = 98636; spellId <= 98655; ++spellId)
+    for (uint32 spellId = 98636; spellId <= 98657; ++spellId)
     {
         if (player->HasAura(spellId))
             player->RemoveAurasDueToSpell(spellId);

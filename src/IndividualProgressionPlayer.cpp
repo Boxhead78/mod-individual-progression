@@ -94,22 +94,22 @@ public:
         if (level >= 81 || mapEntryExpansion == CONTENT_81_90)
         {
             progressionState = PROGRESSION_CATA_TIER_4;
-            validAuras = { 98652, 98653, 98654, 98655 };
+            validAuras = { 98654, 98655, 98656, 98657 };
         }
         else if ((level <= 80 && level >= 70) || mapEntryExpansion == CONTENT_71_80)
         {
             progressionState = PROGRESSION_WOTLK_TIER_4;
-            validAuras = { 98647, 98648, 98649, 98650, 98651 };
+            validAuras = { 98649, 98650, 98651, 98652, 98653 };
         }
         else if ((level <= 69 && level >= 60) || mapEntryExpansion == CONTENT_61_70)
         {
             progressionState = PROGRESSION_TBC_TIER_4;
-            validAuras = { 98642, 98643, 98644, 98645, 98646 };
+            validAuras = { 98643, 98644, 98645, 98646, 98647, 98648 };
         }
         else
         {
             progressionState = PROGRESSION_AQ;
-            validAuras = { 98636, 98637, 98638, 98639, 98640, 98641 };
+            validAuras = { 98636, 98637, 98638, 98639, 98640, 98641, 98642 };
         }
 
         bool hasValid = false;
