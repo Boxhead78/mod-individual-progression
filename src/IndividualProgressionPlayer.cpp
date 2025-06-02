@@ -104,12 +104,12 @@ public:
         else if ((level <= 69 && level >= 60) || mapEntryExpansion == CONTENT_61_70)
         {
             progressionState = PROGRESSION_TBC_TIER_4;
-            validAuras = { 98643, 98644, 98645, 98646, 98647, 98648 };
+            validAuras = { 98644, 98645, 98646, 98647, 98648 };
         }
         else
         {
             progressionState = PROGRESSION_AQ;
-            validAuras = { 98636, 98637, 98638, 98639, 98640, 98641, 98642 };
+            validAuras = { 98636, 98637, 98638, 98639, 98640, 98641, 98642, 98643 };
         }
 
         bool hasValid = false;
