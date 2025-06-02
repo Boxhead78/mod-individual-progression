@@ -71,18 +71,20 @@ enum BuffSpells
     SPELL_RUNE_TAP       = 48982,
     SPELL_LIFE_STEAL     = 20004,
     IPP_PHASE            = 89509,
-    IPP_PHASE_AQ         = 89511
+    IPP_PHASE_II         = 89511
 };
 
 enum ProgressionQuestIDs
 {
-    MIGHT_OF_KALIMDOR     = 8742,
-    BANG_A_GONG           = 108743,
-    CHAOS_AND_DESTRUCTION = 108744,
-    QUEST_MORROWGRAIN     = 3803,
+
     QUEST_TROLL_NECKLACE  = 2881,
+    QUEST_MORROWGRAIN     = 3803,
     QUEST_DEADWOOD        = 6221,
-    QUEST_WINTERFALL      = 6241
+    QUEST_WINTERFALL      = 6241,
+    MIGHT_OF_KALIMDOR     = 8742,
+    INTO_THE_BREACH       = 10259,
+    BANG_A_GONG           = 108743,
+    CHAOS_AND_DESTRUCTION = 108744
 };
 
 enum ProgressionZones
@@ -152,30 +154,31 @@ enum ProgressionSettings
     SETTING_PROGRESSION_STATE = 0
 };
 
-enum ProgressionState : uint8
+enum ProgressionState : uint8         // Progression stands for what has been completed
 {
     PROGRESSION_START           = 0,
-    PROGRESSION_MOLTEN_CORE     = 1,
-    PROGRESSION_ONYXIA          = 2,
-    PROGRESSION_BLACKWING_LAIR  = 3,  // AQ War effort, AQ quest line
-    PROGRESSION_PRE_AQ          = 4,  // AQ outdoors war 
-    PROGRESSION_AQ_WAR          = 5,  // AQ gates open, raid available
-    PROGRESSION_AQ              = 6,  
-    PROGRESSION_NAXX40          = 7,
-    PROGRESSION_TBC_TIER_1      = 8,  // Karazhan, Gruul's Lair, Magtheridon's Lair
-    PROGRESSION_TBC_TIER_2      = 9,  // Serpentshrine Cavern, Tempest Keep
-    PROGRESSION_TBC_TIER_3      = 10, // Hyjal Summit and Black Temple
-    PROGRESSION_TBC_TIER_4      = 11, // Zul'Aman
-    PROGRESSION_TBC_TIER_5      = 12, // Sunwell Plateau
-    PROGRESSION_WOTLK_TIER_1    = 13, // WotLK Naxx, EoE, OS
-    PROGRESSION_WOTLK_TIER_2    = 14, // Ulduar
-    PROGRESSION_WOTLK_TIER_3    = 15, // TotC
-    PROGRESSION_WOTLK_TIER_4    = 16, // ICC
-    PROGRESSION_WOTLK_TIER_5    = 17, // Ruby Sanctum
-    PROGRESSION_CATA_TIER_1     = 18, // Baradin Hold, Blackwing Descent
-    PROGRESSION_CATA_TIER_2     = 19, // The Bastion of Twilight, Throne of the Four Winds
-    PROGRESSION_CATA_TIER_3     = 20, // Firelands
-    PROGRESSION_CATA_TIER_4     = 21, // Dragonsoul
+    PROGRESSION_MOLTEN_CORE     = 1,  // BWL available
+    PROGRESSION_ONYXIA          = 2, 
+    PROGRESSION_BLACKWING_LAIR  = 3,  // ZG, AQ War effort, AQ quest line
+    PROGRESSION_PRE_AQ          = 4,  // AQ gates open, raids available, AQ outdoors war 
+    PROGRESSION_AQ_WAR          = 5,  // AQ gates open, raids, Field Duty quests and all Cenarion Hold npcs available
+    PROGRESSION_AQ              = 6,  // Naxx40 and Scourge Invasion
+    PROGRESSION_NAXX40          = 7,  // Into the Breach
+    PROGRESSION_PRE_TBC         = 8,  // Karazhan, Gruul's Lair, Magtheridon's Lair
+    PROGRESSION_TBC_TIER_1      = 9,  // Serpentshrine Cavern, Tempest Keep
+    PROGRESSION_TBC_TIER_2      = 10, // Hyjal Summit and Black Temple
+    PROGRESSION_TBC_TIER_3      = 11, // Zul'Aman
+    PROGRESSION_TBC_TIER_4      = 12, // Sunwell Plateau
+    PROGRESSION_TBC_TIER_5      = 13, // WotLK Naxx, EoE, OS
+    PROGRESSION_WOTLK_TIER_1    = 14, // Ulduar
+    PROGRESSION_WOTLK_TIER_2    = 15, // TotC
+    PROGRESSION_WOTLK_TIER_3    = 16, // ICC
+    PROGRESSION_WOTLK_TIER_4    = 17, // Ruby Sanctum
+    PROGRESSION_WOTLK_TIER_5    = 18 ,
+    PROGRESSION_CATA_TIER_1     = 19, // Baradin Hold, Blackwing Descent
+    PROGRESSION_CATA_TIER_2     = 20, // The Bastion of Twilight, Throne of the Four Winds
+    PROGRESSION_CATA_TIER_3     = 21, // Firelands
+    PROGRESSION_CATA_TIER_4     = 22, // Dragonsoul
 };
 
 enum RandomDungeonIds : uint16

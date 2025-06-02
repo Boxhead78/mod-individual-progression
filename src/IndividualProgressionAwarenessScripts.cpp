@@ -174,7 +174,7 @@ public:
                 return true;
             }
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40);
+            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_TBC);
         }
     };
 
@@ -477,7 +477,7 @@ public:
                 return true;
             }
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40);
+            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_TBC);
         }
     };
 
