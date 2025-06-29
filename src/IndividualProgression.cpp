@@ -97,8 +97,8 @@ void IndividualProgression::ApplyGearStatsTuning(Player* player, float& computed
 {
     if (item->Quality != ITEM_QUALITY_EPIC) // Non-endgame gear is okay
         return;
-    if ((hasPassedProgression(player, PROGRESSION_NAXX40) && (item->RequiredLevel <= 60)) ||
-        (hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (item->RequiredLevel <=70)))
+    if ((hasPassedProgression(player, PROGRESSION_NAXX40) && (item->RequiredLevel <= IP_LEVEL_VANILLA)) ||
+        (hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (item->RequiredLevel <= IP_LEVEL_TBC)))
     {
         computedAdjustment -= (100.0f * previousGearTuning);
     }
@@ -108,8 +108,8 @@ void IndividualProgression::ComputeGearTuning(Player* player, float& computedAdj
 {
     if (item->Quality != ITEM_QUALITY_EPIC) // Non-endgame gear is okay
         return;
-    if ((hasPassedProgression(player, PROGRESSION_NAXX40) && (item->RequiredLevel <= 60)) ||
-        (hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (item->RequiredLevel <=70)))
+    if ((hasPassedProgression(player, PROGRESSION_NAXX40) && (item->RequiredLevel <= IP_LEVEL_VANILLA)) ||
+        (hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (item->RequiredLevel <= IP_LEVEL_TBC)))
     {
         computedAdjustment += previousGearTuning;
     }

@@ -116,8 +116,8 @@ IndividualProgression.HunterPetLevelFix = 1
 #                     before being able to use the teleportation crystal in EPL. This is consistent behavior with other Vanilla raids (MC, BL).
 #                     If disabled, players can enter Naxx 40 through the crystal as soon as they are attuned and they have reached the correct
 #                     progression level - no Stratholme run will be required.
-#        Default:     1 - Enabled
-#                     0 - Disabled
+#        Default:     0 - Disabled
+#                     1 - Enabled
 #
 IndividualProgression.RequireNaxxStrathEntrance = 0
 
@@ -193,7 +193,7 @@ IndividualProgression.ProgressionLimit = 18
 #
 #
 #        Default:   0 - Disabled
-#                   1-16 - Starting progression stage
+#                   1-18 - Starting progression stage
 #
 IndividualProgression.StartingProgression = 0
 
@@ -226,8 +226,7 @@ IndividualProgression.RepeatableVanillaQuestsXP = 0
 #                     Please refer to IndividualProgression.h/ProgressionState enum for progression stage values.
 #
 #        Default:   0 - TBC Races always available
-#                   6 - Classic must be complete to create TBC Races
-#                   1-16 - Required progression level to create TBC Race characters
+#                   1-18 - Required progression level to create TBC Race characters
 #
 #
 IndividualProgression.TbcRacesUnlockProgression = 6
@@ -275,19 +274,19 @@ IndividualProgression.CataRacesStartingProgression = 16
 #                     This is due to the game not having a proper progression balancing for Death Knights until WotLK,
 #                     but please adjust as desired.
 #
-#        Default:   11 - TBC must be completed to create Death Knights
+#        Default:   13 - TBC must be completed to create Death Knights
 #                   0 - Disabled
-#                   1-16 - Required progression
+#                   1-18 - Required progression
 #
-IndividualProgression.DeathKnightUnlockProgression = 11
+IndividualProgression.DeathKnightUnlockProgression = 13
 
 # IndividualProgression.DeathKnightStartingProgression
 #        Description: The progression level at which Death Knight characters will begin.
 #
-#        Default:   11 - Death Knights start at the beginning of WotLK
-#                   0-16 - Progression level
+#        Default:   13 - Death Knights start at the beginning of WotLK
+#                   0-18 - Progression level
 #
-IndividualProgression.DeathKnightStartingProgression = 11
+IndividualProgression.DeathKnightStartingProgression = 13
 
 # IndividualProgression.DisableDefaultProgression
 #        Description: Disable the regular progression flow, so progression must be advanced through custom creature progression entries

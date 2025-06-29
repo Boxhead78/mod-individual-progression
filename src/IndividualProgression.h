@@ -21,6 +21,13 @@
 
 typedef std::unordered_map<uint32, uint32> questXpMapType;
 
+enum ProgressionLevelThreshold
+{
+    IP_LEVEL_VANILLA = 60,
+    IP_LEVEL_TBC     = 70,
+    IP_LEVEL_WOTLK   = 80
+};
+
 enum ProgressionBossIDs
 {
     PB_RAGNAROS = 11502,
@@ -76,7 +83,6 @@ enum BuffSpells
 
 enum ProgressionQuestIDs
 {
-
     QUEST_TROLL_NECKLACE  = 2881,
     QUEST_MORROWGRAIN     = 3803,
     QUEST_DEADWOOD        = 6221,
@@ -85,6 +91,28 @@ enum ProgressionQuestIDs
     INTO_THE_BREACH       = 10259,
     BANG_A_GONG           = 108743,
     CHAOS_AND_DESTRUCTION = 108744
+};
+
+enum ProgressionQuests
+{
+    PROGRESSION_FLAG_MC       = 66001,
+    PROGRESSION_FLAG_ONYXIA   = 66002,
+    PROGRESSION_FLAG_BWL      = 66003,
+    PROGRESSION_FLAG_PRE_AQ   = 66004,
+    PROGRESSION_FLAG_AQ_WAR   = 66005,
+    PROGRESSION_FLAG_AQ       = 66006,
+    PROGRESSION_FLAG_NAXX40   = 66007,
+    PROGRESSION_FLAG_PRE_TBC  = 66008,
+	PROGRESSION_FLAG_TBC_T1   = 66009,
+	PROGRESSION_FLAG_TBC_T2   = 66010,
+	PROGRESSION_FLAG_TBC_T3   = 66011,
+	PROGRESSION_FLAG_TBC_T4   = 66012,
+	PROGRESSION_FLAG_TBC_T5   = 66013,
+	PROGRESSION_FLAG_WOTLK_T1 = 66014,
+	PROGRESSION_FLAG_WOTLK_T2 = 66015,
+	PROGRESSION_FLAG_WOTLK_T3 = 66016,
+	PROGRESSION_FLAG_WOTLK_T4 = 66017,
+	PROGRESSION_FLAG_WOTLK_T5 = 66018
 };
 
 enum ProgressionZones
@@ -101,7 +129,7 @@ enum ProgressionZones
 
 enum ProgressionAreas
 {
-	AREA_AZSHARA                         = 16,
+    AREA_AZSHARA                         = 16,
     AREA_THE_DARK_PORTAL                 = 72,
     AREA_DREADMAUL_ROCK                  = 249,
     AREA_RUINS_OF_THAURISSAN             = 250,
@@ -121,7 +149,7 @@ enum ProgressionAreas
     AREA_DREADMAUL_POST                  = 1439,
     AREA_SERPENTS_COIL                   = 1440,
     AREA_VALLEY_OF_HEROES                = 1611,
-	AREA_BROKEN_PILLAR                   = 1938,
+    AREA_BROKEN_PILLAR                   = 1938,
     AREA_ABYSSAL_SANDS                   = 1939,
     AREA_TWILIGHT_VALE                   = 2077,
     AREA_FROSTSABER_ROCK                 = 2241,
