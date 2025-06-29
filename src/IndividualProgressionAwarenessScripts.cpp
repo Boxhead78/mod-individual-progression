@@ -844,7 +844,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            if (player->IsGameMaster() || me->IsInCombat())
             {
                 return true;
             }
@@ -881,7 +881,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            if (player->IsGameMaster() || me->IsInCombat())
             {
                 return true;
             }
@@ -918,7 +918,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            if (player->IsGameMaster() || me->IsInCombat())
             {
                 return true;
             }
@@ -955,7 +955,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            if (player->IsGameMaster() || me->IsInCombat())
             {
                 return true;
             }
@@ -992,7 +992,7 @@ npc_ipp_hillsbrad_presence() : CreatureScript("npc_ipp_hillsbrad_presence") { }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            if (player->IsGameMaster() || me->IsInCombat())
             {
                 return true;
             }
@@ -1029,7 +1029,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            if (player->IsGameMaster() || me->IsInCombat())
             {
                 return true;
             }
