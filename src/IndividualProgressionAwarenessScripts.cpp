@@ -841,6 +841,74 @@ public:
     }
 };
 
+class npc_training_dummy_ipp_wotlk : public CreatureScript
+{
+public:
+    npc_training_dummy_ipp_wotlk() : CreatureScript("npc_training_dummy_ipp_wotlk") { }
+
+    struct npc_training_dummy_ipp_wotlkAI : ScriptedAI
+    {
+        /*explicit*/ npc_training_dummy_ipp_wotlkAI(Creature* creature) : ScriptedAI(creature)
+        {
+            me->SetCombatMovement(false);
+            me->ApplySpellImmune(0, 0, 98, true); // ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true)
+        }
+
+        uint32 resetTimer;
+
+        void Reset() override
+        {
+            me->CastSpell(me, 61204, true); // CastSpell(me, SPELL_STUN_PERMANENT, true)
+            resetTimer = 5000;
+        }
+
+        void EnterEvadeMode(EvadeReason why) override
+        {
+            if (!_EnterEvadeMode(why))
+                return;
+
+            Reset();
+        }
+
+        void DamageTaken(Unit*, uint32& damage, DamageEffectType, SpellSchoolMask) override
+        {
+            resetTimer = 5000;
+            damage = 0;
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            if (!UpdateVictim())
+                return;
+
+            if (resetTimer <= diff)
+            {
+                EnterEvadeMode(EVADE_REASON_NO_HOSTILES);
+                resetTimer = 5000;
+            }
+            else
+                resetTimer -= diff;
+        }
+
+        void MoveInLineOfSight(Unit* /*who*/) override { }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_5);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_training_dummy_ipp_wotlkAI(creature);
+    }
+};
+
 class npc_ipp_individual_progression_setter : public CreatureScript
 {
 public:
@@ -1223,6 +1291,7 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_wotlk_totc();
     new npc_ipp_wotlk_icc();
     new npc_ipp_ds2();
+    // new npc_training_dummy_ipp_wotlk();
     new npc_ipp_individual_progression_setter();
     new npc_ipp_ragefire_chasm();
     new npc_ipp_ragefire_chasm_remove();
