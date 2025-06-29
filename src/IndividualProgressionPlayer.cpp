@@ -137,24 +137,15 @@ public:
 
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
         {
-            if (sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL) > 60)
-            {
-                maxPlayerLevel = 60;
-            }
+            maxPlayerLevel = 60;
         }
         else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
-            if (sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL) > 70)
-            {
-                maxPlayerLevel = 70;
-            }
+            maxPlayerLevel = 70;
         }
         else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
         {
-            if (sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL) > 80)
-            {
-                maxPlayerLevel = 80;
-            }
+            maxPlayerLevel = 80;
         }
     }
 
