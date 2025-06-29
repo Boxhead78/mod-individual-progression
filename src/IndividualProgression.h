@@ -25,7 +25,8 @@ enum ProgressionLevelThreshold
 {
     IP_LEVEL_VANILLA = 60,
     IP_LEVEL_TBC     = 70,
-    IP_LEVEL_WOTLK   = 80
+    IP_LEVEL_WOTLK   = 80,
+    IP_LEVEL_CATA    = 90
 };
 
 enum ProgressionBossIDs
