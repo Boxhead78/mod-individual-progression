@@ -1044,6 +1044,104 @@ public:
     }
 };
 
+class npc_ipp_rhea_tn : public CreatureScript
+{
+public:
+    npc_ipp_rhea_tn() : CreatureScript("npc_ipp_rhea_tn") { }
+
+    struct npc_ipp_rhea_tnAI: SmartAI
+    {
+        explicit npc_ipp_rhea_tnAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || me->IsInCombat())
+                return true;
+
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return !(target->GetQuestRewardStatus(50365) || target->GetQuestStatus(50365) == QUEST_STATUS_COMPLETE);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_rhea_tnAI(creature);
+    }
+};
+
+class npc_ipp_rheastrasza_tn : public CreatureScript
+{
+public:
+    npc_ipp_rheastrasza_tn() : CreatureScript("npc_ipp_rheastrasza_tn") { }
+
+    struct npc_ipp_rheastrasza_tnAI: SmartAI
+    {
+        explicit npc_ipp_rheastrasza_tnAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || me->IsInCombat())
+                return true;
+
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->GetQuestRewardStatus(50365) || target->GetQuestStatus(50365) == QUEST_STATUS_COMPLETE;
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_rheastrasza_tnAI(creature);
+    }
+};
+
+class gobject_ipp_trove_of_the_watchers : public GameObjectScript
+{
+public:
+    gobject_ipp_trove_of_the_watchers() : GameObjectScript("gobject_ipp_trove_of_the_watchers") { }
+
+    struct gobject_ipp_trove_of_the_watchersAI: GameObjectAI
+    {
+        explicit gobject_ipp_trove_of_the_watchersAI(GameObject* object) : GameObjectAI(object) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->GetQuestRewardStatus(50374) || target->GetQuestStatus(50374) == QUEST_STATUS_COMPLETE;
+        }
+    };
+
+    GameObjectAI* GetAI(GameObject* object) const override
+    {
+        return new gobject_ipp_trove_of_the_watchersAI(object);
+    }
+};
+
 // Add all scripts in one
 void AddSC_mod_individual_progression_awareness()
 {
@@ -1076,4 +1174,7 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_duskwood_worgen();
     new npc_ipp_hillsbrad_presence();
     new npc_ipp_magatha_tn();
+    new npc_ipp_rhea_tn();
+    new npc_ipp_rheastrasza_tn();
+    new gobject_ipp_trove_of_the_watchers();
 }
