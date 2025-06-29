@@ -36,7 +36,7 @@ bool IndividualProgression::isBeforeProgression(Player* player, ProgressionState
 
 void IndividualProgression::UpdateProgressionState(Player* player, ProgressionState newState) const
 {
-    if (!player || !newState)
+    if (!player)
         return;
 
     if (progressionLimit && newState > progressionLimit)
@@ -53,7 +53,7 @@ void IndividualProgression::UpdateProgressionState(Player* player, ProgressionSt
 
 void IndividualProgression::ForceUpdateProgressionState(Player* player, ProgressionState newState)
 {
-    if (!player || !newState)
+    if (!player)
         return;
 
     player->UpdatePlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE, newState);
