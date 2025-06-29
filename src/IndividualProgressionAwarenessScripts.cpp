@@ -787,6 +787,36 @@ public:
     }
 };
 
+class npc_ipp_individual_progression_setter : public CreatureScript
+{
+public:
+    npc_ipp_individual_progression_setter() : CreatureScript("npc_ipp_individual_progression_setter") { }
+
+    struct npc_ipp_individual_progression_setterAI: ScriptedAI
+    {
+        explicit npc_ipp_individual_progression_setterAI(Creature* creature) : ScriptedAI(creature) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || sIndividualProgression->progressionSetterAlwaysVisible)
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            uint8 highestProgression = sIndividualProgression->GetAccountProgression(target->GetSession()->GetAccountId());
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_CATA_TIER_1) || (sIndividualProgression->progressionLimit && highestProgression >= sIndividualProgression->progressionLimit))
+                return true;
+            else
+                return false;
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_individual_progression_setterAI(creature);
+    }
+};
+
 class npc_ipp_ragefire_chasm : public CreatureScript
 {
 public:
@@ -863,36 +893,6 @@ public:
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_ipp_ragefire_chasm_removeAI(creature);
-    }
-};
-
-class npc_ipp_individual_progression_setter : public CreatureScript
-{
-public:
-    npc_ipp_individual_progression_setter() : CreatureScript("npc_ipp_individual_progression_setter") { }
-
-    struct npc_ipp_individual_progression_setterAI: ScriptedAI
-    {
-        explicit npc_ipp_individual_progression_setterAI(Creature* creature) : ScriptedAI(creature) { };
-
-        bool CanBeSeen(Player const* player) override
-        {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || sIndividualProgression->progressionSetterAlwaysVisible)
-            {
-                return true;
-            }
-            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            uint8 highestProgression = sIndividualProgression->GetAccountProgression(target->GetSession()->GetAccountId());
-            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_CATA_TIER_1) || (sIndividualProgression->progressionLimit && highestProgression >= sIndividualProgression->progressionLimit))
-                return true;
-            else
-                return false;
-        }
-    };
-
-    CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new npc_ipp_individual_progression_setterAI(creature);
     }
 };
 
