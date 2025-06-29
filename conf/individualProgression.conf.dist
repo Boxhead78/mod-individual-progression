@@ -182,9 +182,9 @@ IndividualProgression.SimpleConfigOverride = 0
 #                     For example, a value of 6 will limit players to Vanilla content.
 #
 #        Default:   0 - Disabled
-#                   1-16 - Maximum progression stage
+#                   1-18 - Maximum progression stage
 #
-IndividualProgression.ProgressionLimit = 17
+IndividualProgression.ProgressionLimit = 18
 
 # IndividualProgression.StartingProgression
 #        Description: If enabled, players will begin at this progression stage.
@@ -335,22 +335,6 @@ IndividualProgression.PvPGearRequirements = 0
 #                     1 - Disabled
 #
 IndividualProgression.DisableRDF = 0
-
-# IndividualProgression.ExcludeAccounts
-#        Description: Enable or disable the exclusion of accounts from Individual Progression.
-#        This is useful for accounts that are used for bots, testing, or other purposes where progression should not be enforced.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-IndividualProgression.ExcludeAccounts = 0
-
-# IndividualProgression.ExcludedAccountsRegex
-#        Description: A regular expression to match account names that should be excluded from Individual Progression.
-#        This is useful for accounts that are used for bots, testing, or other purposes where progression should not be enforced.
-#        Only used if ExcludeAccounts is enabled.
-#        Default:     ""
-#
-IndividualProgression.ExcludedAccountsRegex = ""
 
 #
 # IndividualProgression.ProgressionSetterAlwaysVisible
