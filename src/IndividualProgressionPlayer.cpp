@@ -950,6 +950,17 @@ public:
                     player->GetMap()->SetZoneWeather(player->GetZoneId(), WEATHER_STATE_MEDIUM_RAIN, 0.5f);
                 }
                 break;
+            case AREA_ICECROWN_CITADEL:
+            case AREA_ICECROWN_CITADEL_OUTSIDE:
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+                {
+                    if (!player->GetPlayerSetting("FOTLK-MOVIE", 0).value)
+                    {
+                        player->SendMovieStart(MOVIE_FOTLK);
+                        player->UpdatePlayerSetting("FOTLK-MOVIE", 0, true);
+                    }
+                }
+
             default:
                 
                 uint32 mapid = player->GetMapId();
@@ -992,6 +1003,25 @@ public:
                 
                 player->RemoveAura(IPP_PHASE);
                 player->RemoveAura(IPP_PHASE_II);
+        }
+    }
+
+    void OnPlayerUpdateZone(Player* player, uint32 newZone, uint32 newArea) override
+    {
+        // TBC-Movie Trigger with phase PROGRESSION_NAXX40
+        if (!player->GetPlayerSetting("TBC-MOVIE", 0).value && sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_PRE_TBC)))
+        {
+            player->StopMoving();
+            player->SendMovieStart(MOVIE_TBC);
+            player->UpdatePlayerSetting("TBC-MOVIE", 0, 1);
+        }
+
+        // WotLK-Movie Trigger with phase PROGRESSION_TBC_TIER_5
+        if (!player->GetPlayerSetting("WOTLK-MOVIE", 0).value && sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_WOTLK_TIER_1)))
+        {
+            player->StopMoving();
+            player->SendMovieStart(MOVIE_WOTLK);
+            player->UpdatePlayerSetting("WOTLK-MOVIE", 0, 1);
         }
     }
 

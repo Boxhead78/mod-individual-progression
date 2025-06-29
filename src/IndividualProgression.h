@@ -174,7 +174,7 @@ enum ProgressionState : uint8         // Progression stands for what has been co
     PROGRESSION_WOTLK_TIER_2    = 15, // TotC
     PROGRESSION_WOTLK_TIER_3    = 16, // ICC
     PROGRESSION_WOTLK_TIER_4    = 17, // Ruby Sanctum
-    PROGRESSION_WOTLK_TIER_5    = 18 ,
+    PROGRESSION_WOTLK_TIER_5    = 18,
     PROGRESSION_CATA_TIER_1     = 19, // Baradin Hold, Blackwing Descent
     PROGRESSION_CATA_TIER_2     = 20, // The Bastion of Twilight, Throne of the Four Winds
     PROGRESSION_CATA_TIER_3     = 21, // Firelands
@@ -229,6 +229,13 @@ enum PvPTitles : uint32
 enum ProgressionSoundEntries : uint32
 {
     MUSIC_RAGEFIRE_CHASM_HEROIC_LIGHT = 70001
+};
+
+enum ProgressionMovies : uint8
+{
+    MOVIE_TBC   = 18,
+    MOVIE_WOTLK = 20,
+    MOVIE_FOTLK = 22
 };
 
 class IndividualProgression
