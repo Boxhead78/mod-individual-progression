@@ -1183,7 +1183,6 @@ public:
         // TBC-Movie Trigger with phase PROGRESSION_NAXX40
         if (!player->GetPlayerSetting("TBC-MOVIE", 0).value && sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_PRE_TBC)))
         {
-            player->StopMoving();
             player->SendMovieStart(MOVIE_TBC);
             player->UpdatePlayerSetting("TBC-MOVIE", 0, 1);
         }
@@ -1191,7 +1190,6 @@ public:
         // WotLK-Movie Trigger with phase PROGRESSION_TBC_TIER_5
         if (!player->GetPlayerSetting("WOTLK-MOVIE", 0).value && sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_WOTLK_TIER_1)))
         {
-            player->StopMoving();
             player->SendMovieStart(MOVIE_WOTLK);
             player->UpdatePlayerSetting("WOTLK-MOVIE", 0, 1);
         }
