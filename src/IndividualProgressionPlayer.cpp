@@ -48,7 +48,6 @@ public:
         }
 
         sIndividualProgression->CheckAdjustments(player);
-        sIndividualProgression->CheckHPAdjustments(player);
         sIndividualProgression->checkIPProgression(player);
 
         if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE)) && (player->GetQuestStatus(PROGRESSION_FLAG_MC) != QUEST_STATUS_REWARDED))
@@ -661,11 +660,6 @@ public:
                     sIndividualProgression->checkKillProgression(member, killed);
             }
         }
-    }
-
-    void OnPlayerAchievementComplete(Player* player, AchievementEntry const* achievement) override
-    {
-        sIndividualProgression->checkAchievementProgression(player, achievement);
     }
 
     bool OnPlayerUpdateFishingSkill(Player* player, int32 /*skill*/, int32 /*zone_skill*/, int32 chance, int32 roll) override

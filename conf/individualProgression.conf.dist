@@ -238,7 +238,7 @@ IndividualProgression.TbcRacesUnlockProgression = 6
 #                   0-16 - Progression level
 #
 #
-IndividualProgression.TbcRacesStartingProgression = 6
+IndividualProgression.TbcRacesStartingProgression = 0
 
 #
 # IndividualProgression.CataRacesUnlockProgression
@@ -262,7 +262,7 @@ IndividualProgression.CataRacesUnlockProgression = 16
 #                   0-16 - Progression level
 #
 #
-IndividualProgression.CataRacesStartingProgression = 16
+IndividualProgression.CataRacesStartingProgression = 0
 
 # IndividualProgression.DeathKnightUnlockProgression
 #        Description: The progression level at which Death Knight characters can be created.
@@ -331,7 +331,7 @@ IndividualProgression.PvPGearRequirements = 0
 #        Default:     1 - RDF Disabled
 #                     0 - RDF Enabled
 #
-IndividualProgression.DisableRDF = 1
+IndividualProgression.DisableRDF = 0
 
 #
 # IndividualProgression.ProgressionSetterAlwaysVisible
