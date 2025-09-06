@@ -245,9 +245,16 @@ public:
             ProgressionState masterState = sIndividualProgression->GetCurrentProgressionState(master);
             ProgressionState myState = sIndividualProgression->GetCurrentProgressionState(player);
 
+            // Set individualprogression phase
             if (myState != masterState)
             {
                 sIndividualProgression->ForceUpdateProgressionState(player, masterState);
+            }
+
+            // Also set bot phasemask here
+            if (player->GetPhaseMask() != master->GetPhaseMask())
+            {
+                player->SetPhaseMask(master->GetPhaseMask(), true);
             }
 
             return;
