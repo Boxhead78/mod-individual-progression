@@ -447,7 +447,7 @@ public:
             amount = 0;
         }
             // Player is in WotLK content - do not give XP past level 80
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_CATA_TIER_1) && player->GetLevel() >= 80)
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_CATA_TIER_1) && player->GetLevel() >= IP_LEVEL_WOTLK)
         {
             // Still award XP to pets - they won't be able to pass the player's level
             Pet* pet = player->GetPet();
@@ -574,7 +574,7 @@ public:
             {
                 return false;
             }
-            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS && player->GetLevel() <= IP_LEVEL_TBC && (!isAttuned(player) ||  sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) ))  
+            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS && (!isAttuned(player) || sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))  
             {
                 return false;
             }

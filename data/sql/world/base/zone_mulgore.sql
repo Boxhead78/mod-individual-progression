@@ -1,3 +1,5 @@
+SET @maxLevel = 80;
+
 /* smart scripts */
 UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (2959, 3035, 3056, 5787);
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN 
@@ -263,7 +265,7 @@ UPDATE `creature_template` SET `subname` = 'Fisherman'                 WHERE `en
 UPDATE `creature_template` SET `subname` = 'Skinner'                   WHERE `entry` = 6290;  -- Yonn Deepcut <Skinner>
 UPDATE `creature_template` SET `subname` = 'Journeyman Engineer'       WHERE `entry` = 10993; -- Twizwick Sprocketgrind <Journeyman Engineer>
 
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` IN (3210, 3211, 7975); -- guards
+UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` IN (3210, 3211, 7975); -- guards
 
 
 DELETE FROM `npc_trainer` WHERE `ID` IN (3069, 3690, 5938, 5939, 6290, 10993);

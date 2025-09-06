@@ -1,3 +1,5 @@
+SET @maxLevel = 80;
+
 /* Drop chance for Rattlecage Skull was incorrectly set to 15 - updated to 80 */
 UPDATE `creature_loot_template` SET `Chance` = 80 WHERE `Entry` = 1890 AND `Item` = 6281;
 
@@ -28,11 +30,11 @@ UPDATE `creature_template` SET `faction` = 22 WHERE `entry` = 1688;  -- Night We
 UPDATE `creature_template` SET `faction` = 67 WHERE `entry` = 13158; -- Lieutenant Sanders
 
 -- update npc levels
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 1736; -- Deathguard Randolph
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 1737; -- Deathguard Oliver
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 1739; -- Deathguard Phillip
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 1741; -- Deathguard Bartrand
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 7980; -- Deathguard Elite
+UPDATE `creature_template` SET `minlevel`=@maxLevel - 5, `maxlevel`=@maxLevel - 5 WHERE `entry` = 1736; -- Deathguard Randolph
+UPDATE `creature_template` SET `minlevel`=@maxLevel - 5, `maxlevel`=@maxLevel - 5 WHERE `entry` = 1737; -- Deathguard Oliver
+UPDATE `creature_template` SET `minlevel`=@maxLevel - 5, `maxlevel`=@maxLevel - 5 WHERE `entry` = 1739; -- Deathguard Phillip
+UPDATE `creature_template` SET `minlevel`=@maxLevel - 5, `maxlevel`=@maxLevel - 5 WHERE `entry` = 1741; -- Deathguard Bartrand
+UPDATE `creature_template` SET `minlevel`=@maxLevel - 5, `maxlevel`=@maxLevel - 5 WHERE `entry` = 7980; -- Deathguard Elite
 
 -- update npc ranks
 UPDATE `creature_template` SET `rank` = 1 WHERE `entry` = 4280; -- Scarlet Preserver

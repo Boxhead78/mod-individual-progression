@@ -1,3 +1,5 @@
+SET @maxLevel = 80;
+
 /* smart scripts */
 UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (3243, 3383, 3414, 3470, 3472, 3476, 4127, 4128, 4129);
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN 
@@ -345,7 +347,7 @@ UPDATE `creature_template` SET `subname` = 'Skinner'                  WHERE `ent
 UPDATE `creature_template` SET `subname` = 'Master Goblin Engineer'   WHERE `entry` = 8738;-- Vazario Linkgrease <Master Goblin Engineer>
 
 UPDATE `creature_template` SET `minlevel` = 15, `maxlevel` = 17 WHERE `entry` = 3634;  -- Deviate Stalker
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 3615;  -- Devrak <Wind Rider Master>
+UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 3615;  -- Devrak <Wind Rider Master>
 UPDATE `creature_template` SET `minlevel` = 19, `maxlevel` = 19 WHERE `entry` = 3652;  -- Trigore the Lasher
 UPDATE `creature_template` SET `minlevel` = 20, `maxlevel` = 20 WHERE `entry` = 3672;  -- Boahn <Druid of the Fang>
 UPDATE `creature_template` SET `minlevel` = 40, `maxlevel` = 40 WHERE `entry` = 4380;  -- Darkmist Widow
@@ -353,9 +355,9 @@ UPDATE `creature_template` SET `minlevel` = 25, `maxlevel` = 25 WHERE `entry` = 
 UPDATE `creature_template` SET `minlevel` = 24, `maxlevel` = 24 WHERE `entry` = 5800;  -- Marcus Bel <Alliance Outrunner>
 UPDATE `creature_template` SET `minlevel` = 19, `maxlevel` = 19 WHERE `entry` = 5835;  -- Foreman Grills
 UPDATE `creature_template` SET `minlevel` = 15, `maxlevel` = 15 WHERE `entry` = 8236;  -- Muck Frenzy
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 10378; -- Omusa Thunderhorn <Wind Rider Master>
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 14717; -- Horde Elite
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 16227; -- Bragok <Flight Master>
+UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 10378; -- Omusa Thunderhorn <Wind Rider Master>
+UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 14717; -- Horde Elite
+UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 16227; -- Bragok <Flight Master>
 
 UPDATE `creature_template` SET `rank` = 1 WHERE `entry` IN (
 3630,   -- Deviate Coiler

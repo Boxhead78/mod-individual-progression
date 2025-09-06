@@ -204,14 +204,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11043, 0, 3, 0, 105, 0, 100, 0, 0, 0, 8000, 10000, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Crimson Monk - Victim Casting - Cast Kick'),
 (11043, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Crimson Monk - Between 0-15% Health - Flee For Assist (No Repeat)');
 
-
--- stratholme living side, 3 doors not locked that should require the scarlet key
-UPDATE gameobject_template SET `Data1` = 299 WHERE `entry` IN (175967, 175968, 176194);
-UPDATE gameobject_template_addon SET `flags` = 34 WHERE `entry` IN (175967, 175968, 176194);
-
 -- service gate should open and close, but not lock itself again. I can't get this to work, so I'm keeping the gate open. (old Data2 value was 3000)
 UPDATE `gameobject_template` SET `Data2` = 0 WHERE `entry` = 175368; 
-
 
 -- Gargoyles
 SET @CGUID    := 329000;  -- creature guid

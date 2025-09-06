@@ -1,3 +1,5 @@
+SET @maxLevel = 80;
+
 /* smart scripts */
 UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (118, 285, 525, 735);
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN 
@@ -148,7 +150,7 @@ UPDATE `creature_template` SET `subname` = 'Journeyman Alchemist', `npcflag` = 8
 UPDATE `creature_template` SET `subname` = 'Expert Tailor',        `npcflag` = 81, `trainer_type` = 2 WHERE `entry` = 5567; -- Sellandus <Apprentice Tailor>
 -- update creature levels
 UPDATE `creature_template` SET `maxlevel` = 4 WHERE `entry` = 80;                     -- Kobold Laborer
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` = 1642; -- Northshire Guard
+UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 1642; -- Northshire Guard
 
 DELETE FROM `creature_template_addon` WHERE `entry` = 69;  -- Diseased Timber Wolf
 DELETE FROM `creature_template_addon` WHERE `entry` = 299; -- Diseased Young Wolf
