@@ -254,6 +254,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -289,6 +297,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -337,6 +353,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -372,6 +396,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -420,6 +452,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -455,6 +495,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -521,6 +569,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -556,6 +612,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -595,6 +659,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -630,6 +702,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -669,6 +749,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -704,6 +792,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -743,6 +839,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -780,6 +884,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -815,6 +927,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -956,6 +1076,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             if (target->GetTypeId() == TYPEID_UNIT && target->GetEntry() == 3986)
             {
                 return;
@@ -998,6 +1126,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -1033,6 +1169,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -1072,6 +1216,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -1107,6 +1259,14 @@ npc_ipp_hillsbrad_presence() : CreatureScript("npc_ipp_hillsbrad_presence") { }
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
@@ -1146,6 +1306,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -1183,6 +1351,14 @@ public:
                     return;
             }
 
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
             SmartAI::AttackStart(target);
         }
 
@@ -1217,6 +1393,14 @@ public:
             {
                 if (!CanBeSeen(target->ToPlayer()))
                     return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
             }
 
             SmartAI::AttackStart(target);
