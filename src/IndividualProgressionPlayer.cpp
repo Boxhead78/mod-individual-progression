@@ -692,6 +692,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -700,6 +701,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -708,6 +710,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -716,6 +719,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;            
@@ -724,12 +728,14 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE_II, false);
                 }
                 break;    
@@ -738,12 +744,14 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE_II, false);
                 }
                 break;    
@@ -752,12 +760,14 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE_II, false);
                 }
                 break;    
@@ -766,52 +776,59 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE_II, false);
                 }
                 break;    
             case AREA_BOUGH_SHADOW:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA) || isExcludedFromProgression(player))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
             case AREA_SERADANE:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA) || isExcludedFromProgression(player))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
             case AREA_DREAM_BOUGH:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA) || isExcludedFromProgression(player))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
             case AREA_JADEMIR_LAKE:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA) || isExcludedFromProgression(player))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
             case AREA_TWILIGHT_GROVE:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA) || isExcludedFromProgression(player))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -820,6 +837,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -828,6 +846,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -836,6 +855,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -844,6 +864,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -852,6 +873,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -860,6 +882,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -868,6 +891,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -876,6 +900,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;    
@@ -884,6 +909,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -892,6 +918,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -900,6 +927,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -908,6 +936,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -916,6 +945,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -924,6 +954,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -932,6 +963,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -940,6 +972,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -948,12 +981,14 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 else if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_PRE_TBC)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE_II, false);
                 }					
                 break;
@@ -962,6 +997,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -970,6 +1006,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -978,6 +1015,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -986,6 +1024,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -994,6 +1033,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1002,6 +1042,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1010,6 +1051,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1018,6 +1060,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1026,6 +1069,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1034,6 +1078,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1042,6 +1087,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1050,6 +1096,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1058,6 +1105,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1066,6 +1114,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1074,6 +1123,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1082,6 +1132,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1090,6 +1141,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1098,6 +1150,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1106,6 +1159,7 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1114,12 +1168,14 @@ public:
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) 
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE_II, false);
                 }					
                 break;
@@ -1133,10 +1189,11 @@ public:
             case AREA_THE_ALLIANCE_VALIANTS_RING:
             case AREA_THE_HORDE_VALIANTS_RING:
             case AREA_ARGENT_PAVILION:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_2))
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_2) || isExcludedFromProgression(player))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->RemoveAura(IPP_PHASE_II);
+                    player->RemoveAura(IPP_PHASE_III);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
@@ -1168,45 +1225,96 @@ public:
             default:
                 
                 uint32 mapid = player->GetMapId();
-            
-                if (mapid == MAP_SHADOWFANG_KEEP && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+
+                if (mapid == MAP_VAULT_OF_ARCHAVON)
                 {
-                    player->RemoveAura(IPP_PHASE);
-                    player->RemoveAura(IPP_PHASE_II);
-                    player->CastSpell(player, IPP_PHASE, false);
-                    break;
-                }    
-                if (mapid == MAP_RAZORFEN_DOWNS && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
-                {
-                    player->RemoveAura(IPP_PHASE);
-                    player->RemoveAura(IPP_PHASE_II);
-                    player->CastSpell(player, IPP_PHASE, false);
-                    break;
-                }    
-                if (mapid == MAP_SCARLET_MONASTERY && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
-                {
-                    player->RemoveAura(IPP_PHASE);
-                    player->RemoveAura(IPP_PHASE_II);
-                    player->CastSpell(player, IPP_PHASE, false);
-                    break;
+					if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_1) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_WOTLK_TIER_2))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        break;
+                    }
+					else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_2) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_WOTLK_TIER_3))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        player->CastSpell(player, IPP_PHASE_II, false);
+                        break;
+                    }
+					else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        player->CastSpell(player, IPP_PHASE_II, false);
+                        player->CastSpell(player, IPP_PHASE_III, false);
+                        break;
+                    }
                 }
-                if (mapid == MAP_STRATHOLME && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                if (mapid == MAP_SHADOWFANG_KEEP)
                 {
-                    player->RemoveAura(IPP_PHASE);
-                    player->RemoveAura(IPP_PHASE_II);
-                    player->CastSpell(player, IPP_PHASE, false);
-                    break;
+					if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        break;
+                    }
                 }
-                if (mapid == MAP_DIRE_MAUL && ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))))
+                if (mapid == MAP_RAZORFEN_DOWNS)
                 {
-                    player->RemoveAura(IPP_PHASE);
-                    player->RemoveAura(IPP_PHASE_II);
-                    player->CastSpell(player, IPP_PHASE, false);
-                    break;
+					if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        break;
+				    }
+                }    
+                if (mapid == MAP_SCARLET_MONASTERY)
+                {
+				    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        break;
+                    }
+                }
+                if (mapid == MAP_STRATHOLME)
+                {
+                    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        break;
+                    }
+                }
+                if (mapid == MAP_DIRE_MAUL)
+                {
+                    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ) && sIndividualProgression->isBeforeProgression(player, PROGRESSION_NAXX40))
+                    {
+                        player->RemoveAura(IPP_PHASE);
+                        player->RemoveAura(IPP_PHASE_II);
+                        player->RemoveAura(IPP_PHASE_III);
+                        player->CastSpell(player, IPP_PHASE, false);
+                        break;
+                    }
                 }
 
                 player->RemoveAura(IPP_PHASE);
                 player->RemoveAura(IPP_PHASE_II);
+                player->RemoveAura(IPP_PHASE_III);
         }
     }
 
