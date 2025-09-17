@@ -95,4 +95,5 @@ DELETE FROM `creature_formations` WHERE `leaderGUID` = 5845;
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES 
 (5845, 5845, 0, 0, 3, 0, 0),
 (5845, 5846, 0, 0, 3, 0, 0),
-(5845, 608504, 0, 0, 3, 0, 0);
+(5845, 608504, 0, 0, 3, 0, 0),
+(5845, 3119328, 0, 0, 3, 0, 0);
