@@ -530,17 +530,35 @@ class npc_ipp_pre_tbc : public CreatureScript
 public:
     npc_ipp_pre_tbc() : CreatureScript("npc_ipp_pre_tbc") { }
 
-    struct npc_ipp_pre_tbcAI: ScriptedAI
+    struct npc_ipp_pre_tbcAI: SmartAI
     {
-        explicit npc_ipp_pre_tbcAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_pre_tbcAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
             {
                 return true;
             }
-            
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());            
             return sIndividualProgression->isBeforeProgression(target,PROGRESSION_PRE_TBC);
         }

@@ -135,17 +135,6 @@ class onyxia_entrance_trigger : public AreaTriggerScript
 public:
     onyxia_entrance_trigger() : AreaTriggerScript("onyxia_entrance_trigger") { }
 
-    bool isExcludedFromProgression(Player* player)
-    {
-        if(!sIndividualProgression->excludeAccounts) {
-            return false;
-        }
-        std::string accountName;
-        bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
-        std::regex excludedAccountsRegex (sIndividualProgression->excludedAccountsRegex);
-        return (accountNameFound && std::regex_match(accountName, excludedAccountsRegex));
-    }
-
     bool OnTrigger(Player* player, AreaTrigger const* /*areaTrigger*/) override
     {       
         ChatHandler handler(player->GetSession());
