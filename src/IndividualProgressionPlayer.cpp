@@ -1197,31 +1197,6 @@ public:
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
-            case AREA_DREADMIST_PEAK:
-            case AREA_FELFIRE_HILL:
-            case AREA_DEMON_FALL_CANYON:
-            case AREA_DEMON_FALL_RIDGE:
-            case AREA_STONEWATCH:
-            case AREA_STONEWATCH_TOWER:
-            case AREA_STONEWATCH_KEEP:
-            case AREA_VUL_GOL_OGRE_MOUND:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
-                {
-                    player->PlayDirectMusic(MUSIC_RAGEFIRE_CHASM_HEROIC_LIGHT, player);
-                    player->GetMap()->SetZoneWeather(player->GetZoneId(), WEATHER_STATE_MEDIUM_RAIN, 0.5f);
-                }
-                break;
-            case AREA_ICECROWN_CITADEL:
-            case AREA_ICECROWN_CITADEL_OUTSIDE:
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
-                {
-                    if (!player->GetPlayerSetting("FOTLK-MOVIE", 0).value)
-                    {
-                        player->SendMovieStart(MOVIE_FOTLK);
-                        player->UpdatePlayerSetting("FOTLK-MOVIE", 0, true);
-                    }
-                }
-
             default:
                 
                 uint32 mapid = player->GetMapId();
@@ -1316,8 +1291,37 @@ public:
                 player->RemoveAura(IPP_PHASE_II);
                 player->RemoveAura(IPP_PHASE_III);
         }
+
+        // Boxhead Custom
+        switch (newArea) {
+            case AREA_DREADMIST_PEAK:
+            case AREA_FELFIRE_HILL:
+            case AREA_DEMON_FALL_CANYON:
+            case AREA_DEMON_FALL_RIDGE:
+            case AREA_STONEWATCH:
+            case AREA_STONEWATCH_TOWER:
+            case AREA_STONEWATCH_KEEP:
+            case AREA_VUL_GOL_OGRE_MOUND:
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
+                {
+                    player->PlayDirectMusic(MUSIC_RAGEFIRE_CHASM_HEROIC_LIGHT, player);
+                    player->GetMap()->SetZoneWeather(player->GetZoneId(), WEATHER_STATE_HEAVY_RAIN, 0.7f);
+                }
+                break;
+            case AREA_ICECROWN_CITADEL:
+            case AREA_ICECROWN_CITADEL_OUTSIDE:
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_3))
+                {
+                    if (!player->GetPlayerSetting("FOTLK-MOVIE", 0).value)
+                    {
+                        player->SendMovieStart(MOVIE_FOTLK);
+                        player->UpdatePlayerSetting("FOTLK-MOVIE", 0, true);
+                    }
+                }
+        }
     }
 
+    // Boxhead Custom
     void OnPlayerUpdateZone(Player* player, uint32 newZone, uint32 newArea) override
     {
         // TBC-Movie Trigger with phase PROGRESSION_NAXX40
