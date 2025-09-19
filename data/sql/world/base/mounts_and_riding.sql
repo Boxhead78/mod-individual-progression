@@ -37,7 +37,7 @@ UPDATE npc_trainer SET MoneyCost = 10000000  WHERE SpellID = 33391;
 UPDATE npc_trainer SET ReqLevel = 70         WHERE SpellID = 34090; -- Expert Riding
 UPDATE npc_trainer SET MoneyCost = 50000000  WHERE SpellID = 34090;
 UPDATE npc_trainer SET MoneyCost = 100000000 WHERE SpellID = 34091; -- Artisan Riding
-UPDATE npc_trainer SET MoneyCost = 50000000  WHERE SpellID = 54197; -- Cold Weather Flying
+UPDATE npc_trainer SET MoneyCost = 100000000  WHERE SpellID = 54197; -- Cold Weather Flying
 
 DELETE FROM `npc_trainer` WHERE `SpellID` = 13819; -- Summon Warhorse
 DELETE FROM `npc_trainer` WHERE `SpellID` = 13820; -- Summon Warhorse
