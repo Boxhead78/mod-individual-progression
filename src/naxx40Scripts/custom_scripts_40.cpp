@@ -37,12 +37,12 @@ public:
         }
 
         // Do not allow entrance to Naxx 40 from Northrend
-        // Change 10 man heroic to regular 25 man, as when 10 man heroic is not available
+        // Change 10 man heroic to regular 10 man, as when 10 man heroic is not available
         if (player->GetMapId() == 571)
         {
             if (diff == RAID_DIFFICULTY_10MAN_HEROIC)
             {
-                player->SetRaidDifficulty(RAID_DIFFICULTY_25MAN_NORMAL);
+                player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_NORMAL);
             }
         }
         switch (areaTrigger->entry)

@@ -457,31 +457,20 @@ public:
         }
     }
 
-    static bool isAttuned(Player* player)
-    {
-        if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) || 
-            (player->GetQuestStatus(NAXX40_ATTUNEMENT_2) == QUEST_STATUS_REWARDED) ||
-            (player->GetQuestStatus(NAXX40_ATTUNEMENT_3) == QUEST_STATUS_REWARDED))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     bool OnPlayerBeforeTeleport(Player* player, uint32 mapid, float x, float y, float z, float /*orientation*/, uint32 /*options*/, Unit* /*target*/) override
     {
+        if (!player)
+            return false;
+
         if (!sIndividualProgression->enabled || player->IsGameMaster() || player->GetSession()->IsBot())
         {
             return true;
         }
-        if (mapid == MAP_ONYXIAS_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && !player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+        if (mapid == MAP_ONYXIAS_LAIR && (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE) && (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET) || sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))))
         {
             return false;
         }       
-        if (mapid == MAP_BLACKWING_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE))
+        if (mapid == MAP_BLACKWING_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
         {
             return false;
         }
@@ -497,19 +486,9 @@ public:
         {
             return false;
         }
-        if (mapid == MAP_OUTLAND)
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4) && player->GetMap()->GetZoneId(player->GetPhaseMask(), player->GetPositionX(), player->GetPositionY(), player->GetPositionZ()) == ZONE_QUELDANAS)
         {
-            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-            {
-                // The player may be in the Azuremyst area which is on the outlands map - check the area ID
-                return IsTBCRaceStartingZone(mapid, x, y, z);
-            }
-            Map const *map = sMapMgr->FindMap(mapid, 0);
-            uint32 zoneId = map->GetZoneId(0, x, y, z);
-            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4) && zoneId == ZONE_QUELDANAS)
-            {
-                return false;
-            }
+            return false;
         }
         if (mapid == MAP_ZUL_AMAN && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_3))
         {
@@ -562,19 +541,15 @@ public:
         {
             return false;
         }
+        if (mapid == MAP_NAXXRAMAS && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ))
+        {
+            return false;
+        }
 
         InstanceTemplate const* instanceTemplate = sObjectMgr->GetInstanceTemplate(mapid);
         if (instanceTemplate)
         {
             if (instanceTemplate->Parent == MAP_OUTLAND && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-            {
-                return false;
-            }
-            if (instanceTemplate->Parent == MAP_NORTHREND && mapid != MAP_NAXXRAMAS && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-            {
-                return false;
-            }
-            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS && (!isAttuned(player) || sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)))  
             {
                 return false;
             }
@@ -593,24 +568,28 @@ public:
             case MIGHT_OF_KALIMDOR:
                 if (!sIndividualProgression->disableDefaultProgression)
                 {
+                    player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_PRE_AQ);
                     sIndividualProgression->UpdateProgressionState(player, PROGRESSION_PRE_AQ);
                 }
                 break;
             case BANG_A_GONG:
                 if (!sIndividualProgression->disableDefaultProgression)
                 {
+                    player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_PRE_AQ);
                     sIndividualProgression->UpdateProgressionState(player, PROGRESSION_PRE_AQ);
                 }
                 break;
             case CHAOS_AND_DESTRUCTION:
                 if (!sIndividualProgression->disableDefaultProgression)
                 {
+                    player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_AQ_WAR);
                     sIndividualProgression->UpdateProgressionState(player, PROGRESSION_AQ_WAR);
                 }
                 break;
             case INTO_THE_BREACH:
                 if (!sIndividualProgression->disableDefaultProgression)
                 {
+                    player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_PRE_TBC);
                     sIndividualProgression->UpdateProgressionState(player, PROGRESSION_PRE_TBC);
                 }
                 break;

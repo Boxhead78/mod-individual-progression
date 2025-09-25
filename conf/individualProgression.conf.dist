@@ -370,6 +370,9 @@ IndividualProgression.PvPGearRequirements = 0
 #
 IndividualProgression.DisableRDF = 0
 
+##############################################
+# Twilborne Custom                           #
+##############################################
 #
 # IndividualProgression.ProgressionSetterAlwaysVisible
 #        Description: Normally the individual progression setter (ID 50000) is only visible if one character of an account has 

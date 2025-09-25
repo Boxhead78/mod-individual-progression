@@ -262,6 +262,7 @@ public:
                 guardian->AI()->Talk(EMOTE_GUARDIAN_FLEE);
             }
             Talk(SAY_DEATH);
+            instance->DoUpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_KILL_CREATURE, NPC_KELTHUZAD_40, 1);
         }
 
         void MoveInLineOfSight(Unit* who) override

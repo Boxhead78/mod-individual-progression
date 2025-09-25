@@ -139,20 +139,24 @@ public:
     {       
         ChatHandler handler(player->GetSession());
 		uint32 progressionLevel = player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
-	
-        if (progressionLevel < PROGRESSION_TBC_TIER_5 && (player->HasItemCount(ITEM_DRAKEFIRE_AMULET) ||  player->GetSession()->IsBot()))
+        Difficulty diff = player->GetGroup() ? player->GetGroup()->GetDifficulty(true) : player->GetDifficulty(true);
+
+        if ((progressionLevel < PROGRESSION_WOTLK_TIER_1 && (player->HasItemCount(ITEM_DRAKEFIRE_AMULET) || player->GetSession()->IsBot())))
         {
             player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
             player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
+            return true;
         }
-        else if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+        else if (progressionLevel < PROGRESSION_WOTLK_TIER_1 && !player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
         {
             handler.PSendSysMessage("You must have the Drakefire Amulet in your inventory to enter this version of Onyxia\'s Lair.");
-        }	
-        else if (progressionLevel > PROGRESSION_TBC_TIER_4)
+            return false;
+        }
+        if (diff == RAID_DIFFICULTY_10MAN_HEROIC)
         {
-            handler.PSendSysMessage("Your progression level is too high to enter this version of Onyxia\'s Lair.");
-        }	
+            player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_NORMAL);
+        }
+        player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
         return true;
     }
 };

@@ -96,7 +96,7 @@ enum ProgressionQuests
 
 enum ProgressionAchievements
 {
-    KEL_THUZAD_KILL      = 575, // WotLK, naxx40 does not have an achievement
+    KEL_THUZAD_KILL      = 575, // WotLK
     ONYXIAS_KILL         = 684,
     NEFARIAN_KILL        = 685,
     RAGNAROS_KILL        = 686,
@@ -108,7 +108,8 @@ enum ProgressionAchievements
     KIL_JAEDEN_KILL      = 698,
     ANUB_ARAK_KILL       = 3916,
     LICH_KING_KILL       = 4597,
-    HALION_KILL          = 4815
+    HALION_KILL          = 4815,
+    KEL_THUZAD_40_KILL   = 5004, // Classic
 };
 
 enum ProgressionZones
@@ -183,11 +184,37 @@ enum DungeonKeys
     ITEM_DRAKEFIRE_AMULET       = 16309
 };
 
+enum AchievementSpellEvents
+{
+    ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE     = 95000, 
+    ACHIEVEMENT_SPELL_EVENT_ONYXIA          = 95001,
+    ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR  = 95002,
+    ACHIEVEMENT_SPELL_EVENT_PRE_AQ          = 95003,
+    ACHIEVEMENT_SPELL_EVENT_AQ_WAR          = 95004,
+    ACHIEVEMENT_SPELL_EVENT_AQ              = 95005,
+    ACHIEVEMENT_SPELL_EVENT_NAXX40          = 95006,
+    ACHIEVEMENT_SPELL_EVENT_PRE_TBC         = 95007,
+    ACHIEVEMENT_SPELL_EVENT_KARAZHAN        = 95022, 
+    ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP    = 95008,
+    ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE    = 95009,
+    ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN        = 95010,
+    ACHIEVEMENT_SPELL_EVENT_SUNWELL         = 95011,
+    ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS       = 95012,
+    ACHIEVEMENT_SPELL_EVENT_ULDUAR          = 95013,
+    ACHIEVEMENT_SPELL_EVENT_TOTC            = 95014,
+    ACHIEVEMENT_SPELL_EVENT_ICC             = 95015,
+    ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM    = 95016,
+    ACHIEVEMENT_SPELL_EVENT_BWD             = 99999, // NYI
+    ACHIEVEMENT_SPELL_EVENT_TOTFW           = 99999, // NYI
+    ACHIEVEMENT_SPELL_EVENT_FIRELANDS       = 99999, // NYI
+    ACHIEVEMENT_SPELL_EVENT_DRAGONSOUL      = 99999, // NYI
+};
+
 enum ProgressionState : uint8         // Progression stands for what has been completed
 {
     PROGRESSION_START           = 0,
-    PROGRESSION_MOLTEN_CORE     = 1,  // BWL available
-    PROGRESSION_ONYXIA          = 2, 
+    PROGRESSION_MOLTEN_CORE     = 1, 
+    PROGRESSION_ONYXIA          = 2,  // BWL available
     PROGRESSION_BLACKWING_LAIR  = 3,  // ZG, AQ War effort, AQ quest line
     PROGRESSION_PRE_AQ          = 4,  // AQ gates open, raids available, AQ outdoors war 
     PROGRESSION_AQ_WAR          = 5,  // AQ gates open, raids, Field Duty quests and all Cenarion Hold npcs available

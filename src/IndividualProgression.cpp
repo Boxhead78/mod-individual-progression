@@ -247,66 +247,85 @@ void IndividualProgression::checkIPProgression(Player* killer)
 
     if (killer->HasAchieved(HALION_KILL)) // 4815
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM);
         UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_5);
         return;
     }
     else if (killer->HasAchieved(LICH_KING_KILL)) // 4597
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ICC);
         UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_4);
         return;
     }
     else if (killer->HasAchieved(ANUB_ARAK_KILL)) // 3916
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TOTC);
         UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_3);
         return;
     }
     else if (killer->HasAchieved(KEL_THUZAD_KILL)) // 575
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS);
         UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_1);
         return;
     }
     else if (killer->HasAchieved(KIL_JAEDEN_KILL)) // 698
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_SUNWELL);
         UpdateProgressionState(killer, PROGRESSION_TBC_TIER_5);
-        return;
-    }
-    else if (killer->HasAchieved(ZUL_JIN_KILL)) // 691
-    {
-        UpdateProgressionState(killer, PROGRESSION_TBC_TIER_4);
         return;
     }
     else if (killer->HasAchieved(ILLIDAN_KILL)) // 697
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE);
         UpdateProgressionState(killer, PROGRESSION_TBC_TIER_3);
+        return;
+    }
+    else if (killer->HasAchieved(ZUL_JIN_KILL)) // 691
+    {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN);
+        UpdateProgressionState(killer, PROGRESSION_TBC_TIER_4);
         return;
     }
     else if (killer->HasAchieved(KAEL_THAS_KILL)) // 696
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP);
         UpdateProgressionState(killer, PROGRESSION_TBC_TIER_2);
         return;
     }
     else if (killer->HasAchieved(MALCHEZAAR_KILL)) //  690
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_KARAZHAN);
         UpdateProgressionState(killer, PROGRESSION_TBC_TIER_1);
+        return;
+    }
+    else if (killer->HasAchieved(KEL_THUZAD_40_KILL)) // 5004
+    {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXX40);
+        UpdateProgressionState(killer, PROGRESSION_NAXX40);
         return;
     }
     else if (killer->HasAchieved(C_THUN_KILL)) // 687
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_AQ);
         UpdateProgressionState(killer, PROGRESSION_AQ);
         return;
     }
     else if (killer->HasAchieved(NEFARIAN_KILL)) // 685
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR);
         UpdateProgressionState(killer, PROGRESSION_BLACKWING_LAIR);
         return;
     }
     else if (killer->HasAchieved(ONYXIAS_KILL)) // 684
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ONYXIA);
         UpdateProgressionState(killer, PROGRESSION_ONYXIA);
         return;
     }
     else if (killer->HasAchieved(RAGNAROS_KILL)) // 686
     {
+        killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE);
         UpdateProgressionState(killer, PROGRESSION_MOLTEN_CORE);
         return;
     }
@@ -333,48 +352,63 @@ void IndividualProgression::checkKillProgression(Player* killer, Creature* kille
     switch (killed->GetEntry())
     {
         case RAGNAROS:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE);
             UpdateProgressionState(killer, PROGRESSION_MOLTEN_CORE);
             break;
         case ONYXIA:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ONYXIA);
             UpdateProgressionState(killer, PROGRESSION_ONYXIA);
             break;
         case NEFARIAN:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR);
             UpdateProgressionState(killer, PROGRESSION_BLACKWING_LAIR);
             break;
         case CTHUN:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_AQ);
             UpdateProgressionState(killer, PROGRESSION_AQ);
             break;
         case KELTHUZAD_40:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXX40);
             UpdateProgressionState(killer, PROGRESSION_NAXX40);
             break;
         case MALCHEZAAR:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_KARAZHAN);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_1);
             break;
         case KAELTHAS:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_2);
             break;
         case ILLIDAN:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_3);
             break;
         case ZULJIN:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_4);
             break;
         case KILJAEDEN:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_SUNWELL);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_5);
             break;
         case KELTHUZAD:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_1);
             break;
         case YOGGSARON:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ULDUAR);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_2);
             break;
         case ANUBARAK:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TOTC);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_3);
             break;
         case LICH_KING:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ICC);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_4);
             break;
         case HALION:
+            killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_5);
             break;
     }
