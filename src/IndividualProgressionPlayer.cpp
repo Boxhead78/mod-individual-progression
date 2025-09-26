@@ -145,7 +145,7 @@ public:
 
     void OnPlayerSetMaxLevel(Player* player, uint32& maxPlayerLevel) override
     {
-        if (!sIndividualProgression->enabled)
+        if (!sIndividualProgression->enabled || true) // Disabled this due to missing xp text after leveling again
         {
             return;
         }
