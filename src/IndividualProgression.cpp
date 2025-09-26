@@ -354,63 +354,108 @@ void IndividualProgression::checkKillProgression(Player* killer, Creature* kille
         case RAGNAROS:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE);
             UpdateProgressionState(killer, PROGRESSION_MOLTEN_CORE);
+            UpdateProgressionQuests(killer);
             break;
-        case ONYXIA:
+        case ONYXIA_40:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ONYXIA);
             UpdateProgressionState(killer, PROGRESSION_ONYXIA);
+            UpdateProgressionQuests(killer);
             break;
         case NEFARIAN:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR);
             UpdateProgressionState(killer, PROGRESSION_BLACKWING_LAIR);
+            UpdateProgressionQuests(killer);
             break;
         case CTHUN:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_AQ);
             UpdateProgressionState(killer, PROGRESSION_AQ);
+            UpdateProgressionQuests(killer);
             break;
         case KELTHUZAD_40:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXX40);
             UpdateProgressionState(killer, PROGRESSION_NAXX40);
+            UpdateProgressionQuests(killer);
             break;
         case MALCHEZAAR:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_KARAZHAN);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_1);
+            UpdateProgressionQuests(killer);
             break;
         case KAELTHAS:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_2);
+            UpdateProgressionQuests(killer);
             break;
         case ILLIDAN:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_3);
+            UpdateProgressionQuests(killer);
             break;
         case ZULJIN:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_4);
+            UpdateProgressionQuests(killer);
             break;
         case KILJAEDEN:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_SUNWELL);
             UpdateProgressionState(killer, PROGRESSION_TBC_TIER_5);
+            UpdateProgressionQuests(killer);
             break;
         case KELTHUZAD:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_1);
+            UpdateProgressionQuests(killer);
             break;
         case YOGGSARON:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ULDUAR);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_2);
+            UpdateProgressionQuests(killer);
             break;
         case ANUBARAK:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TOTC);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_3);
+            UpdateProgressionQuests(killer);
             break;
         case LICH_KING:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ICC);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_4);
+            UpdateProgressionQuests(killer);
             break;
         case HALION:
             killer->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM);
             UpdateProgressionState(killer, PROGRESSION_WOTLK_TIER_5);
+            UpdateProgressionQuests(killer);
             break;
+    }
+}
+
+void IndividualProgression::UpdateProgressionQuests(Player* player)
+{
+	// remove all hidden progression quests
+    for (uint8 i = PROGRESSION_MOLTEN_CORE; i <= PROGRESSION_WOTLK_TIER_5; ++i)
+    {
+        uint32 PROGRESSION_QUEST = 66000;
+        PROGRESSION_QUEST = PROGRESSION_QUEST + i;
+		
+        if (player->GetQuestStatus(PROGRESSION_QUEST) == QUEST_STATUS_REWARDED)
+            player->RemoveRewardedQuest(PROGRESSION_QUEST);		
+    }
+
+    // add hidden progression quests
+    for (uint8 i = PROGRESSION_MOLTEN_CORE; i <= PROGRESSION_WOTLK_TIER_5; ++i)
+    {
+		ProgressionState PROGRESSION_STATE = static_cast<ProgressionState>(i);
+        uint32 PROGRESSION_QUEST = 66000;
+        PROGRESSION_QUEST = PROGRESSION_QUEST + i;
+		
+        if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_STATE)) && (player->GetQuestStatus(PROGRESSION_QUEST) != QUEST_STATUS_REWARDED))
+        {
+            Quest const* quest = sObjectMgr->GetQuestTemplate(PROGRESSION_QUEST);
+
+            player->AddQuest(quest, nullptr);
+            player->CompleteQuest(PROGRESSION_QUEST);
+            player->RewardQuest(quest, 0, player, false, false);
+        }
     }
 }
 

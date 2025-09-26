@@ -31,21 +31,22 @@ enum ProgressionLevelThreshold
 
 enum ProgressionBossIDs
 {
-    RAGNAROS = 11502,
-    ONYXIA = 10184,
-    NEFARIAN = 11583,
-    CTHUN = 15727,
-    KELTHUZAD = 15990,
-    KELTHUZAD_40 = 351019,
-    MALCHEZAAR = 15690,
-    KAELTHAS = 19622,
-    ILLIDAN = 22917,
-    ZULJIN = 23863,
-    KILJAEDEN = 25315,
-    YOGGSARON = 33288,
-    ANUBARAK = 34564,
-    LICH_KING = 36597,
-    HALION = 39863
+    RAGNAROS             = 11502,
+    ONYXIA               = 10184,
+    ONYXIA_40            = 301000,
+    NEFARIAN             = 11583,
+    CTHUN                = 15727,
+    KELTHUZAD            = 15990,
+    KELTHUZAD_40         = 351019,
+    MALCHEZAAR           = 15690,
+    KAELTHAS             = 19622,
+    ILLIDAN              = 22917,
+    ZULJIN               = 23863,
+    KILJAEDEN            = 25315,
+    YOGGSARON            = 33288,
+    ANUBARAK             = 34564,
+    LICH_KING            = 36597,
+    HALION               = 39863
 };
 
 enum BuffSpells
@@ -319,6 +320,7 @@ public:
     void AdjustWotLKStats(Player* player) const;
     bool hasCustomProgressionValue(uint32 creatureEntry);
     void checkIPProgression(Player* player);	
+    void UpdateProgressionQuests(Player* player);
     void checkKillProgression(Player* player, Creature* killed);
     void setProgressionSpell(Player* player, ProgressionState newState);
     void removeAllProgressionSpells(Player* player);
