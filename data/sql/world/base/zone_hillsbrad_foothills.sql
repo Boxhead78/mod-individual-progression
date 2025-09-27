@@ -1,5 +1,5 @@
 /* smart scripts */
-UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (2351, 2354, 2356, 2385, 14280);
+UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (2354, 2385, 14280);
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN 
 (2240, 2241, 2244, 2249, 2260, 2261, 2264, 2265, 2266, 2267, 2268, 2269, 2270, 2304, 2305, 2319, 2335, 2344, 2345, 2346, 2348, 2349, 2350, 
 2360, 2368, 2369, 2370, 2371, 2372, 2373, 2374, 2375, 2376, 2377, 2387, 2403, 2404, 2427, 2428, 2448, 2449, 2450, 2451, 2503, 14278);
