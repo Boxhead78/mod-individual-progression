@@ -33,17 +33,18 @@ public:
 
     static bool HandleSetIndividualProgressionCommand(ChatHandler* handler, Optional<PlayerIdentifier> player, uint32 progressionLevel)
     {
-        if (progressionLevel <= 0)
+        if (progressionLevel > sIndividualProgression->progressionLimit)
         {
             handler->SendSysMessage("Invalid Progression Level.");
             return false;
         }
-        if (progressionLevel > sIndividualProgression->progressionLimit)
+
+        if (progressionLevel > PROGRESSION_CATA_TIER_4)
         {
-            handler->SendSysMessage("Invalid progression level.");
+            handler->SendSysMessage("Invalid Progression Level.");
             return false;
         }
-        progressionLevel -= 1;
+
         player = PlayerIdentifier::FromTargetOrSelf(handler);
         Player* target = player->GetConnectedPlayer();
         std::string playername = target->GetName();
