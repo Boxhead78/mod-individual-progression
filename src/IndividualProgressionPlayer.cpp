@@ -144,7 +144,7 @@ public:
 
     void OnPlayerSetMaxLevel(Player* player, uint32& maxPlayerLevel) override
     {
-        if (!sIndividualProgression->enabled || true) // Disabled this due to missing xp text after leveling again
+        if (!sIndividualProgression->enabled)
         {
             return;
         }
@@ -160,6 +160,10 @@ public:
         else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
         {
             maxPlayerLevel = IP_LEVEL_WOTLK;
+        }
+        else
+        {
+            maxPlayerlevel = IP_LEVEL_CATA;
         }
     }
 

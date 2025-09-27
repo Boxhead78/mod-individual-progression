@@ -47,6 +47,27 @@ void IndividualProgression::UpdateProgressionState(Player* player, ProgressionSt
     {
         player->UpdatePlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE, newState);
     }
+
+    // Also set maxPlayerLevel here, else it's only set on Login, level up or level reset
+    uint32 maxPlayerlevel = sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL);
+    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
+    {
+        maxPlayerlevel = IP_LEVEL_VANILLA;
+    }
+    else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+    {
+        maxPlayerlevel = IP_LEVEL_TBC;
+    }
+    else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+    {
+        maxPlayerlevel = IP_LEVEL_WOTLK;
+    }
+    else
+    {
+        maxPlayerlevel = IP_LEVEL_CATA;
+    }
+    player->SetUInt32Value(PLAYER_FIELD_MAX_LEVEL, maxPlayerlevel);
+
     sIndividualProgression->removeAllProgressionSpells(player);
     sIndividualProgression->setProgressionSpell(player, newState);
 }
@@ -55,6 +76,26 @@ void IndividualProgression::ForceUpdateProgressionState(Player* player, Progress
 {
     if (!player)
         return;
+
+    // Also set maxPlayerLevel here, else it's only set on Login, level up or level reset
+    uint32 maxPlayerlevel = sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL);
+    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
+    {
+        maxPlayerlevel = IP_LEVEL_VANILLA;
+    }
+    else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+    {
+        maxPlayerlevel = IP_LEVEL_TBC;
+    }
+    else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+    {
+        maxPlayerlevel = IP_LEVEL_WOTLK;
+    }
+    else
+    {
+        maxPlayerlevel = IP_LEVEL_CATA;
+    }
+    player->SetUInt32Value(PLAYER_FIELD_MAX_LEVEL, maxPlayerlevel);
 
     player->UpdatePlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE, newState);
     sIndividualProgression->removeAllProgressionSpells(player);
