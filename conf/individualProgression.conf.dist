@@ -207,7 +207,7 @@ IndividualProgression.SimpleConfigOverride = 0
 #                     For example, a value of 6 will limit players to Vanilla content.
 #
 #        Default:     0 - Disabled (players may progress up to the maximum progression stage of 18, which is the completion of WotLK content)
-#                     1-17 - Set a lower maximum attainable progression stage 
+#                     1-18 - Set a lower maximum attainable progression stage 
 #
 IndividualProgression.ProgressionLimit = 18
 
@@ -264,7 +264,7 @@ IndividualProgression.TbcRacesUnlockProgression = 6
 #        Description: The progression level at which TBC races characters will begin.
 #
 #        Default:   6 - TBC Races start at the beginning of TBC
-#                   0-16 - Progression level
+#                   0-18 - Progression level
 #
 #
 IndividualProgression.TbcRacesStartingProgression = 0
@@ -278,17 +278,17 @@ IndividualProgression.TbcRacesStartingProgression = 0
 #
 #        Default:   0 - Cata Races always available
 #                   6 - Classic must be complete to create Cata Races
-#                   1-16 - Required progression level to create Cata Race characters
+#                   1-18 - Required progression level to create Cata Race characters
 #
 #
-IndividualProgression.CataRacesUnlockProgression = 16
+IndividualProgression.CataRacesUnlockProgression = 18
 
 #
 # IndividualProgression.CataRacesStartingProgression
 #        Description: The progression level at which Cata races characters will begin.
 #
 #        Default:   6 - Cata Races start at the beginning of Cata
-#                   0-16 - Progression level
+#                   0-18 - Progression level
 #
 #
 IndividualProgression.CataRacesStartingProgression = 0
