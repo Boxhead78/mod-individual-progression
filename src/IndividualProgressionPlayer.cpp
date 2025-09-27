@@ -48,7 +48,6 @@ public:
         }
 
         sIndividualProgression->CheckAdjustments(player);
-        sIndividualProgression->checkIPProgression(player);
     }
 
     void OnPlayerAfterUpdate(Player* player, uint32 /*diff*/) override
@@ -167,7 +166,6 @@ public:
     void OnPlayerMapChanged(Player* player) override
     {
         sIndividualProgression->CheckAdjustments(player);
-        sIndividualProgression->checkIPProgression(player);
     }
 
     void OnPlayerLevelChanged(Player* player, uint8 /*oldLevel*/) override
@@ -393,6 +391,88 @@ public:
             }
         }
         return true;
+    }
+
+    void OnPlayerAchievementComplete(Player* player, AchievementEntry const* achievement) override
+    {
+        if (!sIndividualProgression->enabled || !player || !achievement)
+            return;
+
+        switch (achievement->ID)
+        {
+            case HALION_KILL: // 4815
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_5);
+                break;
+
+            case LICH_KING_KILL: // 4597
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ICC);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_4);
+                break;
+
+            case ANUB_ARAK_KILL: // 3916
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TOTC);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_3);
+                break;
+
+            case KEL_THUZAD_KILL: // 575
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_WOTLK_TIER_1);
+                break;
+
+            case KIL_JAEDEN_KILL: // 698
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_SUNWELL);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_TBC_TIER_5);
+                break;
+
+            case ILLIDAN_KILL: // 697
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_TBC_TIER_3);
+                break;
+
+            case ZUL_JIN_KILL: // 691
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_TBC_TIER_4);
+                break;
+
+            case KAEL_THAS_KILL: // 696
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_TBC_TIER_2);
+                break;
+
+            case MALCHEZAAR_KILL: // 690
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_KARAZHAN);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_TBC_TIER_1);
+                break;
+
+            case KEL_THUZAD_40_KILL: // 5004
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_NAXX40);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_NAXX40);
+                break;
+
+            case C_THUN_KILL: // 687
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_AQ);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_AQ);
+                break;
+
+            case NEFARIAN_KILL: // 685
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_BLACKWING_LAIR);
+                break;
+
+            case ONYXIAS_KILL: // 684
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_ONYXIA);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_ONYXIA);
+                break;
+
+            case RAGNAROS_KILL: // 686
+                player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_BE_SPELL_TARGET, ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE);
+                sIndividualProgression->UpdateProgressionState(player, PROGRESSION_MOLTEN_CORE);
+                break;
+
+            default:
+                break;
+        }
     }
 
     void OnPlayerCompleteQuest(Player* player, Quest const* quest) override
