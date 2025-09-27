@@ -306,10 +306,14 @@ public:
         {
             return true;
         }
-        if (mapid == MAP_ONYXIAS_LAIR && (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE) && (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET) || sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))))
+        if (mapid == MAP_ONYXIAS_LAIR)
         {
-            return false;
-        }       
+            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE))
+                return false;
+
+            if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+                return false;
+        } 
         if (mapid == MAP_BLACKWING_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
         {
             return false;

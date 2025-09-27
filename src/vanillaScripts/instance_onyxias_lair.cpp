@@ -137,25 +137,41 @@ public:
 
     bool OnTrigger(Player* player, AreaTrigger const* /*areaTrigger*/) override
     {       
-        ChatHandler handler(player->GetSession());
-		uint32 progressionLevel = player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
-        Difficulty diff = player->GetGroup() ? player->GetGroup()->GetDifficulty(true) : player->GetDifficulty(true);
-
-        if ((progressionLevel < PROGRESSION_TBC_TIER_5 && (player->HasItemCount(ITEM_DRAKEFIRE_AMULET) || player->GetSession()->IsBot())))
+        // Bots are always allowed to teleport, skip all checks
+        if (player->GetSession()->IsBot())
         {
-            player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
             player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
             return true;
         }
-        else if (progressionLevel < PROGRESSION_TBC_TIER_5 && !player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+
+        ChatHandler handler(player->GetSession());
+        // Condition 1: Player must have completed Molten Core progression
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE))
         {
-            handler.PSendSysMessage("You must have the Drakefire Amulet in your inventory to enter this version of Onyxia\'s Lair.");
+            handler.PSendSysMessage("You must have completed Molten Core progression to enter Onyxia's Lair.");
             return false;
         }
-        if (diff == RAID_DIFFICULTY_10MAN_HEROIC)
+
+        // Condition 2: Before TBC Tier 5 progression, Drakefire Amulet required
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
         {
-            player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_NORMAL);
+            if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+            {
+                handler.PSendSysMessage("You must have the Drakefire Amulet in your inventory to enter this version of Onyxia's Lair.");
+                return false;
+            }
+
+            // Force 10-man heroic difficulty before TBC Tier 5
+            player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
         }
+        else
+        {
+            // At or beyond TBC Tier 5, disallow 10-man heroic
+            if (player->GetDifficulty(true) == RAID_DIFFICULTY_10MAN_HEROIC)
+                player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_NORMAL);
+        }
+
+        // Passed all conditions, teleport player
         player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
         return true;
     }
