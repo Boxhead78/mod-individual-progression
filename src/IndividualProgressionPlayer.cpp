@@ -163,7 +163,7 @@ public:
         }
         else
         {
-            maxPlayerlevel = IP_LEVEL_CATA;
+            maxPlayerLevel = IP_LEVEL_CATA;
         }
     }
 
