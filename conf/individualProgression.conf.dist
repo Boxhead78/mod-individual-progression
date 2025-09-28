@@ -209,7 +209,7 @@ IndividualProgression.SimpleConfigOverride = 0
 #        Default:     0 - Disabled (players may progress up to the maximum progression stage of 18, which is the completion of WotLK content)
 #                     1-18 - Set a lower maximum attainable progression stage 
 #
-IndividualProgression.ProgressionLimit = 18
+IndividualProgression.ProgressionLimit = 17
 
 # IndividualProgression.StartingProgression
 #
@@ -281,7 +281,7 @@ IndividualProgression.TbcRacesStartingProgression = 0
 #                   1-18 - Required progression level to create Cata Race characters
 #
 #
-IndividualProgression.CataRacesUnlockProgression = 18
+IndividualProgression.CataRacesUnlockProgression = 17
 
 #
 # IndividualProgression.CataRacesStartingProgression
@@ -381,4 +381,4 @@ IndividualProgression.DisableRDF = 0
 #        Default:     0 - Disabled
 #                     1 - Enabled
 #
-IndividualProgression.ProgressionSetterAlwaysVisible = 0
+IndividualProgression.ProgressionSetterAlwaysVisible = 1
