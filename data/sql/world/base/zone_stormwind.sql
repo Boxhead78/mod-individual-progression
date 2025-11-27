@@ -67,19 +67,7 @@ INSERT INTO `creature` (`guid`, `id1`, `map`, `position_x`, `position_y`, `posit
 
 UPDATE `creature` SET `equipment_id` = 1 WHERE `id1` = 12805; -- Officer Areyn <Accessories Quartermaster>
 
-
-UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 68;    -- Stormwind City Guard
-UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 352;   -- Dungar Longdrink <Gryphon Master>
-UPDATE `creature_template` SET `minlevel` = @maxLevel + 2, `maxlevel` = @maxLevel + 2 WHERE `entry` = 466;   -- General Marcus Jonathan <High Commander of Stormwind Defense>
-UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 1976;  -- Stormwind City Patroller
-UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 1756;  -- Stormwind Royal Guard
-UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 14423; -- Officer Jaxon
-UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 14438; -- Officer Pomeroy
-UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 14439; -- Officer Brady
-UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 15351; -- Alliance Brigadier General
 UPDATE `creature_template` SET `minlevel` = @maxLevel + 3, `maxlevel` = @maxLevel + 3 WHERE `entry` = 29611; -- King Varian Wrynn
-
-UPDATE `creature_template` SET `rank` = 0 WHERE `entry` IN (1756, 15351);
 
 UPDATE `creature_template` SET `subname` = 'Arcane Goods Vendor' WHERE `entry` = 1257; -- Keldric Boucher <Alchemy Supplies & Reagents>
 UPDATE `creature_template` SET `subname` = 'Reagent Vendor'  WHERE `entry` = 1275; -- Kyra Boucher <Reagents>
@@ -90,9 +78,9 @@ UPDATE `creature_template` SET `subname` = 'Reagent Vendor'  WHERE `entry` = 135
 UPDATE `creature_template` SET `subname` = 'Weapon Crafter'  WHERE `entry` = 7232; -- Borgus Steelhand <Weapon Crafter>
 
 -- Lieutenant Rachel Vaccar <Outland Armor Quartermaster>
-UPDATE `creature_template` SET `subname` = NULL, `minlevel` = 55, `maxlevel` = 55, `npcflag` = 0 WHERE `entry` = 12778;
+UPDATE `creature_template` SET `subname` = NULL, `npcflag` = 0 WHERE `entry` = 12778;
 UPDATE `creature_template_locale` SET `Title` = NULL WHERE `entry` = 12778;
-
+DELETE FROM `npc_vendor` WHERE `entry`= 12778; -- was placed in battlegrounds during Vanilla and TBC. needs to be hidden until wotlk
 
 DELETE FROM `npc_trainer` WHERE `ID` IN (1430, 2327, 5482, 5493, 5513);
 INSERT INTO `npc_trainer` (`ID`, `SpellID`) VALUES 
@@ -103,98 +91,32 @@ INSERT INTO `npc_trainer` (`ID`, `SpellID`) VALUES
 (5513, -390000); -- Gelman Stonehand <Mining Trainer>
 
 
--- the following should perhaps go to vanilla_vendors
--- Elaine Trias <Mistress of Cheese>
-DELETE FROM `npc_vendor` WHERE `entry` = 483 AND `item` IN (27857, 33443, 35952);
-
--- Keldric Boucher <Alchemy Supplies & Reagents>
-DELETE FROM `npc_vendor` WHERE `entry` = 1257 AND `item` IN (22147, 22148, 37201, 40411);
-
--- Kyra Boucher <Reagents>
-DELETE FROM `npc_vendor` WHERE `entry` = 1275 AND `item` IN (22147, 22148, 37201);
-
--- Edna Mullby <Trade Supplies>
-DELETE FROM `npc_vendor` WHERE `entry` = 1286 AND `item` IN (14341, 18256, 20856);
-DELETE FROM `npc_vendor` WHERE `entry` = 1286 AND `item` IN (2324, 2605, 2928, 6260, 6529);
-INSERT INTO `npc_vendor` (`entry`, `item`) VALUES (1286, 2324), (1286, 2605), (1286, 2928), (1286, 6260), (1286, 6529);
-
--- Frederick Stover <Bow & Arrow Merchant>
-DELETE FROM `npc_vendor` WHERE `entry` = 1298 AND `item` IN (11303, 11306, 11307, 28053);
-
--- Bernard Gump <Florist>
-DELETE FROM `npc_vendor` WHERE `entry` = 1302 AND `item` IN (785, 2449, 2453, 3355, 3356, 3357);
-
--- Charys Yserian <Arcane Trinkets Vendor>
-DELETE FROM `npc_vendor` WHERE `entry` = 1307 AND `item` IN (22147, 22148, 37201);
-
--- Owen Vaughn <Reagent Vendor>
-DELETE FROM `npc_vendor` WHERE `entry` = 1308 AND `item` IN (22147, 22148, 37201);
-
--- Maria Lumere <Alchemy Supplies>
-DELETE FROM `npc_vendor` WHERE `entry` = 1313 AND `item`=40411;
-
--- Jasper Fel <Shady Dealer>
-DELETE FROM `npc_vendor` WHERE `entry` = 1325 AND `item` IN (21835, 21927, 22053, 22054, 22055, 43230, 43231, 43232, 43233, 43234, 43235, 43237);
-
--- Sloan McCoy <Poison Supplier>
-DELETE FROM `npc_vendor` WHERE `entry` = 1326 AND `item` IN (21835, 21927, 22053, 22054, 22055, 43230, 43231, 43232, 43233, 43234, 43235, 43237);
-
--- Alexandra Bolero <Tailoring Supplies>
-DELETE FROM `npc_vendor` WHERE `entry` = 1347 AND `item`=38426;
-
--- Brother Cassius <Reagent Vendor>
-DELETE FROM `npc_vendor` WHERE `entry` = 1351 AND `item` IN (22147, 22148, 37201);
-
--- Thomas Miller <Baker>
-DELETE FROM `npc_vendor` WHERE `entry` = 3518 AND `item` IN (27855, 33449, 35950);
-
--- Bren Trias <Apprentice of Cheese>
-DELETE FROM `npc_vendor` WHERE `entry` = 4981 AND `item` IN (27857, 28399, 33443, 33444, 33445, 35952, 35954);
-
--- Rebecca Laughlin <Tabard Designer>
-DELETE FROM `npc_vendor` WHERE `entry` = 5193 AND `item` IN (15196, 15198, 19032, 19506, 23999, 31774, 31775, 31776, 31777, 31778, 31779, 31780, 31781, 31804, 32445, 32828, 35221);
-
--- Eldraeith <Herbalism Supplier>
-DELETE FROM `npc_vendor` WHERE `entry` = 5503 AND `item` IN (18256, 40411);
-
--- Brooke Stonebraid <Mining Supplies>
-DELETE FROM `npc_vendor` WHERE `entry` = 5514 AND `item` IN (20815, 20824);
-
--- Billibub Cogspinner <Engineering Supplies>
-DELETE FROM `npc_vendor` WHERE `entry` = 5519 AND `item` IN (39684, 40533);
-
--- Jillian Tanner <Leatherworking Supplies>
-DELETE FROM `npc_vendor` WHERE `entry` = 5565 AND `item`=38426;
-
--- Innkeeper Allison <Innkeeper>
-DELETE FROM `npc_vendor` WHERE `entry` = 6740 AND `item` IN (4536, 4537, 4538, 4539, 4602, 8953, 27855, 27856, 28399, 33444, 33445, 33449, 35948, 35949, 35950, 35954);
-
--- Lieutenant Rachel Vaccar <Outland Armor Quartermaster>
-DELETE FROM `npc_vendor` WHERE `entry` = 12778;
-
-
 SET @Biggins     := 112781; -- Master Sergeant Biggins <Officer Accessories Quartermaster>, Vanilla
+SET @Karter      := 112783; -- Lieutenant Karter, <Mount Vendor>, Vanilla
 SET @Clate       := 112785; -- Stone Guard Zarg <Food and Drink>, Vanilla
 SET @Wrynn       := 629611; -- creating copy with 'npc_king_varian_wrynn' script, to prevent AC worldserver error for not using the script
 
-DELETE FROM `creature_template` WHERE `entry` IN (@Biggins, @Clate, @Wrynn);
+
+DELETE FROM `creature_template` WHERE `entry` IN (@Biggins, @Karter, @Clate, @Wrynn);
 INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, 
 `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `scale`, `rank`, `dmgschool`, `DamageModifier`, `BaseAttackTime`, `RangeAttackTime`, 
 `BaseVariance`, `RangeVariance`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, 
 `lootid`, `pickpocketloot`, `skinloot`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `HoverHeight`, `HealthModifier`, `ManaModifier`, `ArmorModifier`, `ExperienceModifier`, 
 `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `spell_school_immune_mask`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES 
 --
-(@Biggins, 0, 0, 0, 0, 0, 'Master Sergeant Biggins', 'Officer Accessories Quartermaster', NULL, 0, 55, 55, 0, 1078, 128, 1, 1.14286, 1, 1, 18, 1, 0, 0, 1.05, 2000, 2000, 1, 1, 1, 768, 2048, 0, 0, 0, 0, 0, 0, 7, 4096, 0, 0, 0, 0, 0, 0, 0, '', 0, 1, 2, 1, 2.6, 1, 0, 0, 1, 0, 0, 0, 'npc_ipp_pre_tbc', 12340),
-(@Clate, 0, 0, 0, 0, 0, 'Sergeant Major Clate', 'Food and Drink', NULL, 0, 55, 55, 0, 123, 4224, 1, 1.14286, 1, 1, 18, 1, 0, 0, 2.15, 2000, 2000, 1, 1, 1, 768, 2048, 0, 0, 0, 0, 0, 0, 7, 4096, 0, 0, 0, 0, 0, 0, 0, '', 0, 1, 2, 1, 2.6, 1, 0, 0, 1, 0, 0, 0, 'npc_ipp_pre_tbc', 12340),
-(@Wrynn, 0, 0, 0, 0, 0, 'King Varian Wrynn', 'King of Stormwind', '', 9834, 63, 63, 2, 1733, 3, 1, 1.42857, 1, 1, 20, 1, 3, 0, 35, 2000, 2000, 1, 1, 1, 0, 2048, 0, 0, 0, 0, 0, 0, 7, 76, 0, 0, 0, 0, 0, 700000, 750000, '', 0, 1, 400, 20, 1, 1, 1, 144, 1, 617299839, 0, 0, 'npc_king_varian_wrynn', 12340);
+(@Biggins,0,0,0,0,0,'Master Sergeant Biggins','Officer Accessories Quartermaster',NULL,0,55,55,0,1078,128,1,1.14286,1,1,18,1,0,0,1.05,2000,2000,1,1,1,768,2048,0,0,0,0,0,0,7,4096,0,0,0,0,0,0,0,'',0,1,2,1,2.6,1,0,0,1,0,0,0,'npc_ipp_pre_tbc',0),
+(@Karter,0,0,0,0,0,'Lieutenant Karter','Mount Vendor',NULL,0,55,55,0,1078,128,1,1.14286,1,1,18,1,0,0,1.05,2000,2000,1,1,1,768,2048,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,'',0,1,2,1,2.6,1,0,0,1,0,0,0,'npc_ipp_pre_tbc',0),
+(@Clate,0,0,0,0,0,'Sergeant Major Clate','Food and Drink',NULL,0,55,55,0,123,4224,1,1.14286,1,1,18,1,0,0,2.15,2000,2000,1,1,1,768,2048,0,0,0,0,0,0,7,4096,0,0,0,0,0,0,0,'',0,1,2,1,2.6,1,0,0,1,0,0,0,'npc_ipp_pre_tbc',0),
+(@Wrynn,0,0,0,0,0,'King Varian Wrynn','King of Stormwind','',9834,63,63,2,1733,3,1,1.42857,1,1,20,1,3,0,35,2000,2000,1,1,1,0,2048,0,0,0,0,0,0,7,76,0,0,0,0,0,700000,750000,'',0,1,400,20,1,1,1,144,1,617299839,0,0,'npc_king_varian_wrynn',0);
 
-DELETE FROM `creature_template_addon` WHERE `entry` IN (@Biggins, @Clate, @Wrynn);
+DELETE FROM `creature_template_addon` WHERE `entry` IN (@Biggins, @Karter, @Clate, @Wrynn);
 INSERT INTO `creature_template_addon` (`entry`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 
 (@Biggins, 0, 0, 0, 1, 0, 0, NULL),
+(@Karter, 0, 0, 0, 0, 0, 0, NULL),
 (@Clate, 0, 0, 0, 0, 0, 0, NULL),
 (@Wrynn, 0, 0, 0, 1, 0, 3, NULL);
 
-DELETE FROM `creature_template_locale` WHERE `entry` IN (@Biggins, @Clate, @Wrynn);
+DELETE FROM `creature_template_locale` WHERE `entry` IN (@Biggins, @Karter, @Clate, @Wrynn);
 INSERT INTO `creature_template_locale` (`entry`, `locale`, `Name`, `Title`, `VerifiedBuild`) VALUES 
 (@Biggins, 'deDE', 'Hauptfeldwebel Biggins', 'Rüstmeister für Zubehör', 18019),
 (@Biggins, 'esES', 'Sargento primero Biggins', 'Intendente de accesorios', 18019),
@@ -204,6 +126,15 @@ INSERT INTO `creature_template_locale` (`entry`, `locale`, `Name`, `Title`, `Ver
 (@Biggins, 'ruRU', 'Старший сержант Биггинс', 'Начальник снабжения аксессуарами', 18019),
 (@Biggins, 'zhCN', '军士长贝金斯', '杂货军需官', 18019),
 (@Biggins, 'zhTW', '上士貝金斯', '雜貨軍需官', 18019),
+--
+(@Karter, 'deDE', 'Leutnant Karter','Rüstmeisterin für Kriegsreittiere', 18019),
+(@Karter, 'esES', 'Teniente Karter','Intendente de monturas de guerra', 18019),
+(@Karter, 'esMX', 'Teniente Karter','Intendente de monturas de guerra', 18019),
+(@Karter, 'frFR', 'Lieutenant Karter','Intendante des montures de guerre', 18019),
+(@Karter, 'koKR', '부관 칼터','전투 탈것 병참장교', 18019),
+(@Karter, 'ruRU', 'Лейтенант Картер','Начальник снабжения верховыми животными', 18019),
+(@Karter, 'zhCN', '卡特尔中尉','战争坐骑军需官', 18019),
+(@Karter, 'zhTW', '卡特爾中尉','戰爭軍需官', 18019),
 --
 (@Clate, 'deDE', 'Stabsfeldwebel Clate', 'Speis & Trank', 18019),
 (@Clate, 'esES', 'Alférez Clate', 'Alimentos y bebidas', 18019),
@@ -223,9 +154,10 @@ INSERT INTO `creature_template_locale` (`entry`, `locale`, `Name`, `Title`, `Ver
 (@Wrynn, 'zhCN', '瓦里安·乌瑞恩国王', '暴风城国王', 18019),
 (@Wrynn, 'zhTW', '瓦里安·烏瑞恩國王', '暴風之王', 18019);
 
-DELETE FROM `creature_template_model` WHERE `CreatureID` IN (@Biggins, @Clate, @Wrynn);
+DELETE FROM `creature_template_model` WHERE `CreatureID` IN (@Biggins, @Karter, @Clate, @Wrynn);
 INSERT INTO `creature_template_model` (`CreatureID`, `Idx`, `CreatureDisplayID`, `DisplayScale`, `Probability`, `VerifiedBuild`) VALUES 
 (@Biggins, 0, 12669, 1, 1, 12340),
+(@Karter, 0, 12922, 1, 1, 12340),
 (@Clate, 0, 12925, 1, 1, 12340),
 (@Wrynn, 0, 28127, 1, 1, 12340);
 
@@ -235,27 +167,28 @@ UPDATE `creature_template` SET `subname` = 'Armor Quartermaster' WHERE `entry` =
 UPDATE `creature_template` SET `npcflag` = 4224 WHERE `entry` IN (24671, 24672);
 
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_pre_tbc' WHERE `entry` IN (12805, 26393, 26394);
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (12781, 12784, 12785, 20278, 23396, 23446, 24671, 24672);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (12781, 12783, 12784, 12785, 20278, 23396, 23446, 24671, 24672);
 
 UPDATE `creature_template_addon` SET `mount` = 0 WHERE `entry` = 12783;
 
 
-DELETE FROM `creature` WHERE `guid` IN (133928, 133926, 133929, 612781, 612783, 612785, 623446, 624671, 624672, 626393, 626394, 720278, 723396);
-INSERT INTO `creature` (`guid`, `id1`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
+DELETE FROM `creature` WHERE `guid` IN (133928, 133926, 133929, 612781, 133927, 612783, 612785, 623446, 624671, 624672, 612777, 626394, 720278, 723396);
+INSERT INTO `creature` (`guid`, `id1`, `map`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
 --
-(612781, @Biggins, 0, -8777.4, 417.124, 103.921, 6.23553, 180), -- Master Sergeant Biggins <Officer Accessories Quartermaster>, Vanilla
-(133926, 12781, 0, -8777.4, 417.124, 103.921, 6.23553, 180),    -- Master Sergeant Biggins <Officer Accessories Quartermaster>, TBC
-(612785, @Clate, 0, -8771.31, 401.973, 109.665, 0.659191, 180), -- Sergeant Major Clate <Food and Drink>, Vanilla
-(133929, 12785, 0, -8771.31, 401.973, 109.665, 0.659191, 180),  -- Sergeant Major Clate <Armor Quartermaster>, TBC 
-(626394, 26394, 0, -8778.3, 432.142, 105.309, 4.17386, 180),    -- Captain O'Neal <Weapons Quartermaster>, Vanilla
-(624671, 24671, 0, -8778.3, 432.142, 105.309, 4.17386, 180),    -- Captain O'Neal <Weapons Quartermaster>, TBC
-(626393, 26393, 0, -8768.77, 401.647, 109.665, 2.22999, 180),   -- Captain Dirgehammer <Armor Quartermaster>, Vanilla
-(624672, 24672, 0, -8773.33, 427.279, 105.233, 3.84677, 180),   -- Captain Dirgehammer <Armor Quartermaster>, TBC
-(133928, 12784, 0, -8764.6, 413.632, 103.922, 0.693375, 180),   -- Lieutenant Jackspring <Weapons Quartermaster>, TBC 
-(720278, 20278, 0, -8789.08, 425.681, 105.233, 5.68294, 180),   -- Vixton Pinchwhistle <Arena Vendor>, TBC
-(723396, 23396, 0, -8786.12, 428.386, 105.233, 5.5871, 180),    -- Krixel Pinchwhistle <Arena Vendor>, TBC
-(623446, 23446, 0, -8785.74, 420.484, 105.233, 0.701937, 180),  -- Lieutenant Tristia <Armor Quartermaster>, TBC
-(612783, 12783, 0, -8779.7, 432.158, 105.233, 5.36374, 180);    -- Lieutenant Karter <Mount Vendor>
+(612781, @Biggins, 0, 1, 1, -8777.4, 417.124, 103.921, 6.23553, 180), -- Master Sergeant Biggins <Officer Accessories Quartermaster>, Vanilla
+(133926, 12781, 0, 1, 1, -8777.4, 417.124, 103.921, 6.23553, 180),    -- Master Sergeant Biggins <Officer Accessories Quartermaster>, TBC
+(612785, @Clate, 0, 1, 1, -8771.31, 401.973, 109.665, 0.659191, 180), -- Sergeant Major Clate <Food and Drink>, Vanilla
+(133929, 12785, 0, 1, 1, -8771.31, 401.973, 109.665, 0.659191, 180),  -- Sergeant Major Clate <Armor Quartermaster>, TBC 
+(626394, 26394, 0, 1, 1, -8778.3, 432.142, 105.309, 4.17386, 180),    -- Captain O'Neal <Weapons Quartermaster>, Vanilla
+(624671, 24671, 0, 1, 1, -8778.3, 432.142, 105.309, 4.17386, 180),    -- Captain O'Neal <Weapons Quartermaster>, TBC
+(612777, 12777, 0, 1, 1, -8768.77, 401.647, 109.665, 2.22999, 180),   -- Captain Dirgehammer <Armor Quartermaster>, Vanilla
+(624672, 24672, 0, 1, 1, -8773.33, 427.279, 105.233, 3.84677, 180),   -- Captain Dirgehammer <Armor Quartermaster>, TBC
+(133928, 12784, 0, 1, 1, -8764.6, 413.632, 103.922, 0.693375, 180),   -- Lieutenant Jackspring <Weapons Quartermaster>, TBC 
+(720278, 20278, 0, 1, 1, -8789.08, 425.681, 105.233, 5.68294, 180),   -- Vixton Pinchwhistle <Arena Vendor>, TBC
+(723396, 23396, 0, 1, 1, -8786.12, 428.386, 105.233, 5.5871, 180),    -- Krixel Pinchwhistle <Arena Vendor>, TBC
+(623446, 23446, 0, 1, 1, -8785.74, 420.484, 105.233, 0.701937, 180),  -- Lieutenant Tristia <Armor Quartermaster>, TBC
+(133927, 12783, 0, 1, 1, -8779.7, 432.158, 105.233, 5.36374, 180),    -- Lieutenant Karter <Mount Vendor>, TBC
+(612783, @Karter, 0, 1, 1, -8779.7, 432.158, 105.233, 5.36374, 180);  -- Lieutenant Karter <Mount Vendor>, Vanilla
 
 
 -- Master Sergeant Biggins <Officer Accessories Quartermaster> - Vanilla
@@ -281,11 +214,16 @@ INSERT INTO `npc_vendor` (`entry`, `item`, `maxcount`, `incrtime`, `ExtendedCost
 -- Officer Areyn <Accessories Quartermaster>
 DELETE FROM `npc_vendor` WHERE `entry` = 12805;
 INSERT INTO `npc_vendor` (`entry`, `item`, `ExtendedCost`) VALUES 
-(12805, 18445, 492), (12805, 18447, 931), (12805, 18448, 492), (12805, 18449, 931), (12805, 18454, 492), 
-(12805, 18455, 931), (12805, 18456, 492), (12805, 18457, 931), (12805, 18854, 634), (12805, 18856, 634), 
-(12805, 18858, 634), (12805, 18859, 634), (12805, 18862, 634), (12805, 18863, 634), (12805, 18864, 634);
+(12805, 18445, 492), (12805, 18447, 931), (12805, 18448, 492), (12805, 18449, 931), (12805, 18454, 492), (12805, 18455, 931), (12805, 18456, 492), (12805, 18457, 931), 
+(12805, 18664, 0), (12805, 18854, 634), (12805, 18856, 634), (12805, 18858, 634), (12805, 18859, 634), (12805, 18862, 634), (12805, 18863, 634), (12805, 18864, 634), 
+(12805, 18442, 838), (12805, 18444, 930), (12805, 18443, 491), (12805, 15196, 1007), (12805, 18440, 1050), (12805, 18441, 986), (12805, 16342, 774); 
 
--- Lieutenant Karter <War Mount Quartermaster>
+-- Lieutenant Karter <War Mount Quartermaster> - Vanilla
+DELETE FROM `npc_vendor` WHERE `entry` = @Karter;
+INSERT INTO `npc_vendor` (`entry`, `item`, `ExtendedCost`) VALUES
+(@Karter, 18241, 423), (@Karter, 18242, 423), (@Karter, 18243, 423), (@Karter, 18244, 423);
+
+-- Lieutenant Karter <War Mount Quartermaster> - TBC
 DELETE FROM `npc_vendor` WHERE `entry` = 12783;
 INSERT INTO `npc_vendor` (`entry`, `item`, `ExtendedCost`) VALUES
 (12783, 18241, 423), (12783, 18242, 423), (12783, 18243, 423), (12783, 18244, 423), (12783, 35906, 423);
@@ -352,18 +290,28 @@ INSERT INTO `npc_vendor` (`entry`, `item`, `maxcount`, `incrtime`, `ExtendedCost
 -- Captain Dirgehammer <Armor Quartermaster> - Vanilla
 DELETE FROM `npc_vendor` WHERE `entry` IN (12777, 26393);
 INSERT INTO `npc_vendor` (`entry`, `item`, `ExtendedCost`) VALUES
-(26393, 16437, 465), (26393, 16440, 541), (26393, 16441, 464), (26393, 16442, 542), (26393, 16443, 463), (26393, 16444, 465), (26393, 16446, 465), (26393, 16448, 541), (26393, 16449, 465),
-(26393, 16450, 542), (26393, 16451, 464), (26393, 16452, 463), (26393, 16453, 463), (26393, 16454, 541), (26393, 16455, 464), (26393, 16456, 542), (26393, 16457, 465), (26393, 16459, 465),
-(26393, 16462, 465), (26393, 16463, 541), (26393, 16465, 464), (26393, 16466, 463), (26393, 16467, 542), (26393, 16468, 465), (26393, 16471, 541), (26393, 16472, 465), (26393, 16473, 463),
-(26393, 16474, 464), (26393, 16475, 542), (26393, 16476, 465), (26393, 16477, 463), (26393, 16478, 464), (26393, 16479, 542), (26393, 16480, 465), (26393, 16483, 465), (26393, 16484, 541),
-(26393, 17578, 464), (26393, 17579, 542), (26393, 17580, 465), (26393, 17581, 463), (26393, 17583, 465), (26393, 17584, 541), (26393, 17602, 464), (26393, 17603, 542), (26393, 17604, 465),
-(26393, 17605, 463), (26393, 17607, 465), (26393, 17608, 541), (26393, 23272, 652), (26393, 23273, 653), (26393, 23274, 428), (26393, 23275, 427), (26393, 23276, 444), (26393, 23277, 427),
-(26393, 23278, 427), (26393, 23279, 428), (26393, 23280, 428), (26393, 23281, 427), (26393, 23282, 428), (26393, 23283, 427), (26393, 23284, 428), (26393, 23285, 427), (26393, 23286, 428),
-(26393, 23287, 427), (26393, 23288, 428), (26393, 23289, 427), (26393, 23290, 428), (26393, 23291, 427), (26393, 23292, 652), (26393, 23293, 653), (26393, 23294, 652), (26393, 23295, 653),
-(26393, 23296, 653), (26393, 23297, 652), (26393, 23298, 652), (26393, 23299, 653), (26393, 23300, 652), (26393, 23301, 653), (26393, 23302, 653), (26393, 23303, 652), (26393, 23304, 653),
-(26393, 23305, 652), (26393, 23306, 444), (26393, 23307, 427), (26393, 23308, 444), (26393, 23309, 427), (26393, 23310, 444), (26393, 23311, 427), (26393, 23312, 444), (26393, 23313, 427),
-(26393, 23314, 444), (26393, 23315, 427), (26393, 23316, 444), (26393, 23317, 427), (26393, 23318, 444), (26393, 23319, 427), (26393, 29594, 427), (26393, 29595, 428), (26393, 29596, 652),
-(26393, 29597, 653), (26393, 29598, 444), (26393, 29599, 427), (26393, 29606, 465), (26393, 29607, 541), (26393, 29608, 542), (26393, 29609, 463), (26393, 29610, 464), (26393, 29611, 465);
+-- boot 427, gloves 428, helm 444, pants 653, chest 652, shoulders 427
+(12777, 16369, 427), (12777, 16391, 428), (12777, 16413, 652), (12777, 16414, 653), (12777, 16416, 444), (12777, 16415, 427), -- mages, pre naxx
+(12777, 16423, 427), (12777, 16424, 444), (12777, 16422, 653), (12777, 16421, 652), (12777, 16393, 427), (12777, 16397, 428), -- druid, pre naxx
+(12777, 16392, 427), (12777, 16396, 428), (12777, 16417, 652), (12777, 16419, 653), (12777, 16420, 427), (12777, 16418, 444), -- rogue, pre naxx
+(12777, 16405, 427), (12777, 16406, 428), (12777, 16430, 652), (12777, 16431, 653), (12777, 16429, 444), (12777, 16432, 427), -- warrior, pre naxx
+(12777, 16410, 428), (12777, 16409, 427), (12777, 16433, 652), (12777, 16435, 653), (12777, 16434, 444), (12777, 16436, 427), -- paladin, pre naxx
+(12777, 16425, 652), (12777, 16426, 653), (12777, 16401, 427), (12777, 16403, 428), (12777, 16428, 444), (12777, 16427, 427), -- hunter, pre naxx
+(12777, 17562, 427), (12777, 17564, 428), (12777, 17568, 652), (12777, 17567, 653), (12777, 17569, 427), (12777, 17566, 444), -- warlock, pre naxx
+(12777, 17594, 427), (12777, 17596, 428), (12777, 17600, 652), (12777, 17599, 653), (12777, 17598, 444), (12777, 17601, 427), -- priest, pre naxx
+--
+(12777, 16437, 465), (12777, 16440, 541), (12777, 16441, 464), (12777, 16442, 542), (12777, 16443, 463), (12777, 16444, 465), (12777, 16446, 465), (12777, 16448, 541), (12777, 16449, 465),
+(12777, 16450, 542), (12777, 16451, 464), (12777, 16452, 463), (12777, 16453, 463), (12777, 16454, 541), (12777, 16455, 464), (12777, 16456, 542), (12777, 16457, 465), (12777, 16459, 465),
+(12777, 16462, 465), (12777, 16463, 541), (12777, 16465, 464), (12777, 16466, 463), (12777, 16467, 542), (12777, 16468, 465), (12777, 16471, 541), (12777, 16472, 465), (12777, 16473, 463),
+(12777, 16474, 464), (12777, 16475, 542), (12777, 16476, 465), (12777, 16477, 463), (12777, 16478, 464), (12777, 16479, 542), (12777, 16480, 465), (12777, 16483, 465), (12777, 16484, 541),
+(12777, 17578, 464), (12777, 17579, 542), (12777, 17580, 465), (12777, 17581, 463), (12777, 17583, 465), (12777, 17584, 541), (12777, 17602, 464), (12777, 17603, 542), (12777, 17604, 465),
+(12777, 17605, 463), (12777, 17607, 465), (12777, 17608, 541), (12777, 23272, 652), (12777, 23273, 653), (12777, 23274, 428), (12777, 23275, 427), (12777, 23276, 444), (12777, 23277, 427),
+(12777, 23278, 427), (12777, 23279, 428), (12777, 23280, 428), (12777, 23281, 427), (12777, 23282, 428), (12777, 23283, 427), (12777, 23284, 428), (12777, 23285, 427), (12777, 23286, 428),
+(12777, 23287, 427), (12777, 23288, 428), (12777, 23289, 427), (12777, 23290, 428), (12777, 23291, 427), (12777, 23292, 652), (12777, 23293, 653), (12777, 23294, 652), (12777, 23295, 653),
+(12777, 23296, 653), (12777, 23297, 652), (12777, 23298, 652), (12777, 23299, 653), (12777, 23300, 652), (12777, 23301, 653), (12777, 23302, 653), (12777, 23303, 652), (12777, 23304, 653),
+(12777, 23305, 652), (12777, 23306, 444), (12777, 23307, 427), (12777, 23308, 444), (12777, 23309, 427), (12777, 23310, 444), (12777, 23311, 427), (12777, 23312, 444), (12777, 23313, 427),
+(12777, 23314, 444), (12777, 23315, 427), (12777, 23316, 444), (12777, 23317, 427), (12777, 23318, 444), (12777, 23319, 427), (12777, 29594, 427), (12777, 29595, 428), (12777, 29596, 652),
+(12777, 29597, 653), (12777, 29598, 444), (12777, 29599, 427), (12777, 29606, 465), (12777, 29607, 541), (12777, 29608, 542), (12777, 29609, 463), (12777, 29610, 464), (12777, 29611, 465);
 
 -- Captain Dirgehammer <Armor Quartermaster> - TBC
 DELETE FROM `npc_vendor` WHERE `entry` = 24672;
@@ -383,11 +331,108 @@ INSERT INTO `npc_vendor` (`entry`, `item`, `maxcount`, `incrtime`, `ExtendedCost
 (24672, 31632, 0, 0, 2263), (24672, 31633, 0, 0, 2265), (24672, 31634, 0, 0, 2267), (24672, 31640, 0, 0, 2259), (24672, 31641, 0, 0, 2261), (24672, 31642, 0, 0, 2263),
 (24672, 31643, 0, 0, 2265), (24672, 31644, 0, 0, 2267);
 
-
 /* Hide certain vendor items until the player has reached the progression tier for them */
-DELETE FROM `conditions` WHERE `SourceGroup` IN (12777, 12782, 12783, 26394);
+DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 23 AND `SourceGroup` IN (12777, 12782, 12783, 26394) AND `ConditionValue1` IN (66002, 66006, 66008);
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, 
 `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES 
+--
+(23, 12777, 16369, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Silk Boots if the player has NOT completed PROGRESSION_AQ'), -- mage
+(23, 12777, 16391, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Silk Gloves if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16413, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Silk Raiment if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16414, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Silk Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16416, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Crown if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16415, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Silk Spaulders if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16423, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dragonhide Epaulets if the player has NOT completed PROGRESSION_AQ'), -- druid
+(23, 12777, 16424, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dragonhide Shroud if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16422, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dragonhide Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16421, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dragonhide Tunic if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16393, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dragonhide Footwraps if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16397, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dragonhide Gloves if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16392, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Leather Boots if the player has NOT completed PROGRESSION_AQ'), -- rogue
+(23, 12777, 16396, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Leather Gauntlets if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16417, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Leather Armor if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16419, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Leather Legguards if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16420, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Leather Spaulders if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16418, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Leather Veil if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16405, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Plate Boots if the player has NOT completed PROGRESSION_AQ'), -- warrior
+(23, 12777, 16406, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Plate Gauntlets if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16430, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Plate Chestguard if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16431, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Plate Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16429, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Plate Helm if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16432, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Plate Pauldrons if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16410, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Lamellar Gauntlets if the player has NOT completed PROGRESSION_AQ'), -- paladin
+(23, 12777, 16409, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Lamellar Sabatons if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16433, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Lamellar Breastplate if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16435, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Lamellar Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16434, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Lamellar Headguard if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16436, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Lamellar Shoulders if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16425, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Chain Hauberk if the player has NOT completed PROGRESSION_AQ'), -- hunter
+(23, 12777, 16426, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Chain Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16401, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Chain Boots if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16403, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Chain Gauntlets if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16428, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Chain Helmet if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 16427, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Chain Pauldrons if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17562, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dreadweave Boots if the player has NOT completed PROGRESSION_AQ'), -- warlock
+(23, 12777, 17564, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dreadweave Gloves if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17568, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dreadweave Robe if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17567, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dreadweave Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17569, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dreadweave Mantle if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17566, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Headguard if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17594, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Satin Boots if the player has NOT completed PROGRESSION_AQ'), -- priest
+(23, 12777, 17596, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Satin Gloves if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17600, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Satin Robes if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17599, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Satin Leggings if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17598, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Diadem if the player has NOT completed PROGRESSION_AQ'),
+(23, 12777, 17601, 0, 0, 8, 0, 66006, 0, 0, 1, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Satin Amice if the player has NOT completed PROGRESSION_AQ'),
+--
+(23, 12777, 23304, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Silk Legguards if the player has completed PROGRESSION_AQ'), -- mage
+(23, 12777, 23305, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Silk Tunic if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23290, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Silk Handwraps if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23291, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Silk Walkers if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23318, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Silk Cowl if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23319, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Silk Mantle if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23294, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dragonhide Chestpiece if the player has completed PROGRESSION_AQ'), -- druid
+(23, 12777, 23295, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dragonhide Leggings if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23280, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dragonhide Grips if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23281, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dragonhide Treads if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23308, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dragonhide Headguard if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23309, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dragonhide Shoulders if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23298, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Leather Chestpiece if the player has completed PROGRESSION_AQ'), -- rogue
+(23, 12777, 23299, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Leather Legguards if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23284, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Leather Grips if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23285, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Leather Walkers if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23312, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Leather Helm if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23313, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Leather Shoulders if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23300, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Plate Hauberk if the player has completed PROGRESSION_AQ'), -- warrior
+(23, 12777, 23301, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Plate Leggings if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23286, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Plate Gauntlets if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23287, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Plate Greaves if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23314, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Plate Helm if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23315, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Plate Shoulders if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23272, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Lamellar Breastplate if the player has completed PROGRESSION_AQ'), -- paladin
+(23, 12777, 23273, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Lamellar Leggings if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23274, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Lamellar Gauntlets if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23275, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Lamellar Sabatons if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23276, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Lamellar Headguard if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23277, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Lamellar Shoulders if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23292, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Chain Hauberk if the player has completed PROGRESSION_AQ'), -- hunter
+(23, 12777, 23293, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Chain Legguards if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23278, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Chain Greaves if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23279, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Chain Vices if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23306, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Chain Helm if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23307, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Chain Shoulders if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23296, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dreadweave Legguards if the player has completed PROGRESSION_AQ'), -- warlock
+(23, 12777, 23297, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Dreadweave Tunic if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23282, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dreadweave Handwraps if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23283, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Dreadweave Walkers if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23310, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dreadweave Cowl if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23311, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Dreadweave Spaulders if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23302, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Satin Legguards if the player has completed PROGRESSION_AQ'), -- priest
+(23, 12777, 23303, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Captains Satin Tunic if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23288, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Satin Handwraps if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23289, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Knight-Lieutenants Satin Walkers if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23316, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Satin Hood if the player has completed PROGRESSION_AQ'),
+(23, 12777, 23317, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will only sell Lieutenant Commanders Satin Mantle if the player has completed PROGRESSION_AQ'),
 --
 (23, 12777, 16437, 0, 0, 8, 0, 66002, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will not sell Marshals Silk Footwraps until the player has completed PROGRESSION_ONYXIA'),
 (23, 12777, 16440, 0, 0, 8, 0, 66002, 0, 0, 0, 0, 0, '', 'Captain Dirgehammer will not sell Marshals Silk Gloves until the player has completed PROGRESSION_ONYXIA'),
@@ -466,14 +511,15 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 UPDATE `gameobject` SET `ScriptName` = 'gobject_ipp_pre_tbc' WHERE `guid` IN (61936, 61940, 61942, 61944, 61945, 61946, 61947, 61949, 61951);
 UPDATE `creature`   SET `ScriptName` = 'npc_ipp_tbc' WHERE `id1` = 19848; -- Harbinger Ennarth
 
-
 -- WotLK pvp vendors
 DELETE FROM `creature` WHERE `id1` IN 
-(12777,  -- Captain Dirgehammer <Armor Quartermaster>
- 12782,  -- Captain O'Neal <Weapons Quartermaster>
+(12782,  -- Captain O'Neal <Weapons Quartermaster>
+ 26393,  -- Captain Dirgehammer <Armor Quartermaster>
  34075,  -- Captain Dirgehammer <Armor Quartermaster>
  34081); -- Captain O'Neal <Jewelcrafting Quartermaster>
 
+/* NPC Rebecca Laughlin - Remove non-Vanilla Tabards */
+DELETE FROM `npc_vendor` WHERE `entry`= 5193 AND `item` IN (15197, 15199, 19031, 19505, 24004, 31773, 31775, 31776, 31777, 31778, 31779, 31780, 31781, 31804, 32445, 32828, 35221);
 
 -- Summon Felsteed (Warlock)
 DELETE FROM `quest_offer_reward` WHERE `ID` = 4488;
@@ -511,14 +557,3 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (12739, 0, 0, 1, 2, 0, 100, 0, 0, 30, 0, 0, 0, 0, 11, 8599, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Onyxias Elite Guard - Between 0-30% Health - Cast Enrage'),
 (12739, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Onyxias Elite Guard - On Enrage - Say Line 0');
-
--- this should probably go to vanilla_vendors
--- Remove non-Vanilla food items from Stormwind vendors
-DELETE FROM npc_vendor WHERE entry = 483   and item IN (27857, 33443, 35952);
-DELETE FROM npc_vendor WHERE entry = 3518  and item IN (27855, 33449, 35950);
-DELETE FROM npc_vendor WHERE entry = 3003  and item IN (27855, 33449, 35950);
-DELETE FROM npc_vendor WHERE entry = 4255  and item IN (27854, 27855, 27856, 27857, 27858, 27860, 28399, 29448, 29449, 29450, 29451, 29452, 33443, 33444, 33445, 33449, 33451, 33454, 35948, 35949, 35950, 35951, 35952, 35953, 35954);
-DELETE FROM npc_vendor WHERE entry = 4981  and item IN (27857, 28399, 33443, 33444, 33445, 35952, 35954);
-DELETE FROM npc_vendor WHERE entry = 5109  and item IN (27855, 33449, 35950);
-DELETE FROM npc_vendor WHERE entry = 6740  and item IN (27855, 27856, 28399, 33444, 33445, 33449, 35948, 35949, 35950, 35954);
-DELETE FROM npc_vendor WHERE entry = 10367 and item IN (27854, 27855, 27856, 27857, 27858, 27860, 28399, 29448, 29449, 29450, 29451, 29452, 33443, 33444, 33445, 33449, 33451, 33454, 35948, 35949, 35950, 35951, 35952, 35953, 35954, 27859, 29453, 33452, 35947);

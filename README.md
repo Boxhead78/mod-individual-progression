@@ -18,6 +18,7 @@ Lower-level content added in later expansions that is not "catch-up" content has
 * Complete overhaul of all vanilla creatures and quests. Smart AI, quest drop chances, creature respawn times, spells, patrols and spawn locations have all been restored.
 * Optional power and health adjustment for Vanilla and TBC content to simulate the original world difficulty.
 * WotLK emblems drop based on your progression.
+* Playerbots support
 
 For a complete list of changes, please see [here](https://github.com/ZhengPeiRu21/mod-individual-progression/wiki/List-of-Changes).
 
@@ -43,7 +44,8 @@ This is handled by the client, so I have created an addon that will restore this
 Special thanks to all contributors of the following projects who made this module possible:
 * AzerothCore and TrinityCore, along with ancestors Mangos, etc.
 * AzerothCore Progression Module for Vanilla content and scripts
-* AzerothCore War Effort Module
+* AzerothCore mod-war-effort
+* AzerothCore mod-pvp-titles
 * Wrath of the Vanilla Module for more Vanilla world adjustments
 * Vmangos for Vanilla game and patch progression data
 * Sogladev for many Naxx 40 scripts and data

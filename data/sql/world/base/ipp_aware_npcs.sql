@@ -6,7 +6,8 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (16
                                                                               20026, 20027, 20053, 20054, 20069, 18542, 20080, 20081, 20082, 21643, 20130,
                                                                               19934, 19936, 19950, 19951, 19959, 22889, 22902, 22835, 22837);
 
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_ds2' WHERE `entry` IN (15282, 15270);
+-- Phasing NPCs related to AllowEarlyDungeonSet2
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_ds2' WHERE `entry` IN (15270, 15282, 16012, 16013);
 
 -- Phasing Cenarion Hold NPCs
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_preaq' WHERE `entry` IN (15176, 15180, 15181, 15183, 15188, 15189, 15190, 15191, 15293, 15194, 
@@ -15,7 +16,7 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_preaq' WHERE `entry` IN (
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id1` = 15184 AND `guid` IN (42782, 42783, 42768);
 
 -- Phasing ZG quest NPCs on YoJamba Isle
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id1` IN (14904, 14910, 15070);
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id1` IN (14902, 14903, 14904, 14905, 14910, 15070);
 
 -- Phasing NPCs until after the outdoors AQ war has been completed
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_aq' WHERE `entry` IN  (15498, 15499, 15500, 15540, 16091);                -- Cenarion Hold
@@ -62,8 +63,15 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN 
 -- Phasing TBC vendors and trainers - Copies are added to replace them until TBC T4.
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN (18754, 18771, 19187, 21087);
 
--- Phasing for General Tiras'alan and Dathris Sunstriker - prevent early access to Isle of Quel'Danas
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t5' WHERE `entry` IN (25167, 18594);
+-- TBC, phasing Shattered Sun offensive NPCs in Shattrath
+UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id1` IN (17076, 19475, 24932, 24938, 25115, 25134, 25135, 25136, 25137, 25138, 25141, 25142, 25143, 25153, 25155, 25167, 27666, 27667);
+
+-- TBC, Terrace of Light, phasing T5 game objects
+UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc_t4' WHERE `entry` IN 
+(187056,  -- Shattrath portal to Isle of Quel'Danas
+ 187345,  -- Sunwell Plateau model
+ 187356,  -- Shattered Sun Banner
+ 187357); -- Shattered Sun Banner
 
 -- Dragons of Nightmare
 UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id1` IN (14887, 14888, 14889, 14890);

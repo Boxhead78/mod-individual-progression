@@ -1,5 +1,3 @@
-SET @maxLevel = 80;
-
 /* smart scripts */
 UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (118, 285, 525, 735);
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN 
@@ -122,10 +120,6 @@ INSERT INTO `creature_questender` (`id`, `quest`) VALUES (459, 1598);
 DELETE FROM `creature_queststarter` WHERE `id` = 459 AND `quest` = 1598;
 INSERT INTO `creature_queststarter` (`id`, `quest`) VALUES (459, 1598);
 
--- update creature factions
-UPDATE `creature_template` SET `faction` = 17 WHERE `entry` = 38;  -- Defias Thug
-UPDATE `creature_template` SET `faction` = 17 WHERE `entry` = 103; -- Garrick Padfoot
-
 -- update creature models
 UPDATE `creature_template_model` SET `CreatureDisplayID` = 604   WHERE `CreatureID` = 69;  -- Diseased Timber Wolf
 UPDATE `creature_template_model` SET `CreatureDisplayID` = 10912 WHERE `CreatureID` = 257; -- Kobold Worker
@@ -148,9 +142,6 @@ UPDATE `creature_template` SET `subname` = 'Expert Leatherworker'     WHERE `ent
 UPDATE `creature_template` SET `subname` = 'Skinner'                  WHERE `entry` = 6306; -- Helene Peltskinner <Skinner>
 UPDATE `creature_template` SET `subname` = 'Journeyman Alchemist', `npcflag` = 81, `trainer_type` = 2 WHERE `entry` = 5500; -- Tel'Athir <Apprentice Alchemist>
 UPDATE `creature_template` SET `subname` = 'Expert Tailor',        `npcflag` = 81, `trainer_type` = 2 WHERE `entry` = 5567; -- Sellandus <Apprentice Tailor>
--- update creature levels
-UPDATE `creature_template` SET `maxlevel` = 4 WHERE `entry` = 80;                     -- Kobold Laborer
-UPDATE `creature_template` SET `minlevel` = @maxLevel - 5, `maxlevel` = @maxLevel - 5 WHERE `entry` = 1642; -- Northshire Guard
 
 DELETE FROM `creature_template_addon` WHERE `entry` = 69;  -- Diseased Timber Wolf
 DELETE FROM `creature_template_addon` WHERE `entry` = 299; -- Diseased Young Wolf
@@ -172,11 +163,6 @@ INSERT INTO `npc_trainer` (`ID`, `SpellID`) VALUES
 (11072, -330001),
 (11072, -330002);
 
--- Antonio Perelli <Traveling Salesman>
-DELETE FROM `npc_vendor` WHERE `entry` = 844 AND `item` = 40411;
-
--- Dawn Brightstar <Arcane Goods>
-DELETE FROM `npc_vendor` WHERE `entry` = 958 AND `item` IN (22147, 22148, 37201, 40411);
 
 -- Wolves Across the Border
 DELETE FROM `quest_offer_reward` WHERE `ID` = 33;

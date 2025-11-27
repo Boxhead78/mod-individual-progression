@@ -148,7 +148,12 @@ public:
         // Condition 1: Player must have completed Molten Core progression
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_MOLTEN_CORE))
         {
-            handler.PSendSysMessage("You must have completed Molten Core progression to enter Onyxia's Lair.");
+            uint32 loc = player->GetSession()->GetSessionDbLocaleIndex();
+            if (loc == 3)
+                handler.PSendSysMessage("Ihr müsst den Geschmolzenen Kern abgeschlossen haben, um den Hort der Onyxia betreten zu können.");
+            else
+                handler.PSendSysMessage("You must have completed Molten Core progression to enter Onyxia's Lair.");
+
             return false;
         }
 
@@ -157,7 +162,11 @@ public:
         {
             if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
             {
-                handler.PSendSysMessage("You must have the Drakefire Amulet in your inventory to enter this version of Onyxia's Lair.");
+                if (loc == 3)
+                    handler.PSendSysMessage("Ihr benötigt das Drachenfeueramulett, um den Hort der Onyxia betreten zu können.");
+                else
+                    handler.PSendSysMessage("You must have the Drakefire Amulet to enter Onyxia's Lair.");
+
                 return false;
             }
 
