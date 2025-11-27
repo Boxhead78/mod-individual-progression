@@ -1440,6 +1440,51 @@ public:
     }
 };
 
+class npc_ipp_scampli_tn : public CreatureScript
+{
+public:
+    npc_ipp_scampli_tn() : CreatureScript("npc_ipp_scampli_tn") { }
+
+    struct npc_ipp_scampli_tnAI: SmartAI
+    {
+        explicit npc_ipp_scampli_tnAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return target->GetQuestRewardStatus(50559);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_scampli_tnAI(creature);
+    }
+};
+
 class gobject_ipp_trove_of_the_watchers : public GameObjectScript
 {
 public:
@@ -1503,5 +1548,6 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_magatha_tn();
     new npc_ipp_rhea_tn();
     new npc_ipp_rheastrasza_tn();
+    new npc_ipp_scampli_tn();
     new gobject_ipp_trove_of_the_watchers();
 }
