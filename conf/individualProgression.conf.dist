@@ -385,16 +385,7 @@ IndividualProgression.VanillaPvpTitlesPersistAfterVanilla = 1
 #        Default:     0 - Disabled (Default, Blizzlike)
 #                     1 - Enabled
 #
-IndividualProgression.VanillaPvpEarnTitlesAfterVanilla = 0
-
-# IndividualProgression.ExcludedAccountsEarnPvPTitles
-#
-#        Description: Enable / Disable excluded accounts earning pvp titles. This includes playerbots.
-#
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-IndividualProgression.ExcludedAccountsEarnPvPTitles = 0
+IndividualProgression.VanillaPvpEarnTitlesAfterVanilla = 1
 
 ##############################################
 # Twilborne Custom                           #

@@ -40,8 +40,6 @@ public:
             {
                 sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression));
             }
-
-            sIndividualProgression->checkIPProgression(player);
             sIndividualProgression->UpdateProgressionQuests(player);
         }
         else if (sIndividualProgression->tbcRacesStartingProgression && (player->getRace() == RACE_BLOODELF || player->getRace() == RACE_DRAENEI) && (int32)player->GetLevel() == sConfigMgr->GetOption<int32>("StartPlayerLevel", 1) && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->tbcRacesStartingProgression)))
@@ -56,11 +54,6 @@ public:
         {
             sIndividualProgression->AwardEarnedVanillaPvpTitles(player);
             sIndividualProgression->CleanUpVanillaPvpTitles(player);
-        }
-
-		if (sIndividualProgression->isExcludedFromProgression(player))
-        {
-            sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(0));    
         }
 
         sIndividualProgression->CheckAdjustments(player);
@@ -216,46 +209,6 @@ public:
                 (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && player->GetLevel() == IP_LEVEL_TBC) ||
                 // Player is in WotLK content - give money at 80 level cap
                 (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5) && player->GetLevel() == IP_LEVEL_WOTLK));
-    }
-
-    void OnPlayerAfterUpdateMaxHealth(Player* player, float& value) override
-    {
-        // TODO: This should be adjust to use an aura like damage adjustment. This is more robust to update when changing equipment, etc.
-        if (!sIndividualProgression->enabled)
-        {
-            return;
-        }
-        if (!player)
-        {
-            return;
-        }
-        if (player->GetMap()->IsBattlegroundOrArena())
-        {
-            value *= 1;
-            return;
-        }
-        float gearAdjustment = 0.0;
-        for (uint8 i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
-        {
-            if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
-                sIndividualProgression->ComputeGearTuning(player, gearAdjustment, item->GetTemplate());
-        }
-		
-        // Player is still in Vanilla content - give Vanilla health adjustment
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-        {
-            value *= (sIndividualProgression->vanillaHealthAdjustment - gearAdjustment);
-        }
-            // Player is in TBC content - give TBC health adjustment
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-        {
-            value *= (sIndividualProgression->tbcHealthAdjustment - gearAdjustment);
-        }
-            // Player is in WotLK content - only need to check gear adjustment
-        else
-        {
-            value *= 1 - gearAdjustment;
-        }
     }
 
     void OnPlayerQuestComputeXP(Player* player, Quest const* quest, uint32& xpValue) override
@@ -868,7 +821,6 @@ public:
             return;
         }
         Player* player = isPet ? healer->GetOwner()->ToPlayer() : healer->ToPlayer();
-        float gearAdjustment = computeTotalGearTuning(player);
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
         {
             heal *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaHealingAdjustment);
@@ -898,7 +850,6 @@ public:
             return;
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
-        float gearAdjustment = computeTotalGearTuning(player);
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
         {
             damage *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment);
@@ -924,7 +875,6 @@ public:
             return;
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
-        float gearAdjustment = computeTotalGearTuning(player);
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
         {
             damage *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment);
@@ -959,7 +909,6 @@ public:
             return;
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
-        float gearAdjustment = computeTotalGearTuning(player);
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
         {
             damage *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment);

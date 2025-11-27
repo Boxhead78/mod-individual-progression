@@ -162,6 +162,7 @@ public:
         {
             if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
             {
+                uint32 loc = player->GetSession()->GetSessionDbLocaleIndex();
                 if (loc == 3)
                     handler.PSendSysMessage("Ihr benötigt das Drachenfeueramulett, um den Hort der Onyxia betreten zu können.");
                 else

@@ -118,10 +118,10 @@ void IndividualProgression::CheckAdjustments(Player* player) const
         float adjustmentApplyPercent = (player->GetLevel() - 10.0f) / 50.0f;
 
         float PowerAdjustmentValue = -100.0f * (1.0f - vanillaPowerAdjustment);
-        float computedPowerAdjustment = (PowerAdjustmentValue * adjustmentApplyPercent) : 0;
+        float computedPowerAdjustment = (PowerAdjustmentValue * adjustmentApplyPercent);
 
         float HealthAdjustmentAmount = -100.0f * (1.0f - vanillaHealthAdjustment);
-        float computedHealthAdjustment = (HealthAdjustmentAmount * adjustmentApplyPercent) : 0;
+        float computedHealthAdjustment = (HealthAdjustmentAmount * adjustmentApplyPercent);
 
 	    AdjustStats(player, computedPowerAdjustment, computedHealthAdjustment);
     }
@@ -235,17 +235,6 @@ bool IndividualProgression::isAttuned(Player* player)
     {
         return false;
     }
-}
-
-bool IndividualProgression::isExcludedFromProgression(Player* player)
-{
-    if(!sIndividualProgression->excludeAccounts) {
-        return false;
-    }
-    std::string accountName;
-    bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
-    std::regex excludedAccountsRegex (sIndividualProgression->excludedAccountsRegex);
-    return (accountNameFound && std::regex_match(accountName, excludedAccountsRegex));
 }
 
 void IndividualProgression::checkIPPhasing(Player* player, uint32 newArea)
@@ -1052,7 +1041,6 @@ private:
         sIndividualProgression->VanillaPvpKillRank14 = sConfigMgr->GetOption<uint32>("IndividualProgression.VanillaPvpKillRequirement.Rank14", 24000);
         sIndividualProgression->VanillaPvpTitlesKeepPostVanilla = sConfigMgr->GetOption<bool>("IndividualProgression.VanillaPvpTitlesPersistAfterVanilla", true);
         sIndividualProgression->VanillaPvpTitlesEarnPostVanilla = sConfigMgr->GetOption<bool>("IndividualProgression.VanillaPvpEarnTitlesAfterVanilla", false);
-        sIndividualProgression->ExcludedAccountsEarnPvPTitles = sConfigMgr->GetOption<bool>("IndividualProgression.ExcludedAccountsEarnPvPTitles", false);
         sIndividualProgression->DisableRDF = sConfigMgr->GetOption<bool>("IndividualProgression.DisableRDF", false);
         sIndividualProgression->progressionSetterAlwaysVisible = sConfigMgr->GetOption<bool>("IndividualProgression.ProgressionSetterAlwaysVisible", false);
     }

@@ -390,20 +390,20 @@ enum ProgressionMovies : uint8
 
 IppPvPTitleData const TitleData[14] =
 {
-    { PRIVATE,              SCOUT              },
-    { CORPORAL,             GRUNT              },
-    { SERGEANT,             SERGEANT_H         },
-    { MASTER_SERGEANT,      SENIOR_SERGEANT    },
-    { SERGEANT_MAJOR,       FIRST_SERGEANT     },
-    { KNIGHT,               STONE_GUARD        },
-    { KNIGHT_LIEUTENANT,    BLOOD_GUARD        },
-    { KNIGHT_CAPTAIN,       LEGIONNAIRE        },
-    { KNIGHT_CHAMPION,      CENTURION          },
-    { LIEUTENANT_COMMANDER, CHAMPION           },
-    { COMMANDER,            LIEUTENANT_GENERAL },
-    { MARSHAL,              GENERAL            },
-    { FIELD_MARSHAL,        WARLORD            },
-    { GRAND_MARSHAL,        HIGH_WARLORD       }
+    { TITLE_PRIVATE,              TITLE_SCOUT              },
+    { TITLE_CORPORAL,             TITLE_GRUNT              },
+    { TITLE_SERGEANT,             TITLE_SERGEANT_H         },
+    { TITLE_MASTER_SERGEANT,      TITLE_SENIOR_SERGEANT    },
+    { TITLE_SERGEANT_MAJOR,       TITLE_FIRST_SERGEANT     },
+    { TITLE_KNIGHT,               TITLE_STONE_GUARD        },
+    { TITLE_KNIGHT_LIEUTENANT,    TITLE_BLOOD_GUARD        },
+    { TITLE_KNIGHT_CAPTAIN,       TITLE_LEGIONNAIRE        },
+    { TITLE_KNIGHT_CHAMPION,      TITLE_CENTURION          },
+    { TITLE_LIEUTENANT_COMMANDER, TITLE_CHAMPION           },
+    { TITLE_COMMANDER,            TITLE_LIEUTENANT_GENERAL },
+    { TITLE_MARSHAL,              TITLE_GENERAL            },
+    { TITLE_FIELD_MARSHAL,        TITLE_WARLORD            },
+    { TITLE_GRAND_MARSHAL,        TITLE_HIGH_WARLORD       }
 };
 
 PvPTitleData const AchievementData[14] =
@@ -450,8 +450,7 @@ public:
     void AdjustWotLKStats(Player* player) const;
     bool hasCustomProgressionValue(uint32 creatureEntry);
     bool isAttuned(Player* player);
-	void checkIPPhasing(Player* player, uint32 newArea);
-    void checkIPProgression(Player* player);	
+	void checkIPPhasing(Player* player, uint32 newArea);	
     void UpdateProgressionQuests(Player* player);
     void checkKillProgression(Player* player, Creature* killed);
     void CleanUpVanillaPvpTitles(Player* player);
