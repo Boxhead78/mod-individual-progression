@@ -229,10 +229,10 @@ enum AchievementSpellEvents
     ACHIEVEMENT_SPELL_EVENT_TOTC            = 95014,
     ACHIEVEMENT_SPELL_EVENT_ICC             = 95015,
     ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM    = 95016,
-    ACHIEVEMENT_SPELL_EVENT_BWD             = 99999, // NYI
-    ACHIEVEMENT_SPELL_EVENT_TOTFW           = 99999, // NYI
-    ACHIEVEMENT_SPELL_EVENT_FIRELANDS       = 99999, // NYI
-    ACHIEVEMENT_SPELL_EVENT_DRAGONSOUL      = 99999, // NYI
+    ACHIEVEMENT_SPELL_EVENT_BWD             = 99999, // NYI AchievementCriteria.dbc
+    ACHIEVEMENT_SPELL_EVENT_TOTFW           = 99999, // NYI AchievementCriteria.dbc
+    ACHIEVEMENT_SPELL_EVENT_FIRELANDS       = 99999, // NYI AchievementCriteria.dbc
+    ACHIEVEMENT_SPELL_EVENT_DRAGONSOUL      = 99999, // NYI AchievementCriteria.dbc
 };
 
 enum ProgressionState : uint8         // Progression stands for what has been completed
@@ -431,8 +431,8 @@ public:
 
     std::map<uint32, uint8> customProgressionMap;
     questXpMapType questXpMap;
-    float vanillaPowerAdjustment, vanillaHealthAdjustment, tbcPowerAdjustment, tbcHealthAdjustment, vanillaHealingAdjustment, tbcHealingAdjustment, previousGearTuning;
-    bool enabled, questXpFix, hunterPetLevelFix, enforceGroupRules, fishingFix, simpleConfigOverride, questMoneyAtLevelCap, repeatableVanillaQuestsXp, disableDefaultProgression, earlyDungeonSet2, requireNaxxStrath, pvpGearRequirements, DisableRDF, VanillaPvpTitlesKeepPostVanilla, VanillaPvpTitlesEarnPostVanilla, progressionSetterAlwaysVisible;
+    float vanillaPowerAdjustment, vanillaHealthAdjustment, tbcPowerAdjustment, tbcHealthAdjustment, vanillaHealingAdjustment, tbcHealingAdjustment;
+    bool enabled, questXpFix, hunterPetLevelFix, enforceGroupRules, fishingFix, simpleConfigOverride, questMoneyAtLevelCap, repeatableVanillaQuestsXp, disableDefaultProgression, earlyDungeonSet2, requireNaxxStrath, DisableRDF, VanillaPvpTitlesKeepPostVanilla, VanillaPvpTitlesEarnPostVanilla, progressionSetterAlwaysVisible;
     int progressionLimit, startingProgression, tbcRacesProgressionLevel, tbcRacesStartingProgression, cataRacesProgressionLevel, cataRacesStartingProgression, deathKnightProgressionLevel, deathKnightStartingProgression, RequiredZulGurubProgression;
     uint32 VanillaPvpKillRank1, VanillaPvpKillRank2, VanillaPvpKillRank3, VanillaPvpKillRank4, VanillaPvpKillRank5, VanillaPvpKillRank6, VanillaPvpKillRank7, VanillaPvpKillRank8, VanillaPvpKillRank9, VanillaPvpKillRank10, VanillaPvpKillRank11, VanillaPvpKillRank12, VanillaPvpKillRank13, VanillaPvpKillRank14;
     std::string excludedAccountsRegex;
@@ -453,7 +453,6 @@ public:
 	void checkIPPhasing(Player* player, uint32 newArea);
     void checkIPProgression(Player* player);	
     void UpdateProgressionQuests(Player* player);
-    void UpdateProgressionAchievements(Player* player, uint16 achievementID);
     void checkKillProgression(Player* player, Creature* killed);
     void CleanUpVanillaPvpTitles(Player* player);
     void AwardEarnedVanillaPvpTitles(Player* player);

@@ -27,7 +27,10 @@ bool IndividualProgression::hasPassedProgression(Player* player, ProgressionStat
 	{
         return false;
 	}
+
+    return player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value >= state;
 }
+
 bool IndividualProgression::isBeforeProgression(Player* player, ProgressionState state)
 {
     return player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value < state;
@@ -108,39 +111,28 @@ void IndividualProgression::CheckAdjustments(Player* player) const
     if (!enabled)
 	{
         return;
-    }
-    if (player->GetMap()->IsBattlegroundOrArena())
+	}
+
+    if (!hasPassedProgression(player, PROGRESSION_PRE_TBC))
     {
-        AdjustWotLKStats(player);
-        return;
-    }
-    if (!hasPassedProgression(player, PROGRESSION_NAXX40))
-    {
-        AdjustVanillaStats(player);
+        float adjustmentApplyPercent = (player->GetLevel() - 10.0f) / 50.0f;
+
+        float PowerAdjustmentValue = -100.0f * (1.0f - vanillaPowerAdjustment);
+        float computedPowerAdjustment = (PowerAdjustmentValue * adjustmentApplyPercent) : 0;
+
+        float HealthAdjustmentAmount = -100.0f * (1.0f - vanillaHealthAdjustment);
+        float computedHealthAdjustment = (HealthAdjustmentAmount * adjustmentApplyPercent) : 0;
+
+	    AdjustStats(player, computedPowerAdjustment, computedHealthAdjustment);
     }
     else if (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
     {
-        AdjustTBCStats(player);
-    }
-    else
-    {
-        AdjustWotLKStats(player);
-    }
-    if (player->getClass() == CLASS_HUNTER)
-    {
-        // Remove the 15% built-in ranged haste that was added to hunters in WotLK
-        // This lets us add haste spells back to quivers
-        player->RemoveAura(RANGED_HASTE_SPELL);
-        player->CastSpell(player, RANGED_HASTE_SPELL, false);
-    }	
-}
+        float computedPowerAdjustment = -100.0f * (1.0f - tbcPowerAdjustment);
 
-void IndividualProgression::ApplyGearStatsTuning(Player* player, float& computedAdjustment, ItemTemplate const* item) const
-{
-    if (item->Quality != ITEM_QUALITY_EPIC) // Non-endgame gear is okay
-        return;
-    if ((hasPassedProgression(player, PROGRESSION_NAXX40) && (item->RequiredLevel <= IP_LEVEL_VANILLA)) ||
-        (hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (item->RequiredLevel <= IP_LEVEL_TBC)))
+	    AdjustStats(player, computedPowerAdjustment, tbcHealthAdjustment);
+    }
+
+    if (player->getClass() == CLASS_HUNTER)
     {
         // Remove the 15% built-in ranged haste that was added to hunters in WotLK - This lets us add haste spells back to quivers
         player->RemoveAura(RANGED_HASTE_SPELL);
@@ -150,68 +142,8 @@ void IndividualProgression::ApplyGearStatsTuning(Player* player, float& computed
 
 void IndividualProgression::AdjustStats(Player* player, float computedPowerAdjustment, float computedHealthAdjustment)
 {
-    if (item->Quality != ITEM_QUALITY_EPIC) // Non-endgame gear is okay
-        return;
-    if ((hasPassedProgression(player, PROGRESSION_NAXX40) && (item->RequiredLevel <= IP_LEVEL_VANILLA)) ||
-        (hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && (item->RequiredLevel <= IP_LEVEL_TBC)))
-    {
-        computedAdjustment += previousGearTuning;
-    }
-}
-
-void IndividualProgression::AdjustVanillaStats(Player* player) const
-{
-    float adjustmentValue = -100.0f * (1.0f - vanillaPowerAdjustment);
-    float adjustmentApplyPercent = 1;
-    float computedAdjustment = player->GetLevel() > 10 ? (adjustmentValue * adjustmentApplyPercent) : 0;
-
-    float adjustmentHealingValue = -100.0f * (1.0f - vanillaHealingAdjustment);
-    float adjustmentHealingApplyPercent = 1;
-    float computedHealingAdjustment = player->GetLevel() > 10 ? (adjustmentHealingValue * adjustmentHealingApplyPercent) : 0;
-
-    AdjustStats(player, computedAdjustment, computedHealingAdjustment);
-}
-
-void IndividualProgression::AdjustTBCStats(Player* player) const
-{
-    float adjustmentValue = -100.0f * (1.0f - tbcPowerAdjustment);
-    float adjustmentApplyPercent = 1;
-    float computedAdjustment = player->GetLevel() > 10 ? (adjustmentValue * adjustmentApplyPercent) : 0;
-
-    float adjustmentHealingValue = -100.0f * (1.0f - tbcHealingAdjustment);
-    float adjustmentHealingApplyPercent = 1;
-    float computedHealingAdjustment = player->GetLevel() > 10 ? (adjustmentHealingValue * adjustmentHealingApplyPercent) : 0;
-
-    for (uint8 i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
-    {
-        if (Item *item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
-        {
-            ApplyGearStatsTuning(player, computedAdjustment, item->GetTemplate());
-            ApplyGearStatsTuning(player, computedHealingAdjustment, item->GetTemplate());
-        }
-    }
-    AdjustStats(player, computedAdjustment, computedHealingAdjustment);
-}
-
-void IndividualProgression::AdjustWotLKStats(Player* player) const
-{
-    float computedAdjustment = 0;
-    for (uint8 i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; ++i)
-    {
-        if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
-            ApplyGearStatsTuning(player, computedAdjustment, item->GetTemplate());
-    }
-    AdjustStats(player, computedAdjustment, computedAdjustment);
-}
-
-void IndividualProgression::AdjustStats(Player* player, float computedAdjustment, float /*computedHealingAdjustment*/)
-{
-    if (!player || player->IsDuringRemoveFromWorld() || !player->IsInWorld())
-        return;
-
-    //int32 bp0 = 0; // This would be the damage taken adjustment value, but we are already adjusting health
-    auto bp1 = static_cast<int32>(computedAdjustment);
-    //auto bp1Healing = static_cast<int32>(computedHealingAdjustment);
+    auto bp1 = static_cast<int32>(computedPowerAdjustment);
+	auto bp2 = static_cast<int32>(computedHealthAdjustment);
 
     player->RemoveAura(ABSORB_SPELL);
     player->CastCustomSpell(player, ABSORB_SPELL, &bp1, nullptr, nullptr, false);
@@ -222,7 +154,7 @@ void IndividualProgression::AdjustStats(Player* player, float computedAdjustment
 
 float IndividualProgression::ComputeVanillaAdjustment(uint8 playerLevel, float configAdjustmentValue)
 {
-    float adjustmentApplyPercent = 1;
+    float adjustmentApplyPercent = (float(playerLevel) - 10.0f) / 50.0f;
     return playerLevel > 10 ? 1.0f - ((1.0f - configAdjustmentValue) * adjustmentApplyPercent) : 1;
 }
 

@@ -114,42 +114,42 @@ INSERT INTO `npc_vendor` (`entry`, `item`, `maxcount`, `incrtime`) VALUES
 
 
 -- Alliance 60% speed mounts
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Black Stallion'                   WHERE `entry` = 2411;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Pinto'                            WHERE `entry` = 2414;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Chestnut Mare'                    WHERE `entry` = 5655;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Brown Horse'                      WHERE `entry` = 5656;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Black Stallion'                   WHERE `entry` = 2411;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Pinto'                            WHERE `entry` = 2414;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Chestnut Mare'                    WHERE `entry` = 5655;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Brown Horse'                      WHERE `entry` = 5656;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Gray Ram'                         WHERE `entry` = 5864;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Brown Ram'                        WHERE `entry` = 5872;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'White Ram'                        WHERE `entry` = 5873;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Gray Ram'                         WHERE `entry` = 5864;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Brown Ram'                        WHERE `entry` = 5872;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'White Ram'                        WHERE `entry` = 5873;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Red Mechanostrider'               WHERE `entry` = 8563; 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Blue Mechanostrider'              WHERE `entry` = 8595; 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Green Mechanostrider'             WHERE `entry` = 13321;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Unpainted Mechanostrider'         WHERE `entry` = 13322;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Purple Mechanostrider'            WHERE `entry` = 13323;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Red and Blue Mechanostrider'      WHERE `entry` = 13324;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Red Mechanostrider'               WHERE `entry` = 8563; 
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Blue Mechanostrider'              WHERE `entry` = 8595; 
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Green Mechanostrider'             WHERE `entry` = 13321;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Unpainted Mechanostrider'         WHERE `entry` = 13322;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Purple Mechanostrider'            WHERE `entry` = 13323;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Red and Blue Mechanostrider'      WHERE `entry` = 13324;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Striped Nightsaber'               WHERE `entry` = 8629;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Striped Frostsaber'               WHERE `entry` = 8631;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Spotted Frostsaber'               WHERE `entry` = 8632;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Striped Dawnsaber'                WHERE `entry` = 47100;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Striped Nightsaber'               WHERE `entry` = 8629;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Striped Frostsaber'               WHERE `entry` = 8631;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Spotted Frostsaber'               WHERE `entry` = 8632;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Striped Dawnsaber'                WHERE `entry` = 47100;
 
 -- Horde 60% speed mounts
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Timber Wolf'                      WHERE `entry` = 1132;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Dire Wolf'                        WHERE `entry` = 5665;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Brown Wolf'                       WHERE `entry` = 5668;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Timber Wolf'                      WHERE `entry` = 1132;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Dire Wolf'                        WHERE `entry` = 5665;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Brown Wolf'                       WHERE `entry` = 5668;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Emerald Raptor'                   WHERE `entry` = 8588;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Turquoise Raptor'                 WHERE `entry` = 8591;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Violet Raptor'                    WHERE `entry` = 8592;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Emerald Raptor'                   WHERE `entry` = 8588;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Turquoise Raptor'                 WHERE `entry` = 8591;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Violet Raptor'                    WHERE `entry` = 8592;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Red Skeletal Horse'               WHERE `entry` = 13331;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Blue Skeletal Horse'              WHERE `entry` = 13332;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Brown Skeletal Horse'             WHERE `entry` = 13333;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Red Skeletal Horse'               WHERE `entry` = 13331;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Blue Skeletal Horse'              WHERE `entry` = 13332;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Brown Skeletal Horse'             WHERE `entry` = 13333;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Gray Kodo'                        WHERE `entry` = 15277;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Brown Kodo'                       WHERE `entry` = 15290;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Gray Kodo'                        WHERE `entry` = 15277;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Brown Kodo'                       WHERE `entry` = 15290;
 
 -- Alliance 100% speed mounts
 UPDATE `item_template` SET `Quality` = 4, `BuyPrice` = 1000000,  `RequiredLevel` = 60, `Name` = 'Frostsaber'                       WHERE `entry` = 12302;
@@ -226,21 +226,21 @@ UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 1000000,  `RequiredLevel`
 
 
 -- unavailable mounts
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Winter Wolf'                      WHERE `entry` = 1133;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Gray Wolf'                        WHERE `entry` = 1134;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Red Wolf'                         WHERE `entry` = 5663;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Skeletal Mount'                   WHERE `entry` = 8583;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Ivory Raptor'                     WHERE `entry` = 8589;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Obsidian Raptor'                  WHERE `entry` = 8590;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Spotted Nightsaber'               WHERE `entry` = 8628;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Bengal Tiger'                     WHERE `entry` = 8630;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Leopard'                          WHERE `entry` = 8633;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Winter Wolf'                      WHERE `entry` = 1133;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Gray Wolf'                        WHERE `entry` = 1134;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Red Wolf'                         WHERE `entry` = 5663;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Skeletal Mount'                   WHERE `entry` = 8583;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Ivory Raptor'                     WHERE `entry` = 8589;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Obsidian Raptor'                  WHERE `entry` = 8590;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Spotted Nightsaber'               WHERE `entry` = 8628;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Bengal Tiger'                     WHERE `entry` = 8630;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Leopard'                          WHERE `entry` = 8633;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Primal Leopard'                   WHERE `entry` = 12325;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Tawny Sabercat'                   WHERE `entry` = 12326;
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Golden Sabercat'                  WHERE `entry` = 12327;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Primal Leopard'                   WHERE `entry` = 12325;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Tawny Sabercat'                   WHERE `entry` = 12326;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Golden Sabercat'                  WHERE `entry` = 12327;
 
-UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 40, `Name` = 'Fluorescent Green Mechanostrider' WHERE `entry` = 13325;
+UPDATE `item_template` SET `Quality` = 3, `BuyPrice` = 100000,   `RequiredLevel` = 30, `Name` = 'Fluorescent Green Mechanostrider' WHERE `entry` = 13325;
 UPDATE `item_template` SET `Quality` = 5, `BuyPrice` = 10000000, `RequiredLevel` = 60, `Name` = 'Foror\'s Fabled Steed'            WHERE `entry` = 20221;
 
 

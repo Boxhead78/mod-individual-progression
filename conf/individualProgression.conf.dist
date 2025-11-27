@@ -38,7 +38,7 @@ IndividualProgression.EnforceGroupRules = 0
 #        Default:     1 - No Adjustment
 #        Suggested:   between 0.5 and 0.6 (50-60% of regular damage)
 #
-IndividualProgression.VanillaPowerAdjustment = 1
+IndividualProgression.VanillaPowerAdjustment = 0.5
 
 # IndividualProgression.VanillaHealingAdjustment
 #
@@ -49,7 +49,7 @@ IndividualProgression.VanillaPowerAdjustment = 1
 #        Default:     1 - No Adjustment
 #        Suggested:   0.5 (50% of regular healing)
 #
-IndividualProgression.VanillaHealingAdjustment = 1
+IndividualProgression.VanillaHealingAdjustment = 0.5
 
 # IndividualProgression.VanillaHealthAdjustmnet
 #
@@ -59,7 +59,7 @@ IndividualProgression.VanillaHealingAdjustment = 1
 #
 #        Default:     1 - No Adjustment
 #
-IndividualProgression.VanillaHealthAdjustment = 0.6
+IndividualProgression.VanillaHealthAdjustment = 0.5
 
 # IndividualProgression.TBCPowerAdjustment
 #
@@ -70,7 +70,7 @@ IndividualProgression.VanillaHealthAdjustment = 0.6
 #        Default:     1 - No Adjustment
 #        Suggested:   between 0.5 and 0.6 (50-60% of regular damage)
 #
-IndividualProgression.TBCPowerAdjustment = 0.65
+IndividualProgression.TBCPowerAdjustment = 0.7
 
 # IndividualProgression.TBCHealingAdjustment
 #
@@ -81,7 +81,7 @@ IndividualProgression.TBCPowerAdjustment = 0.65
 #        Default:     1 - No Adjustment
 #        Suggested:   between 0.5 and 0.6 (50-60% of regular healing)
 #
-IndividualProgression.TBCHealingAdjustment = 0.65
+IndividualProgression.TBCHealingAdjustment = 0.7
 
 # IndividualProgression.TBCHealthAdjustment
 #
