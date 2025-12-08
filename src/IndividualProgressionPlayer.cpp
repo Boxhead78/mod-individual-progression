@@ -50,7 +50,7 @@ public:
         {
             sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->cataRacesStartingProgression));
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression)))
+        if (sIndividualProgression->ExcludedAccountsEarnPvPTitles || !sIndividualProgression->isExcludedFromProgression(player))
         {
             sIndividualProgression->AwardEarnedVanillaPvpTitles(player);
             sIndividualProgression->CleanUpVanillaPvpTitles(player);
@@ -180,7 +180,7 @@ public:
         {
             return false;
         }
-		
+
         // Player is still in Vanilla content - give money at 60 level cap
         return ((!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC) && player->GetLevel() == IP_LEVEL_VANILLA) ||
                 // Player is in TBC content - give money at 70 level cap
@@ -288,7 +288,7 @@ public:
 
     static bool isAttuned(Player* player)
     {
-        if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) || 
+        if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) ||
             (player->GetQuestStatus(NAXX40_ATTUNEMENT_2) == QUEST_STATUS_REWARDED) ||
             (player->GetQuestStatus(NAXX40_ATTUNEMENT_3) == QUEST_STATUS_REWARDED))
         {
@@ -305,7 +305,7 @@ public:
         if (!player)
             return false;
 
-        if (!sIndividualProgression->enabled || player->IsGameMaster() || player->GetSession()->IsBot())
+        if (!sIndividualProgression->enabled || player->IsGameMaster() || player->GetSession()->IsBot() || sIndividualProgression->isExcludedFromProgression(player))
         {
             return true;
         }
@@ -333,9 +333,9 @@ public:
             }
         }
         if (mapid == MAP_ZUL_GURUB)
-        {   
+        {
             ProgressionState REQUIRED_ZG_PROGRESSION = static_cast<ProgressionState>(sIndividualProgression->RequiredZulGurubProgression);
-            
+
             if (!sIndividualProgression->hasPassedProgression(player, REQUIRED_ZG_PROGRESSION))
             {
                 return false;
@@ -600,12 +600,12 @@ public:
                 killer->RemoveAura(IPP_PHASE);
                 killer->RemoveAura(IPP_PHASE_II);
                 killer->RemoveAura(IPP_PHASE_III);
-	            killer->CastSpell(killer, IPP_PHASE, false);			
+	            killer->CastSpell(killer, IPP_PHASE, false);
                 killer->CastSpell(killer, IPP_PHASE_II, false);
                 killer->CastSpell(killer, IPP_PHASE_III, false);
                 break;
         }
-        
+
         if (killed->GetCreatureTemplate()->rank > CREATURE_ELITE_NORMAL)
         {
             sIndividualProgression->checkKillProgression(killer, killed);
@@ -809,9 +809,12 @@ public:
             if (spellInfo->Effects[i].Effect == SPELL_EFFECT_HEAL_MAX_HEALTH)
                 return;
         }
+        if (spellInfo->Id == SPELL_RUNE_TAP || spellInfo->Id == SPELL_LIFE_STEAL || spellInfo->Id == SPELL_CANNIBALISE)
+        {
+            return;
+        }
 
-        // Skip specific spells that are already balanced separately
-        if (spellInfo->Id == SPELL_RUNE_TAP || spellInfo->Id == SPELL_LIFE_STEAL)
+        if (!healer)
             return;
 
         // No progression healing nerf in BGs/Arenas

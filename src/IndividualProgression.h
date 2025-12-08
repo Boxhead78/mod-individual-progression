@@ -46,7 +46,7 @@ enum ProgressionBossIDs
     YOGGSARON            = 33288,
     ANUBARAK             = 34564,
     LICH_KING            = 36597,
-    HALION               = 39863, 
+    HALION               = 39863,
     RHAHK_ZOR            = 644,
     SNEED                = 643,
     GILNID               = 1763
@@ -59,6 +59,7 @@ enum BuffSpells
     RANGED_HASTE_SPELL   = 89507,
     SPELL_RUNE_TAP       = 48982,
     SPELL_LIFE_STEAL     = 20004,
+    SPELL_CANNIBALISE    = 20578,
     IPP_PHASE            = 89509,
     IPP_PHASE_II         = 89511,
     IPP_PHASE_III        = 89513
@@ -238,8 +239,8 @@ enum AchievementSpellEvents
 enum ProgressionState : uint8         // Progression stands for what has been completed
 {
     PROGRESSION_START           = 0,
-    PROGRESSION_MOLTEN_CORE     = 1, 
-    PROGRESSION_ONYXIA          = 2,  // BWL available
+    PROGRESSION_MOLTEN_CORE     = 1,  // BWL available
+    PROGRESSION_ONYXIA          = 2,
     PROGRESSION_BLACKWING_LAIR  = 3,  // ZG, AQ War effort, AQ quest line
     PROGRESSION_PRE_AQ          = 4,  // AQ gates open, raids available, AQ outdoors war 
     PROGRESSION_AQ_WAR          = 5,  // AQ gates open, raids, Field Duty quests and all Cenarion Hold npcs available
