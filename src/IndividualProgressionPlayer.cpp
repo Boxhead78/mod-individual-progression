@@ -50,7 +50,7 @@ public:
         {
             sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->cataRacesStartingProgression));
         }
-        if (sIndividualProgression->ExcludedAccountsEarnPvPTitles || !sIndividualProgression->isExcludedFromProgression(player))
+        else if (!sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression)))
         {
             sIndividualProgression->AwardEarnedVanillaPvpTitles(player);
             sIndividualProgression->CleanUpVanillaPvpTitles(player);
@@ -305,7 +305,7 @@ public:
         if (!player)
             return false;
 
-        if (!sIndividualProgression->enabled || player->IsGameMaster() || player->GetSession()->IsBot() || sIndividualProgression->isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || player->IsGameMaster() || player->GetSession()->IsBot())
         {
             return true;
         }

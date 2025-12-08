@@ -141,12 +141,6 @@ public:
         player = PlayerIdentifier::FromTargetOrSelf(handler);
         Player* target = player->GetConnectedPlayer();
 
-        if (!sIndividualProgression->isExcludedFromProgression(target))
-        {
-            handler->SendSysMessage("Player is not a bot account.");
-            return false;
-        }
-
         std::string playername = target->GetName();
         uint8 currentState = target->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
         uint32 currentArea = target->GetAreaId();
