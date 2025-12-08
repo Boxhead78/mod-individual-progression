@@ -814,9 +814,6 @@ public:
             return;
         }
 
-        if (!healer)
-            return;
-
         // No progression healing nerf in BGs/Arenas
         if (healer->GetMap()->IsBattlegroundOrArena())
             return;
