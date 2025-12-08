@@ -55,8 +55,6 @@ public:
             sIndividualProgression->AwardEarnedVanillaPvpTitles(player);
             sIndividualProgression->CleanUpVanillaPvpTitles(player);
         }
-
-        sIndividualProgression->CheckAdjustments(player);
     }
 
     void OnPlayerAfterUpdate(Player* player, uint32 /*diff*/) override
@@ -176,26 +174,6 @@ public:
         }
     }
 
-    void OnPlayerMapChanged(Player* player) override
-    {
-        sIndividualProgression->CheckAdjustments(player);
-    }
-
-    void OnPlayerLevelChanged(Player* player, uint8 /*oldLevel*/) override
-    {
-        sIndividualProgression->CheckAdjustments(player);
-    }
-
-    void OnPlayerEquip(Player* player, Item* /*it*/, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/) override
-    {
-        sIndividualProgression->CheckAdjustments(player);
-    }
-
-    void OnPlayerResurrect(Player* player, float /*restore_percent*/, bool /*applySickness*/) override
-    {
-        sIndividualProgression->CheckAdjustments(player);
-    }
-
     bool OnPlayerShouldBeRewardedWithMoneyInsteadOfExp(Player* player) override
     {
         if (!sIndividualProgression->questMoneyAtLevelCap)
@@ -210,6 +188,47 @@ public:
                 // Player is in WotLK content - give money at 80 level cap
                 (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5) && player->GetLevel() == IP_LEVEL_WOTLK));
     }
+
+    // Returns the responsible player for progression scaling.
+    // Currently only player itself is relevant for max health, but this allows future pet support.
+    inline Player* GetProgressionPlayerForHealth(Player* player)
+    {
+        return player;
+    }
+
+    // Returns the health scaling multiplier based on progression state
+    inline float GetHealthMultiplier(Player* player)
+    {
+        if (!player || !sIndividualProgression->enabled)
+            return 1.0f;
+
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
+            return sIndividualProgression->vanillaHealthAdjustment;
+
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+            return sIndividualProgression->tbcHealthAdjustment;
+
+        return 1.0f;
+    }
+
+    void OnPlayerAfterUpdateMaxHealth(Player* player, float& value) override
+    {
+        if (!sIndividualProgression->enabled || !player)
+            return;
+
+        // Never apply progression scaling inside battlegrounds or arenas
+        if (player->GetMap()->IsBattlegroundOrArena())
+            return;
+
+        Player* progressionPlayer = GetProgressionPlayerForHealth(player);
+        if (!progressionPlayer)
+            return;
+
+        float mult = GetHealthMultiplier(progressionPlayer);
+        if (mult != 1.0f)
+            value *= mult;
+    }
+
 
     void OnPlayerQuestComputeXP(Player* player, Quest const* quest, uint32& xpValue) override
     {
@@ -618,7 +637,6 @@ public:
 
     void OnPlayerUpdateArea(Player* player, uint32 /*oldArea*/, uint32 newArea) override
     {
-        sIndividualProgression->CheckAdjustments(player);
         sIndividualProgression->checkIPPhasing(player, newArea);
 
         // Boxhead Custom
@@ -714,154 +732,118 @@ public:
     }
 };
 
-
-class IndividualPlayerProgression_PetScript : public PetScript
+namespace
 {
-private:
-    static void CheckAdjustments(Pet* pet)
+    // Resolve the responsible player for progression scaling:
+    // - direct player
+    // - player's pet
+    // - charmed/controlled units owned by a player
+    inline Player* GetProgressionPlayer(Unit* src)
     {
-        if (!sIndividualProgression->enabled)
-        {
-            return;
-        }
-        if (!pet || !pet->GetOwner())
-        {
-            return;
-        }
-        if (pet->GetMap()->IsBattlegroundOrArena())
-        {
-            return;
-        }
-        if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_PRE_TBC))
-        {
-            AdjustVanillaStats(pet);
-        }
-        else if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_TBC_TIER_5))
-        {
-            AdjustTBCStats(pet);
-        }
+        if (!src)
+            return nullptr;
+
+        if (Player* p = src->ToPlayer())
+            return p;
+
+        if (Unit* owner = src->GetOwner())
+            if (Player* p = owner->ToPlayer())
+                return p;
+
+        if (Unit* charmer = src->GetCharmer())
+            if (Player* p = charmer->ToPlayer())
+                return p;
+
+        return nullptr;
     }
 
-    static void AdjustVanillaStats(Pet* pet)
+    // Healing multiplier based on progression state
+    inline float GetHealingMultiplier(Player* player)
     {
-        float adjustmentValue = -100.0f * (1.0f - sIndividualProgression->vanillaPowerAdjustment);
-        float adjustmentApplyPercent = (pet->GetLevel() - 10.0f) / 50.0f;
-        float computedAdjustment = pet->GetLevel() > 10 ? (adjustmentValue * adjustmentApplyPercent) : 0;
-        float hpAdjustmentValue = -100.0f * (1.0f - sIndividualProgression->vanillaHealthAdjustment);
-        float hpAdjustment = pet->GetLevel() > 10 ? (hpAdjustmentValue * adjustmentApplyPercent) : 0;
-        AdjustStats(pet, computedAdjustment, hpAdjustment);
+        if (!player || !sIndividualProgression->enabled)
+            return 1.0f;
+
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
+            return sIndividualProgression->vanillaHealingAdjustment;
+
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+            return sIndividualProgression->tbcHealingAdjustment;
+
+        return 1.0f;
     }
 
-    static void AdjustTBCStats(Pet* pet)
+    // Damage multiplier based on progression state
+    inline float GetDamageMultiplier(Player* player)
     {
-        float adjustmentValue = -100.0f * (1.0f - sIndividualProgression->tbcPowerAdjustment);
-        float adjustmentApplyPercent = 1;
-        float computedAdjustment = pet->GetLevel() > 10 ? (adjustmentValue * adjustmentApplyPercent) : 0;
-        float hpAdjustmentValue = -100.0f * (1.0f - sIndividualProgression->tbcHealthAdjustment);
-        float hpAdjustment = pet->GetLevel() > 10 ? (hpAdjustmentValue * adjustmentApplyPercent) : 0;
-        AdjustStats(pet, computedAdjustment, hpAdjustment);
+        if (!player || !sIndividualProgression->enabled)
+            return 1.0f;
+
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
+            return sIndividualProgression->vanillaPowerAdjustment;
+
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+            return sIndividualProgression->tbcPowerAdjustment;
+
+        return 1.0f;
     }
-
-    static void AdjustStats(Pet* pet, float computedAdjustment, float hpAdjustment)
-    {
-        // int32 bp0 = 0; // This would be the damage taken adjustment value, but we are already adjusting health
-        auto bp1 = static_cast<int32>(computedAdjustment);
-        auto bp2 = static_cast<int32>(hpAdjustment);
-
-        pet->RemoveAura(ABSORB_SPELL);
-        pet->CastCustomSpell(pet, ABSORB_SPELL, &bp1, nullptr, nullptr, false);
-
-        pet->RemoveAura(HP_AURA_SPELL);
-        pet->CastCustomSpell(pet, HP_AURA_SPELL, &bp2, nullptr, nullptr, false);
-    }
-
-public:
-    IndividualPlayerProgression_PetScript() : PetScript("IndividualProgression_PetScript") { }
-
-    void OnPetAddToWorld(Pet* pet) override
-    {
-        CheckAdjustments(pet);
-    }
-};
+}
 
 class IndividualPlayerProgression_UnitScript : public UnitScript
 {
 public:
     IndividualPlayerProgression_UnitScript() : UnitScript("IndividualPlayerProgression_UnitScript") { }
 
-    void ModifyHealReceived(Unit* /*target*/, Unit *healer, uint32 &heal, SpellInfo const *spellInfo) override
+    void ModifyHealReceived(Unit* /*target*/, Unit* healer, uint32& heal, SpellInfo const* spellInfo) override
     {
-        // Skip potions, bandages, percentage based heals like Rune Tap, etc.
-        if (!sIndividualProgression->enabled || !healer || !heal || !spellInfo || spellInfo->HasAttribute(SPELL_ATTR0_NO_IMMUNITIES) || spellInfo->Mechanic == MECHANIC_BANDAGE)
-        {
+        // Basic validation
+        if (!sIndividualProgression->enabled || !healer || !heal || !spellInfo)
             return;
-        }
 
-        // Skip percentage based heals or spells already nerfed by damage reduction
-        for (uint8 i = 0; i < 3; i++)
+        // Skip potions, bandages, scripted / special heals
+        if (spellInfo->HasAttribute(SPELL_ATTR0_NO_IMMUNITIES) || spellInfo->Mechanic == MECHANIC_BANDAGE)
+            return;
+
+        // Skip percentage-based heals (Heal Max Health)
+        for (uint8 i = 0; i < MAX_SPELL_EFFECTS; ++i)
         {
             if (spellInfo->Effects[i].Effect == SPELL_EFFECT_HEAL_MAX_HEALTH)
-            {
                 return;
-            }
         }
+
+        // Skip specific spells that are already balanced separately
         if (spellInfo->Id == SPELL_RUNE_TAP || spellInfo->Id == SPELL_LIFE_STEAL)
-        {
             return;
-        }
 
+        // No progression healing nerf in BGs/Arenas
         if (healer->GetMap()->IsBattlegroundOrArena())
-        {
             return;
-        }
 
-        bool isPet = healer->GetOwner() && healer->GetOwner()->GetTypeId() == TYPEID_PLAYER;
-        if (!isPet && healer->GetTypeId() != TYPEID_PLAYER)
-        {
+        // Only apply if healer is a player or controlled by a player
+        Player* player = GetProgressionPlayer(healer);
+        if (!player)
             return;
-        }
-        Player* player = isPet ? healer->GetOwner()->ToPlayer() : healer->ToPlayer();
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-        {
-            heal *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaHealingAdjustment);
-        }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-        {
-            heal *= sIndividualProgression->tbcHealingAdjustment;
-        }
-        else
-        {
-            return;
-        }
+
+        float mult = GetHealingMultiplier(player);
+        if (mult != 1.0f)
+            heal = uint32(float(heal) * mult);
     }
 
     void ModifySpellDamageTaken(Unit* /*target*/, Unit* attacker, int32& damage, SpellInfo const* /*spellInfo*/) override
     {
-        if (!sIndividualProgression->enabled || !attacker || !damage)
+        if (!sIndividualProgression->enabled || !attacker || damage <= 0)
             return;
-		
-        bool isPet = attacker->GetOwner() && attacker->GetOwner()->GetTypeId() == TYPEID_PLAYER;
-        if (!isPet && attacker->GetTypeId() != TYPEID_PLAYER)
-        {
-            return;
-        }
+
+        // No progression damage nerf in BGs/Arenas
         if (attacker->GetMap()->IsBattlegroundOrArena())
-        {
             return;
-        }
-        Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-        {
-            damage *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment);
-        }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-        {
-            damage *= sIndividualProgression->tbcPowerAdjustment;
-        }
-        else
-        {
+
+        Player* player = GetProgressionPlayer(attacker);
+        if (!player)
             return;
-        }
+
+        float mult = GetDamageMultiplier(player);
+        if (mult != 1.0f)
+            damage = int32(float(damage) * mult);
     }
 
     void ModifyMeleeDamage(Unit* /*target*/, Unit* attacker, uint32& damage) override
@@ -869,24 +851,17 @@ public:
         if (!sIndividualProgression->enabled || !attacker || !damage)
             return;
 
-        bool isPet = attacker->GetOwner() && attacker->GetOwner()->GetTypeId() == TYPEID_PLAYER;
-        if (!isPet && attacker->GetTypeId() != TYPEID_PLAYER)
-        {
+        // No progression damage nerf in BGs/Arenas
+        if (attacker->GetMap()->IsBattlegroundOrArena())
             return;
-        }
-        Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-        {
-            damage *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment);
-        }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-        {
-            damage *= sIndividualProgression->tbcPowerAdjustment;
-        }
-        else
-        {
+
+        Player* player = GetProgressionPlayer(attacker);
+        if (!player)
             return;
-        }
+
+        float mult = GetDamageMultiplier(player);
+        if (mult != 1.0f)
+            damage = uint32(float(damage) * mult);
     }
 
     void ModifyPeriodicDamageAurasTick(Unit* /*target*/, Unit* attacker, uint32& damage, SpellInfo const* spellInfo) override
@@ -894,40 +869,33 @@ public:
         if (!sIndividualProgression->enabled || !attacker || !damage || !spellInfo)
             return;
 
-        // Do not apply reductions to healing auras - these are already modified in the ModifyHeal hook
+        // Do not apply reductions to periodic healing auras
         for (uint8 j = 0; j < MAX_SPELL_EFFECTS; ++j)
         {
-            if (spellInfo->Effects[j].Effect == SPELL_EFFECT_APPLY_AURA && spellInfo->Effects[j].ApplyAuraName == SPELL_AURA_PERIODIC_HEAL)
+            if (spellInfo->Effects[j].Effect == SPELL_EFFECT_APPLY_AURA &&
+                spellInfo->Effects[j].ApplyAuraName == SPELL_AURA_PERIODIC_HEAL)
             {
                 return;
             }
         }
 
-        bool isPet = attacker->GetOwner() && attacker->GetOwner()->GetTypeId() == TYPEID_PLAYER;
-        if (!isPet && attacker->GetTypeId() != TYPEID_PLAYER)
-        {
+        // No progression damage nerf in BGs/Arenas
+        if (attacker->GetMap()->IsBattlegroundOrArena())
             return;
-        }
-        Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
-        {
-            damage *= sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment);
-        }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-        {
-            damage *= sIndividualProgression->tbcPowerAdjustment;
-        }
-        else
-        {
+
+        Player* player = GetProgressionPlayer(attacker);
+        if (!player)
             return;
-        }
+
+        float mult = GetDamageMultiplier(player);
+        if (mult != 1.0f)
+            damage = uint32(float(damage) * mult);
     }
 };
 
 void AddSC_mod_individual_progression_player()
 {
     new IndividualPlayerProgression();
-    new IndividualPlayerProgression_PetScript();
     new IndividualPlayerProgression_AccountScript();
     new IndividualPlayerProgression_UnitScript();
 }

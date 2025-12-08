@@ -442,9 +442,6 @@ public:
     static bool isBeforeProgression(Player* player, ProgressionState state) ;
     void UpdateProgressionState(Player* player, ProgressionState newState) const;
     static void ForceUpdateProgressionState(Player* player, ProgressionState newState);
-    void CheckAdjustments(Player* player) const;
-    void ApplyGearStatsTuning(Player* player, float& computedAdjustment, ItemTemplate const* item) const;
-    void ComputeGearTuning(Player* player, float& computedAdjustment, ItemTemplate const* item) const;
     void AdjustVanillaStats(Player* player) const;
     void AdjustTBCStats(Player* player) const;
     void AdjustWotLKStats(Player* player) const;
@@ -459,8 +456,6 @@ public:
     void removeAllProgressionSpells(Player* player);
     static void LoadCustomProgressionEntries(const std::string& customProgressionString);
     static void RemovePlayerAchievement(uint16 playerGUID, uint16 achievementId);
-    static void AdjustStats(Player* player, float computedPowerAdjustment, float computedHealthAdjustment);
-    static float ComputeVanillaAdjustment(uint8 playerLevel, float configAdjustmentValue);
     static uint8 GetAccountProgression(uint32 accountId);
 };
 

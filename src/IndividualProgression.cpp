@@ -106,58 +106,6 @@ void IndividualProgression::ForceUpdateProgressionState(Player* player, Progress
     sIndividualProgression->setProgressionSpell(player, newState);
 }
 
-void IndividualProgression::CheckAdjustments(Player* player) const
-{
-    if (!enabled)
-	{
-        return;
-	}
-
-    if (!hasPassedProgression(player, PROGRESSION_PRE_TBC))
-    {
-        float adjustmentApplyPercent = (player->GetLevel() - 10.0f) / 50.0f;
-
-        float PowerAdjustmentValue = -100.0f * (1.0f - vanillaPowerAdjustment);
-        float computedPowerAdjustment = (PowerAdjustmentValue * adjustmentApplyPercent);
-
-        float HealthAdjustmentAmount = -100.0f * (1.0f - vanillaHealthAdjustment);
-        float computedHealthAdjustment = (HealthAdjustmentAmount * adjustmentApplyPercent);
-
-	    AdjustStats(player, computedPowerAdjustment, computedHealthAdjustment);
-    }
-    else if (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
-    {
-        float computedPowerAdjustment = -100.0f * (1.0f - tbcPowerAdjustment);
-
-	    AdjustStats(player, computedPowerAdjustment, tbcHealthAdjustment);
-    }
-
-    if (player->getClass() == CLASS_HUNTER)
-    {
-        // Remove the 15% built-in ranged haste that was added to hunters in WotLK - This lets us add haste spells back to quivers
-        player->RemoveAura(RANGED_HASTE_SPELL);
-        player->CastSpell(player, RANGED_HASTE_SPELL, false);
-    }
-}
-
-void IndividualProgression::AdjustStats(Player* player, float computedPowerAdjustment, float computedHealthAdjustment)
-{
-    auto bp1 = static_cast<int32>(computedPowerAdjustment);
-	auto bp2 = static_cast<int32>(computedHealthAdjustment);
-
-    player->RemoveAura(ABSORB_SPELL);
-    player->CastCustomSpell(player, ABSORB_SPELL, &bp1, nullptr, nullptr, false);
-
-	player->RemoveAura(HP_AURA_SPELL);
-    player->CastCustomSpell(player, HP_AURA_SPELL, &bp2, nullptr, nullptr, false);
-}
-
-float IndividualProgression::ComputeVanillaAdjustment(uint8 playerLevel, float configAdjustmentValue)
-{
-    float adjustmentApplyPercent = (float(playerLevel) - 10.0f) / 50.0f;
-    return playerLevel > 10 ? 1.0f - ((1.0f - configAdjustmentValue) * adjustmentApplyPercent) : 1;
-}
-
 /**
  * Gets the highest progression level achieved by an account
  * Note that this method makes a direct, non-sync DB call and should be used sparingly
