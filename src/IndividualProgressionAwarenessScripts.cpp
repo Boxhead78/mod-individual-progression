@@ -805,14 +805,14 @@ public:
     }
 };
 
-class npc_ipp_tbc_t5 : public CreatureScript
+class npc_ipp_pre_wotlk : public CreatureScript
 {
 public:
-    npc_ipp_tbc_t5() : CreatureScript("npc_ipp_tbc_t5") { }
+    npc_ipp_pre_wotlk() : CreatureScript("npc_ipp_pre_wotlk") { }
 
-    struct npc_ipp_tbc_t5AI: SmartAI
+    struct npc_ipp_pre_wotlkAI: ScriptedAI
     {
-        explicit npc_ipp_tbc_t5AI(Creature* creature) : SmartAI(creature) { };
+        explicit npc_ipp_pre_wotlkAI(Creature* creature) : ScriptedAI(creature) { };
 
         void AttackStart(Unit* target) override
         {
@@ -840,13 +840,13 @@ public:
                 return true;
             }
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_4);
+            return sIndividualProgression->isBeforeProgression(target, PROGRESSION_TBC_TIER_5);
         }
     };
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_ipp_tbc_t5AI(creature);
+        return new npc_ipp_pre_wotlkAI(creature);
     }
 };
 
@@ -1567,7 +1567,7 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_tbc();
     new npc_ipp_tbc_pre_t4();
     new npc_ipp_tbc_t4();
-    // new npc_ipp_tbc_t5();
+    new npc_ipp_pre_wotlk();
     new npc_ipp_wotlk();
     new npc_ipp_wotlk_ulduar();
     new npc_ipp_wotlk_totc();

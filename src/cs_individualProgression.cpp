@@ -19,7 +19,6 @@ public:
             { "get",    HandleGetIndividualProgressionCommand,    SEC_GAMEMASTER,    Console::Yes },
             { "set",    HandleSetIndividualProgressionCommand,    SEC_GAMEMASTER,    Console::Yes },
             { "tele",   HandleTeleIndividualProgressionCommand,   SEC_GAMEMASTER,    Console::Yes },
-            { "view",   HandleGetIndividualProgressionCommand,    SEC_GAMEMASTER,    Console::Yes },
             { "setbot", HandleSetBotIndividualProgressionCommand, SEC_GAMEMASTER,    Console::Yes },
         };
 
@@ -130,16 +129,22 @@ public:
         return true;
     }
 
-    static bool HandleSetBotIndividualProgressionCommand(ChatHandler* handler, Optional<PlayerIdentifier> player, uint32 progressionLevel)
+    static bool HandleSetBotIndividualProgressionCommand(ChatHandler* handler)
     {
-        if (progressionLevel > PROGRESSION_WOTLK_TIER_5)
+        Player* player = handler->GetSession()->GetPlayer();
+
+        if (!player)
         {
-            handler->SendSysMessage("Invalid Progression Level.");
+            handler->SendSysMessage("Player not found.");
             return false;
         }
 
-        player = PlayerIdentifier::FromTargetOrSelf(handler);
-        Player* target = player->GetConnectedPlayer();
+        Group* group = player->GetGroup();
+        if (!group)
+        {
+            handler->SendSysMessage("You need to be in a group to use this command.");
+            return false;
+        }
 
         std::string playername = target->GetName();
         uint8 currentState = target->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
@@ -147,14 +152,17 @@ public:
 
         if (progressionLevel < currentState)
         {
-            CheckProgressionAchievements(target, currentState, progressionLevel);
+            Player* member = itr->GetSource();
+            if (!member || !sIndividualProgression->isExcludedFromProgression(member))
+                continue;
+
+            sIndividualProgression->UpdateProgressionState(member, static_cast<ProgressionState>(currentState));
+            sIndividualProgression->UpdateProgressionQuests(member);
+            sIndividualProgression->CheckAdjustments(member);
+            sIndividualProgression->checkIPPhasing(member, currentArea);
         }
 
-        sIndividualProgression->ForceUpdateProgressionState(target, static_cast<ProgressionState>(progressionLevel));
-        sIndividualProgression->UpdateProgressionQuests(target);
-        sIndividualProgression->checkIPPhasing(target, currentArea);
-
-        handler->PSendSysMessage("Updated Progression Level for |cff00ffff{}|r = |cff00ffff{}|r", playername, progressionLevel);
+        handler->PSendSysMessage("Updated Progression Level for all bots = |cff00ffff{}|r", currentState);
         return true;
     }
 
