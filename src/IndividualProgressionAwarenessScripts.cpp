@@ -810,9 +810,9 @@ class npc_ipp_pre_wotlk : public CreatureScript
 public:
     npc_ipp_pre_wotlk() : CreatureScript("npc_ipp_pre_wotlk") { }
 
-    struct npc_ipp_pre_wotlkAI: ScriptedAI
+    struct npc_ipp_pre_wotlkAI: SmartAI
     {
-        explicit npc_ipp_pre_wotlkAI(Creature* creature) : ScriptedAI(creature) { };
+        explicit npc_ipp_pre_wotlkAI(Creature* creature) : SmartAI(creature) { };
 
         void AttackStart(Unit* target) override
         {

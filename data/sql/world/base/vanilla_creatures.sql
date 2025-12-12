@@ -1,5 +1,15 @@
 SET @maxLevel = 80;
 
+/* CUSTOM */
+UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 36213;
+
+UPDATE `creature_template` SET `minlevel` = @maxLevel + 2, `maxlevel` = @maxLevel + 2 WHERE `entry` = 2425;
+
+UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 36225;
+
+UPDATE `creature_template` SET `minlevel` = @maxLevel, `maxlevel` = @maxLevel WHERE `entry` = 36226;
+/* CUSTOM */
+
 /*  Flesh Eater  */
 UPDATE `creature_template` SET `speed_walk` = 0.777776 WHERE `entry` = 3;
 

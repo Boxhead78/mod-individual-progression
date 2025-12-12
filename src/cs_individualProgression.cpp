@@ -19,7 +19,6 @@ public:
             { "get",    HandleGetIndividualProgressionCommand,    SEC_GAMEMASTER,    Console::Yes },
             { "set",    HandleSetIndividualProgressionCommand,    SEC_GAMEMASTER,    Console::Yes },
             { "tele",   HandleTeleIndividualProgressionCommand,   SEC_GAMEMASTER,    Console::Yes },
-            { "setbot", HandleSetBotIndividualProgressionCommand, SEC_GAMEMASTER,    Console::Yes },
         };
 
         static ChatCommandTable commandTable =
@@ -126,43 +125,6 @@ public:
         sIndividualProgression->checkIPPhasing(target, currentArea);
 
         handler->PSendSysMessage("Updated Progression Level for |cff00ffff{}|r = |cff00ffff{}|r", playername, progressionLevel);
-        return true;
-    }
-
-    static bool HandleSetBotIndividualProgressionCommand(ChatHandler* handler)
-    {
-        Player* player = handler->GetSession()->GetPlayer();
-
-        if (!player)
-        {
-            handler->SendSysMessage("Player not found.");
-            return false;
-        }
-
-        Group* group = player->GetGroup();
-        if (!group)
-        {
-            handler->SendSysMessage("You need to be in a group to use this command.");
-            return false;
-        }
-
-        std::string playername = target->GetName();
-        uint8 currentState = target->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
-        uint32 currentArea = target->GetAreaId();
-
-        if (progressionLevel < currentState)
-        {
-            Player* member = itr->GetSource();
-            if (!member || !sIndividualProgression->isExcludedFromProgression(member))
-                continue;
-
-            sIndividualProgression->UpdateProgressionState(member, static_cast<ProgressionState>(currentState));
-            sIndividualProgression->UpdateProgressionQuests(member);
-            sIndividualProgression->CheckAdjustments(member);
-            sIndividualProgression->checkIPPhasing(member, currentArea);
-        }
-
-        handler->PSendSysMessage("Updated Progression Level for all bots = |cff00ffff{}|r", currentState);
         return true;
     }
 

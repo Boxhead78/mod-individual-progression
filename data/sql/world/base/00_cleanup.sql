@@ -1,3 +1,5 @@
+SET @maxLevel = 80;
+
 /* Several unused BG NPCs have wrong classes in AC - fix to prevent console warning */
 UPDATE `creature_template` SET `unit_class` = 2 WHERE `entry` IN (22742, 22791, 22796, 22792, 22627, 22532, 22774, 22534, 22529, 22537, 22790, 22791, 22637, 22599,
                                                                  32013, 22781, 31930, 32128, 31935, 31927, 31938, 32120, 37332, 32142, 31821, 37248, 37453, 37253,
@@ -28,7 +30,7 @@ UPDATE `creature` SET `equipment_id` = 0 WHERE `guid` IN (34103, 34104, 38297);
 -- Restore conversation between Faranell and Wrathgate NPC Kraggosh - 00_cleanup
 UPDATE `creature_template` SET `AINAME` = 'SmartAI' WHERE `entry` = 2055;
 
-UPDATE `creature_template` SET `minlevel` = 83, `maxlevel` = 83, `ScriptName` = 'npc_king_varian_wrynn' WHERE `entry` = 29611; -- King Varian Wrynn
+UPDATE `creature_template` SET `minlevel` = @maxLevel + 3, `maxlevel` = @maxLevel + 3, `ScriptName` = 'npc_king_varian_wrynn' WHERE `entry` = 29611; -- King Varian Wrynn
 
 -- restore AC entries that were wrongly overwritten by AQ war bosses
 DELETE FROM `pool_template` WHERE `entry` IN (15813, 15818);
