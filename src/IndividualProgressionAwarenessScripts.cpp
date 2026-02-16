@@ -1543,6 +1543,96 @@ public:
     }
 };
 
+class npc_ipp_pre_cata : public CreatureScript
+{
+public:
+    npc_ipp_pre_cata() : CreatureScript("npc_ipp_pre_cata") { }
+
+    struct npc_ipp_pre_cataAI: SmartAI
+    {
+        explicit npc_ipp_pre_cataAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return !sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_pre_cataAI(creature);
+    }
+};
+
+class npc_ipp_cata : public CreatureScript
+{
+public:
+    npc_ipp_cata() : CreatureScript("npc_ipp_cata") { }
+
+    struct npc_ipp_cataAI: SmartAI
+    {
+        explicit npc_ipp_cataAI(Creature* creature) : SmartAI(creature) { };
+
+        void AttackStart(Unit* target) override
+        {
+            if (target->IsPlayer())
+            {
+                if (!CanBeSeen(target->ToPlayer()))
+                    return;
+            }
+
+            if (target->IsPet() || target->IsGuardian() || target->IsTotem() || target->IsControlledByPlayer())
+            {
+                if (Unit* owner = target->GetOwner())
+                    if (Player* ownerPlr = owner->ToPlayer())
+                        if (!CanBeSeen(ownerPlr))
+                            return;
+            }
+
+            SmartAI::AttackStart(target);
+        }
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_cataAI(creature);
+    }
+};
+
 // Add all scripts in one
 void AddSC_mod_individual_progression_awareness()
 {
@@ -1583,5 +1673,7 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_rhea_tn();
     new npc_ipp_rheastrasza_tn();
     new npc_ipp_scampli_tn();
+    new npc_ipp_pre_cata();
+    //new npc_ipp_cata();
     new gobject_ipp_trove_of_the_watchers();
 }
