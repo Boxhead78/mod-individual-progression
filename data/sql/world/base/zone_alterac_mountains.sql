@@ -25,53 +25,53 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2246, 0, 0, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 22766, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Syndicate Assassin - Out of Combat - Cast Sneak (No Repeat)'),
 (2246, 0, 1, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 7276, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Syndicate Assassin - On Reset - Cast Poison Proc'),
 (2246, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Syndicate Assassin - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(2247, 0, 0, 0, 9, 0, 100, 0, 2000, 13000, 12000, 18000, 0, 5, 11, 17207, 66, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Syndicate Enforcer - Within 0-5 Range - Cast Whirlwind'),
+(2247, 0, 0, 0, 9, 0, 100, 0, 2000, 13000, 12000, 18000, 0, 5, 11, 17207, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Syndicate Enforcer - Within 0-5 Range - Cast Whirlwind'),
 (2247, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Syndicate Enforcer - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
-(2254, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Crushridge Mauler - On Aggro - Say Line 0'),
+(2254, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Mauler - On Aggro - Say Line 0'),
 (2254, 0, 1, 0, 9, 0, 100, 0, 4100, 9300, 10200, 17900, 0, 5, 11, 11976, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Crushridge Mauler - Within 0-5 Range - Cast Strike'),
 (2254, 0, 2, 0, 0, 0, 100, 0, 7400, 15800, 7600, 18700, 0, 0, 11, 6253, 1, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Crushridge Mauler - Within 0-5 Range - Cast Backhand'),
 (2254, 0, 3, 4, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Mauler - On Death - Cross Cast Enrage'),
 (2254, 0, 4, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Mauler - On Death - Crushridge Warmonger Say Line 1'),
-(2255, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Crushridge Mage - On Aggro - Say Line 0'),
+(2255, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Mage - On Aggro - Say Line 0'),
 (2255, 0, 1, 0, 0, 0, 100, 0, 0, 0, 3500, 4800, 0, 0, 11, 9672, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Crushridge Mage - In Combat - Cast Frostbolt'),
 (2255, 0, 2, 0, 0, 0, 100, 0, 5300, 7400, 11300, 21200, 0, 0, 11, 6742, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Crushridge Mage - In Combat - Cast Bloodlust'),
 (2255, 0, 3, 4, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Mage - On Death - Cross Cast Enrage'),
 (2255, 0, 4, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Mage - On Death - Crushridge Warmonger Say Line 1'),
-(2256, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Crushridge Enforcer - On Aggro - Say Line 0'),
+(2256, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Enforcer - On Aggro - Say Line 0'),
 (2256, 0, 1, 0, 0, 0, 100, 0, 6000, 9000, 18000, 24000, 0, 0, 11, 9791, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Crushridge Enforcer - Within 0-5 Range - Cast Head Crack'),
 (2256, 0, 2, 3, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Enforcer - On Death - Cross Cast Enrage'),
 (2256, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Enforcer - On Death - Crushridge Warmonger Say Line 1'),
-(2287, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Crushridge Warmonger - On Aggro - Say Line 0 (No Repeat)'),
+(2287, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Warmonger - On Aggro - Say Line 0 (No Repeat)'),
 (2287, 0, 1, 0, 2, 0, 100, 1, 0, 50, 0, 0, 0, 0, 39, 15, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Crushridge Warmonger - Between 0-50% Health - Call For Help (No Repeat)'),
 (2287, 0, 2, 3, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Warmonger - On Death - Cross Cast Enrage'),
 (2287, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Warmonger - On Death - Crushridge Warmonger Say Line 1'),
 --
 (2271, 0, 0, 0, 106, 0, 50, 0, 0, 0, 4800, 18100, 0, 5, 11, 3260, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Dalaran Shield Guard - Within 0-5 Range - Cast Violet Shield Effect'),
 (2271, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Dalaran Shield Guard - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(2272, 0, 0, 0, 0, 0, 100, 0, 0, 0, 3300, 6600, 0, 0, 11, 20819, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Dalaran Theurgist - In Combat - Cast Frostbolt'),
+(2272, 0, 0, 0, 0, 0, 100, 0, 0, 0, 3300, 6600, 0, 0, 11, 20819, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Dalaran Theurgist - In Combat - Cast Frostbolt'),
 (2272, 0, 1, 0, 0, 0, 100, 0, 4000, 5300, 4600, 9900, 0, 0, 11, 3652, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Dalaran Theurgist - In Combat - Cast Summon Spirit of Old'),
 (2272, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Dalaran Theurgist - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (2306, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 3000, 0, 0, 11, 20822, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Baron Vardus - In Combat - Cast Frostbolt'),
 (2306, 0, 1, 0, 106, 0, 100, 0, 0, 0, 12200, 39800, 0, 8, 11, 11831, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Baron Vardus - Within 0-8 Range - Cast Frost Nova'),
 (2306, 0, 2, 0, 0, 0, 100, 0, 1000, 3000, 12500, 29800, 0, 0, 11, 6253, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Baron Vardus - In Combat - Cast Backhand'),
 (2306, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Baron Vardus - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(2415, 0, 0, 0, 0, 0, 100, 0, 0, 0, 3300, 4900, 0, 0, 11, 20823, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Warden Belamoore - In Combat - Cast Fireball'),
+(2415, 0, 0, 0, 0, 0, 100, 0, 0, 0, 3300, 4900, 0, 0, 11, 20823, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Warden Belamoore - In Combat - Cast Fireball'),
 (2415, 0, 1, 0, 106, 0, 100, 0, 0, 0, 14900, 37400, 0, 10, 11, 20828, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Warden Belamoore - Within 0-10 Range - Cast Cone of Cold'),
 (2415, 0, 2, 0, 0, 0, 100, 0, 7000, 13000, 6000, 16000, 0, 0, 11, 13323, 1, 0, 0, 0, 0, 6, 30, 1, 0, 0, 0, 0, 0, 0,     'Warden Belamoore - Within 0-30 Range - Cast Polymorph'),
 (2415, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Warden Belamoore - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
-(2417, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Grel\'borg the Miser - On Aggro - Say Line 0 (No Repeat)'),
+(2417, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Grel\'borg the Miser - On Aggro - Say Line 0 (No Repeat)'),
 (2417, 0, 1, 0, 0, 0, 100, 0, 3000, 6000, 29000, 38000, 0, 0, 11, 6742, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Grel\'borg the Miser - In Combat - Cast Bloodlust'),
 (2417, 0, 2, 0, 0, 0, 100, 0, 2000, 2000, 36000, 36000, 0, 0, 11, 4979, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Grel\'borg the Miser - In Combat - Cast Quick Flame Ward'),
-(2417, 0, 3, 0, 0, 0, 100, 0, 10000, 19000, 10000, 23000, 0, 0, 11, 11990, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Grel\'borg the Miser - Within 0-30 Range - Cast Rain of Fire'),
+(2417, 0, 3, 0, 0, 0, 100, 0, 10000, 19000, 10000, 23000, 0, 0, 11, 11990, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,   'Grel\'borg the Miser - Within 0-30 Range - Cast Rain of Fire'),
 (2420, 0, 0, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 7366, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Targ - Out of Combat - Cast Berserker Stance (No Repeat)'),
-(2420, 0, 1, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Targ - On Aggro - Say Line 0 (No Repeat)'),
+(2420, 0, 1, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Targ - On Aggro - Say Line 0 (No Repeat)'),
 (2420, 0, 2, 0, 0, 0, 100, 0, 4000, 16000, 6000, 19000, 0, 0, 11, 15496, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,     'Targ - Within 0-5 Range - Cast Cleave'),
 (2420, 0, 3, 0, 106, 0, 100, 0, 0, 0, 11000, 24000, 0, 8, 11, 8147, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Targ - Within 0-8 Range - Cast Thunderclap'),
 (2421, 0, 0, 0, 0, 0, 100, 0, 7000, 13000, 11000, 26000, 0, 0, 11, 8379, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,      'Muckrake - Within 0-5 Range - Cast Disarm'),
 (2421, 0, 1, 0, 105, 0, 100, 0, 0, 0, 13000, 16000, 0, 5, 11, 12555, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Muckrake - Target Casting - Cast Pummel'),
-(2422, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                          'Glommus - On Aggro - Say Line 0 (No Repeat)'),
+(2422, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Glommus - On Aggro - Say Line 0 (No Repeat)'),
 (2422, 0, 1, 0, 0, 0, 100, 0, 1000, 1000, 1000, 9000, 0, 0, 11, 9128, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Glommus - In Combat - Cast Battle Shout'),
 (2422, 0, 2, 0, 106, 0, 100, 0, 0, 0, 14000, 35000, 0, 10, 11, 13730, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Glommus - Within 0-10 Range - Cast Demoralizing Shout'),
 (2422, 0, 3, 0, 0, 0, 100, 0, 6000, 8000, 9000, 32000, 0, 0, 11, 11428, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Glommus - Within 0-5 Range - Cast Knockdown'),
@@ -81,7 +81,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2423, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Lord Aliden Perenolde - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (2453, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 30000, 35000, 0, 0, 11, 6742, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Lo Grosh - In Combat - Cast Bloodlust'),
 (2453, 0, 1, 0, 0, 0, 100, 0, 1000, 3000, 35000, 38000, 0, 0, 11, 2601, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Lo Grosh - In Combat - Cast Fire Shield III'),
-(2453, 0, 2, 0, 0, 0, 100, 0, 5000, 8000, 18000, 22000, 0, 0, 11, 8814, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,     'Lo Grosh - In Combat - Cast Flame Spike'),
+(2453, 0, 2, 0, 0, 0, 100, 0, 5000, 8000, 18000, 22000, 0, 0, 11, 8814, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,      'Lo Grosh - In Combat - Cast Flame Spike'),
 (4504, 0, 0, 0, 54, 0, 100, 0, 0, 0, 0, 0, 0, 0, 53, 0, 450400, 1, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Frostmaw - On Just Summoned - Start Patrol');
 
 
@@ -107,6 +107,11 @@ INSERT INTO `waypoints` (`entry`, `pointid`, `position_x`, `position_y`, `positi
 (@ENTRY*100, 12, 222.2341, -253.12283, 144.81778,  NULL, 0, 'Frostmaw'),
 (@ENTRY*100, 13, 230.49452, -242.26663, 142.41824, NULL, 0, 'Frostmaw');
 
+-- fix Stone Fury waypoints
+DELETE FROM `creature_template_addon` WHERE `entry` = 2258;
+DELETE FROM `creature_addon` WHERE `guid` = 63913;
+INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 
+(63913, 639130, 0, 0, 0, 0, 0, NULL);
 
 -- Jailor Borhuin(2431) and Baron Vardus(2306) - multiple spawn locations 
 DELETE FROM `creature` WHERE `id1` IN (2306, 2431);

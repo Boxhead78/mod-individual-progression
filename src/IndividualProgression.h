@@ -75,6 +75,9 @@ enum ProgressionQuestIDs
     MIGHT_OF_KALIMDOR         = 8742,
     BANG_A_GONG               = 8743,
     INTO_THE_BREACH           = 10259,
+    VIALS_OF_ETERNITY         = 10445,
+    TRIAL_MAGTHERIDON         = 10888,
+    CUDGEL_OF_KARDESH         = 10901,
     BATTLE_UNDERCITY_HORDE    = 13267,
     BATTLE_UNDERCITY_ALLIANCE = 13377,
     SIMPLY_BANG_A_GONG        = 108743,
@@ -135,18 +138,6 @@ enum ProgressionAchievements
     KEL_THUZAD_40_KILL   = 5004, // Classic
 };
 
-enum ProgressionZones
-{
-    ZONE_AZUREMYST       = 3524,
-    ZONE_BLOODMYST       = 3525,
-    ZONE_GHOSTLANDS      = 3433,
-    ZONE_EVERSONG        = 3430,
-    ZONE_EXODAR          = 3557,
-    ZONE_SILVERMOON      = 3487,
-    ZONE_QUELDANAS       = 4080,
-    ZONE_VEILED_SEA      = 3479
-};
-
 enum ProgressionAreas
 {
     AREA_THE_DARK_PORTAL                 = 72,
@@ -188,6 +179,8 @@ enum ProgressionAreas
     AREA_HIVE_ASHI                       = 2742,
     AREA_HIVE_ZORA                       = 2743,
     AREA_HIVE_REGAL                      = 2744,
+    AREA_VEILED_SEA                      = 3479,
+	AREA_AMMEN_VALE                      = 3526,
     AREA_TERRACE_OF_LIGHT                = 3897,
     AREA_ARGENT_SUNREAVER_PAVILION       = 4666,
     AREA_ARGENT_SILVER_COVENANT_PAVILION = 4667,
@@ -200,6 +193,14 @@ enum ProgressionAreas
     AREA_STONEWATCH_TOWER                = 999,
     AREA_STONEWATCH_KEEP                 = 2099,
     AREA_VUL_GOL_OGRE_MOUND              = 93
+};
+
+enum DungeonKeys
+{
+    ITEM_DRAKEFIRE_AMULET                = 16309,
+    ITEM_TEMPEST_KEY                     = 31704,
+    ITEM_MEDALLION_OF_KARABOR            = 32649,
+    ITEM_BLESSED_MEDALLION_OF_KARABOR    = 32757
 };
 
 enum ProgressionSettings
@@ -435,7 +436,7 @@ public:
     std::map<uint32, uint8> customProgressionMap;
     questXpMapType questXpMap;
     float vanillaPowerAdjustment, vanillaHealthAdjustment, tbcPowerAdjustment, tbcHealthAdjustment, vanillaHealingAdjustment, tbcHealingAdjustment;
-    bool enabled, questXpFix, hunterPetLevelFix, enforceGroupRules, fishingFix, simpleConfigOverride, questMoneyAtLevelCap, repeatableVanillaQuestsXp, disableDefaultProgression, earlyDungeonSet2, DisableRDF, VanillaPvpTitlesKeepPostVanilla, VanillaPvpTitlesEarnPostVanilla, progressionSetterAlwaysVisible;
+    bool enabled, questXpFix, hunterPetLevelFix, enforceGroupRules, fishingFix, simpleConfigOverride, questMoneyAtLevelCap, repeatableVanillaQuestsXp, disableDefaultProgression, earlyDungeonSet2, doableNaxx40Bosses, DisableRDF, VanillaPvpTitlesKeepPostVanilla, VanillaPvpTitlesEarnPostVanilla, progressionSetterAlwaysVisible;
     int progressionLimit, startingProgression, tbcRacesProgressionLevel, tbcRacesStartingProgression, cataRacesProgressionLevel, cataRacesStartingProgression, deathKnightProgressionLevel, deathKnightStartingProgression, RequiredZulGurubProgression;
     uint32 VanillaPvpKillRank1, VanillaPvpKillRank2, VanillaPvpKillRank3, VanillaPvpKillRank4, VanillaPvpKillRank5, VanillaPvpKillRank6, VanillaPvpKillRank7, VanillaPvpKillRank8, VanillaPvpKillRank9, VanillaPvpKillRank10, VanillaPvpKillRank11, VanillaPvpKillRank12, VanillaPvpKillRank13, VanillaPvpKillRank14;
     std::string excludedAccountsRegex;

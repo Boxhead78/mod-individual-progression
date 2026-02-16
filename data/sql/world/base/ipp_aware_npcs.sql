@@ -5,6 +5,10 @@ SET @IPPPHASE_III := 262144;
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN 
 (16841, 19254, 16840, 20026, 20027, 20053, 20054, 20069, 18542, 20080, 20081, 20082, 21643, 20130, 19934, 19936, 19950, 19951, 19959, 22889, 22902, 22835, 22837);
 
+/* Arena NPCs */
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN
+(19915, 19909, 19911, 26012, 26007, 26075, 26307, 26309, 26760, 19912, 19859, 19860, 19861, 20499, 20497, 30610, 30611, 32832);
+
 -- Stormwind
 UPDATE `creature` SET `phaseMask` = @IPPPHASE     WHERE `id1` = 1749;  -- Lady Katrana Prestor
 UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id1` = 29611; -- King Varian Wrynn
@@ -16,8 +20,11 @@ UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id1` = 29346; -- Apothe
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_ds2' WHERE `entry` IN (15270, 15282, 16012, 16013);
 
 -- Phasing Cenarion Hold NPCs
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_preaq' WHERE `entry` IN (15176, 15180, 15181, 15183, 15188, 15189, 15190, 15191, 15293, 15194,
-                                                                                15306, 15419, 15599, 15612, 15613, 15614, 15693, 15903, 16543, 17081, 17082);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_preaq' WHERE `entry` IN
+(15176, 15180, 15181, 15183, 15187, 15188, 15189, 15190, 15191, 15194, 15293, 15306, 15419, 15612, 15613, 15614, 15903, 16543, 17081, 17082);
+
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_aqwewar' WHERE `entry` IN (15693); -- Jonathan the Revelator
+
 -- Phasing Cenarion Hold guards
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id1` = 15184 AND `guid` IN (42782, 42783, 42768);
 
@@ -44,33 +51,34 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk' WHERE `entry` IN (
 
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk_ulduar' WHERE `entry` IN (34252);
 
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk_totc' WHERE `entry` IN (35498, 35577, 35496, 36208, 35500, 35497, 34244, 28701);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk_totc' WHERE `entry` IN (35498, 35577, 35496, 36208, 35500, 35497, 34244);
 
--- TODO: Harold Winston (32172) has rings from all patches, so he needs special phasing applied - for now make him require ICC progression
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk_icc' WHERE `entry` IN (37776, 40160, 37780, 32172);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk_icc' WHERE `entry` IN (37776, 40160, 37780);
 
 -- Phasing the portals to Blasted Lands until TBC is unlocked
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc' WHERE `entry` IN (195141, 195142);
 
--- Phasing Eye of the Storm Emissary until TBC
+-- Phasing battlemasters
+UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_ipp_wotlk' WHERE `entry` IN 
+(15351, 34955, 34988, 34991, 34997, 34998, 35007, 35008, 35017, 35020, 35021, 35023, 35024, 35025, 35598, 35599, 35600, 35602, 35603, 35611);
+UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_ipp_pre_wotlk' WHERE `entry` IN (347, 2804, 14942, 15007);
+UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_ipp_tbc'   WHERE `entry` IN (20374, 20381, 20383, 20385, 20386, 20388);
+
+-- Phasing emissaries
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (22013, 22015);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk' WHERE `entry` IN (30566, 30567, 34948, 34949, 34950, 34951);
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc' WHERE `entry` IN (185106, 185107);
-
--- Phasing Strand of the Ancients Emissary until WotLK
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk' WHERE `entry` IN (30566, 30567);
-
--- Phasing Isle of Conquest Emissary and banner until WotLK
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk' WHERE `entry` IN (34948, 34949, 34950, 34951);
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_wotlk' WHERE `entry` IN (195532, 195533);
 
 -- Phasing Zul'Aman quest npcs until TBC T4.
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN (19227, 23761);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN (23761);
 
 -- Phasing TBC vendors and trainers - Copies are added to replace them until TBC T4.
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN (18754, 18771, 19187, 21087);
 
 -- TBC, phasing Shattered Sun offensive NPCs in Shattrath
-UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id1` IN (17076, 19475, 24932, 24938, 25115, 25134, 25135, 25136, 25137, 25138, 25141, 25142, 25143, 25153, 25155, 25167, 27666, 27667);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id1` IN 
+(17076, 19475, 24932, 24938, 25115, 25134, 25135, 25136, 25137, 25138, 25141, 25142, 25143, 25153, 25155, 25167, 25885, 27666, 27667);
 
 -- TBC, Terrace of Light, phasing T5 game objects
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc_t4' WHERE `entry` IN

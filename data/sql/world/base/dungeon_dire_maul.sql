@@ -1,5 +1,41 @@
 SET @CGUID   := 653000;
+SET @OGUID   := 653000;
 SET @WPID    := 6530000;
+
+-- Dusty Tomes
+DELETE FROM `gameobject` WHERE `id` = 179548;
+INSERT INTO `gameobject` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, 
+`rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`, `ScriptName`, `VerifiedBuild`, `Comment`) VALUES
+--
+(@OGUID+1, 179548, 429, 0, 0, 1, 1, 4.36356, -436.696, 16.4123, 0.995107, 0, 0, 0.477277, 0.878753, 7200, 255, 1, '', 0, NULL),
+(@OGUID+2, 179548, 429, 0, 0, 1, 1, -144.107, 742.185, -24.5802, 5.42981, 0, 0, 0.41386, -0.910341, 7200, 255, 1, '', 0, NULL),
+(@OGUID+3, 179548, 429, 0, 0, 1, 1, 512.784, 588.036, -25.4023, 3.28124, 0, 0, -0.997563, 0.0697661, 7200, 255, 1, '', 0, NULL),
+(@OGUID+4, 179548, 429, 0, 0, 1, 1, -108.174, -208.762, -56.0361, 5.85044, 0, 0, 0.214688, -0.976683, 7200, 255, 1, '', 0, NULL),
+(@OGUID+5, 179548, 429, 0, 0, 1, 1, -8.62444, -351.419, -53.8242, 3.01908, 0, 0, 0.998124, 0.0612191, 7200, 255, 1, '', 0, NULL),
+(@OGUID+6, 179548, 429, 0, 0, 1, 1, 837.458, 493.936, 37.3182, 3.81369, 0, 0, 0.944066, -0.329757, 7200, 255, 1, '', 0, NULL),
+(@OGUID+7, 179548, 429, 0, 0, 1, 1, -81.1221, 368.843, -2.37102, 3.29414, 0, 0, 0.997092, -0.076201, 7200, 255, 1, '', 0, NULL),
+(@OGUID+8, 179548, 429, 0, 0, 1, 1, 118.018, -261.472, -4.14639, 0.087266, 0, 0, 0.0436192, 0.999048, 7200, 255, 1, '', 0, NULL),
+(@OGUID+9, 179548, 429, 0, 0, 1, 1, 287.941, 341.455, 2.85298, 4.28258, 0, 0, 0.841636, -0.540046, 7200, 255, 1, '', 0, NULL),
+(@OGUID+10, 179548, 429, 0, 0, 1, 1, 285.164, -431.063, -119.962, -1.58825, 0, 0, 0, 1, 7200, 255, 1, '', 0, NULL),
+(@OGUID+11, 179548, 429, 0, 0, 1, 1, -86.3983, 569.308, 28.6079, 1.78023, 0, 0, 0, 1, 7200, 255, 1, '', 0, NULL);
+
+DELETE FROM `pool_gameobject` WHERE `pool_entry` IN (601019);
+INSERT INTO `pool_gameobject` (`guid`, `pool_entry`, `chance`, `description`) VALUES 
+(@OGUID+1,  601019, 0, 'A Dusty Tome'),
+(@OGUID+2,  601019, 0, 'A Dusty Tome'),
+(@OGUID+3,  601019, 0, 'A Dusty Tome'),
+(@OGUID+4,  601019, 0, 'A Dusty Tome'),
+(@OGUID+5,  601019, 0, 'A Dusty Tome'),
+(@OGUID+6,  601019, 0, 'A Dusty Tome'),
+(@OGUID+7,  601019, 0, 'A Dusty Tome'),
+(@OGUID+8,  601019, 0, 'A Dusty Tome'),
+(@OGUID+9,  601019, 0, 'A Dusty Tome'),
+(@OGUID+10, 601019, 0, 'A Dusty Tome'),
+(@OGUID+11, 601019, 0, 'A Dusty Tome');
+
+DELETE FROM `pool_template` WHERE `entry` IN (601019);
+INSERT INTO `pool_template` (`entry`, `max_limit`, `description`) VALUES 
+(601019, 1, 'A Dusty Tome - Dire Maul');
 
 
 /* ---- Dire Maul North ----- */
@@ -28,8 +64,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11444, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                             'Gordok Mage-Lord - On Aggro - Say Line 0'),
 (11444, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 15530, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,                'Gordok Mage-Lord - In Combat - Cast Frostbolt'),
 (11444, 0, 2, 0, 0, 0, 100, 0, 7000, 14000, 12000, 15000, 0, 0, 11, 14145, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Gordok Mage-Lord - In Combat - Cast Fire Blast'),
-(11444, 0, 3, 0, 0, 0, 100, 0, 12000, 17000, 19000, 25000, 0, 0, 11, 16102, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,     'Gordok Mage-Lord - In Combat - Cast Flamestrike'),
-(11444, 0, 4, 0, 0, 0, 100, 0, 7000, 9000, 16000, 20000, 0, 0, 11, 13323, 96, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,       'Gordok Mage-Lord - In Combat - Cast Polymorph'),
+(11444, 0, 3, 0, 0, 0, 100, 0, 12000, 17000, 19000, 25000, 0, 0, 11, 16102, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,      'Gordok Mage-Lord - In Combat - Cast Flamestrike'),
+(11444, 0, 4, 0, 0, 0, 100, 0, 7000, 9000, 16000, 20000, 0, 0, 11, 13323, 32, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,       'Gordok Mage-Lord - In Combat - Cast Polymorph'),
 (11444, 0, 5, 0, 2, 0, 100, 1, 0, 30, 0, 0, 0, 0, 11, 16170, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Gordok Mage-Lord - Between 0-30% Health - Cast Bloodlust'),
 (11444, 0, 6, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                           'Gordok Mage-Lord - On Bloodlust - Say Line 1'),
 (11444, 0, 7, 0, 1, 0, 100, 0, 4000, 15000, 20000, 40000, 0, 0, 10, 1, 11, 25, 6, 21, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Gordok Mage-Lord - Out of Combat - Play Random Emote'),
@@ -47,7 +83,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11448, 0, 3, 4, 1, 0, 100, 1, 10000, 10000, 0, 0, 0, 0, 11, 21157, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Gordok Warlock - Out of Combat - Cast Dark Channeling'),
 (11448, 0, 4, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 17, 193, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Gordok Warlock - Out of Combat - Set Emotestate'),
 (11448, 0, 5, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 15232, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,                'Gordok Warlock - In Combat - Cast Shadow Bolt'),
-(11448, 0, 6, 0, 0, 0, 100, 0, 9000, 15000, 26000, 30000, 0, 0, 11, 17883, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,      'Gordok Warlock - In Combat - Cast Immolate'),
+(11448, 0, 6, 0, 0, 0, 100, 0, 9000, 15000, 26000, 30000, 0, 0, 11, 17883, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,       'Gordok Warlock - In Combat - Cast Immolate'),
 (11448, 0, 7, 0, 0, 0, 100, 0, 7000, 15000, 20000, 26000, 0, 0, 11, 8994, 32, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,       'Gordok Warlock - In Combat - Cast Banish'),
 (11448, 0, 8, 0, 0, 0, 100, 0, 5000, 9000, 20000, 25000, 0, 0, 11, 13338, 288, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,      'Gordok Warlock - In Combat - Cast Curse of Tongues'),
 --
@@ -305,7 +341,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11469, 0, 2, 3, 2, 0, 100, 1, 0, 30, 0, 0, 0, 0, 11, 8269, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Eldreth Seether - Between 0-30% Health - Cast Frenzy'),
 (11469, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Eldreth Seether - On Frenzy - Say Line 0'),
 (11470, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 16006, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Eldreth Sorcerer - In Combat - Cast Chain Lightning'),
-(11470, 0, 1, 0, 0, 0, 100, 0, 9000, 15000, 16000, 21000, 0, 0, 11, 13323, 97, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0, 'Eldreth Sorcerer - In Combat - Cast Polymorph'),
+(11470, 0, 1, 0, 0, 0, 100, 0, 9000, 15000, 16000, 21000, 0, 0, 11, 13323, 33, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0, 'Eldreth Sorcerer - In Combat - Cast Polymorph'),
 (11470, 0, 2, 0, 0, 0, 100, 0, 10000, 14000, 7000, 13000, 0, 0, 11, 22823, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Eldreth Sorcerer - In Combat - Cast Starshards'),
 (11471, 0, 0, 0, 1, 0, 100, 0, 1000, 10000, 600000, 600000, 0, 0, 11, 18100, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Eldreth Apparition - Out of Combat - Cast Frost Armor'),
 (11471, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 16799, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Eldreth Apparition - In Combat - Cast Frostbolt'),
@@ -319,15 +355,15 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11473, 0, 3, 0, 14, 0, 100, 0, 2000, 40, 9000, 14000, 0, 0, 11, 7154, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Eldreth Spectre - Friendly Missing Health - Cast Dark Offering'),
 (11473, 0, 4, 0, 0, 0, 100, 0, 9000, 12000, 22000, 26000, 0, 0, 11, 17201, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Eldreth Spectre - In Combat - Self Cast Dispel Magic'),
 (11475, 0, 0, 0, 9, 0, 100, 0, 0, 0, 15200, 20100, 0, 5, 11, 17831, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Eldreth Phantasm - Within 0-5 Range - Cast Call of the Graves'),
-(11475, 0, 1, 0, 0, 0, 100, 0, 6000, 9000, 16000, 29000, 0, 0, 11, 15802, 96, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Eldreth Phantasm - In Combat - Cast Shrink'),
+(11475, 0, 1, 0, 0, 0, 100, 0, 6000, 9000, 16000, 29000, 0, 0, 11, 15802, 32, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Eldreth Phantasm - In Combat - Cast Shrink'),
 --
 (11476, 0, 0, 0, 9, 0, 100, 0, 0, 0, 5000, 9000, 0, 5, 11, 13444, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Skeletal Highborne - Within 0-5 Range - Cast Sunder Armor'),
 (11477, 0, 0, 0, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 11, 22825, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Rotting Highborne - On Just Died - Cast Summon Cadaverous Worm'),
 (11480, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2400, 3800, 0, 0, 11, 15979, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Arcane Aberration - In Combat - Cast Arcane Bolt'),
 (11480, 0, 1, 0, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 11, 22936, 258, 0, 0, 0, 0, 5, 30, 0, 1, 0, 0, 0, 0, 0,             'Arcane Aberration - On Death - Cast Mana Burn'),
-(11483, 0, 0, 0, 0, 0, 100, 0, 6000, 9000, 11000, 15000, 0, 0, 11, 15659, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Mana Remnant - In Combat - Cast Chain Lightning'),
+(11483, 0, 0, 0, 0, 0, 100, 0, 6000, 9000, 11000, 15000, 0, 0, 11, 15659, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Mana Remnant - In Combat - Cast Chain Lightning'),
 (11483, 0, 1, 0, 0, 0, 100, 0, 5000, 25000, 15000, 25000, 0, 0, 11, 14514, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Mana Remnant - In Combat - Cast Blink'),
-(11484, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 3000, 5000, 0, 0, 11, 15230, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Residual Monstrosity - In Combat - Cast Arcane Bolt'),
+(11484, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 3000, 5000, 0, 0, 11, 15230, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Residual Monstrosity - In Combat - Cast Arcane Bolt'),
 (11484, 0, 1, 0, 0, 0, 100, 0, 7000, 9000, 9000, 14000, 0, 0, 11, 22940, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Residual Monstrosity - In Combat - Cast Arcane Blast'),
 (11484, 0, 2, 0, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 11, 22939, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Residual Monstrosity - On Death - Cast Summon Mana Bursts'),
 --
@@ -342,8 +378,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (11487, 0, 0, 0, 2, 0, 100, 1, 0, 60, 0, 0, 0, 0, 11, 22917, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Magister Kalendris - Between 0-60% Health - Cast Shadowform (No Repeat)'),
 (11487, 0, 1, 0, 2, 0, 100, 1, 0, 30, 0, 0, 0, 0, 28, 22917, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Magister Kalendris - Between 0-30% Health - Remove Shadowform (No Repeat)'),
-(11487, 0, 2, 0, 0, 0, 100, 0, 1000, 3000, 6000, 8000, 0, 0, 11, 15587, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Magister Kalendris - In Combat - Cast Mind Blast'),
-(11487, 0, 3, 0, 0, 0, 100, 0, 7000, 10000, 9000, 12000, 0, 0, 11, 22919, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Magister Kalendris - In Combat - Cast Mind Flay'),
+(11487, 0, 2, 0, 0, 0, 100, 0, 1000, 3000, 6000, 8000, 0, 0, 11, 15587, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Magister Kalendris - In Combat - Cast Mind Blast'),
+(11487, 0, 3, 0, 0, 0, 100, 0, 7000, 10000, 9000, 12000, 0, 0, 11, 22919, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Magister Kalendris - In Combat - Cast Mind Flay'),
 (11487, 0, 4, 0, 0, 0, 100, 0, 5000, 9000, 20000, 24000, 0, 0, 11, 15654, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,   'Magister Kalendris - In Combat - Cast Shadow Word: Pain'),
 (11487, 0, 5, 0, 0, 0, 100, 0, 8000, 12000, 15000, 20000, 0, 0, 11, 7645, 0, 0, 0, 0, 0, 6, 20, 0, 0, 0, 0, 0, 0, 0,   'Magister Kalendris - In Combat - Cast Dominate Mind'),
 (11487, 0, 6, 0, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 99, 3, 0, 0, 0, 0, 0, 20, 185579, 150, 0, 0, 0, 0, 0, 0,            'Magister Kalendris - On Death - Set Gameobject Loot State'),
@@ -377,14 +413,14 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11496, 0, 9, 0, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 34, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Immol\'thar - On Death - Set Instance Data 1 to 1'),
 --
 (14303, 0, 0, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 22696, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Petrified Guardian - Out of Combat - Cast Thorns'),
-(14303, 0, 1, 0, 2, 0, 100, 0, 0, 50, 8000, 16000, 0, 0, 11, 22373, 96, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Petrified Guardian - Between 0-50% Health - Cast Regrowth'),
-(14303, 0, 2, 0, 14, 0, 100, 0, 2000, 40, 3000, 7000, 0, 0, 11, 22373, 96, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,      'Petrified Guardian - Friendly Missing Health - Cast Regrowth'),
+(14303, 0, 1, 0, 2, 0, 100, 0, 0, 50, 8000, 16000, 0, 0, 11, 22373, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Petrified Guardian - Between 0-50% Health - Cast Regrowth'),
+(14303, 0, 2, 0, 14, 0, 100, 0, 2000, 40, 3000, 7000, 0, 0, 11, 22373, 32, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,      'Petrified Guardian - Friendly Missing Health - Cast Regrowth'),
 (14308, 0, 0, 0, 9, 0, 100, 0, 0, 0, 8000, 14000, 8, 25, 11, 22911, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Ferra - Within Rage 8-25yd - Cast Charge'),
 (14308, 0, 1, 0, 0, 0, 100, 0, 3000, 6000, 5000, 8000, 0, 0, 11, 17156, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Ferra - In Combat - Cast Maul'),
 (14398, 0, 0, 0, 0, 0, 100, 0, 6000, 8000, 8000, 19000, 0, 0, 11, 22947, 320, 0, 0, 0, 0, 5, 30, 0, 1, 0, 0, 0, 0, 0,  'Eldreth Darter - In Combat - Cast Mana Burn'),
 (14398, 0, 1, 0, 0, 0, 100, 0, 3000, 9000, 18000, 34000, 0, 0, 11, 17139, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Eldreth Darter - In Combat - Cast Power Word: Shield'),
-(14399, 0, 0, 0, 0, 0, 100, 0, 4000, 9000, 7000, 12000, 0, 0, 11, 22945, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Arcane Torrent - In Combat - Cast Forked Lightning'),
-(14399, 0, 1, 0, 0, 0, 100, 0, 7000, 14000, 19000, 23000, 0, 0, 11, 22946, 64, 0, 0, 0, 0, 5, 20, 0, 0, 0, 0, 0, 0, 0, 'Arcane Torrent - In Combat - Cast Lightning Cloud'),
+(14399, 0, 0, 0, 0, 0, 100, 0, 4000, 9000, 7000, 12000, 0, 0, 11, 22945, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Arcane Torrent - In Combat - Cast Forked Lightning'),
+(14399, 0, 1, 0, 0, 0, 100, 0, 7000, 14000, 19000, 23000, 0, 0, 11, 22946, 0, 0, 0, 0, 0, 5, 20, 0, 0, 0, 0, 0, 0, 0,  'Arcane Torrent - In Combat - Cast Lightning Cloud'),
 (14400, 0, 0, 0, 1, 0, 100, 0, 1000, 1000, 300000, 300000, 0, 0, 11, 12550, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Arcane Feedback - Out of Combat - Cast Lightning Shield'),
 (14400, 0, 1, 0, 0, 0, 100, 0, 0, 0, 15000, 30000, 0, 0, 11, 12550, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Arcane Feedback - In Combat - Cast Lightning Shield');
 
@@ -948,8 +984,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11457, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Wildspawn Hellcaller - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (11461, 0, 0, 0, 0, 0, 100, 0, 4000, 8000, 13000, 17000, 0, 0, 11, 16172, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,    'Warpwood Guardian - Within 0-5 Range - Cast Head Crack'),
 (11461, 0, 1, 0, 105, 0, 100, 0, 0, 0, 1000, 4000, 0, 5, 11, 15615, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Warpwood Guardian - Target Casting - Cast Pummel'),
-(11461, 0, 2, 0, 14, 0, 100, 0, 3400, 40, 9000, 14000, 0, 0, 11, 22373, 96, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,      'Warpwood Guardian - Friendly Missing Health - Cast Regrowth'),
-(11461, 0, 3, 0, 2, 0, 100, 0, 0, 75, 6000, 18000, 0, 0, 11, 22373, 96, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Warpwood Guardian - Between 0-75% Health - Cast Regrowth'),
+(11461, 0, 2, 0, 14, 0, 100, 0, 3400, 40, 9000, 14000, 0, 0, 11, 22373, 32, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,      'Warpwood Guardian - Friendly Missing Health - Cast Regrowth'),
+(11461, 0, 3, 0, 2, 0, 100, 0, 0, 75, 6000, 18000, 0, 0, 11, 22373, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Warpwood Guardian - Between 0-75% Health - Cast Regrowth'),
 (11462, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 5000, 7000, 0, 0, 11, 18368, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,      'Warpwood Treant - Within 0-5 Range - Cast Strike'),
 (11462, 0, 1, 0, 0, 0, 100, 0, 7000, 9000, 18000, 22000, 0, 0, 11, 14331, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,    'Warpwood Treant - Within 0-5 Range - Cast Vicious Rend'),
 (11462, 0, 2, 0, 0, 0, 100, 0, 7000, 12000, 9000, 14000, 0, 0, 11, 11428, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,    'Warpwood Treant - Within 0-5 Range - Cast Knockdown'),

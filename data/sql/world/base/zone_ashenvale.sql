@@ -25,13 +25,13 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3711, 0, 1, 0, 9, 0, 100, 0, 0, 0, 26600, 39800, 0, 5, 11, 11977, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Wrathtail Myrmidon - Within 0-5 Range - Cast Rend'),
 (3711, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Wrathtail Myrmidon - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (3715, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 8598, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Wrathtail Sea Witch - In Comba - Cast Lightning Blast'),
-(3715, 0, 1, 0, 0, 0, 100, 0, 0, 0, 20000, 35000, 0, 0, 11, 11981, 321, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Wrathtail Sea Witch - In Combat - Cast Mana Burn'),
+(3715, 0, 1, 0, 0, 0, 100, 0, 0, 0, 20000, 35000, 0, 0, 11, 11981, 256, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Wrathtail Sea Witch - In Combat - Cast Mana Burn'),
 (3715, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Wrathtail Sea Witch - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (3717, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 20792, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Wrathtail Sorceress - In Combat - Cast Frostbolt'),
 (3717, 0, 1, 0, 106, 0, 100, 0, 0, 0, 15000, 35000, 0, 8, 11, 11831, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wrathtail Sorceress - Within 0-8 Range - Cast Frost Nova'),
-(3717, 0, 2, 0, 0, 0, 50, 0, 5000, 10000, 60000, 60000, 0, 0, 11, 4980, 65, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wrathtail Sorceress - In Combat - Cast Quick Frost Ward'),
+(3717, 0, 2, 0, 0, 0, 50, 0, 5000, 10000, 60000, 60000, 0, 0, 11, 4980, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Wrathtail Sorceress - In Combat - Cast Quick Frost Ward'),
 (3717, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Wrathtail Sorceress - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(3721, 0, 0, 0, 0, 0, 100, 0, 2000, 7000, 3000, 8000, 0, 0, 11, 6917, 96, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Mystlash Hydra - In Combat - Cast Venom Spit'),
+(3721, 0, 0, 0, 0, 0, 100, 0, 2000, 7000, 3000, 8000, 0, 0, 11, 6917, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Mystlash Hydra - In Combat - Cast Venom Spit'),
 --
 (3725, 0, 0, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 11939, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Dark Strand Cultist - Out of Combat - Cast Summon Imp (No Repeat)'),
 (3725, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 20791, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Dark Strand Cultist - In Combat - Cast Shadow Bolt'),
@@ -41,8 +41,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3730, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 3582, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Dark Strand Excavator - On Respawn - Cast Torch Burst Proc'),
 (3730, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Dark Strand Excavator - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
-(3732, 0, 0, 0, 0, 0, 100, 0, 4000, 7000, 8000, 12000, 0, 0, 11, 9734, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,       'Forsaken Seeker - In Combat - Cast Holy Smite'),
-(3732, 0, 1, 0, 14, 0, 100, 1, 300, 40, 0, 0, 0, 0, 11, 2054, 65, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Forsaken Seeker - Friendly Missing 300 Health - Cast Heal (No Repeat)'),
+(3732, 0, 0, 0, 0, 0, 100, 0, 4000, 7000, 8000, 12000, 0, 0, 11, 9734, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Forsaken Seeker - In Combat - Cast Holy Smite'),
+(3732, 0, 1, 0, 14, 0, 100, 1, 300, 40, 0, 0, 0, 0, 11, 2054, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                 'Forsaken Seeker - Friendly Missing 300 Health - Cast Heal (No Repeat)'),
 (3732, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Forsaken Seeker - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (3733, 0, 0, 0, 0, 0, 100, 0, 5000, 11000, 120000, 135000, 0, 0, 11, 7102, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,    'Forsaken Herbalist - Within 0-5 Range - Cast Contagion of Rot'),
 (3734, 0, 0, 0, 9, 0, 100, 0, 0, 0, 11000, 18000, 0, 5, 11, 6253, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Forsaken Thug - Within 0-5 Range - Cast Backhand'),
@@ -88,15 +88,15 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3750, 0, 3, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 21, 60, 0, 0, 0, 0, 0, 0, 0,                     'Foulweald Totemic - On Reset - Attack Player, conditioned'),
 --
 (3752, 0, 0, 0, 9, 0, 100, 0, 0, 0, 10000, 13000, 0, 5, 11, 6595, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Xavian Rogue - Within 0-5 Range - Cast Exploit Weakness'),
-(3752, 0, 1, 0, 2, 0, 100, 0, 0, 15, 0, 0, 0, 0, 11, 6925, 64, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Xavian Rogue - Between 0-15% Health - Cast Gift of the Xavian (No Repeat)'),
+(3752, 0, 1, 0, 2, 0, 100, 0, 0, 15, 0, 0, 0, 0, 11, 6925, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Xavian Rogue - Between 0-15% Health - Cast Gift of the Xavian (No Repeat)'),
 (3754, 0, 0, 0, 0, 0, 100, 0, 7100, 9400, 23900, 37400, 0, 0, 11, 5242, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Xavian Betrayer - In Combat - Cast \'Battle Shout\''),
 (3754, 0, 1, 0, 2, 0, 100, 0, 0, 15, 0, 0, 0, 0, 11, 6925, 64, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Xavian Betrayer - Between 0-15% Health - Cast Gift of the Xavian (No Repeat)'),
 (3755, 0, 0, 0, 0, 0, 100, 0, 1000, 2000, 2000, 6000, 0, 0, 11, 6223, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Xavian Felsworn - In Combat - Cast Corruption'),
-(3755, 0, 1, 0, 2, 0, 100, 0, 0, 15, 0, 0, 0, 0, 11, 6925, 64, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Xavian Felsworn - Between 0-15% Health - Cast Gift of the Xavian (No Repeat)'),
+(3755, 0, 1, 0, 2, 0, 100, 0, 0, 15, 0, 0, 0, 0, 11, 6925, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Xavian Felsworn - Between 0-15% Health - Cast Gift of the Xavian (No Repeat)'),
 (3757, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 9053, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Xavian Hellcaller - In Combat - Cast Fireball'),
-(3757, 0, 1, 0, 0, 0, 50, 0, 5000, 15000, 60000, 60000, 0, 0, 11, 5740, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,     'Xavian Hellcaller - In Combat - Cast Rain of Fire'),
+(3757, 0, 1, 0, 0, 0, 50, 0, 5000, 15000, 60000, 60000, 0, 0, 11, 5740, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,      'Xavian Hellcaller - In Combat - Cast Rain of Fire'),
 (3757, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Xavian Hellcaller - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(3757, 0, 3, 0, 2, 0, 100, 1, 0, 10, 0, 0, 0, 0, 11, 6925, 64, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Xavian Hellcaller - Between 0-10% Health - Cast Gift of the Xavian (No Repeat)'),
+(3757, 0, 3, 0, 2, 0, 100, 1, 0, 10, 0, 0, 0, 0, 11, 6925, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Xavian Hellcaller - Between 0-10% Health - Cast Gift of the Xavian (No Repeat)'),
 --
 (3758, 0, 0, 0, 9, 0, 100, 0, 0, 0, 14500, 23900, 0, 5, 11, 6942, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Felmusk Satyr - Within 0-5 Range - Cast Overwhelming Stench'),
 (3758, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Felmusk Satyr - Between 0-15% Health - Flee For Assist (No Repeat)'),
@@ -112,27 +112,27 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (3772, 0, 0, 0, 9, 0, 100, 0, 0, 0, 13900, 21500, 0, 5, 11, 18812, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Lesser Felguard - Within 0-5 Range - Cast Knockdown'),
 (3772, 0, 1, 0, 0, 0, 100, 0, 2000, 4000, 66000, 77000, 0, 0, 11, 184, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Lesser Felguard - In Combat - Cast Fire Shield II'),
-(3773, 0, 0, 0, 0, 0, 100, 0, 5000, 9000, 21000, 28000, 0, 0, 11, 1094, 96, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,     'Akkrilus - In Combat - Cast Immolate'),
+(3773, 0, 0, 0, 0, 0, 100, 0, 5000, 9000, 21000, 28000, 0, 0, 11, 1094, 32, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,     'Akkrilus - In Combat - Cast Immolate'),
 (3773, 0, 1, 0, 0, 0, 100, 0, 2000, 4000, 66000, 77000, 0, 0, 11, 184, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Akkrilus - In Combat - Cast Fire Shield II'),
 (3774, 0, 0, 0, 9, 0, 100, 0, 0, 0, 21700, 39500, 0, 10, 11, 2691, 256, 0, 0, 0, 0, 5, 30, 0, 1, 0, 0, 0, 0, 0,         'Felslayer - Within 0-10 Range - Cast Mana Burn'),
 --
 (3780, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 6867, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Shadethicket Moss Eater - On Respawn - Cast Moss Covered Hands Proc'),
 (3780, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 6871, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Shadethicket Moss Eater - On Respawn - Cast Moss Covered Feet Proc'),
-(3781, 0, 0, 0, 9, 0, 100, 0, 0, 0, 17300, 36200, 0, 30, 11, 12747, 96, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Shadethicket Wood Shaper - Within 0-30 Range - Cast Entangling Roots'),
+(3781, 0, 0, 0, 9, 0, 100, 0, 0, 0, 17300, 36200, 0, 30, 11, 12747, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Shadethicket Wood Shaper - Within 0-30 Range - Cast Entangling Roots'),
 (3782, 0, 0, 0, 0, 0, 100, 0, 5700, 8000, 16000, 39000, 0, 0, 11, 6864, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Shadethicket Stone Mover - In Combat - Cast Strength of Stone'),
-(3783, 0, 0, 0, 9, 0, 100, 0, 0, 0, 45800, 60500, 0, 30, 11, 6535, 65, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Shadethicket Raincaller - Within 0-30 Range - Cast Lightning Cloud'),
+(3783, 0, 0, 0, 9, 0, 100, 0, 0, 0, 45800, 60500, 0, 30, 11, 6535, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Shadethicket Raincaller - Within 0-30 Range - Cast Lightning Cloud'),
 (3783, 0, 1, 0, 9, 0, 100, 0, 0, 0, 3800, 13100, 0, 40, 11, 9532, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Shadethicket Raincaller - Within 0-40 Range - Cast Lightning Bolt'),
 (3784, 0, 0, 0, 0, 0, 100, 0, 6000, 9000, 24000, 31000, 0, 0, 11, 3604, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Shadethicket Bark Ripper - In Combat - Cast Tendon Rip'),
 (3789, 0, 0, 0, 0, 0, 100, 0, 10000, 15000, 21000, 34000, 0, 0, 11, 3604, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Terrowulf Fleshripper - In Combat - Cast Tendon Rip'),
 (3791, 0, 0, 0, 9, 0, 100, 0, 0, 0, 20200, 28900, 0, 20, 11, 7068, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Terrowulf Shadow Weaver - Within 0-20 Range - Cast Veil of Shadow'),
 (3792, 0, 0, 0, 0, 0, 100, 0, 1000, 1000, 30000, 45000, 0, 0, 11, 6507, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Terrowulf Packlord - In Combat - Cast Battle Roar'),
-(3792, 0, 1, 0, 0, 0, 100, 0, 6000, 11000, 3000, 13000, 0, 0, 11, 6576, 64, 0, 0, 0, 0, 6, 5, 0, 0, 0, 0, 0, 0, 0,      'Terrowulf Packlord - Within 0-5 Range - Cast Intimidating Growl'),
+(3792, 0, 1, 0, 0, 0, 100, 0, 6000, 11000, 3000, 13000, 0, 0, 11, 6576, 0, 0, 0, 0, 0, 6, 5, 0, 0, 0, 0, 0, 0, 0,       'Terrowulf Packlord - Within 0-5 Range - Cast Intimidating Growl'),
 --
 (3797, 0, 0, 0, 1, 0, 100, 0, 0, 0, 300000, 300000, 0, 0, 11, 7090, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Cenarion Protector - Out of Combat - Cast Bear Form'),
 (3797, 0, 1, 0, 0, 0, 100, 0, 9000, 20000, 19000, 34000, 0, 0, 11, 15727, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Cenarion Protector - In Combat - Cast Demoralizing Roar'),
 (3797, 0, 2, 0, 2, 0, 100, 0, 0, 50, 16100, 17400, 0, 0, 11, 1430, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Cenarion Protector - Between 0-50% Health - Cast Rejuvenation'),
 (3797, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Cenarion Protector - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(3801, 0, 0, 0, 0, 0, 100, 0, 5000, 8000, 14000, 18000, 0, 0, 11, 8399, 96, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,     'Severed Sleeper - In Combat - Cast Sleep'),
+(3801, 0, 0, 0, 0, 0, 100, 0, 5000, 8000, 14000, 18000, 0, 0, 11, 8399, 32, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,     'Severed Sleeper - In Combat - Cast Sleep'),
 (3803, 0, 0, 0, 9, 0, 100, 0, 0, 0, 22600, 39600, 0, 10, 11, 2691, 256, 0, 0, 0, 0, 5, 30, 0, 1, 0, 0, 0, 0, 0,         'Severed Keeper - Within 0-10 Range - Cast Mana Burn'),
 (3804, 0, 0, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 8218, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Forsaken Intruder - On Reset - Cast Sneak'),
 (3804, 0, 1, 0, 67, 0, 100, 0, 0, 0, 5000, 9000, 0, 5, 11, 7159, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Forsaken Intruder - Behind Target - Cast Backstab'),
@@ -154,7 +154,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3818, 0, 0, 1, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 6921, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Elder Shadowhorn Stag - On Aggro - Cast Shadowhorn Charge'),
 (3818, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Elder Shadowhorn Stag - On Aggro - Say Line 0'),
 (3819, 0, 0, 0, 9, 0, 100, 0, 0, 0, 8600, 21700, 0, 30, 11, 12023, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Wildthorn Stalker - Within 0-30 Range - Cast Web'),
-(3820, 0, 0, 0, 9, 0, 100, 0, 0, 0, 3600, 9900, 0, 30, 11, 6917, 96, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Wildthorn Venomspitter - Within 0-30 Range - Cast Venom Spit'),
+(3820, 0, 0, 0, 9, 0, 100, 0, 0, 0, 3600, 9900, 0, 30, 11, 6917, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Wildthorn Venomspitter - Within 0-30 Range - Cast Venom Spit'),
 (3821, 0, 0, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 75, 6920, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wildthorn Lurker - On Reset - Add aura Hide'),
 (3821, 0, 1, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 3616, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wildthorn Lurker - On Respawn - Cast Poison Proc'),
 (3823, 0, 0, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Ghostpaw Runner - Between 0-15% Health - Flee For Assist (No Repeat)'),
@@ -165,9 +165,9 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3833, 0, 0, 0, 0, 0, 100, 0, 13000, 29000, 31000, 36000, 0, 0, 11, 15798, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Cenarion Vindicator - In Combat - Cast Moonfire'),
 (3833, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Cenarion Vindicator - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (3834, 0, 0, 0, 9, 0, 100, 0, 0, 0, 30500, 80000, 0, 5, 11, 6909, 96, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Crazed Ancient - Within 0-5 Range - Cast Curse of Thorns'),
-(3917, 0, 0, 0, 0, 0, 100, 0, 8000, 10000, 15000, 18000, 0, 0, 11, 9672, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Befouled Water Elemental - In Combat - Cast Frostbolt'),
+(3917, 0, 0, 0, 0, 0, 100, 0, 8000, 10000, 15000, 18000, 0, 0, 11, 9672, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Befouled Water Elemental - In Combat - Cast Frostbolt'),
 (3917, 0, 1, 0, 9, 0, 100, 0, 0, 0, 17000, 38000, 0, 5, 11, 6873, 33, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Befouled Water Elemental - Within 0-5 Range - Cast Foul Chill'),
-(3919, 0, 0, 0, 9, 0, 100, 0, 0, 0, 33700, 77100, 0, 5, 11, 6909, 96, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Withered Ancient - Within 0-5 Range - Cast Curse of Thorns'),
+(3919, 0, 0, 0, 9, 0, 100, 0, 0, 0, 33700, 77100, 0, 5, 11, 6909, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Withered Ancient - Within 0-5 Range - Cast Curse of Thorns'),
 --
 (3921, 0, 0, 0, 11, 0, 100, 1, 1000, 3000, 0, 0, 0, 0, 11, 6813, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Thistlefur Ursa - On Respawn - Cast Coat of Thistlefur (No Repeat)'),
 (3921, 0, 1, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 7165, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Thistlefur Ursa - On Aggro - Cast Battle Stance'),
@@ -198,8 +198,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3926, 0, 7, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 9, 3925, 0, 15, 1, 0, 0, 0, 0,                    'Thistlefur Pathfinder - On Death - Thistlefur Avenger Say Line 0'),
 --
 (3940, 0, 0, 0, 0, 0, 100, 0, 6000, 8000, 37000, 46000, 0, 0, 11, 2767, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,       'Taneel Darkwood - In Combat - Cast Shadow Word: Pain'),
-(3940, 0, 1, 0, 2, 0, 100, 0, 0, 90, 15000, 18000, 0, 0, 11, 6077, 65, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Taneel Darkwood - Between 0-90% Health - Cast Renew'),
-(3940, 0, 2, 0, 2, 0, 100, 0, 0, 20, 20000, 30000, 0, 0, 11, 6063, 65, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Taneel Darkwood - Between 0-20% Health - Cast Heal'),
+(3940, 0, 1, 0, 2, 0, 100, 0, 0, 90, 15000, 18000, 0, 0, 11, 6077, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Taneel Darkwood - Between 0-90% Health - Cast Renew'),
+(3940, 0, 2, 0, 2, 0, 100, 0, 0, 20, 20000, 30000, 0, 0, 11, 6063, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Taneel Darkwood - Between 0-20% Health - Cast Heal'),
 (3941, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 7090, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Uthil Mooncall - On Respawn - Cast Bear Form'), -- https://www.youtube.com/watch?v=Jy__YLALZB0&t=223s
 (3941, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Uthil Mooncall - Between 0-50% Health - Set phase to 1'),
 (3941, 0, 2, 0, 9, 1, 100, 0, 0, 0, 8000, 12000, 0, 5, 11, 12161, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Uthil Mooncall - Within 0-5 Range - Cast Maul (Phase 1)'),
@@ -207,14 +207,14 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3941, 0, 4, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Uthil Mooncall - Between 0-50% Health - Set phase to 2'),
 (3941, 0, 5, 0, 2, 2, 100, 0, 0, 50, 15000, 19000, 0, 0, 11, 2091, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Uthil Mooncall - Between 0-50% Health - Cast Rejuvenation (Phase 2)'),
 (3941, 0, 6, 0, 0, 2, 100, 0, 0, 0, 20000, 26000, 0, 0, 11, 8927, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Uthil Mooncall - In Combat - Cast Moonfire (Phase 2)'),
-(3942, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 17000, 20000, 0, 0, 11, 6535, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Mavoris Cloudsbreak - In Combat - Cast Lightning Cloud'),
-(3942, 0, 1, 0, 0, 0, 100, 0, 8000, 11000, 17000, 20000, 0, 0, 11, 421, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,     'Mavoris Cloudsbreak - In Combat - Cast Chain Lightning'),
+(3942, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 17000, 20000, 0, 0, 11, 6535, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,       'Mavoris Cloudsbreak - In Combat - Cast Lightning Cloud'),
+(3942, 0, 1, 0, 0, 0, 100, 0, 8000, 11000, 17000, 20000, 0, 0, 11, 421, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,      'Mavoris Cloudsbreak - In Combat - Cast Chain Lightning'),
 --
 (3943, 0, 0, 0, 4, 0, 100, 1, 0, 0, 0, 0, 0, 0, 11, 7165, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Ruuzel - On Aggro - Cast Battle Stance'),
 (3943, 0, 1, 0, 9, 0, 100, 0, 0, 0, 10300, 20900, 0, 5, 11, 25712, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Ruuzel - Within 0-5 Range - Cast Heroic Strike'),
 (3943, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Ruuzel - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(3944, 0, 0, 0, 0, 0, 100, 0, 5000, 9000, 15000, 19000, 0, 0, 11, 15970, 96, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,    'Wrathtail Priestess - In Combat - Cast Sleep'),
-(3944, 0, 1, 0, 74, 0, 100, 0, 0, 0, 25000, 40000, 40, 40, 11, 11642, 65, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,        'Wrathtail Priestess - Friendly Between 0-40% Health - Cast Heal'),
+(3944, 0, 0, 0, 0, 0, 100, 0, 5000, 9000, 15000, 19000, 0, 0, 11, 15970, 32, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,    'Wrathtail Priestess - In Combat - Cast Sleep'),
+(3944, 0, 1, 0, 74, 0, 100, 0, 0, 0, 25000, 40000, 40, 40, 11, 11642, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Wrathtail Priestess - Friendly Between 0-40% Health - Cast Heal'),
 (3944, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Wrathtail Priestess - Between 0-15% Health - Flee For Assist'),
 (3987, 0, 0, 0, 2, 0, 100, 0, 0, 75, 22100, 32600, 0, 0, 11, 18557, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Dal Bloodclaw - Between 0-75% Health - Cast \'Drain Life\''),
 (3987, 0, 1, 0, 2, 0, 100, 0, 0, 50, 0, 0, 0, 0, 39, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Dal Bloodclaw - Between 0-50% Health - Call For Help'),
@@ -224,9 +224,9 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (4054, 0, 0, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Laughing Sister - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (4273, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 9532, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Keeper Ordanus - In Combat - Cast Lightning Bolt'),
-(4273, 0, 1, 0, 0, 0, 100, 0, 3000, 6000, 20000, 35000, 0, 0, 11, 12747, 97, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,    'Keeper Ordanus - In Combat - Cast Entangling Roots'),
+(4273, 0, 1, 0, 0, 0, 100, 0, 3000, 6000, 20000, 35000, 0, 0, 11, 12747, 33, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,    'Keeper Ordanus - In Combat - Cast Entangling Roots'),
 (4273, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Keeper Ordanus - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(4619, 0, 0, 0, 0, 0, 100, 0, 8000, 14000, 9000, 16000, 0, 0, 11, 7098, 96, 0, 0, 0, 0, 5, 10, 0, 0, 0, 0, 0, 0, 0,     'Geltharis - Within 0-10 Range - Cast Curse of Mending'),
+(4619, 0, 0, 0, 0, 0, 100, 0, 8000, 14000, 9000, 16000, 0, 0, 11, 7098, 32, 0, 0, 0, 0, 5, 10, 0, 0, 0, 0, 0, 0, 0,     'Geltharis - Within 0-10 Range - Cast Curse of Mending'),
 (4619, 0, 1, 0, 2, 0, 100, 1, 0, 20, 0, 0, 0, 0, 11, 6925, 64, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Geltharis - Between 0-20% Health - Cast Gift of the Xavian (No Repeat)'),
 (5314, 0, 0, 0, 0, 0, 100, 0, 3000, 6000, 7000, 10000, 0, 0, 11, 20667, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,       'Phantim - In Combat - Cast Corrosive Acid Breath'),
 (5314, 0, 1, 0, 0, 0, 100, 0, 7000, 9000, 10000, 10000, 0, 0, 12, 12898, 7, 300000, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Phantim - In Combat - Cast Summon Phantim Illusion'),
@@ -241,16 +241,16 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (10641, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 10022, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Branch Snapper - On Respawn - Cast Deadly Poison Proc'),
 (10641, 0, 1, 0, 0, 0, 100, 0, 7000, 10000, 12000, 17000, 0, 0, 11, 10101, 0, 0, 0, 0, 0, 21, 10, 0, 0, 0, 0, 0, 0, 0,  'Branch Snapper - Within 0-10 Range - Cast Knock Away'),
 (10642, 0, 0, 0, 0, 0, 100, 0, 5000, 8000, 12000, 15000, 0, 0, 11, 21030, 0, 0, 0, 0, 0, 5, 20, 0, 0, 0, 0, 0, 0, 0,    'Eck\'alom - Within 0-20 Range - Cast Frost Shock'),
-(10642, 0, 1, 0, 0, 0, 100, 0, 23000, 35000, 20000, 30000, 0, 0, 11, 5276, 64, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Eck\'alom - Within 0-30 Range - Cast Freeze'),
-(10643, 0, 0, 0, 0, 0, 100, 0, 9000, 15000, 180000, 185000, 0, 0, 11, 3584, 64, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,  'Mugglefin - Within 0-5 Range - Cast Volatile Infection'),
+(10642, 0, 1, 0, 0, 0, 100, 0, 23000, 35000, 20000, 30000, 0, 0, 11, 5276, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,   'Eck\'alom - Within 0-30 Range - Cast Freeze'),
+(10643, 0, 0, 0, 0, 0, 100, 0, 9000, 15000, 180000, 185000, 0, 0, 11, 3584, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,   'Mugglefin - Within 0-5 Range - Cast Volatile Infection'),
 (10643, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Mugglefin - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (10644, 0, 0, 0, 9, 0, 100, 0, 0, 0, 20000, 25000, 0, 5, 11, 3604, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Mist Howler - Within 0-5 Range - Cast Tendon Rip'),
 (10644, 0, 1, 0, 0, 0, 100, 0, 6000, 10000, 18000, 21000, 0, 0, 11, 13443, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,   'Mist Howler - Within 0-5 Range - Cast Rend'),
 (10644, 0, 2, 0, 0, 0, 100, 0, 16000, 20000, 30000, 35000, 0, 0, 11, 8715, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Mist Howler - In Combat - Cast Terrifying Howl'),
 (10647, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 9053, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Prince Raze - In Combat - Cast Fireball'),
-(10647, 0, 1, 0, 9, 0, 100, 0, 0, 0, 13000, 16000, 0, 40, 11, 16570, 65, 0, 0, 0, 0, 5, 40, 0, 0, 0, 0, 0, 0, 0,        'Prince Raze - Within 0-40 Range - Cast Charged Arcane Bolt'),
-(10647, 0, 2, 0, 106, 0, 100, 0, 0, 0, 12000, 18000, 0, 8, 11, 11969, 65, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Prince Raze - Within 0-8 Range - Cast Fire Nova'), -- https://www.youtube.com/watch?v=yNbLH40kj3A
-(10647, 0, 3, 0, 2, 0, 100, 1, 0, 10, 0, 0, 0, 0, 11, 6925, 65, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Prince Raze - Between 0-10% Health - Cast Gift of the Xavian (No Repeat)'),
+(10647, 0, 1, 0, 9, 0, 100, 0, 0, 0, 13000, 16000, 0, 40, 11, 16570, 1, 0, 0, 0, 0, 5, 40, 0, 0, 0, 0, 0, 0, 0,         'Prince Raze - Within 0-40 Range - Cast Charged Arcane Bolt'),
+(10647, 0, 2, 0, 106, 0, 100, 0, 0, 0, 12000, 18000, 0, 8, 11, 11969, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Prince Raze - Within 0-8 Range - Cast Fire Nova'), -- https://www.youtube.com/watch?v=yNbLH40kj3A
+(10647, 0, 3, 0, 2, 0, 100, 1, 0, 10, 0, 0, 0, 0, 11, 6925, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Prince Raze - Between 0-10% Health - Cast Gift of the Xavian (No Repeat)'),
 --
 (11680, 0, 0, 0, 4, 0, 15, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                         'Horde Scout - On Aggro - Say Line 0 (No Repeat)'),
 (11680, 0, 1, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 30, 60, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Horde Scout - Outside 30 Range - Start Combat Movement'),
@@ -268,7 +268,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (11683, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Warsong Shaman - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
 (11697, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 18542, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Mannoroc Lasher - On Respawn - Cast Immolate'),
-(11697, 0, 1, 0, 9, 0, 100, 0, 0, 0, 20500, 35300, 0, 40, 11, 9613, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Mannoroc Lasher - Within 0-40 Range - Cast Shadow Bolt'),
+(11697, 0, 1, 0, 9, 0, 100, 0, 0, 0, 20500, 35300, 0, 40, 11, 9613, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Mannoroc Lasher - Within 0-40 Range - Cast Shadow Bolt'),
 (12037, 0, 0, 0, 9, 0, 100, 0, 0, 0, 4000, 7000, 0, 5, 11, 17156, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Ursol lok - Within 0-5 Range - Cast Maul'),
 --
 (12474, 0, 0, 0, 9, 0, 100, 0, 0, 0, 7000, 10000, 0, 5, 11, 20666, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Emeraldon Boughguard - Within 0-5 Range - Cast Cleave'),
@@ -277,13 +277,13 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (12475, 0, 0, 0, 0, 0, 100, 0, 2000, 6000, 19000, 23000, 0, 0, 11, 20654, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Emeraldon Tree Warder - In Combat - Cast Entangling Roots'),
 (12475, 0, 1, 0, 0, 0, 100, 0, 0, 0, 5000, 9000, 0, 0, 11, 20656, 96, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,           'Emeraldon Tree Warder - In Combat - Cast Faerie Fire'),
 (12476, 0, 0, 0, 74, 0, 100, 0, 0, 0, 8000, 12000, 40, 40, 11, 20664, 32, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,        'Emeraldon Oracle - Friendly Between 0-40% Health - Cast Rejuvenation'),
-(12476, 0, 1, 0, 74, 0, 100, 0, 0, 0, 10000, 15000, 40, 40, 11, 20665, 96, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Emeraldon Oracle - Friendly Between 0-40% Health - Cast Regrowth'),
+(12476, 0, 1, 0, 74, 0, 100, 0, 0, 0, 10000, 15000, 40, 40, 11, 20665, 32, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Emeraldon Oracle - Friendly Between 0-40% Health - Cast Regrowth'),
 --
 (12676, 0, 0, 0, 9, 0, 100, 0, 0, 0, 20000, 28000, 0, 5, 11, 12097, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sharptalon - Within 0-5 Range - Cast Pierce Armor'),
 (12677, 0, 0, 0, 9, 0, 100, 0, 0, 0, 15000, 22000, 0, 5, 11, 13445, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Shadumbra - Within 0-5 Range - Cast Rend'),
 (12678, 0, 0, 0, 0, 0, 100, 0, 5000, 9000, 12000, 22000, 0, 0, 11, 10101, 0, 0, 0, 0, 0, 21, 10, 0, 0, 0, 0, 0, 0, 0,   'Ursangous - Within 0-10 Range - Cast Knock Away'), -- https://www.youtube.com/watch?v=z0hBbOoPHlc
 (12678, 0, 1, 0, 9, 0, 100, 0, 0, 0, 15900, 24300, 0, 5, 11, 13443, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Ursangous - Within 0-5 Range - Cast Rend'),
-(12759, 0, 0, 0, 0, 0, 100, 0, 5000, 8000, 14000, 22000, 0, 0, 11, 9672, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Tideress - In Combat - Cast Frostbolt'),
+(12759, 0, 0, 0, 0, 0, 100, 0, 5000, 8000, 14000, 22000, 0, 0, 11, 9672, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Tideress - In Combat - Cast Frostbolt'),
 (12759, 0, 1, 0, 9, 0, 100, 0, 0, 0, 15400, 21800, 0, 5, 11, 6873, 33, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Tideress - Within 0-5 Range - Cast Foul Chill'), -- https://www.youtube.com/watch?v=O4-dow3jcFc
 (12856, 0, 0, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 30, 60, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Ashenvale Outrunner - Outside 30 Range - Start Combat Movement'),
 (12856, 0, 1, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 5, 30, 21, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ashenvale Outrunner - Within 5-30 Range - Stop Combat Movement'),
@@ -318,7 +318,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (12897, 0, 0, 0, 9, 0, 100, 0, 0, 0, 20500, 30800, 0, 5, 11, 11977, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Silverwing Warrior - Within 0-5 Range - Cast Rend'),
 (12897, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Silverwing Warrior - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
-(17300, 0, 0, 0, 9, 0, 100, 0, 0, 0, 15700, 32500, 0, 40, 11, 9613, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Gorgannon - Within 0-40 Range - Cast Shadow Bolt'),
+(17300, 0, 0, 0, 9, 0, 100, 0, 0, 0, 15700, 32500, 0, 40, 11, 9613, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Gorgannon - Within 0-40 Range - Cast Shadow Bolt'),
 (17300, 0, 1, 0, 9, 0, 100, 0, 0, 0, 12100, 24400, 0, 5, 11, 11428, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Gorgannon - Within 0-5 Range - Cast Knockdown'),
 (17300, 0, 2, 3, 2, 0, 100, 1, 0, 50, 0, 0, 0, 0, 39, 15, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Gorgannon - Between 0-50% Health - Call For Help (No Repeat)'),
 (17300, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Gorgannon - On Call For Help - Say Line 0');
@@ -336,7 +336,26 @@ UPDATE `creature` SET `spawntimesecs` = 37800, `MovementType` = 1, `wander_dista
 UPDATE `creature_loot_template` SET `Chance` = 4 WHERE `Item` = 5366;
 
 /* Freedom to Ruul */
-UPDATE `creature_template` SET `AIName` =  'SmartAI' WHERE `entry` = 12818;
+DELETE FROM `waypoints` WHERE `entry` = 12818;
+INSERT INTO `waypoints` (`entry`, `pointid`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `point_comment`) VALUES 
+(12818, 1, 3339.1, -693.613, 162.218, NULL, 0, 'Ruul Snowhoof'),
+(12818, 2, 3343.94, -682.272, 163.039, NULL, 0, 'Ruul Snowhoof'),
+(12818, 3, 3381.5, -659.834, 162.487, NULL, 0, 'Ruul Snowhoof'),
+(12818, 4, 3398.88, -639.631, 164.475, NULL, 0, 'Ruul Snowhoof'),
+(12818, 5, 3435.28, -626.7, 169.293, NULL, 0, 'Ruul Snowhoof'),
+(12818, 6, 3448.07, -602.344, 173.647, NULL, 0, 'Ruul Snowhoof'),
+(12818, 7, 3494.7, -562.032, 181.617, NULL, 0, 'Ruul Snowhoof'),
+(12818, 8, 3495.38, -544.667, 185.993, NULL, 0, 'Ruul Snowhoof'),
+(12818, 9, 3498.32, -511.16, 188.352, NULL, 0, 'Ruul Snowhoof'),
+(12818, 10, 3495.54, -495.119, 185.284, NULL, 0, 'Ruul Snowhoof'),
+(12818, 11, 3456.1, -479.545, 170.831, NULL, 0, 'Ruul Snowhoof'),
+(12818, 12, 3431.75, -460.84, 160.697, NULL, 0, 'Ruul Snowhoof'),
+(12818, 13, 3383.33, -423.934, 148.55, NULL, 0, 'Ruul Snowhoof'),
+(12818, 14, 3310.56, -450.354, 150.207, NULL, 0, 'Ruul Snowhoof'),
+(12818, 15, 3281.33, -523.056, 155.155, NULL, 0, 'Ruul Snowhoof'),
+(12818, 16, 3236.17, -518.389, 148.701, NULL, 0, 'Ruul Snowhoof');
+
+UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` = 12818;
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` = 12818;
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
 `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
@@ -345,23 +364,72 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 -- 
 (12818, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Ruul Snowhoof - On Respawn - Set Reactstate Passive'),
 (12818, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 3, 12819, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Ruul Snowhoof - On Respawn - Morph To Creature Ruul Snowhoof Bear Form'),
-(12818, 0, 2, 3, 19, 0, 100, 0, 6482, 0, 0, 0, 0, 0, 8, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Ruul Snowhoof - On Quest \'Freedom to Ruul Taken\' - Set Reactstate Aggressive'),
-(12818, 0, 3, 4, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ruul Snowhoof - On Quest \'Freedom to Ruul Taken\' - Set Event Phase 1'),
-(12818, 0, 4, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ruul Snowhoof - On Quest \'Freedom to Ruul Taken\' - Set Run Off'),
+(12818, 0, 2, 3, 19, 0, 100, 0, 6482, 0, 0, 0, 0, 0, 64, 1, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,            'Ruul Snowhoof - On Quest Taken - Store Targetlist'),
+(12818, 0, 3, 4, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 8, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Ruul Snowhoof - On Quest Taken - Set Reactstate Aggressive'),
+(12818, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ruul Snowhoof - On Quest Taken - Set Event Phase 1'),
+(12818, 0, 5, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ruul Snowhoof - On Quest Taken - Set Run Off'),
 --
-(12818, 0, 5, 0, 1, 1, 100, 1, 100, 100, 0, 0, 0, 0, 53, 0, 12818, 0, 6482, 10000, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,  'Ruul Snowhoof - Out of Combat - Start Waypoint (Phase 1) (No Repeat)'),
-(12818, 0, 6, 0, 1, 1, 100, 1, 3100, 3100, 0, 0, 0, 0, 54, 3000, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Ruul Snowhoof - Out of Combat - Pause Waypoint (Phase 1) (No Repeat)'),
-(12818, 0, 7, 0, 1, 1, 100, 1, 3150, 3150, 0, 0, 0, 0, 1, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,         'Ruul Snowhoof - Out of Combat - Say Line 0 (Phase 1) (No Repeat)'),
-(12818, 0, 8, 0, 1, 1, 100, 513, 5000, 5000, 0, 0, 0, 0, 3, 0, 29421, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Ruul Snowhoof - Out of Combat - Morph To Model 29421 (Phase 1) (No Repeat)'),
-(12818, 0, 9, 0, 1, 1, 100, 513, 5000, 5000, 0, 0, 0, 0, 3, 12819, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Ruul Snowhoof - Out of Combat - Morph To Creature Ruul Snowhoof Bear Form (Phase 1) (No Repeat)'),
+(12818, 0, 6, 0, 1, 1, 100, 1, 100, 100, 0, 0, 0, 0, 53, 0, 12818, 0, 6482, 10000, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,  'Ruul Snowhoof - Out of Combat - Start Waypoint'),
+(12818, 0, 7, 0, 1, 1, 100, 1, 3100, 3100, 0, 0, 0, 0, 54, 3000, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Ruul Snowhoof - Out of Combat - Pause Waypoint'),
+(12818, 0, 8, 0, 1, 1, 100, 1, 3150, 3150, 0, 0, 0, 0, 1, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,         'Ruul Snowhoof - Out of Combat - Say Line 0'),
+(12818, 0, 9, 0, 1, 1, 100, 513, 5000, 5000, 0, 0, 0, 0, 3, 0, 29421, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Ruul Snowhoof - Out of Combat - Morph To Model 29421'),
+(12818, 0, 10, 0, 1, 1, 100, 513, 5000, 5000, 0, 0, 0, 0, 3, 12819, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Ruul Snowhoof - Out of Combat - Morph To Creature Ruul Snowhoof Bear Form'),
 --
-(12818, 0, 10, 0, 60, 1, 100, 1, 40000, 40000, 0, 0, 0, 0, 12, 3921, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3439.62, -616.591, 171.968, 4.30965,  'Ruul Snowhoof - On Update - Summon Creature \'Thistlefur Ursa\' (Phase 1) (No Repeat)'),
-(12818, 0, 11, 0, 60, 1, 100, 1, 44000, 44000, 0, 0, 0, 0, 12, 3922, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3439.62, -616.591, 171.968, 4.30965,  'Ruul Snowhoof - On Update - Summon Creature \'Thistlefur Totemic\' (Phase 1) (No Repeat)'),
-(12818, 0, 12, 0, 60, 1, 100, 1, 48000, 48000, 0, 0, 0, 0, 12, 3926, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3439.62, -616.591, 171.968, 4.30965,  'Ruul Snowhoof - On Update - Summon Creature \'Thistlefur Pathfinder\' (Phase 1) (No Repeat)'),
-(12818, 0, 13, 0, 60, 1, 100, 1, 90000, 90000, 0, 0, 0, 0, 12, 3921, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3495.9, -526.57, 188.322, 4.62782,  'Ruul Snowhoof - On Update - Summon Creature \'Thistlefur Ursa\' (Phase 1) (No Repeat)'),
-(12818, 0, 14, 0, 60, 1, 100, 1, 94000, 94000, 0, 0, 0, 0, 12, 3922, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3495.9, -526.57, 188.322, 4.62782,  'Ruul Snowhoof - On Update - Summon Creature \'Thistlefur Totemic\' (Phase 1) (No Repeat)'),
-(12818, 0, 15, 0, 60, 1, 100, 1, 98000, 98000, 0, 0, 0, 0, 12, 3926, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3495.9, -526.57, 188.322, 4.62782,  'Ruul Snowhoof - On Update - Summon Creature \'Thistlefur Pathfinder\' (Phase 1) (No Repeat)'),
+(12818, 0, 11, 0, 60, 1, 100, 1, 40000, 40000, 0, 0, 0, 0, 12, 3921, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3439.62, -616.591, 171.968, 4.30965, 'Ruul Snowhoof - On Update - Summon Creature Thistlefur Ursa'),
+(12818, 0, 12, 0, 60, 1, 100, 1, 44000, 44000, 0, 0, 0, 0, 12, 3922, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3439.62, -616.591, 171.968, 4.30965, 'Ruul Snowhoof - On Update - Summon Creature Thistlefur Totemic'),
+(12818, 0, 13, 0, 60, 1, 100, 1, 48000, 48000, 0, 0, 0, 0, 12, 3926, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3439.62, -616.591, 171.968, 4.30965, 'Ruul Snowhoof - On Update - Summon Creature Thistlefur Pathfinder'),
+(12818, 0, 14, 0, 60, 1, 100, 1, 90000, 90000, 0, 0, 0, 0, 12, 3921, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3495.9, -526.57, 188.322, 4.62782,   'Ruul Snowhoof - On Update - Summon Creature Thistlefur Ursa'),
+(12818, 0, 15, 0, 60, 1, 100, 1, 94000, 94000, 0, 0, 0, 0, 12, 3922, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3495.9, -526.57, 188.322, 4.62782,   'Ruul Snowhoof - On Update - Summon Creature Thistlefur Totemic'),
+(12818, 0, 16, 0, 60, 1, 100, 1, 98000, 98000, 0, 0, 0, 0, 12, 3926, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 3495.9, -526.57, 188.322, 4.62782,   'Ruul Snowhoof - On Update - Summon Creature Thistlefur Pathfinder'),
 --
-(12818, 0, 16, 17, 58, 1, 100, 1, 15, 0, 0, 0, 0, 0, 1, 1, 2000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,           'Ruul Snowhoof - On Waypoint Finished - Say Line 1 (Phase 1) (No Repeat)'),
-(12818, 0, 17, 18, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Ruul Snowhoof - On Waypoint Finished - Demorph (Phase 1) (No Repeat)'),
-(12818, 0, 18, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 26, 6482, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Ruul Snowhoof - On Waypoint Finished - Quest Complete');
+(12818, 0, 17, 18, 58, 1, 100, 1, 16, 12818, 0, 0, 0, 0, 1, 1, 2000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,       'Ruul Snowhoof - On Waypoint Finished - Say Line 1'),
+(12818, 0, 18, 19, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Ruul Snowhoof - On Waypoint Finished - Demorph'),
+(12818, 0, 19, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 15, 6482, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,         'Ruul Snowhoof - On Waypoint Finished - Quest Credit');
+
+/* Torek's Assault - fixed movement speed and added 4 second pause */
+UPDATE `smart_scripts` SET `action_param1` = 0 WHERE `entryorguid` = 1285800 AND `source_type` = 9 AND `id` = 4; 
+UPDATE `creature_template` SET `speed_run` = 0.8 WHERE `entry` IN (12858, 12859); -- was 1.14286
+
+-- formation not working for some reason, I don't understand it.
+-- when disabling the follow, the Splintertree Raiders don't move at all.
+/* DELETE FROM `creature_formations` WHERE `leaderGUID` IN (32373);
+INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES 
+(32373, 32373, 0, 0, 515, 0, 0),       -- https://www.youtube.com/watch?v=RYpuzb5uYx0
+(32373, 32380, 4, 135, 515, 0, 0),
+(32373, 32378, 4, 180, 515, 0, 0),
+(32373, 32379, 4, 225, 515, 0, 0); */
+
+UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN (12858, 12859);
+DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (12858, 12859);
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
+`event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
+`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, 
+`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
+-- 
+(12858, 0, 0, 0, 11, 0, 100, 512, 0, 0, 0, 0, 0, 0, 2, 113, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Torek - On Spawn - Set Faction'),
+(12858, 0, 1, 2, 19, 0, 100, 512, 6544, 0, 0, 0, 0, 0, 64, 1, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,          'Torek - On Quest Accept - Store Party Targetlist'),
+(12858, 0, 2, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 80, 1285800, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Torek - On Quest Accept - Run Script'),
+(12858, 0, 3, 0, 40, 0, 100, 1, 1, 12858, 0, 0, 0, 0, 54, 4000, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Torek - On Reached WP1 - Pause WP'),
+(12858, 0, 4, 0, 40, 0, 100, 1, 2, 12858, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,            'Torek - On Reached WP2 - Say Line 1'),
+(12858, 0, 5, 0, 40, 0, 100, 1, 8, 12858, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,            'Torek - On Reached WP8 - Say Line 2'),
+(12858, 0, 6, 0, 40, 0, 100, 1, 19, 12858, 0, 0, 0, 0, 107, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Torek - On Reached WP19 - Summon Group'),
+(12858, 0, 7, 8, 40, 0, 100, 1, 20, 12858, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,           'Torek - On Reached WP20 - Say Line 3'),
+(12858, 0, 8, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 15, 6544, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,          'Torek - On Reached WP20 - Complete Quest'),
+(12858, 0, 9, 10, 40, 0, 100, 1, 21, 12858, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,          'Torek - On Reached WP21 - Say Line 4'),
+(12858, 0, 10, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 54, 60000, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Torek - On Reached WP21 - Pause WP'),
+(12858, 0, 11, 12, 40, 0, 100, 512, 22, 12858, 0, 0, 0, 0, 45, 2, 2, 0, 0, 0, 0, 9, 12859, 0, 100, 0, 0, 0, 0, 0, 'Torek - On Reached WP22 - Set Data on Splintertree Raider'),
+(12858, 0, 12, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Torek - On Reached WP22 - Despawn'),
+(12858, 0, 13, 14, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 45, 2, 2, 0, 0, 0, 0, 9, 12859, 0, 200, 0, 0, 0, 0, 0,       'Torek - On Death - Set Data on Splintertree Raider'),
+(12858, 0, 14, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 6, 6544, 0, 0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 0, 0,          'Torek - On Death - Fail Quest'),
+(12858, 0, 15, 0, 9, 0, 100, 0, 0, 0, 15000, 20000, 0, 5, 11, 11977, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Torek - IC - Cast Rend'),
+(12858, 0, 16, 0, 0, 0, 100, 512, 0, 0, 20000, 30000, 0, 0, 11, 8078, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Torek - IC - Cast Thunderclap'),
+(12858, 0, 17, 0, 40, 0, 100, 512, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'On reached WP - Set Home Position'),
+--
+(12859, 0, 0, 0, 11, 0, 100, 512, 0, 0, 0, 0, 0, 0, 2, 113, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Splintertree Raider - On Spawn - Set Faction'),
+(12859, 0, 1, 2, 38, 0, 100, 512, 1, 1, 0, 0, 0, 0, 2, 83, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Splintertree Raider - On Data Set 1 1 - Set Faction'),
+(12859, 0, 2, 3, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 91, 8, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Splintertree Raider - On Data Set 1 1 - Set Bytes 1'),
+(12859, 0, 3, 4, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 8, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Splintertree Raider - On Data Set 1 1 - Set Aggresive'),
+(12859, 0, 4, 0, 61, 0, 100, 512, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 19, 12858, 0, 0, 0, 0, 0, 0, 0,         'Splintertree Raider - On Data Set 1 1 - Follow Torek'), -- should be formation instead
+(12859, 0, 5, 0, 7, 0, 100, 512, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 19, 12858, 0, 0, 0, 0, 0, 0, 0,          'Splintertree Raider - On Evade - Follow Torek'), 
+(12859, 0, 6, 0, 38, 0, 100, 512, 2, 2, 0, 0, 0, 0, 41, 1000, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Splintertree Raider - On Data Set 2 2 - Despawn'),
+(12859, 0, 7, 0, 1, 0, 100, 512, 1000, 1000, 1000, 1000, 0, 0, 101, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Splintertree Raider - OOC - Set Home Position');

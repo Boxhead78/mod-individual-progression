@@ -15,9 +15,8 @@ private:
     {
         Map const *map = sMapMgr->FindMap(mapid, 0);
         uint32 zoneId = map->GetZoneId(0, x, y, z);
-        return (zoneId == ZONE_AZUREMYST || zoneId == ZONE_BLOODMYST || zoneId == ZONE_GHOSTLANDS ||
-                zoneId == ZONE_EVERSONG || zoneId == ZONE_EXODAR || zoneId == ZONE_SILVERMOON ||
-                zoneId == ZONE_VEILED_SEA);
+        return (zoneId == AREA_AZUREMYST_ISLE || zoneId == AREA_BLOODMYST_ISLE || zoneId == AREA_GHOSTLANDS || zoneId == AREA_EVERSONG_WOODS ||
+                zoneId == AREA_THE_EXODAR || zoneId == AREA_SILVERMOON_CITY || zoneId == AREA_AMMEN_VALE || zoneId == AREA_VEILED_SEA);
     }
 
 public:
@@ -26,9 +25,10 @@ public:
     void OnPlayerLogin(Player* player) override
     {
         if (!sIndividualProgression->enabled)
-        {
             return;
-        }
+
+        if (!player || !player->IsInWorld())
+            return;
 
         if (sIndividualProgression->deathKnightStartingProgression && player->getClass() == CLASS_DEATH_KNIGHT && (int32)player->GetLevel() == sConfigMgr->GetOption<int32>("StartHeroicPlayerLevel", 55) && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression)))
         {
@@ -154,7 +154,6 @@ public:
         if (!sIndividualProgression->enabled)
         {
             return;
-        }
 
         if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC))
         {
@@ -256,24 +255,42 @@ public:
         if (!sIndividualProgression->enabled)
         {
             return;
-        }
-        // Player is still in Vanilla content - do not give XP past level 60
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC) && player->GetLevel() >= IP_LEVEL_VANILLA)
+
+        if (sIndividualProgression->isExcludedFromProgression(player))
         {
-            // Still award XP to pets - they won't be able to pass the player's level
-            Pet* pet = player->GetPet();
-            if (pet && xpSource == XPSOURCE_KILL)
-                pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
-            amount = 0;
+            if (player->GetLevel() >= sIndividualProgression->ExcludedAccountsMaxLevel)
+            {
+                // Still award XP to pets - they won't be able to pass the player's level
+                Pet* pet = player->GetPet();
+                if (pet && xpSource == XPSOURCE_KILL)
+                    pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
+
+                amount = 0;
+            }
         }
+        else
+        {
+            // Player is still in Vanilla content - do not give XP past level 60
+            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_TBC) && player->GetLevel() >= IP_LEVEL_VANILLA)
+            {
+                // Still award XP to pets - they won't be able to pass the player's level
+                Pet* pet = player->GetPet();
+                if (pet && xpSource == XPSOURCE_KILL)
+                    pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
+
+                amount = 0;
+            }
             // Player is in TBC content - do not give XP past level 70
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && player->GetLevel() >= IP_LEVEL_TBC)
-        {
-            // Still award XP to pets - they won't be able to pass the player's level
-            Pet* pet = player->GetPet();
-            if (pet && xpSource == XPSOURCE_KILL)
-                pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
-            amount = 0;
+            else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && player->GetLevel() >= IP_LEVEL_TBC)
+            {
+                // Still award XP to pets - they won't be able to pass the player's level
+                Pet* pet = player->GetPet();
+                if (pet && xpSource == XPSOURCE_KILL)
+                    pet->GivePetXP(player->GetGroup() ? amount / 2 : amount);
+
+                amount = 0;
+
+            }
         }
             // Player is in WotLK content - do not give XP past level 80
         else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_CATA_TIER_1) && player->GetLevel() >= IP_LEVEL_WOTLK)
@@ -288,16 +305,13 @@ public:
 
     static bool isAttuned(Player* player)
     {
-        if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) ||
-            (player->GetQuestStatus(NAXX40_ATTUNEMENT_2) == QUEST_STATUS_REWARDED) ||
-            (player->GetQuestStatus(NAXX40_ATTUNEMENT_3) == QUEST_STATUS_REWARDED))
-        {
-            return true;
-        }
-        else
-        {
+        if (!player || !player->IsInWorld())
             return false;
-        }
+
+        if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) || (player->GetQuestStatus(NAXX40_ATTUNEMENT_2) == QUEST_STATUS_REWARDED) || (player->GetQuestStatus(NAXX40_ATTUNEMENT_3) == QUEST_STATUS_REWARDED))
+            return true;
+        else
+            return false;
     }
 
     bool OnPlayerBeforeTeleport(Player* player, uint32 mapid, float x, float y, float z, float /*orientation*/, uint32 /*options*/, Unit* /*target*/) override
@@ -321,22 +335,31 @@ public:
         {
             return false;
         }
-        if (mapid == MAP_ONYXIAS_LAIR) // needed to prevent summoning invalid characters from inside the instance
+        if (mapid == MAP_ONYXIAS_LAIR)
         {
-			if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && !player->HasItemCount(ITEM_DRAKEFIRE_AMULET)) // Vanilla
+            if (player->GetLevel() <= IP_LEVEL_TBC) // vanilla version
             {
-                return false;
+                if (player->GetLevel() < 50)
+                    return false;
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
+                    return false;
+                if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+                    return false;
             }
-			else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && player->GetLevel() != IP_LEVEL_WOTLK) // WotLK
+			else // WotLK
             {
-                return false;
+                if (player->GetLevel() != IP_LEVEL_WOTLK)
+                    return false;
+                // if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+                //     return false;
             }
         }
         if (mapid == MAP_ZUL_GURUB)
         {
+            uint32 PLAYER_PROGRESSION = player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
             ProgressionState REQUIRED_ZG_PROGRESSION = static_cast<ProgressionState>(sIndividualProgression->RequiredZulGurubProgression);
 
-            if (!sIndividualProgression->hasPassedProgression(player, REQUIRED_ZG_PROGRESSION))
+            if (PLAYER_PROGRESSION < REQUIRED_ZG_PROGRESSION)
             {
                 return false;
             }
@@ -407,6 +430,73 @@ public:
         if (mapid == MAP_NAXXRAMAS && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ))
         {
             return false;
+        }
+        if (mapid == MAP_MAGISTERS_TERRACE && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
+        {
+            ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_4);
+            return false;
+        }
+        if (mapid == MAP_THE_SUNWELL && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4))
+        {
+            ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_4);
+            return false;
+        }
+        if (mapid == MAP_TEMPEST_KEEP)
+        {
+            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_1))
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_1);
+                return false;
+            }
+			else if (!player->HasItemCount(ITEM_TEMPEST_KEY))
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("You must possess the Tempest Key to enter The Eye.");
+                return false;
+            }
+			else if (player->GetQuestStatus(TRIAL_MAGTHERIDON) != QUEST_STATUS_REWARDED)
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("You must complete the quest Trial of the Naaru: Magtheridon to enter The Eye.");
+                return false;
+            }
+        }
+        if (mapid == MAP_COILFANG_SERPENTSHRINE_CAVERN)
+        {
+            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_1))
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_1);
+                return false;
+            }
+			else if (player->GetQuestStatus(CUDGEL_OF_KARDESH) != QUEST_STATUS_REWARDED)
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("You must complete the quest The Cudgel of Kar\'desh to enter Serpentshrine Reservoir.");
+                return false;
+            }
+        }
+        if (mapid == MAP_THE_BATTLE_FOR_MOUNT_HYJAL)
+        {
+            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_2))
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_2);
+                return false;
+            }
+			else if (player->GetQuestStatus(VIALS_OF_ETERNITY) != QUEST_STATUS_REWARDED)
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("You must complete the quest The Vials of Eternity to enter the Battle of Mount Hyjal.");
+                return false;
+            }
+        }
+        if (mapid == MAP_BLACK_TEMPLE)
+        {
+            if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_2))
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_2);
+                return false;
+            }
+			else if (!player->HasItemCount(ITEM_MEDALLION_OF_KARABOR) && !player->HasItemCount(ITEM_BLESSED_MEDALLION_OF_KARABOR))
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("You must possess the Medallion of Karabor to enter the Black Temple.");
+                return false;
+            }
         }
 
         InstanceTemplate const* instanceTemplate = sObjectMgr->GetInstanceTemplate(mapid);
@@ -507,8 +597,8 @@ public:
         if (!sIndividualProgression->enabled)
         {
             return;
-        }
-        switch (quest->GetQuestId())
+
+        if (sIndividualProgression->questMoneyAtLevelCap)
         {
             case BANG_A_GONG:
                 if (!sIndividualProgression->disableDefaultProgression)
@@ -581,6 +671,9 @@ public:
 
     void OnPlayerCreatureKill(Player* killer, Creature* killed) override
     {
+        if (!killed || !killer || !killer->IsInWorld())
+            return;
+
         switch (killed->GetEntry())
         {
             case RHAHK_ZOR:
@@ -611,13 +704,12 @@ public:
             sIndividualProgression->checkKillProgression(killer, killed);
             Group* group = killer->GetGroup();
             if (!group)
-            {
                 return;
-            }
+
             for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
             {
                 Player* member = itr->GetSource();
-                if (!member)
+                if (!member || sIndividualProgression->isExcludedFromProgression(member))
                     continue;
 
                 if (killer->IsAtLootRewardDistance(member))
@@ -632,11 +724,31 @@ public:
             return true;
         if (chance < roll)
             return false;
+
         return true;
     }
 
     void OnPlayerUpdateArea(Player* player, uint32 /*oldArea*/, uint32 newArea) override
     {
+        if (!player || !player->IsInWorld() || !newArea)
+            return;
+
+        uint32 mapid = player->GetMap()->GetId();
+
+        if (mapid && mapid == MAP_OUTLAND) // prevent entering Sun's Reach Harbor in Quel'Danas without proper progression
+        {
+            if (!sIndividualProgression->isExcludedFromProgression(player) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_4) && newArea == 4087) // Sun's Reach Harbor
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_TBC_TIER_4);
+
+                TeamId teamId = player->GetTeamId(true);
+                if (teamId == TEAM_ALLIANCE)
+                    player->TeleportTo(0, 2270.32f, -5341.56f, 87, 1.34946f); // Light's Hope Chapel
+                else // Horde
+                    player->TeleportTo(530, 9373.69f, -7168.46f, 9.17572f, 1.04876f); // Eversong Woods
+            }
+        }
+
         sIndividualProgression->checkIPPhasing(player, newArea);
 
         // Boxhead Custom
@@ -694,6 +806,9 @@ public:
 
     bool CanAccountCreateCharacter(uint32 accountId, uint8 charRace, uint8 charClass) override
     {
+        if (!accountId || !charRace || !charClass)
+            return false;
+
         if ((!sIndividualProgression->enabled) ||
             (charRace != RACE_DRAENEI && charRace != RACE_BLOODELF && charRace != RACE_GOBLIN && charRace != RACE_WORGEN && charClass != CLASS_DEATH_KNIGHT) ||
             (!sIndividualProgression->tbcRacesProgressionLevel && !sIndividualProgression->deathKnightProgressionLevel))
@@ -706,9 +821,7 @@ public:
             if (sIndividualProgression->tbcRacesProgressionLevel)
             {
                 if (highestProgression < sIndividualProgression->tbcRacesProgressionLevel)
-                {
                     return false;
-                }
             }
         }
         if (charRace == RACE_GOBLIN || charRace == RACE_WORGEN)
@@ -724,9 +837,7 @@ public:
         if (charClass == CLASS_DEATH_KNIGHT && sIndividualProgression->deathKnightProgressionLevel)
         {
             if (highestProgression < sIndividualProgression->deathKnightProgressionLevel)
-            {
                 return false;
-            }
         }
         return true;
     }
@@ -810,9 +921,7 @@ public:
                 return;
         }
         if (spellInfo->Id == SPELL_RUNE_TAP || spellInfo->Id == SPELL_LIFE_STEAL || spellInfo->Id == SPELL_CANNIBALISE)
-        {
             return;
-        }
 
         // No progression healing nerf in BGs/Arenas
         if (healer->GetMap()->IsBattlegroundOrArena())
@@ -876,7 +985,6 @@ public:
                 spellInfo->Effects[j].ApplyAuraName == SPELL_AURA_PERIODIC_HEAL)
             {
                 return;
-            }
         }
 
         // No progression damage nerf in BGs/Arenas

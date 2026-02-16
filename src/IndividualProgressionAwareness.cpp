@@ -14,11 +14,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled)
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -40,20 +42,14 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster())
-            {
                 return true;
-            }
             
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
             
-            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR))
-            {
-                return sIndividualProgression->isBeforeProgression(target, PROGRESSION_AQ_WAR);
-            }
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_AQ) && !sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR))
+                return true;
             else
-            {
-                return sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_AQ);
-            }
+                return false;
         }
     };
 
@@ -75,20 +71,14 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster())
-            {
                 return true;
-            }
             
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
             
-            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40))
-            {
-                return sIndividualProgression->isBeforeProgression(target, PROGRESSION_NAXX40);
-            }
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ) && !sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40))
+                return true;
             else
-            {
-                return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ);
-            }
+                return false;
         }
     };
 
@@ -110,11 +100,14 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled)
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ);
+            
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -135,12 +128,14 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
-            {
+            if (player->IsGameMaster())
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->isBeforeProgression(target, PROGRESSION_PRE_TBC);
+            if (sIndividualProgression->isBeforeProgression(target, PROGRESSION_PRE_TBC))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -162,11 +157,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled)
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_TBC);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_TBC))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -188,11 +185,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled)
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_4);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_4))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -214,89 +213,19 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled)
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_5);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_5))
+                return true;
+            else
+                return false;
         }
     };
 
     GameObjectAI* GetAI(GameObject* object) const override
     {
         return new gobject_ipp_wotlkAI(object);
-    }
-};
-
-class gobject_ipp_pvp_closed : public GameObjectScript
-{
-public:
-    gobject_ipp_pvp_closed() : GameObjectScript("gobject_ipp_pvp_closed") { }
-
-    struct gobject_ipp_pvp_closedAI: GameObjectAI
-    {
-        explicit gobject_ipp_pvp_closedAI(GameObject* object) : GameObjectAI(object) { };
-
-        bool CanBeSeen(Player const* player) override
-        {
-            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-			uint32 PVP_RANK6_QUEST = 66106;
-			
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || target->GetSession()->IsBot())
-            {
-                return false;
-            }
-			
-            if (target->GetQuestStatus(PVP_RANK6_QUEST) == QUEST_STATUS_REWARDED)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-    };
-
-    GameObjectAI* GetAI(GameObject* object) const override
-    {
-        return new gobject_ipp_pvp_closedAI(object);
-    }
-};
-
-class gobject_ipp_pvp_open : public GameObjectScript
-{
-public:
-    gobject_ipp_pvp_open() : GameObjectScript("gobject_ipp_pvp_open") { }
-
-    struct gobject_ipp_pvp_openAI: GameObjectAI
-    {
-        explicit gobject_ipp_pvp_openAI(GameObject* object) : GameObjectAI(object) { };
-
-        bool CanBeSeen(Player const* player) override
-        {
-            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-			uint32 PVP_RANK6_QUEST = 66106;
-			
-            if (player->IsGameMaster() || !sIndividualProgression->enabled || target->GetSession()->IsBot())
-            {
-                return true;
-            }
-			
-            if (target->GetQuestStatus(PVP_RANK6_QUEST) == QUEST_STATUS_REWARDED)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    };
-
-    GameObjectAI* GetAI(GameObject* object) const override
-    {
-        return new gobject_ipp_pvp_openAI(object);
     }
 };
 
@@ -331,11 +260,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -376,20 +307,14 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
 			
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
 			
-            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_AQ))
-            {
-                return sIndividualProgression->isBeforeProgression(target, PROGRESSION_PRE_AQ);
-            }
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR) && !sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_AQ))
+                return true;
             else
-            {
-                return sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR);
-            }			
+                return false;
         }
     };
 
@@ -430,17 +355,48 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR))
+                return true;
+            else
+                return false;
         }
     };
 
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_ipp_aqAI(creature);
+    }
+};
+
+class npc_ipp_aqwewar : public CreatureScript
+{
+public:
+    npc_ipp_aqwewar() : CreatureScript("npc_ipp_aqwewar") { }
+
+    struct npc_ipp_aqwewarAI: ScriptedAI
+    {
+        explicit npc_ipp_aqwewarAI(Creature* creature) : ScriptedAI(creature) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster())
+                return true;
+            
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR) && !sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR))
+                return true;
+            else
+                return false;
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_aqwewarAI(creature);
     }
 };
 
@@ -456,22 +412,14 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster())
-            {
                 return true;
-            }
             
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
             
-            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR))
-            {
-                return false;
-            }
-            else if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_AQ))
-            {
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_AQ) && !sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ_WAR))
                 return true;
-            }
-
-            return false;
+            else
+                return false;
         }
     };
 
@@ -512,20 +460,14 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster())
-            {
                 return true;
-            }
 			
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
 			
-            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40))
-            {
-                return sIndividualProgression->isBeforeProgression(target, PROGRESSION_NAXX40);
-            }
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ) && !sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40))
+                return true;
             else
-            {
-                return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ);
-            }			
+                return false;
         }
     };
 
@@ -566,11 +508,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->isBeforeProgression(target, PROGRESSION_AQ);
+            if (sIndividualProgression->isBeforeProgression(target, PROGRESSION_AQ))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -611,11 +555,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -656,11 +602,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());            
-            return sIndividualProgression->isBeforeProgression(target,PROGRESSION_PRE_TBC);
+            if (sIndividualProgression->isBeforeProgression(target,PROGRESSION_PRE_TBC))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -701,11 +649,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_TBC);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_PRE_TBC))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -746,11 +696,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->isBeforeProgression(target,PROGRESSION_TBC_TIER_3);
+            if (sIndividualProgression->isBeforeProgression(target,PROGRESSION_TBC_TIER_3))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -791,11 +743,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_3);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_3))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -836,11 +790,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->isBeforeProgression(target, PROGRESSION_TBC_TIER_5);
+            if (sIndividualProgression->isBeforeProgression(target, PROGRESSION_TBC_TIER_5))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -881,11 +837,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_5);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_TBC_TIER_5))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -926,11 +884,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_1);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_1))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -971,11 +931,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_2);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_2))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -1016,11 +978,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_3);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_3))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -1061,15 +1025,13 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
-            if (sIndividualProgression->earlyDungeonSet2)
-            {
-                return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
-            return sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR);
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_BLACKWING_LAIR))
+                return true;
+            else
+                return false;
         }
     };
 
@@ -1574,9 +1536,8 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
             return !sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5);
         }
@@ -1619,9 +1580,8 @@ public:
         bool CanBeSeen(Player const* player) override
         {
             if (player->IsGameMaster() || !sIndividualProgression->enabled || me->IsInCombat())
-            {
                 return true;
-            }
+
             Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
             return sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5);
         }
@@ -1644,11 +1604,10 @@ void AddSC_mod_individual_progression_awareness()
     new gobject_ipp_tbc();
     new gobject_ipp_tbc_t4();         // Shattered Sun
     new gobject_ipp_wotlk();
-    new gobject_ipp_pvp_closed();     // pvp officer doors
-    new gobject_ipp_pvp_open();       // pvp officer doors
     new npc_ipp_preaq();              // Cenarion Hold NPCs
     new npc_ipp_we();                 // War Effort NPCs in cities
 	new npc_ipp_aq();
+    new npc_ipp_aqwewar();            // only visible during AQ war effort and AQ war
     new npc_ipp_aqwar();              // only visible during AQ war
     new npc_ipp_si();                 // Scourge Invasion
     new npc_ipp_pre_naxx40();         // Scourge Invasion

@@ -1,198 +1,8 @@
-/* Correct quest log text for SSC attunement quest "The Cudgel of Kar'desh" */
-UPDATE `quest_template` SET `QuestCompletionLog` = 'Return to Skar\'this the Heretic in the heroic Slave Pens of Coilfang Reservoir.' WHERE `ID` = 10901;
-
-
-/* fix recipe loot drops */
-
--- remove unused reference loot tables
-DELETE FROM `reference_loot_template` WHERE `Entry` BETWEEN 34054 AND 34062;
-
--- remove unused conditions
-DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 1 AND `SourceEntry` IN (30282, 30283, 30305, 30306, 30307, 30308, 30323, 30324, 30321, 30322, 30301, 30302, 30303, 30304, 30280, 30281);
-
--- remove T5 recipes reference loot table from bosses that shouldn't have it.
-DELETE FROM `creature_loot_template` WHERE `Reference` = 34052 AND `Entry` IN (18805, 19516, 19622, 21212, 21213, 21214, 21215, 21216, 21217);
-
--- remove T5 recipes from trash creatures, this is now done with a reference loot table.
-DELETE FROM `creature_loot_template` WHERE `item` IN (30282, 30283, 30305, 30306, 30307, 30308, 30323, 30324, 30321, 30322, 30301, 30302, 30303, 30304, 30280, 30281);
-
--- remove epic loot from trash mobs in SSC, this is now done with a reference loot table.
-DELETE FROM `creature_loot_template` WHERE `item` IN (30021, 30022, 30023, 30025, 30027, 30620);
-
--- add reference loot table to trash creatures
-DELETE FROM `creature_loot_template` WHERE `Item` IN (34052, 36098);
-INSERT INTO `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) VALUES 
---
-(20031, 34052, 34052, 1.768, 0, 1, 1, 1, 1, 'T5 - Recipes'), --  The Eye
-(20032, 34052, 34052, 1.822, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20033, 34052, 34052, 1.83, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20034, 34052, 34052, 1.802, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20035, 34052, 34052, 1.94, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20036, 34052, 34052, 1.673, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20037, 34052, 34052, 1.953, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20039, 34052, 34052, 1.236, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20040, 34052, 34052, 2.475, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20041, 34052, 34052, 2.701, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20042, 34052, 34052, 1.655, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20043, 34052, 34052, 0.779, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20044, 34052, 34052, 0.788, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20045, 34052, 34052, 1.382, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20046, 34052, 34052, 1.603, 0, 1, 1, 1, 1, 'T5 - Recipes'),
--- (20047, 34052, 34052, 1.882, 0, 1, 1, 1, 1, 'T5 - Recipes'), -- creature 20047 uses 20032 instead of having it's own loot template
-(20048, 34052, 34052, 1.877, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20049, 34052, 34052, 1.881, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20050, 34052, 34052, 1.833, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(20052, 34052, 34052, 1.784, 0, 1, 1, 1, 1, 'T5 - Recipes'),
---
-(21218, 34052, 34052, 1.46, 0, 1, 1, 1, 1, 'T5 - Recipes'), -- SSC
-(21220, 34052, 34052, 1.695, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21221, 34052, 34052, 1.338, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21224, 34052, 34052, 1.733, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21225, 34052, 34052, 1.387, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21226, 34052, 34052, 1.358, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21227, 34052, 34052, 1.1, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21228, 34052, 34052, 1.346, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21229, 34052, 34052, 1.96, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21230, 34052, 34052, 2.219, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21231, 34052, 34052, 1.84, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21232, 34052, 34052, 1.726, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21246, 34052, 34052, 7.62, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21251, 34052, 34052, 5.509, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21263, 34052, 34052, 0.1, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21298, 34052, 34052, 1.586, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21299, 34052, 34052, 1.489, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21301, 34052, 34052, 1.69, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21339, 34052, 34052, 1.533, 0, 1, 1, 1, 1, 'T5 - Recipes'),
-(21863, 34052, 34052, 0.532, 0, 1, 1, 1, 1, 'T5 - Recipes'),
---
-(21218, 36098, 36098, 2.224, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21220, 36098, 36098, 2.205, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21221, 36098, 36098, 2.483, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21224, 36098, 36098, 1.691, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21225, 36098, 36098, 1.945, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21226, 36098, 36098, 2.094, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21227, 36098, 36098, 1.767, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21228, 36098, 36098, 2.178, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21229, 36098, 36098, 2.839, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21230, 36098, 36098, 2.889, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21231, 36098, 36098, 2.971, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21232, 36098, 36098, 2.707, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21246, 36098, 36098, 9.105, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21251, 36098, 36098, 8.705, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21263, 36098, 36098, 0.212, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21298, 36098, 36098, 2.242, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21299, 36098, 36098, 2.6, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21301, 36098, 36098, 2.196, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21339, 36098, 36098, 2.47, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items'),
-(21863, 36098, 36098, 1.148, 0, 1, 1, 1, 1, 'SSC - Trash loot - Items');
-
--- fix epic loot table chance for Tempest Keep: The Eye, was incorrectly set to 10% for ALL trash mobs
-UPDATE `creature_loot_template` SET `Chance` = 2.656 WHERE `Reference` = 55500 AND `Entry` = 20031;
-UPDATE `creature_loot_template` SET `Chance` = 2.838 WHERE `Reference` = 55500 AND `Entry` = 20032;
-UPDATE `creature_loot_template` SET `Chance` = 2.767 WHERE `Reference` = 55500 AND `Entry` = 20033;
-UPDATE `creature_loot_template` SET `Chance` = 2.781 WHERE `Reference` = 55500 AND `Entry` = 20034;
-UPDATE `creature_loot_template` SET `Chance` = 2.901 WHERE `Reference` = 55500 AND `Entry` = 20035;
-UPDATE `creature_loot_template` SET `Chance` = 2.538 WHERE `Reference` = 55500 AND `Entry` = 20036;
-UPDATE `creature_loot_template` SET `Chance` = 2.61  WHERE `Reference` = 55500 AND `Entry` = 20037;
-UPDATE `creature_loot_template` SET `Chance` = 1.793 WHERE `Reference` = 55500 AND `Entry` = 20039;
-UPDATE `creature_loot_template` SET `Chance` = 4.037 WHERE `Reference` = 55500 AND `Entry` = 20040;
-UPDATE `creature_loot_template` SET `Chance` = 4.11  WHERE `Reference` = 55500 AND `Entry` = 20041;
-UPDATE `creature_loot_template` SET `Chance` = 2.555 WHERE `Reference` = 55500 AND `Entry` = 20042;
-UPDATE `creature_loot_template` SET `Chance` = 1.227 WHERE `Reference` = 55500 AND `Entry` = 20043;
-UPDATE `creature_loot_template` SET `Chance` = 1.222 WHERE `Reference` = 55500 AND `Entry` = 20044;
-UPDATE `creature_loot_template` SET `Chance` = 2.607 WHERE `Reference` = 55500 AND `Entry` = 20045;
-UPDATE `creature_loot_template` SET `Chance` = 2.916 WHERE `Reference` = 55500 AND `Entry` = 20046;
--- UPDATE `creature_loot_template` SET `Chance` = 2.756 WHERE `Reference` = 55500 AND `Entry` = 20047; -- creature 20047 uses 20032 instead of having it's own loot template
-UPDATE `creature_loot_template` SET `Chance` = 2.848 WHERE `Reference` = 55500 AND `Entry` = 20048;
-UPDATE `creature_loot_template` SET `Chance` = 2.929 WHERE `Reference` = 55500 AND `Entry` = 20049;
-UPDATE `creature_loot_template` SET `Chance` = 2.801 WHERE `Reference` = 55500 AND `Entry` = 20050;
-UPDATE `creature_loot_template` SET `Chance` = 2.913 WHERE `Reference` = 55500 AND `Entry` = 20052;
-
--- fix boss loot tables
-DELETE FROM `creature_loot_template` WHERE `Entry` IN (18805, 19516, 19622, 21212, 21213, 21214, 21215, 21216, 21217);
-INSERT INTO `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) VALUES
---
-(18805, 21877, 0, 18, 0, 1, 1, 3, 3,      'High Astromancer Solarian - Netherweave Cloth'),
-(18805, 29434, 0, 100, 0, 1, 0, 2, 2,     'High Astromancer Solarian - Badge of Justice'),
-(18805, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'High Astromancer Solarian - ReferenceTable - Formula, Plans, Schematics'),
-(18805, 36005, 36005, 100, 0, 1, 1, 1, 1, 'High Astromancer Solarian - ReferenceTable - Epic Items (Group 1)'),
-(18805, 36006, 36006, 100, 0, 1, 1, 1, 1, 'High Astromancer Solarian - ReferenceTable - Epic Items (Group 2)'),
-(18805, 36007, 36007, 100, 0, 1, 1, 1, 1, 'High Astromancer Solarian - ReferenceTable - Epic Items (Group 3)'),
---
-(19516, 29434, 0, 100, 0, 1, 0, 2, 2,     'Void Reaver - Badge of Justice'),
-(19516, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Void Reaver - ReferenceTable - Formula, Plans, Schematics'),
-(19516, 36003, 36003, 100, 0, 1, 1, 1, 1, 'Void Reaver - ReferenceTable - Epic Items (Group 1)'),
-(19516, 36004, 36004, 100, 0, 1, 1, 2, 2, 'Void Reaver - ReferenceTable - Epic Items (Tokens)'),
---
-(19622, 21877, 0, 18, 0, 1, 1, 3, 3,      'Kael\'thas Sunstrider - Netherweave Cloth'),
-(19622, 29434, 0, 100, 0, 1, 0, 3, 3,     'Kael\'thas Sunstrider - Badge of Justice'),
-(19622, 29905, 0, 100, 1, 1, 0, 1, 1,     'Kael\'thas Sunstrider - Kael\'s Vial Remnant'),
-(19622, 30183, 0, 100, 0, 1, 0, 2, 2,     'Kael\'thas Sunstrider - Nether Vortex'),
-(19622, 32405, 0, 100, 0, 1, 0, 1, 1,     'Kael\'thas Sunstrider - Verdant Sphere'),
-(19622, 32458, 0, 2, 0, 1, 0, 1, 1,       'Kael\'thas Sunstrider - Ashes of Al\'ar'),
-(19622, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Kael\'thas Sunstrider - ReferenceTable - Formula, Plans, Schematics'),
-(19622, 36008, 36008, 100, 0, 1, 1, 1, 1, 'Kael\'thas Sunstrider - ReferenceTable - Epic Items (Group 1)'),
-(19622, 36009, 36009, 100, 0, 1, 1, 1, 1, 'Kael\'thas Sunstrider - ReferenceTable - Epic Items (Group 2)'),
-(19622, 36010, 36010, 100, 0, 1, 1, 2, 2, 'Kael\'thas Sunstrider - ReferenceTable - Epic Items (Tokens)'),
---
-(21212, 21877, 0, 18, 0, 1, 1, 3, 3,      'Lady Vashj - Netherweave Cloth'),
-(21212, 29434, 0, 100, 0, 1, 0, 3, 3,     'Lady Vashj - Badge of Justice'),
-(21212, 29906, 0, 100, 1, 1, 0, 1, 1,     'Lady Vashj - Vashj\'s Vial Remnant'),
-(21212, 30183, 0, 100, 0, 1, 0, 2, 2,     'Lady Vashj - Nether Vortex'),
-(21212, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Lady Vashj - ReferenceTable - Formula, Plans, Schematics'),
-(21212, 36024, 36024, 100, 0, 1, 1, 1, 1, 'Lady Vashj - ReferenceTable - Epic Items (Group 1)'),
-(21212, 36025, 36025, 100, 0, 1, 1, 1, 1, 'Lady Vashj - ReferenceTable - Epic Items (Group 2)'),
-(21212, 36026, 36026, 100, 0, 1, 1, 2, 2, 'Lady Vashj - ReferenceTable - Epic Items (Tokens)'),
---
-(21213, 21877, 0, 18, 0, 1, 1, 3, 3,      'Morogrim Tidewalker - Netherweave Cloth'),
-(21213, 29434, 0, 100, 0, 1, 0, 2, 2,     'Morogrim Tidewalker - Badge of Justice'),
-(21213, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Morogrim Tidewalker - ReferenceTable - Formula, Plans, Schematics'),
-(21213, 36017, 36017, 100, 0, 1, 1, 1, 1, 'Morogrim Tidewalker - ReferenceTable - Epic Items (Group 1)'),
-(21213, 36018, 36018, 100, 0, 1, 1, 1, 1, 'Morogrim Tidewalker - ReferenceTable - Epic Items (Group 2)'),
-(21213, 36019, 36019, 100, 0, 1, 1, 1, 1, 'Morogrim Tidewalker - ReferenceTable - Epic Items (Group 3)'),
---
-(21214, 21877, 0, 18, 0, 1, 1, 3, 3,      'Fathom-Lord Karathress - Netherweave Cloth'),
-(21214, 29434, 0, 100, 0, 1, 0, 2, 2,     'Fathom-Lord Karathress - Badge of Justice'),
-(21214, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Fathom-Lord Karathress - ReferenceTable - Formula, Plans, Schematics'),
-(21214, 36022, 36022, 100, 0, 1, 1, 1, 1, 'Fathom-Lord Karathress - ReferenceTable - Epic Items (Group 1)'),
-(21214, 36023, 36023, 100, 0, 1, 1, 2, 2, 'Fathom-Lord Karathress - ReferenceTable - Epic Items (Tokens)'),
---
-(21215, 21877, 0, 18, 0, 1, 1, 3, 3,      'Leotheras the Blind - Netherweave Cloth'),
-(21215, 29434, 0, 100, 0, 1, 0, 2, 2,     'Leotheras the Blind - Badge of Justice'),
-(21215, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Leotheras the Blind - ReferenceTable - Formula, Plans, Schematics'),
-(21215, 36020, 36020, 100, 0, 1, 1, 1, 1, 'Leotheras the Blind - ReferenceTable - Epic Items (Group 1)'),
-(21215, 36021, 36021, 100, 0, 1, 1, 2, 2, 'Leotheras the Blind - ReferenceTable - Epic Items (Tokens)'),
---
-(21216, 29434, 0, 100, 0, 1, 0, 2, 2,     'Hydross the Unstable - Badge of Justice'),
-(21216, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'Hydross the Unstable - ReferenceTable - Formula, Plans, Schematics'),
-(21216, 36011, 36011, 100, 0, 1, 1, 1, 1, 'Hydross the Unstable - ReferenceTable - Epic Items (Group 1)'),
-(21216, 36012, 36012, 100, 0, 1, 1, 1, 1, 'Hydross the Unstable - ReferenceTable - Epic Items (Group 2)'),
-(21216, 36013, 36013, 100, 0, 1, 1, 1, 1, 'Hydross the Unstable - ReferenceTable - Epic Items (Group 3)'),
---
-(21217, 29434, 0, 100, 0, 1, 0, 2, 2,     'The Lurker Below - Badge of Justice'),
-(21217, 50501, 50501, 0.2, 0, 1, 1, 1, 1, 'The Lurker Below - ReferenceTable - Formula, Plans, Schematics'),
-(21217, 36014, 36014, 100, 0, 1, 1, 1, 1, 'The Lurker Below - ReferenceTable - Epic Items (Group 1)'),
-(21217, 36015, 36015, 100, 0, 1, 1, 1, 1, 'The Lurker Below - ReferenceTable - Epic Items (Group 2)'),
-(21217, 36016, 36016, 100, 0, 1, 1, 1, 1, 'The Lurker Below - ReferenceTable - Epic Items (Group 3)');
-
--- hide Badge of Justice drops until TBC tier 5
-DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 1 AND `SourceEntry` = 29434 AND `ConditionTypeOrReference` = 8 AND `SourceGroup` IN (18805, 19516, 19622, 21212, 21213, 21214, 21215, 21216, 21217);
-INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, 
-`ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES 
---
-(1, 18805, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 19516, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 19622, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 21212, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 21213, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 21214, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 21215, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 21216, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4'),
-(1, 21217, 29434, 0, 0, 8, 0, 66012, 0, 0, 0, 0, 0, '', 'Badge of Justice will only drop if the player has completed PROGRESSION_TBC_TIER_4');
-
--- fix reference loot tables
-DELETE FROM `reference_loot_template` WHERE `Entry` IN (34052, 36098, 50501);
+DELETE FROM `reference_loot_template` WHERE `Entry` IN (34052, 36098, 36196, 36197, 36198, 36199, 50501);
 DELETE FROM `reference_loot_template` WHERE `Entry` BETWEEN 36003 AND 36026;
+DELETE FROM `reference_loot_template` WHERE `Entry` BETWEEN 36101 AND 36111; -- Hyjal
+DELETE FROM `reference_loot_template` WHERE `Entry` BETWEEN 36121 AND 36139; -- Black Temple
+
 INSERT INTO `reference_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) VALUES
 --
 (34052, 30280, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Belt of Blasting'),
@@ -353,6 +163,220 @@ INSERT INTO `reference_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `
 (36098, 30025, 0, 0, 0, 1, 1, 1, 1, 'Serpentshrine Shuriken'),
 (36098, 30027, 0, 0, 0, 1, 1, 1, 1, 'Boots of Courage Unending'),
 (36098, 30620, 0, 0, 0, 1, 1, 1, 1, 'Spyglass of the Hidden Fleet'),
+--
+(36101, 30868, 0, 0, 0, 1, 1, 1, 1, 'Rejuvenating Bracers'),
+(36101, 30869, 0, 0, 0, 1, 1, 1, 1, 'Howling Wind Bracers'),
+(36101, 30870, 0, 0, 0, 1, 1, 1, 1, 'Cuffs of Devastation'),
+(36101, 30871, 0, 0, 0, 1, 1, 1, 1, 'Bracers of Martyrdom'),
+(36101, 30872, 0, 0, 0, 1, 1, 1, 1, 'Chronicle of Dark Secrets'),
+(36101, 30873, 0, 0, 0, 1, 1, 1, 1, 'Stillwater Boots'),
+--
+(36102, 30861, 0, 0, 0, 1, 1, 1, 1, 'Furious Shackles'),
+(36102, 30862, 0, 0, 0, 1, 1, 1, 1, 'Blessed Adamantite Bracers'),
+(36102, 30863, 0, 0, 0, 1, 1, 1, 1, 'Deadly Cuffs'),
+(36102, 30864, 0, 0, 0, 1, 1, 1, 1, 'Bracers of the Pathfinder'),
+(36102, 30865, 0, 0, 0, 1, 1, 1, 1, 'Tracker\'s Blade'),
+(36102, 30866, 0, 0, 0, 1, 1, 1, 1, 'Blood-stained Pauldrons'),
+--
+(36103, 30874, 0, 0, 0, 1, 1, 1, 1, 'The Unbreakable Will'),
+(36103, 30883, 0, 0, 0, 1, 1, 1, 1, 'Pillar of Ferocity'),
+(36103, 30884, 0, 0, 0, 1, 1, 1, 1, 'Hatefury Mantle'),
+(36103, 30885, 0, 0, 0, 1, 1, 1, 1, 'Archbishop\'s Slippers'),
+(36103, 30887, 0, 0, 0, 1, 1, 1, 1, 'Golden Links of Restoration'),
+(36103, 30888, 0, 0, 0, 1, 1, 1, 1, 'Anetheron\'s Noose'),
+--
+(36104, 30878, 0, 0, 0, 1, 1, 1, 1, 'Glimmering Steel Mantle'),
+(36104, 30879, 0, 0, 0, 1, 1, 1, 1, 'Don Alejandro\'s Money Belt'),
+(36104, 30880, 0, 0, 0, 1, 1, 1, 1, 'Quickstrider Moccasins'),
+(36104, 30881, 0, 0, 0, 1, 1, 1, 1, 'Blade of Infamy'),
+(36104, 30882, 0, 0, 0, 1, 1, 1, 1, 'Bastion of Light'),
+(36104, 30886, 0, 0, 0, 1, 1, 1, 1, 'Enchanted Leather Sandals'),
+--
+(36105, 30893, 0, 0, 0, 1, 1, 1, 1, 'Sun-touched Chain Leggings'),
+(36105, 30894, 0, 0, 0, 1, 1, 1, 1, 'Blue Suede Shoes'),
+(36105, 30914, 0, 0, 0, 1, 1, 1, 1, 'Belt of the Crescent Moon'),
+(36105, 30916, 0, 0, 0, 1, 1, 1, 1, 'Leggings of Channeled Elements'),
+(36105, 30917, 0, 0, 0, 1, 1, 1, 1, 'Razorfury Mantle'),
+(36105, 30918, 0, 0, 0, 1, 1, 1, 1, 'Hammer of Atonement'),
+--
+(36106, 30889, 0, 0, 0, 1, 1, 1, 1, 'Kaz\'rogal\'s Hardened Heart'),
+(36106, 30891, 0, 0, 0, 1, 1, 1, 1, 'Black Featherlight Boots'),
+(36106, 30892, 0, 0, 0, 1, 1, 1, 1, 'Beast-tamer\'s Shoulders'),
+(36106, 30895, 0, 0, 0, 1, 1, 1, 1, 'Angelista\'s Sash'),
+(36106, 30915, 0, 0, 0, 1, 1, 1, 1, 'Belt of Seething Fury'),
+(36106, 30919, 0, 0, 0, 1, 1, 1, 1, 'Valestalker Girdle'),
+--
+(36107, 30896, 0, 0, 0, 1, 1, 1, 1, 'Glory of the Defender'),
+(36107, 30897, 0, 0, 0, 1, 1, 1, 1, 'Girdle of Hope'),
+(36107, 30898, 0, 0, 0, 1, 1, 1, 1, 'Shady Dealer\'s Pantaloons'),
+(36107, 30899, 0, 0, 0, 1, 1, 1, 1, 'Don Rodrigo\'s Poncho'),
+(36107, 30900, 0, 0, 0, 1, 1, 1, 1, 'Bow-stitched Leggings'),
+(36107, 30901, 0, 0, 0, 1, 1, 1, 1, 'Boundless Agony'),
+--
+(36108, 31092, 0, 0, 0, 1, 1, 1, 1, 'Gloves of the Forgotten Conqueror'),
+(36108, 31093, 0, 0, 0, 1, 1, 1, 1, 'Gloves of the Forgotten Vanquisher'),
+(36108, 31094, 0, 0, 0, 1, 1, 1, 1, 'Gloves of the Forgotten Protector'),
+--
+(36109, 30902, 0, 0, 0, 1, 1, 1, 1, 'Cataclysm\'s Edge'),
+(36109, 30903, 0, 0, 0, 1, 1, 1, 1, 'Legguards of Endless Rage'),
+(36109, 30904, 0, 0, 0, 1, 1, 1, 1, 'Savior\'s Grasp'),
+(36109, 30905, 0, 0, 0, 1, 1, 1, 1, 'Midnight Chestguard'),
+(36109, 30906, 0, 0, 0, 1, 1, 1, 1, 'Bristleblitz Striker'),
+(36109, 30907, 0, 0, 0, 1, 1, 1, 1, 'Mail of Fevered Pursuit'),
+--
+(36110, 30908, 0, 0, 0, 1, 1, 1, 1, 'Apostle of Argus'),
+(36110, 30909, 0, 0, 0, 1, 1, 1, 1, 'Antonidas\'s Aegis of Rapt Concentration'),
+(36110, 30910, 0, 0, 0, 1, 1, 1, 1, 'Tempest of Chaos'),
+(36110, 30911, 0, 0, 0, 1, 1, 1, 1, 'Scepter of Purification'),
+(36110, 30912, 0, 0, 0, 1, 1, 1, 1, 'Leggings of Eternity'),
+(36110, 30913, 0, 0, 0, 1, 1, 1, 1, 'Robes of Rhonin'),
+--
+(36111, 31095, 0, 0, 0, 1, 1, 1, 1, 'Helm of the Forgotten Protector'),
+(36111, 31096, 0, 0, 0, 1, 1, 1, 1, 'Helm of the Forgotten Vanquisher'),
+(36111, 31097, 0, 0, 0, 1, 1, 1, 1, 'Helm of the Forgotten Conqueror'),
+--
+(36121, 32232, 0, 0, 0, 1, 1, 1, 1, 'Eternium Shell Bracers'), -- High Warlord Naj'entus (22887)
+(36121, 32234, 0, 0, 0, 1, 1, 1, 1, 'Fists of Mukoa'),
+(36121, 32236, 0, 0, 0, 1, 1, 1, 1, 'Rising Tide'),
+(36121, 32237, 0, 0, 0, 1, 1, 1, 1, 'The Maelstrom\'s Fury'),
+(36121, 32238, 0, 0, 0, 1, 1, 1, 1, 'Ring of Calming Waves'),
+(36121, 32243, 0, 0, 0, 1, 1, 1, 1, 'Pearl Inlaid Boots'),
+(36121, 32377, 0, 0, 0, 1, 1, 1, 1, 'Mantle of Darkness'),
+--
+(36122, 32239, 0, 0, 0, 1, 1, 1, 1, 'Slippers of the Seacaller'), -- High Warlord Naj'entus (22887)
+(36122, 32240, 0, 0, 0, 1, 1, 1, 1, 'Guise of the Tidal Lurker'),
+(36122, 32241, 0, 0, 0, 1, 1, 1, 1, 'Helm of Soothing Currents'),
+(36122, 32242, 0, 0, 0, 1, 1, 1, 1, 'Boots of Oceanic Fury'),
+(36122, 32245, 0, 0, 0, 1, 1, 1, 1, 'Tide-stomper\'s Greaves'),
+(36122, 32247, 0, 0, 0, 1, 1, 1, 1, 'Ring of Captured Storms'),
+(36122, 32248, 0, 0, 0, 1, 1, 1, 1, 'Halberd of Desolation'),
+--
+(36123, 32256, 0, 0, 0, 1, 1, 1, 1, 'Waistwrap of Infinity'), -- Supremus (22898)
+(36123, 32257, 0, 0, 0, 1, 1, 1, 1, 'Idol of the White Stag'),
+(36123, 32258, 0, 0, 0, 1, 1, 1, 1, 'Naturalist\'s Preserving Cinch'),
+(36123, 32259, 0, 0, 0, 1, 1, 1, 1, 'Bands of the Coming Storm'),
+(36123, 32260, 0, 0, 0, 1, 1, 1, 1, 'Choker of Endless Nightmares'),
+(36123, 32261, 0, 0, 0, 1, 1, 1, 1, 'Band of the Abyssal Lord'),
+(36123, 32262, 0, 0, 0, 1, 1, 1, 1, 'Syphon of the Nathrezim'),
+--
+(36124, 32250, 0, 0, 0, 1, 1, 1, 1, 'Pauldrons of Abyssal Fury'), -- Supremus (22898)
+(36124, 32251, 0, 0, 0, 1, 1, 1, 1, 'Wraps of Precise Flight'),
+(36124, 32252, 0, 0, 0, 1, 1, 1, 1, 'Nether Shadow Tunic'),
+(36124, 32253, 0, 0, 0, 1, 1, 1, 1, 'Legionkiller'),
+(36124, 32254, 0, 0, 0, 1, 1, 1, 1, 'The Brutalizer'),
+(36124, 32255, 0, 0, 0, 1, 1, 1, 1, 'Felstone Bulwark'),
+--
+(36125, 32263, 0, 0, 0, 1, 1, 1, 1, 'Praetorian\'s Legguards'), -- Shade of Akama (22841)
+(36125, 32264, 0, 0, 0, 1, 1, 1, 1, 'Shoulders of the Hidden Predator'),
+(36125, 32265, 0, 0, 0, 1, 1, 1, 1, 'Shadow-walker\'s Cord'),
+(36125, 32266, 0, 0, 0, 1, 1, 1, 1, 'Ring of Deceitful Intent'),
+(36125, 32268, 0, 0, 0, 1, 1, 1, 1, 'Myrmidon\'s Treads'),
+(36125, 32276, 0, 0, 0, 1, 1, 1, 1, 'Flashfire Girdle'),
+(36125, 32513, 0, 0, 0, 1, 1, 1, 1, 'Wristbands of Divine Influence'),
+--
+(36126, 32270, 0, 0, 0, 1, 1, 1, 1, 'Focused Mana Bindings'), -- Shade of Akama (22841)
+(36126, 32271, 0, 0, 0, 1, 1, 1, 1, 'Kilt of Immortal Nature'),
+(36126, 32273, 0, 0, 0, 1, 1, 1, 1, 'Amice of Brilliant Light'),
+(36126, 32275, 0, 0, 0, 1, 1, 1, 1, 'Spiritwalker Gauntlets'),
+(36126, 32278, 0, 0, 0, 1, 1, 1, 1, 'Grips of Silent Justice'),
+(36126, 32279, 0, 0, 0, 1, 1, 1, 1, 'The Seeker\'s Wristguards'),
+(36126, 32361, 0, 0, 0, 1, 1, 1, 1, 'Blind-Seers Icon'),
+--
+(36127, 32326, 0, 0, 0, 1, 1, 1, 1, 'Twisted Blades of Zarak'), -- Teron Gorefiend (22871)
+(36127, 32328, 0, 0, 0, 1, 1, 1, 1, 'Botanist\'s Gloves of Growth'),
+(36127, 32329, 0, 0, 0, 1, 1, 1, 1, 'Cowl of Benevolence'),
+(36127, 32330, 0, 0, 0, 1, 1, 1, 1, 'Totem of Ancestral Guidance'),
+(36127, 32348, 0, 0, 0, 1, 1, 1, 1, 'Soul Cleaver'),
+(36127, 32512, 0, 0, 0, 1, 1, 1, 1, 'Girdle of Lordaeron\'s Fallen'),
+--
+(36128, 32280, 0, 0, 0, 1, 1, 1, 1, 'Gauntlets of Enforcement'), -- Teron Gorefiend (22871)
+(36128, 32323, 0, 0, 0, 1, 1, 1, 1, 'Shadowmoon Destroyer\'s Drape'),
+(36128, 32324, 0, 0, 0, 1, 1, 1, 1, 'Insidious Bands'),
+(36128, 32325, 0, 0, 0, 1, 1, 1, 1, 'Rifle of the Stoic Guardian'),
+(36128, 32327, 0, 0, 0, 1, 1, 1, 1, 'Robe of the Shadow Council'),
+(36128, 32510, 0, 0, 0, 1, 1, 1, 1, 'Softstep Boots of Tracking'),
+--
+(36129, 32338, 0, 0, 0, 1, 1, 1, 1, 'Blood-cursed Shoulderpads'), -- Gurtogg Bloodboil (22948)
+(36129, 32339, 0, 0, 0, 1, 1, 1, 1, 'Belt of Primal Majesty'),
+(36129, 32340, 0, 0, 0, 1, 1, 1, 1, 'Garments of Temperance'),
+(36129, 32341, 0, 0, 0, 1, 1, 1, 1, 'Leggings of Divine Retribution'),
+(36129, 32342, 0, 0, 0, 1, 1, 1, 1, 'Girdle of Mighty Resolve'),
+(36129, 32343, 0, 0, 0, 1, 1, 1, 1, 'Wand of Prismatic Focus'),
+(36129, 32344, 0, 0, 0, 1, 1, 1, 1, 'Staff of Immaculate Recovery'),
+--
+(36130, 32269, 0, 0, 0, 1, 1, 1, 1, 'Messenger of Fate'), -- Gurtogg Bloodboil (22948)
+(36130, 32333, 0, 0, 0, 1, 1, 1, 1, 'Girdle of Stability'),
+(36130, 32334, 0, 0, 0, 1, 1, 1, 1, 'Vest of Mounting Assault'),
+(36130, 32335, 0, 0, 0, 1, 1, 1, 1, 'Unstoppable Aggressor\'s Ring'),
+(36130, 32337, 0, 0, 0, 1, 1, 1, 1, 'Shroud of Forgiveness'),
+(36130, 32501, 0, 0, 0, 1, 1, 1, 1, 'Shadowmoon Insignia'),
+--
+(36133, 32365, 0, 0, 0, 1, 1, 1, 1, 'Heartshatter Breastplate'), -- Mother Shahraz (22947)
+(36133, 32366, 0, 0, 0, 1, 1, 1, 1, 'Shadowmaster\'s Boots'),
+(36133, 32367, 0, 0, 0, 1, 1, 1, 1, 'Leggings of Devastation'),
+(36133, 32368, 0, 0, 0, 1, 1, 1, 1, 'Tome of the Lightbringer'),
+(36133, 32369, 0, 0, 0, 1, 1, 1, 1, 'Blade of Savagery'),
+(36133, 32370, 0, 0, 0, 1, 1, 1, 1, 'Nadina\'s Pendant of Purity'),
+--
+(36134, 31101, 0, 0, 0, 1, 1, 1, 1, 'Pauldrons of the Forgotten Conqueror'), -- Mother Shahraz (22947)
+(36134, 31102, 0, 0, 0, 1, 1, 1, 1, 'Pauldrons of the Forgotten Vanquisher'),
+(36134, 31103, 0, 0, 0, 1, 1, 1, 1, 'Pauldrons of the Forgotten Protector'),
+--
+(36137, 32235, 0, 0, 0, 1, 1, 1, 1, 'Cursed Vision of Sargeras'), -- Illidan Stormrage (22917)
+(36137, 32336, 0, 0, 0, 1, 1, 1, 1, 'Black Bow of the Betrayer'),
+(36137, 32375, 0, 0, 0, 1, 1, 1, 1, 'Bulwark of Azzinoth'),
+(36137, 32471, 0, 0, 0, 1, 1, 1, 1, 'Shard of Azzinoth'),
+(36137, 32497, 0, 0, 0, 1, 1, 1, 1, 'Stormrage Signet Ring'),
+(36137, 32521, 0, 0, 0, 1, 1, 1, 1, 'Faceplate of the Impenetrable'),
+--
+(36138, 32374, 0, 0, 0, 1, 1, 1, 1, 'Zhar\'doom, Greatstaff of the Devourer'), -- Illidan Stormrage (22917)
+(36138, 32483, 0, 0, 0, 1, 1, 1, 1, 'The Skull of Gul\'dan'),
+(36138, 32496, 0, 0, 0, 1, 1, 1, 1, 'Memento of Tyrande'),
+(36138, 32500, 0, 0, 0, 1, 1, 1, 1, 'Crystal Spire of Karabor'),
+(36138, 32524, 0, 0, 0, 1, 1, 1, 1, 'Shroud of the Highborne'),
+(36138, 32525, 0, 0, 0, 1, 1, 1, 1, 'Cowl of the Illidari High Lord'),
+--
+(36139, 31089, 0, 0, 0, 1, 1, 1, 1, 'Chestguard of the Forgotten Conqueror'), -- Illidan Stormrage (22917)
+(36139, 31090, 0, 0, 0, 1, 1, 1, 1, 'Chestguard of the Forgotten Vanquisher'),
+(36139, 31091, 0, 0, 0, 1, 1, 1, 1, 'Chestguard of the Forgotten Protector'),
+--
+(36196, 32589, 0, 0, 0, 1, 1, 1, 1, 'Hellfire-Encased Pendant'),
+(36196, 32590, 0, 0, 0, 1, 1, 1, 1, 'Nethervoid Cloak'),
+(36196, 32591, 0, 0, 0, 1, 1, 1, 1, 'Choker of Serrated Blades'),
+(36196, 32592, 0, 0, 0, 1, 1, 1, 1, 'Chestguard of Relentless Storms'),
+(36196, 32609, 0, 0, 0, 1, 1, 1, 1, 'Boots of the Divine Light'),
+(36196, 32945, 0, 0, 0, 1, 1, 1, 1, 'Fist of Molten Fury'),
+(36196, 32946, 0, 0, 0, 1, 1, 1, 1, 'Claw of Molten Fury'),
+(36196, 34009, 0, 0, 0, 1, 1, 1, 1, 'Hammer of Judgement'),
+(36196, 34010, 0, 0, 0, 1, 1, 1, 1, 'Pepe\'s Shroud of Pacification'),
+--
+(36197, 32736, 0, 0, 0, 1, 1, 1, 1, 'Plans: Swiftsteel Bracers'),
+(36197, 32739, 0, 0, 0, 1, 1, 1, 1, 'Plans: Dawnsteel Shoulders'),
+(36197, 32745, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Shoulderpads of Renewed Life'),
+(36197, 32746, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Swiftstrike Bracers'),
+(36197, 32748, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Bindings of Lightning Reflexes'),
+(36197, 32751, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Living Earth Shoulders'),
+(36197, 32752, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Swiftheal Wraps'),
+(36197, 32755, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Mantle of Nimble Thought'),
+--
+(36198, 32526, 0, 0, 0, 1, 1, 1, 1, 'Band of Devastation'),
+(36198, 32527, 0, 0, 0, 1, 1, 1, 1, 'Ring of Ancient Knowledge'),
+(36198, 32528, 0, 0, 0, 1, 1, 1, 1, 'Blessed Band of Karabor'),
+(36198, 32593, 0, 0, 0, 1, 1, 1, 1, 'Treads of the Den Mother'),
+(36198, 32606, 0, 0, 0, 1, 1, 1, 1, 'Girdle of the Lightbearer'),
+(36198, 32608, 0, 0, 0, 1, 1, 1, 1, 'Pillager\'s Gauntlets'),
+(36198, 32943, 0, 0, 0, 1, 1, 1, 1, 'Swiftsteel Bludgeon'),
+(36198, 34011, 0, 0, 0, 1, 1, 1, 1, 'Illidari Runeshield'),
+(36198, 34012, 0, 0, 0, 1, 1, 1, 1, 'Shroud of the Final Stand'),
+--
+(36199, 32737, 0, 0, 0, 1, 1, 1, 1, 'Plans: Swiftsteel Shoulders'),
+(36199, 32738, 0, 0, 0, 1, 1, 1, 1, 'Plans: Dawnsteel Bracers'),
+(36199, 32744, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Bracers of Renewed Life'),
+(36199, 32747, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Swiftstrike Shoulders'),
+(36199, 32749, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Shoulders of Lightning Reflexes'),
+(36199, 32750, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Living Earth Bindings'),
+(36199, 32753, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Swiftheal Mantle'),
+(36199, 32754, 0, 0, 0, 1, 1, 1, 1, 'Pattern: Bracers of Nimble Thought'),
 --
 (50501, 16253, 0, 0, 0, 1, 1, 1, 1, 'Formula: Enchant Chest - Greater Stats'),
 (50501, 22532, 0, 0, 0, 1, 1, 1, 1, 'Formula: Enchant Bracer - Restore Mana Prime'),

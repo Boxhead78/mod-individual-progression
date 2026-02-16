@@ -115,6 +115,18 @@ IndividualProgression.QuestXPFix = 0
 #
 IndividualProgression.RequireNaxxStrathEntrance = 0
 
+# IndividualProgression.doableNaxx40Bosses
+#
+#        Description: If enabled, this will make certain bosses in Naxx40 easier.
+#                     - Razuvious will cast disrupting shout instead of mana burn
+#                     - Four Horsemen's ability damage will be much lower. So they can be fought together without a strategy.
+#                     - Gluth will search for a zombie every 9 seconds instead of 3.
+#
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+IndividualProgression.doableNaxx40Bosses = 0
+
 # IndividualProgression.MoltenCore.ManualRuneHandling
 #
 #        Description: Defines whether Molten Core runes are handled manually (dousing through Aqual Quintessence) 
@@ -194,7 +206,7 @@ IndividualProgression.DisableRDF = 0
 #
 #        Description: If enabled, players will not be able to proceed beyond this progression stage.
 #                     Please refer to IndividualProgression.h/ProgressionState enum for progression stage values.
-#                     For example, a value of 6 will limit players to Vanilla content.
+#                     For example, a value of 7 will limit players to Vanilla content.
 #
 #        Default:     0 - Disabled (players may progress up to the maximum progression stage of 18, which is the completion of WotLK content)
 #                     1-18 - Set a lower maximum attainable progression stage 
@@ -321,8 +333,8 @@ IndividualProgression.RequiredZulGurubProgression = 3
 #
 #        Description: Disable the regular progression flow, so progression must be advanced through custom creature progression entries
 #
-#        Default:     0 - Disabled
-#                     1 - Enabled
+#        Default:     0 - Default Progression
+#                     1 - Custom Progression
 #
 IndividualProgression.DisableDefaultProgression = 0
 
@@ -331,7 +343,7 @@ IndividualProgression.DisableDefaultProgression = 0
 #        Description: A list of creature IDs paired to progression states. When a creature on the list is defeated by a player,
 #                     the player will be set to that progression state. Used for custom, non-standard progression.
 #                     Not needed for regular, Blizz-like progress through expansions, which works by default.
-#                     Example: IndividualProgression.CustomProgression="448 6, 639 11"
+#                     Example: IndividualProgression.CustomProgression="448 8, 639 13"
 #                     This example would allow players access to TBC content for defeating Hogger (entry 448), and Northrend content for defeating VanCleef (entry 639)
 #                     Leave empty to disable (default.)
 #
@@ -349,6 +361,22 @@ IndividualProgression.CustomProgression = ""
 #                     1 - Enabled
 #
 IndividualProgression.AllowEarlyDungeonSet2 = 0
+
+# IndividualProgression.TBC.ArenaSeason
+#
+#        Description: Current TBC arena season id
+#        Default:     1
+#                     1-4
+#
+IndividualProgression.TBC.ArenaSeason = 1
+
+# IndividualProgression.WotLK.ArenaSeason
+#
+#        Description: Current WotLK arena season id
+#        Default:     5
+#                     5-8
+#
+IndividualProgression.WotLK.ArenaSeason = 5
 
 # IndividualProgression.VanillaPvPRankRequirement
 #

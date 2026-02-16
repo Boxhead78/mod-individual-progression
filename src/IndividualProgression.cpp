@@ -23,28 +23,30 @@ ProgressionState IndividualProgression::GetCurrentProgressionState(Player* playe
 
 bool IndividualProgression::hasPassedProgression(Player* player, ProgressionState state) const
 {
-    if (progressionLimit && state >= progressionLimit)
-	{
+    if (!enabled || !state || !player || !player->IsInWorld())
         return false;
-	}
+
+    if (progressionLimit && (state > progressionLimit))
+        return false;
 
     return player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value >= state;
 }
 
 bool IndividualProgression::isBeforeProgression(Player* player, ProgressionState state)
 {
+    if (!state || !player || !player->IsInWorld())
+        return false;
+
     return player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value < state;
 }
 
 void IndividualProgression::UpdateProgressionState(Player* player, ProgressionState newState) const
 {
-    if (!player)
+    if (!enabled || !player)
         return;
 
     if (progressionLimit && newState > progressionLimit)
-	{
         return;
-	}
 
     uint8 currentState = player->GetPlayerSetting("mod-individual-progression", SETTING_PROGRESSION_STATE).value;
     if (newState > currentState)
@@ -116,9 +118,8 @@ uint8 IndividualProgression::GetAccountProgression(uint32 accountId)
 {
     uint8 progressionLevel = 0;
     if (!sWorld->getBoolConfig(CONFIG_PLAYER_SETTINGS_ENABLED))
-    {
         return 0; // Prevent crash if player settings are not enabled
-    }
+
     QueryResult result = CharacterDatabase.Query("SELECT `data` FROM `character_settings` WHERE `source` = 'mod-individual-progression' AND `guid` IN (SELECT `guid` FROM `characters` WHERE `account` = {});", accountId);
     if (result)
     {
@@ -139,10 +140,10 @@ uint8 IndividualProgression::GetAccountProgression(uint32 accountId)
 
 void IndividualProgression::RemovePlayerAchievement(uint16 playerGUID, uint16 achievementId)
 {
-	if (playerGUID && achievementId)
-    {
-        CharacterDatabase.Query("DELETE FROM `character_achievement` WHERE `guid` = {} AND `achievement` = {}", playerGUID, achievementId);
-    }
+	if (!playerGUID || !achievementId)
+        return;
+
+    CharacterDatabase.Query("DELETE FROM `character_achievement` WHERE `guid` = {} AND `achievement` = {}", playerGUID, achievementId);
 }
 
 void IndividualProgression::LoadCustomProgressionEntries(std::string const& customProgressionString)
@@ -164,29 +165,31 @@ void IndividualProgression::LoadCustomProgressionEntries(std::string const& cust
 
 bool IndividualProgression::hasCustomProgressionValue(uint32 creatureEntry)
 {
-    if (customProgressionMap.empty())
-    {
+    if (!creatureEntry)
         return false;
-    }
+
+    if (customProgressionMap.empty())
+        return false;
+
     return (customProgressionMap.find(creatureEntry) != customProgressionMap.end());
 }
 
 bool IndividualProgression::isAttuned(Player* player)
 {
-    if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) ||
-        (player->GetQuestStatus(NAXX40_ATTUNEMENT_2) == QUEST_STATUS_REWARDED) ||
-        (player->GetQuestStatus(NAXX40_ATTUNEMENT_3) == QUEST_STATUS_REWARDED))
-    {
-        return true;
-    }
-    else
-    {
+    if (!player || !player->IsInWorld())
         return false;
-    }
+
+    if ((player->GetQuestStatus(NAXX40_ATTUNEMENT_1) == QUEST_STATUS_REWARDED) || (player->GetQuestStatus(NAXX40_ATTUNEMENT_2) == QUEST_STATUS_REWARDED) || (player->GetQuestStatus(NAXX40_ATTUNEMENT_3) == QUEST_STATUS_REWARDED))
+        return true;
+    else
+        return false;
 }
 
 void IndividualProgression::checkIPPhasing(Player* player, uint32 newArea)
 {
+    if (!player || !player->IsInWorld())
+        return;
+
     player->RemoveAura(IPP_PHASE);
     player->RemoveAura(IPP_PHASE_II);
     player->RemoveAura(IPP_PHASE_III);
@@ -561,7 +564,7 @@ void IndividualProgression::checkIPPhasing(Player* player, uint32 newArea)
             {
                 player->CastSpell(player, IPP_PHASE_III, false);
             }
-            break;      
+            break;
         case AREA_UNDERCITY:
             if ((player->GetQuestStatus(BATTLE_UNDERCITY_HORDE) == QUEST_STATUS_REWARDED) || (player->GetQuestStatus(BATTLE_UNDERCITY_ALLIANCE) == QUEST_STATUS_REWARDED) || sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_4))
             {
@@ -657,9 +660,10 @@ void IndividualProgression::checkIPPhasing(Player* player, uint32 newArea)
 void IndividualProgression::checkKillProgression(Player* killer, Creature* killed)
 {
     if (!enabled)
-    {
         return;
-    }
+
+    if (!killed || !killer || !killer->IsInWorld())
+        return;
 
     if (hasCustomProgressionValue(killed->GetEntry()))
     {
@@ -668,9 +672,7 @@ void IndividualProgression::checkKillProgression(Player* killer, Creature* kille
     }
 
     if (disableDefaultProgression)
-    {
         return;
-    }
 
     switch (killed->GetEntry())
     {
@@ -754,6 +756,9 @@ void IndividualProgression::checkKillProgression(Player* killer, Creature* kille
 
 void IndividualProgression::UpdateProgressionQuests(Player* player)
 {
+    if (!player || !player->IsInWorld())
+        return;
+
 	// remove all hidden progression quests
     for (uint8 i = PROGRESSION_MOLTEN_CORE; i <= PROGRESSION_WOTLK_TIER_5; ++i)
     {
@@ -784,6 +789,9 @@ void IndividualProgression::UpdateProgressionQuests(Player* player)
 
 void IndividualProgression::CleanUpVanillaPvpTitles(Player* player)
 {
+    if (!player || !player->IsInWorld())
+        return;
+
     TeamId teamId = player->GetTeamId(true);
     uint32 kills = player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS);
     uint16 playerGUID = player->GetGUID().GetCounter();
@@ -812,9 +820,7 @@ void IndividualProgression::CleanUpVanillaPvpTitles(Player* player)
         for (IppPvPTitles title : pvpTitlesList)
         {
             if (player->HasTitle(title.TitleId))
-            {
                 player->SetTitle(sCharTitlesStore.LookupEntry(title.TitleId), true);
-            }
         }
     }
     else
@@ -822,9 +828,7 @@ void IndividualProgression::CleanUpVanillaPvpTitles(Player* player)
         for (IppPvPTitles title : pvpTitlesList)
         {
             if (kills < title.RequiredKills && player->HasTitle(title.TitleId))
-            {
                 player->SetTitle(sCharTitlesStore.LookupEntry(title.TitleId), true);
-            }
         }
     }
 
@@ -844,9 +848,7 @@ void IndividualProgression::CleanUpVanillaPvpTitles(Player* player)
 		uint32_t achievementId = AchievementData[i].TitleId[teamId];
 
 		if (highestRank == i || !player->HasAchieved(achievementId))
-		{
 			continue;
-		}
 
 		RemovePlayerAchievement(playerGUID, achievementId);
     }
@@ -857,9 +859,7 @@ void IndividualProgression::CleanUpVanillaPvpTitles(Player* player)
         uint32 questId = PVP_QUEST + i;
 
         if (player->GetQuestStatus(questId) == QUEST_STATUS_REWARDED)
-		{
             player->RemoveRewardedQuest(questId);
-        }
     }
 
     uint8 i = 1;
@@ -890,6 +890,9 @@ void IndividualProgression::CleanUpVanillaPvpTitles(Player* player)
 
 void IndividualProgression::AwardEarnedVanillaPvpTitles(Player* player)
 {
+    if (!player || !player->IsInWorld())
+        return;
+
     if (sIndividualProgression->isBeforeProgression(player, PROGRESSION_PRE_TBC) || sIndividualProgression->VanillaPvpTitlesKeepPostVanilla)
     {
         TeamId teamId = player->GetTeamId(true);
@@ -935,10 +938,10 @@ void IndividualProgression::AwardEarnedVanillaPvpTitles(Player* player)
             // remove all titles except highest
             for (IppPvPTitles title : pvpTitlesList)
             {
-                if (highestTitle != title.TitleId)
-				{
-                    player->SetTitle(sCharTitlesStore.LookupEntry(title.TitleId), true);
-				}
+                const int titleId = title.TitleId;
+
+                if (highestTitle != titleId)
+                    player->SetTitle(sCharTitlesStore.LookupEntry(titleId), true);
             }
 
 			if (highestTitle != -1 && usesPvPTitle)
@@ -983,6 +986,7 @@ private:
         sIndividualProgression->tbcHealingAdjustment = sConfigMgr->GetOption<float>("IndividualProgression.TBCHealingAdjustment", 1);
         sIndividualProgression->tbcHealthAdjustment = sConfigMgr->GetOption<float>("IndividualProgression.TBCHealthAdjustment", 1);
         sIndividualProgression->questXpFix = sConfigMgr->GetOption<bool>("IndividualProgression.QuestXPFix", true);
+        sIndividualProgression->doableNaxx40Bosses = sConfigMgr->GetOption<bool>("IndividualProgression.doableNaxx40Bosses", false);
         sIndividualProgression->enforceGroupRules = sConfigMgr->GetOption<bool>("IndividualProgression.EnforceGroupRules", true);
         sIndividualProgression->fishingFix = sConfigMgr->GetOption<bool>("IndividualProgression.FishingFix", true);
         sIndividualProgression->simpleConfigOverride = sConfigMgr->GetOption<bool>("IndividualProgression.SimpleConfigOverride", true);
@@ -990,7 +994,7 @@ private:
         sIndividualProgression->startingProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.StartingProgression", 0);
         sIndividualProgression->questMoneyAtLevelCap = sConfigMgr->GetOption<bool>("IndividualProgression.QuestMoneyAtLevelCap", true);
         sIndividualProgression->repeatableVanillaQuestsXp = sConfigMgr->GetOption<bool>("IndividualProgression.RepeatableVanillaQuestsXP", true);
-        sIndividualProgression->disableDefaultProgression = sConfigMgr->GetOption<bool>("IndividualProgression.DisableDefaultProgression", true);
+        sIndividualProgression->disableDefaultProgression = sConfigMgr->GetOption<bool>("IndividualProgression.DisableDefaultProgression", false);
         sIndividualProgression->tbcRacesProgressionLevel = sConfigMgr->GetOption<uint8>("IndividualProgression.TbcRacesUnlockProgression", 0);
         sIndividualProgression->tbcRacesStartingProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.TbcRacesStartingProgression", 6);
         sIndividualProgression->cataRacesProgressionLevel = sConfigMgr->GetOption<uint8>("IndividualProgression.CataRacesUnlockProgression", 0);
@@ -1000,6 +1004,8 @@ private:
         sIndividualProgression->RequiredZulGurubProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.RequiredZulGurubProgression", 3);
         sIndividualProgression->LoadCustomProgressionEntries(sConfigMgr->GetOption<std::string>("IndividualProgression.CustomProgression", ""));
         sIndividualProgression->earlyDungeonSet2 = sConfigMgr->GetOption<bool>("IndividualProgression.AllowEarlyDungeonSet2", false);
+		sIndividualProgression->tbcArenaSeason = sConfigMgr->GetOption<uint8>("IndividualProgression.TBC.ArenaSeason", 1);
+		sIndividualProgression->wotlkArenaSeason = sConfigMgr->GetOption<uint8>("IndividualProgression.WotLK.ArenaSeason", 5);
         sIndividualProgression->VanillaPvpKillRank1 = sConfigMgr->GetOption<uint32>("IndividualProgression.VanillaPvpKillRequirement.Rank1", 100);
         sIndividualProgression->VanillaPvpKillRank2 = sConfigMgr->GetOption<uint32>("IndividualProgression.VanillaPvpKillRequirement.Rank2", 200);
         sIndividualProgression->VanillaPvpKillRank3 = sConfigMgr->GetOption<uint32>("IndividualProgression.VanillaPvpKillRequirement.Rank3", 400);
@@ -1063,9 +1069,7 @@ public:
         }
 
         if (sIndividualProgression->DisableRDF)
-        {
             sWorld->setIntConfig(CONFIG_LFG_OPTIONSMASK, 4);
-        }
     }
 };
 
