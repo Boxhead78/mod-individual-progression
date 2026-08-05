@@ -23,12 +23,12 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (7028, 0, 2, 0, 0, 0, 100, 0, 6000, 8000, 5000, 11000, 0, 0, 11, 20826, 33, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Blackrock Warlock - In Combat - Cast Immolate'),
 (7029, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 7165, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Blackrock Battlemaster - On Respawn - Cast Battle Stance'),
 --
-(7033, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                         'Firegut Ogre - On Aggro - Say Line 0'),
+(7033, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                       'Firegut Ogre - On Aggro - Say Line 0'),
 (7033, 0, 1, 0, 0, 0, 100, 0, 10000, 21000, 16000, 31000, 0, 0, 11, 13382, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Firegut Ogre - In Combat - Cast Torch'),
-(7034, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                         'Firegut Ogre Mage - On Aggro - Say Line 0'),
+(7034, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                       'Firegut Ogre Mage - On Aggro - Say Line 0'),
 (7034, 0, 1, 0, 0, 0, 100, 0, 10000, 21000, 16000, 31000, 0, 0, 11, 13382, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Firegut Ogre Mage - In Combat - Cast Torch'),
 (7034, 0, 2, 0, 0, 0, 100, 0, 8000, 18000, 22000, 39000, 0, 0, 11, 6742, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Firegut Ogre Mage - In Combat - Cast Bloodlust'),
-(7035, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                         'Firegut Brute - On Aggro - Say Line 0'),
+(7035, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                       'Firegut Brute - On Aggro - Say Line 0'),
 (7035, 0, 1, 0, 0, 0, 100, 0, 9000, 14000, 10000, 21000, 0, 0, 11, 10101, 0, 0, 0, 0, 0, 21, 10, 0, 0, 0, 0, 0, 0, 0,  'Firegut Brute - Within 0-10 Range - Cast Knock Away'),
 (7035, 0, 2, 0, 0, 0, 100, 0, 10000, 21000, 16000, 31000, 0, 0, 11, 13382, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Firegut Brute - In Combat - Cast Torch'),
 --
@@ -67,7 +67,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (8978, 0, 4, 0, 0, 0, 100, 0, 7000, 11000, 21000, 36000, 0, 0, 11, 6533, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Thauris Balgarr - In Combat - Cast Net'),
 (8978, 0, 5, 0, 0, 0, 100, 0, 1000, 3000, 19200, 32700, 0, 0, 11, 11802, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Thauris Balgarr - In Combat - Cast Dark Iron Land Mine'), -- test!
 (8979, 0, 0, 0, 0, 0, 100, 0, 6000, 12000, 10000, 17000, 0, 0, 11, 6253, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,    'Gruklash - Within 0-5 Range - Cast Backhand'),
-(8979, 0, 1, 0, 105, 0, 100, 0, 0, 0, 11000, 15000, 0, 5, 11, 12555, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Gruklash - Target Casting - Cast Pummel'),
+(8979, 0, 1, 0, 105, 0, 50, 0, 0, 0, 11000, 15000, 0, 5, 11, 12555, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Gruklash - Target Casting - Cast Pummel'),
 (8979, 0, 2, 3, 2, 0, 100, 0, 0, 50, 120000, 120000, 0, 0, 11, 8269, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Gruklash - Between 0-50% Health - Cast Frenzy'),
 (8979, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Gruklash - On Frenzy - Say Line 0'),
 (8981, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 8876, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Malfunctioning Reaver - On Respawn - Cast Thrash Proc'),
@@ -98,14 +98,14 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 
 
 -- fix spawn locations
-DELETE FROM `creature` WHERE `id1` IN (8977);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
+DELETE FROM `creature` WHERE `id` IN (8977);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
 `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES
 --
-(4596,   8977, 0, 0, 0, 0, 0, 1, 1, 1, -7958.56, -2603.77, 173.694, 5.76038, 500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL), -- Krom'Grul
-(695091, 8977, 0, 0, 0, 0, 0, 1, 1, 1, -7836.08, -2565.46, 125.553, 1.8295,  500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL), -- https://www.youtube.com/watch?v=7ia3WaeLCbs&t=400s
-(695092, 8977, 0, 0, 0, 0, 0, 1, 1, 1, -7928.66, -2670.63, 158.508, 4.53516, 500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL), -- https://www.youtube.com/watch?v=d40q6NJAzBY&t=600s
-(695093, 8977, 0, 0, 0, 0, 0, 1, 1, 1, -7962.19, -2659.41, 168.874, 2.29284, 500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL);
+(4596,   8977, 0, 0, 0, 1, 1, 1, -7958.56, -2603.77, 173.694, 5.76038, 500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL), -- Krom'Grul
+(695091, 8977, 0, 0, 0, 1, 1, 1, -7836.08, -2565.46, 125.553, 1.8295,  500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL), -- https://www.youtube.com/watch?v=7ia3WaeLCbs&t=400s
+(695092, 8977, 0, 0, 0, 1, 1, 1, -7928.66, -2670.63, 158.508, 4.53516, 500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL), -- https://www.youtube.com/watch?v=d40q6NJAzBY&t=600s
+(695093, 8977, 0, 0, 0, 1, 1, 1, -7962.19, -2659.41, 168.874, 2.29284, 500, 0, 0, 2634, 2041, 0, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `pool_creature` WHERE `pool_entry` IN (601050);
 INSERT INTO `pool_creature` (`guid`, `pool_entry`, `chance`, `description`) VALUES 

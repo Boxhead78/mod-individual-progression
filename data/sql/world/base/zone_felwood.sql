@@ -43,11 +43,11 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (7111, 0, 2, 0, 0, 0, 100, 0, 9000, 13000, 18000, 22000, 0, 0, 11, 11990, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Jadefire Hellcaller - In Combat - Cast Rain of Fire'),
 --
 (7112, 0, 0, 0, 0, 0, 100, 0, 9000, 14000, 22000, 25000, 0, 0, 11, 11639, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Jaedenar Cultist - In Combat - Cast Shadow Word: Pain'),
-(7112, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 20825, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,            'Jaedenar Cultist - In Combat - Cast Shadow Bolt'),
+(7112, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 20825, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Jaedenar Cultist - In Combat - Cast Shadow Bolt'),
 (7112, 0, 2, 0, 0, 0, 100, 0, 7000, 9000, 15000, 25000, 0, 0, 11, 11980, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Jaedenar Cultist - In Combat - Cast Curse of Weakness'),
-(7112, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Jaedenar Cultist - Between 0-15% Health - Flee For Assist (No Repeat)'),
+(7112, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Jaedenar Cultist - Between 0-15% Health - Flee For Assist (No Repeat)'),   
 (7113, 0, 0, 0, 0, 0, 100, 0, 5000, 9000, 13000, 17000, 0, 0, 11, 3248, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Jaedenar Guardian - In Combat - Cast Improved Blocking'),
-(7113, 0, 1, 0, 105, 0, 100, 0, 0, 0, 9000, 12000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Jaedenar Guardian - Within 0-5 Range - Cast Shield Bash'),
+(7113, 0, 1, 0, 105, 0, 50, 0, 0, 0, 9000, 12000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Jaedenar Guardian - Within 0-5 Range - Cast Shield Bash'),
 (7114, 0, 0, 0, 9, 0, 100, 0, 0, 0, 17000, 21000, 0, 5, 11, 11977, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Jaedenar Enforcer - Within 0-5 Range - Cast Rend'),
 (7115, 0, 0, 0, 0, 0, 100, 0, 11000, 15000, 12000, 16000, 0, 0, 11, 20832, 0, 0, 0, 0, 0, 21, 20, 0, 0, 0, 0, 0, 0, 0, 'Jaedenar Adept - Within 0-20 Range - Cast Fire Blast'),
 (7115, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 20823, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Jaedenar Adept - In Combat - Cast Fireball'),
@@ -139,24 +139,24 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 (14344, 0, 0, '$s becomes enraged!', 16, 0, 100, 0, 0, 0, 10677, 0, 'Mongress enrage at 30%');
 
 -- Ragepaw, fix movement
-UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id1` = 14342;
+UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id` = 14342;
 
 -- fix Irontree Wood Ancients
 SET @IPPPHASE := 65536;
 
-DELETE FROM `creature` WHERE `id1` IN (14524, 14525, 14526);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `id` IN (14524, 14525, 14526);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(614524, 14524, 0, 0, 1, 0, 0, 1, @IPPPHASE, 0, 6194.55, -1176.35, 369.056, 1.1098,  600, 0, 0, 3331, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(614525, 14525, 0, 0, 1, 0, 0, 1, @IPPPHASE, 0, 6197.12, -1135.42, 366.31,  5.28025, 600, 0, 0, 3331, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(614526, 14526, 0, 0, 1, 0, 0, 1, @IPPPHASE, 0, 6245.91, -1165.98, 366.325, 2.60598, 600, 0, 0, 3331, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(614524, 14524, 1, 0, 0, 1, @IPPPHASE, 0, 6194.55, -1176.35, 369.056, 1.1098,  600, 0, 0, 3331, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(614525, 14525, 1, 0, 0, 1, @IPPPHASE, 0, 6197.12, -1135.42, 366.31,  5.28025, 600, 0, 0, 3331, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(614526, 14526, 1, 0, 0, 1, @IPPPHASE, 0, 6245.91, -1165.98, 366.325, 2.60598, 600, 0, 0, 3331, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 
 -- fix Withered Protector waypoints
-DELETE FROM `creature` WHERE `id1` IN (7149);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `id` IN (7149);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(39489, 7149, 0, 0, 1, 0, 0, 1, 1, 0, 6177, -1322.46, 376.746, 5.71257, 300, 0, 1, 4318, 0, 2, 0, 0, 0, '', 0, 0, NULL);
+(39489, 7149, 1, 0, 0, 1, 1, 0, 6177, -1322.46, 376.746, 5.71257, 300, 0, 1, 4318, 0, 2, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `creature_addon` WHERE `guid` IN (39489);
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 

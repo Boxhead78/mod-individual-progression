@@ -1,9 +1,9 @@
 /* smart scripts */
 UPDATE `creature_template` SET `AIName` = '' WHERE `entry` IN (2320, 2407);
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN 
-(2242, 2243, 2245, 2246, 2247, 2254, 2255, 2256, 2271, 2272, 2287, 2306, 2415, 2417, 2420, 2421, 2422, 2423, 2453, 4504);
+(2242, 2243, 2245, 2246, 2247, 2252, 2253, 2254, 2255, 2256, 2271, 2272, 2287, 2306, 2415, 2417, 2420, 2421, 2422, 2423, 2453, 4504);
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN 
-(2242, 2243, 2245, 2246, 2247, 2254, 2255, 2256, 2271, 2272, 2287, 2306, 2320, 2407, 2415, 2417, 2420, 2421, 2422, 2423, 2453, 4504);
+(2242, 2243, 2245, 2246, 2247, 2252, 2253, 2254, 2255, 2256, 2271, 2272, 2287, 2306, 2320, 2407, 2415, 2417, 2420, 2421, 2422, 2423, 2453, 4504);
 
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
 `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
@@ -13,7 +13,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2242, 0, 0, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 22766, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Syndicate Spy - Out of Combat - Cast Sneak'),
 (2242, 0, 1, 0, 67, 0, 100, 0, 0, 0, 1800, 9800, 0, 5, 11, 7159, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,              'Syndicate Spy - On Behind Target - Cast Backstab'),
 (2242, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Syndicate Spy - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(2243, 0, 0, 0, 105, 0, 100, 0, 0, 0, 10000, 28000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Syndicate Sentry - Target Casting - Cast Shield Bash'),
+(2243, 0, 0, 0, 105, 0, 50, 0, 0, 0, 10000, 28000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Syndicate Sentry - Target Casting - Cast Shield Bash'),
 (2243, 0, 1, 0, 2, 0, 100, 0, 0, 50, 30800, 39200, 0, 0, 11, 15062, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Syndicate Sentry - Between 0-50% Health - Cast Shield Wall'),
 (2243, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Syndicate Sentry - Between 0-15% Health - Flee For Assist'),
 (2245, 0, 0, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 30, 60, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Syndicate Saboteur - Outside 30 Range - Start Combat Movement'),
@@ -28,7 +28,9 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2247, 0, 0, 0, 9, 0, 100, 0, 2000, 13000, 12000, 18000, 0, 5, 11, 17207, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Syndicate Enforcer - Within 0-5 Range - Cast Whirlwind'),
 (2247, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Syndicate Enforcer - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
-(2254, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Mauler - On Aggro - Say Line 0'),
+(2252, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Ogre - On Aggro - Say Line 0'),
+(2253, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Brute - On Aggro - Say Line 0'),
+(2254, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Mauler - On Aggro - Say Line 0'),
 (2254, 0, 1, 0, 9, 0, 100, 0, 4100, 9300, 10200, 17900, 0, 5, 11, 11976, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Crushridge Mauler - Within 0-5 Range - Cast Strike'),
 (2254, 0, 2, 0, 0, 0, 100, 0, 7400, 15800, 7600, 18700, 0, 0, 11, 6253, 1, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Crushridge Mauler - Within 0-5 Range - Cast Backhand'),
 (2254, 0, 3, 4, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Mauler - On Death - Cross Cast Enrage'),
@@ -38,11 +40,11 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2255, 0, 2, 0, 0, 0, 100, 0, 5300, 7400, 11300, 21200, 0, 0, 11, 6742, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Crushridge Mage - In Combat - Cast Bloodlust'),
 (2255, 0, 3, 4, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Mage - On Death - Cross Cast Enrage'),
 (2255, 0, 4, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Mage - On Death - Crushridge Warmonger Say Line 1'),
-(2256, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Enforcer - On Aggro - Say Line 0'),
+(2256, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Enforcer - On Aggro - Say Line 0'),
 (2256, 0, 1, 0, 0, 0, 100, 0, 6000, 9000, 18000, 24000, 0, 0, 11, 9791, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Crushridge Enforcer - Within 0-5 Range - Cast Head Crack'),
 (2256, 0, 2, 3, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Enforcer - On Death - Cross Cast Enrage'),
 (2256, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Enforcer - On Death - Crushridge Warmonger Say Line 1'),
-(2287, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Warmonger - On Aggro - Say Line 0 (No Repeat)'),
+(2287, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Crushridge Warmonger - On Aggro - Say Line 0'),
 (2287, 0, 1, 0, 2, 0, 100, 1, 0, 50, 0, 0, 0, 0, 39, 15, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Crushridge Warmonger - Between 0-50% Health - Call For Help (No Repeat)'),
 (2287, 0, 2, 3, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 86, 8602, 2, 9, 2287, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Crushridge Warmonger - On Death - Cross Cast Enrage'),
 (2287, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 9, 2287, 0, 15, 1, 0, 0, 0, 0,                    'Crushridge Warmonger - On Death - Crushridge Warmonger Say Line 1'),
@@ -61,7 +63,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2415, 0, 2, 0, 0, 0, 100, 0, 7000, 13000, 6000, 16000, 0, 0, 11, 13323, 1, 0, 0, 0, 0, 6, 30, 1, 0, 0, 0, 0, 0, 0,     'Warden Belamoore - Within 0-30 Range - Cast Polymorph'),
 (2415, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       'Warden Belamoore - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
-(2417, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Grel\'borg the Miser - On Aggro - Say Line 0 (No Repeat)'),
+(2417, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Grel\'borg the Miser - On Aggro - Say Line 0'),
 (2417, 0, 1, 0, 0, 0, 100, 0, 3000, 6000, 29000, 38000, 0, 0, 11, 6742, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Grel\'borg the Miser - In Combat - Cast Bloodlust'),
 (2417, 0, 2, 0, 0, 0, 100, 0, 2000, 2000, 36000, 36000, 0, 0, 11, 4979, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Grel\'borg the Miser - In Combat - Cast Quick Flame Ward'),
 (2417, 0, 3, 0, 0, 0, 100, 0, 10000, 19000, 10000, 23000, 0, 0, 11, 11990, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,   'Grel\'borg the Miser - Within 0-30 Range - Cast Rain of Fire'),
@@ -70,8 +72,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (2420, 0, 2, 0, 0, 0, 100, 0, 4000, 16000, 6000, 19000, 0, 0, 11, 15496, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,     'Targ - Within 0-5 Range - Cast Cleave'),
 (2420, 0, 3, 0, 106, 0, 100, 0, 0, 0, 11000, 24000, 0, 8, 11, 8147, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Targ - Within 0-8 Range - Cast Thunderclap'),
 (2421, 0, 0, 0, 0, 0, 100, 0, 7000, 13000, 11000, 26000, 0, 0, 11, 8379, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,      'Muckrake - Within 0-5 Range - Cast Disarm'),
-(2421, 0, 1, 0, 105, 0, 100, 0, 0, 0, 13000, 16000, 0, 5, 11, 12555, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Muckrake - Target Casting - Cast Pummel'),
-(2422, 0, 0, 0, 4, 0, 10, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Glommus - On Aggro - Say Line 0 (No Repeat)'),
+(2421, 0, 1, 0, 105, 0, 50, 0, 0, 0, 13000, 16000, 0, 5, 11, 12555, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Muckrake - Target Casting - Cast Pummel'),
+(2422, 0, 0, 0, 4, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                        'Glommus - On Aggro - Say Line 0'),
 (2422, 0, 1, 0, 0, 0, 100, 0, 1000, 1000, 1000, 9000, 0, 0, 11, 9128, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Glommus - In Combat - Cast Battle Shout'),
 (2422, 0, 2, 0, 106, 0, 100, 0, 0, 0, 14000, 35000, 0, 10, 11, 13730, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Glommus - Within 0-10 Range - Cast Demoralizing Shout'),
 (2422, 0, 3, 0, 0, 0, 100, 0, 6000, 8000, 9000, 32000, 0, 0, 11, 11428, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,       'Glommus - Within 0-5 Range - Cast Knockdown'),
@@ -114,17 +116,17 @@ INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `e
 (63913, 639130, 0, 0, 0, 0, 0, NULL);
 
 -- Jailor Borhuin(2431) and Baron Vardus(2306) - multiple spawn locations 
-DELETE FROM `creature` WHERE `id1` IN (2306, 2431);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `id` IN (2306, 2431);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(16905,  2306, 0, 0, 0, 0, 0, 1, 1, 1, 1180.59, -555.904, 71.1468, 1.8822,  300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', 0, 0, NULL),
-(695010, 2306, 0, 0, 0, 0, 0, 1, 1, 1, 693.333, -905.125, 157.78, 2.69564,  300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', NULL, 0, NULL), -- https://www.youtube.com/watch?v=MgH-PCmxnUo
-(695011, 2306, 0, 0, 0, 0, 0, 1, 1, 1, 1107.99, -718.43, 71.5728, 1.84347,  300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', NULL, 0, NULL), -- https://www.youtube.com/watch?v=ZLXbrYUfLtI
-(695012, 2306, 0, 0, 0, 0, 0, 1, 1, 1, 1001.61, -790.672, 108.606, 2.31075, 300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', NULL, 0, NULL), -- https://www.youtube.com/watch?v=Dk6V9prh2gk
+(16905,  2306, 0, 0, 0, 1, 1, 1, 1180.59, -555.904, 71.1468, 1.8822,  300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', 0, 0, NULL),
+(695010, 2306, 0, 0, 0, 1, 1, 1, 693.333, -905.125, 157.78, 2.69564,  300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', NULL, 0, NULL), -- https://www.youtube.com/watch?v=MgH-PCmxnUo
+(695011, 2306, 0, 0, 0, 1, 1, 1, 1107.99, -718.43, 71.5728, 1.84347,  300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', NULL, 0, NULL), -- https://www.youtube.com/watch?v=ZLXbrYUfLtI
+(695012, 2306, 0, 0, 0, 1, 1, 1, 1001.61, -790.672, 108.606, 2.31075, 300, 0, 0, 1239, 3191, 0, 0, 0, 0, '', NULL, 0, NULL), -- https://www.youtube.com/watch?v=Dk6V9prh2gk
 --
-(17020,  2431, 0, 0, 0, 0, 0, 1, 1, 1, 689.462, -984.645, 165.695, 5.43263, 300, 0, 0, 1536, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695014, 2431, 0, 0, 0, 0, 0, 1, 1, 1, 750.559, -971.896, 167.587, 1.60003, 300, 0, 0, 1537, 0, 0, 0, 0, 0, '', NULL, 0, NULL),    -- https://www.youtube.com/watch?v=3fLlozCjyD0
-(695015, 2431, 0, 0, 0, 0, 0, 1, 1, 1, 679.818, -897.818, 171.806, 4.8398,  300, 0, 0, 1537, 0, 0, 0, 0, 0, '', NULL, 0, NULL);
+(17020,  2431, 0, 0, 0, 1, 1, 1, 689.462, -984.645, 165.695, 5.43263, 300, 0, 0, 1536, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695014, 2431, 0, 0, 0, 1, 1, 1, 750.559, -971.896, 167.587, 1.60003, 300, 0, 0, 1537, 0, 0, 0, 0, 0, '', NULL, 0, NULL),    -- https://www.youtube.com/watch?v=3fLlozCjyD0
+(695015, 2431, 0, 0, 0, 1, 1, 1, 679.818, -897.818, 171.806, 4.8398,  300, 0, 0, 1537, 0, 0, 0, 0, 0, '', NULL, 0, NULL);
 
 DELETE FROM `pool_creature` WHERE `pool_entry` IN (601008, 601009);
 INSERT INTO `pool_creature` (`guid`, `pool_entry`, `chance`, `description`) VALUES 

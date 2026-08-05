@@ -20,10 +20,14 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 (12397, 7, 0, 'The universe will be remade.', 14, 0, 0, 0, 0, 11339, 20083, 0, 'kazzak SAY_WIPE'),
 (12397, 8, 0, 'Kazzak is supreme!', 16, 0, 0, 0, 0, 0, 0, 0, 'kazzak SAY_SUPREME_VANILA');
 
-DELETE FROM `creature` WHERE `guid` = 156950 AND `id1` = 12397;
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `wander_distance`, `spawntimesecs`, `MovementType`) VALUES
-(156950, 12397, 0, 0, 0, -12275.6, -2524.26, 3.79202, 1.69492, 259200, 604800, 1);
-
+DELETE FROM `creature` WHERE `guid` = 156950 AND `id` = 12397;
+INSERT INTO `creature` (`guid`, `id`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `wander_distance`, `spawntimesecs`, `MovementType`) VALUES
+(156950, 12397, 0, -12226.8, -2433.57, 1.76505, 5.01826, 259200, 604800, 1);
+   
+DELETE FROM `creature_template_model` WHERE `CreatureID` = 12397;
+INSERT INTO `creature_template_model` (`CreatureID`, `Idx`, `CreatureDisplayID`, `DisplayScale`, `Probability`, `VerifiedBuild`) VALUES 
+(12397, 0, 12449, 2.2, 1, 12340);
+    
 DELETE FROM `reference_loot_template` WHERE `Entry` = 60000;
 INSERT INTO `reference_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) VALUES
 (60000, 17111, 0, 0, 0, 1, 1, 1, 1, NULL),
@@ -39,6 +43,6 @@ INSERT INTO `reference_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `
 
 DELETE FROM `creature_loot_template` WHERE `Entry` = 12397 AND `Reference` = 60000;
 INSERT INTO `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`, `Comment`) VALUES
-(12397, 1, 60000, 100, 0, 1, 1, 2, 2, NULL);
+(12397, 1, 60000, 100, 0, 1, 0, 2, 2, NULL);
 
 DELETE FROM `creature_loot_template` WHERE `Entry` = 12397 AND `Item` IN (19133, 19134, 19135, 18546, 18544, 18543, 18204, 17113, 17112, 17111);

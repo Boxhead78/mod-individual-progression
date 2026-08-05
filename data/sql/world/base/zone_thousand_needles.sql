@@ -85,7 +85,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (10756, 0, 0, 0, 9, 0, 100, 0, 0, 0, 15000, 18000, 0, 20, 11, 17276, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Scalding Elemental - Within 0-20 Range - Cast Scald'),
 (10757, 0, 0, 0, 9, 0, 100, 9, 0, 0, 12000, 15000, 0, 5, 11, 11983, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Boiling Elemental - Within 0-5 Range - Cast Steam Jet'),
-(10758, 0, 0, 0, 105, 0, 100, 0, 0, 0, 12000, 16000, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,        'Grimtotem Bandit - Target Casting - Cast Kick'),
+(10758, 0, 0, 0, 105, 0, 50, 0, 0, 0, 12000, 16000, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Grimtotem Bandit - Target Casting - Cast Kick'),
 (10758, 0, 1, 0, 0, 0, 100, 0, 12000, 22000, 20000, 33000, 0, 0, 11, 6713, 32, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0,  'Grimtotem Bandit -  Within 0-5 Range - Cast Disarm'),
 (10758, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                     'Grimtotem Bandit - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (10759, 0, 0, 0, 9, 0, 100, 0, 0, 0, 9600, 12300, 0, 25, 11, 8046, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Grimtotem Stomper - Within 0-25 Range - Cast Earth Shock'),
@@ -105,9 +105,9 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (14427, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                     'Gibblesnik - Between 0-15% Health - Flee For Assist (No Repeat)');
 
 
-UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5, `spawntimesecs` = 37800  WHERE `id1` = 14427; -- Gibblesnik
-UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 10 WHERE `id1` = 5937; -- give Vile Sting some movement
-UPDATE `creature` SET `MovementType` = 2, `currentwaypoint` = 1  WHERE `id1` = 4499; -- Rok'Alim the Pounder, waypoints
+UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5, `spawntimesecs` = 37800  WHERE `id` = 14427; -- Gibblesnik
+UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 10 WHERE `id` = 5937; -- give Vile Sting some movement
+UPDATE `creature` SET `MovementType` = 2, `currentwaypoint` = 1  WHERE `id` = 4499; -- Rok'Alim the Pounder, waypoints
 
 DELETE FROM `creature_addon` WHERE `guid` = 21591;
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 

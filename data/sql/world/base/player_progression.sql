@@ -3,6 +3,7 @@
     These can be used in combination with the 'conditions' database table to hide item drops until the player has reached the progression phase for them.
 */
 
+-- hidden progression quests
 DELETE FROM `quest_template` WHERE `ID` BETWEEN 66001 AND 66018;
 INSERT INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestInfoID`, `SuggestedGroupNum`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `RewardNextQuest`, `RewardXPDifficulty`, `RewardMoney`, `RewardMoneyDifficulty`, `RewardDisplaySpell`, `RewardSpell`, `RewardHonor`, `RewardKillHonor`, 
 `StartItem`, `Flags`, `RequiredPlayerKills`, `RewardItem1`, `RewardAmount1`, `RewardItem2`, `RewardAmount2`, `RewardItem3`, `RewardAmount3`, `RewardItem4`, `RewardAmount4`, `ItemDrop1`, `ItemDropQuantity1`, `ItemDrop2`, `ItemDropQuantity2`, `ItemDrop3`, `ItemDropQuantity3`, `ItemDrop4`, `ItemDropQuantity4`, `RewardChoiceItemID1`, `RewardChoiceItemQuantity1`, 
@@ -52,6 +53,49 @@ INSERT INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sourc
 (66017, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
 (66018, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256);
 
+-- hidden pvp quests
+DELETE FROM `quest_template` WHERE `ID` BETWEEN 66101 AND 66114;
+INSERT INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestInfoID`, `SuggestedGroupNum`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `RewardNextQuest`, `RewardXPDifficulty`, `RewardMoney`, `RewardMoneyDifficulty`, `RewardDisplaySpell`, `RewardSpell`, `RewardHonor`, `RewardKillHonor`, 
+`StartItem`, `Flags`, `RequiredPlayerKills`, `RewardItem1`, `RewardAmount1`, `RewardItem2`, `RewardAmount2`, `RewardItem3`, `RewardAmount3`, `RewardItem4`, `RewardAmount4`, `ItemDrop1`, `ItemDropQuantity1`, `ItemDrop2`, `ItemDropQuantity2`, `ItemDrop3`, `ItemDropQuantity3`, `ItemDrop4`, `ItemDropQuantity4`, `RewardChoiceItemID1`, `RewardChoiceItemQuantity1`, 
+`RewardChoiceItemID2`, `RewardChoiceItemQuantity2`, `RewardChoiceItemID3`, `RewardChoiceItemQuantity3`, `RewardChoiceItemID4`, `RewardChoiceItemQuantity4`, `RewardChoiceItemID5`, `RewardChoiceItemQuantity5`, `RewardChoiceItemID6`, `RewardChoiceItemQuantity6`, `POIContinent`, `POIx`, `POIy`, `POIPriority`, `RewardTitle`, `RewardTalents`, `RewardArenaPoints`, 
+`RewardFactionID1`, `RewardFactionValue1`, `RewardFactionOverride1`, `RewardFactionID2`, `RewardFactionValue2`, `RewardFactionOverride2`, `RewardFactionID3`, `RewardFactionValue3`, `RewardFactionOverride3`, `RewardFactionID4`, `RewardFactionValue4`, `RewardFactionOverride4`, `RewardFactionID5`, `RewardFactionValue5`, `RewardFactionOverride5`, 
+`TimeAllowed`, `AllowableRaces`, `LogTitle`, `LogDescription`, `QuestDescription`, `AreaDescription`, `QuestCompletionLog`, `RequiredNpcOrGo1`, `RequiredNpcOrGo2`, `RequiredNpcOrGo3`, `RequiredNpcOrGo4`, `RequiredNpcOrGoCount1`, `RequiredNpcOrGoCount2`, `RequiredNpcOrGoCount3`, `RequiredNpcOrGoCount4`, 
+`RequiredItemId1`, `RequiredItemId2`, `RequiredItemId3`, `RequiredItemId4`, `RequiredItemId5`, `RequiredItemId6`, `RequiredItemCount1`, `RequiredItemCount2`, `RequiredItemCount3`, `RequiredItemCount4`, `RequiredItemCount5`, `RequiredItemCount6`, `Unknown0`, `ObjectiveText1`, `ObjectiveText2`, `ObjectiveText3`, `ObjectiveText4`, `VerifiedBuild`) VALUES 
+--
+(66101, 2, 50, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 1', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66102, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 2', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66103, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 3', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66104, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 4', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66105, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 5', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66106, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 6', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66107, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 7', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66108, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 8', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66109, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 9', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66110, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 10', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66111, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 11', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66112, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 12', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66113, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 13', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340),
+(66114, 2, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28006, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 'PvP Quest Rank 14', NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', '', '', 12340);
+
+-- don't count hidden pvp quest for the loremaster achievement
+DELETE FROM `quest_template_addon` WHERE `ID` BETWEEN 66101 AND 66114;
+INSERT INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, 
+`RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES 
+(66101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66109, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66111, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66113, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256),
+(66114, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 256);
+
 
 /* ACHIEVEMENTS */
 
@@ -75,6 +119,7 @@ INSERT INTO `achievement_dbc` (`ID`, `Faction`, `Instance_Id`, `Supercedes`,
 -- https://www.azerothcore.org/wiki/conditions
 DELETE FROM `conditions` WHERE `SourceGroup` = 19768 AND `SourceEntry` = 34689; -- Design: Chaotic Skyfire Diamond
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 1 AND `SourceEntry` IN (16716, 16717, 20404, 20406, 20407, 20408, 22525, 22526, 22527, 22528, 22529);
+DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 1 AND `SourceEntry` BETWEEN 20652 AND 20675;
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, 
 `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES 
 --
@@ -105,35 +150,30 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 (1, 15541, 20404, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Encrypted Twilight Text will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
 (1, 15542, 20404, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Encrypted Twilight Text will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
 --
-(1, 11880, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'), -- drops in patch 1.8
-(1, 11881, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 11882, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 11883, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 14479, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15201, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15213, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15541, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15542, 20406, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Mantle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
---
-(1, 11880, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'), -- drops in patch 1.8
-(1, 11881, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 11882, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 11883, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 14479, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15201, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15213, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15541, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15542, 20407, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Robe will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
---
-(1, 11880, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'), -- drops in patch 1.8
-(1, 11881, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 11882, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 11883, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 14479, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15201, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15213, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15541, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
-(1, 15542, 20408, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Twilight Cultist Cowl will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15211, 20652, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Azure Templar - Abyssal Cloth Slippers will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15211, 20653, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Azure Templar - Abyssal Plate Gauntlets will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15211, 20654, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Azure Templar - Amethyst War Staff will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15209, 20655, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Crimson Templar - Abyssal Cloth Handwraps will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15209, 20656, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Crimson Templar - Abyssal Mail Sabatons will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15209, 20657, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Crimson Templar - Crystal Tipped Stilettowill only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15212, 20658, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Hoary Templar - Abyssal Leather Boots will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15212, 20659, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Hoary Templar - Abyssal Mail Handguards will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15212, 20660, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Hoary Templar - Stonecutting Glaive will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15307, 20661, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Earthen Templar - Abyssal Leather Gloves will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15307, 20662, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Earthen Templar - Abyssal Plate Greaves will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15307, 20663, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Earthen Templar - Deep Strike Bow will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15206, 20664, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Cynders - Abyssal Cloth Sash will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15206, 20665, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Cynders - Abyssal Leather Leggings will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15206, 20666, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Cynders - Hardened Steel Warhammer will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15207, 20667, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Fathoms - Abyssal Leather Belt will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15207, 20668, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Fathoms - Abyssal Mail Legguards will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15207, 20669, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Fathoms - Darkstone Claymore will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15208, 20670, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Shards - Abyssal Mail Clutch will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15208, 20671, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Shards - Abyssal Plate Legguards will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15208, 20672, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Shards - Sparkling Crystal Wand will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15220, 20673, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Zephyrs - Abyssal Plate Girdle will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15220, 20674, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Zephyrs - Abyssal Cloth Pants will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
+(1, 15220, 20675, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'The Duke of Zephyrs - Soulrender will only drop if the player has completed PROGRESSION_BLACKWING_LAIR'),
 --
 (1, 8555, 22525, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Crypt Fiend Parts will only drop if the player has completed PROGRESSION_AQ'),
 (1, 8556, 22525, 0, 0, 8, 0, 66006, 0, 0, 0, 0, 0, '', 'Crypt Fiend Parts will only drop if the player has completed PROGRESSION_AQ'),
@@ -397,4 +437,3 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 --
 (1, 19768, 34689, 0, 1, 8, 0, 66011, 0, 0, 0, 0, 0, '', 'Design: Chaotic Skyfire Diamond will only drop if the player has completed PROGRESSION_TBC_TIER_3'),
 (1, 19768, 34689, 0, 1, 7, 0, 755, 1, 0, 0, 0, 0, '',   'Design: Chaotic Skyfire Diamond will only drop if the player has the Jewelcrafting skill');
-

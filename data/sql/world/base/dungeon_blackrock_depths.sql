@@ -15,7 +15,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (8889, 0, 1, 0, 0, 0, 100, 0, 8000, 11000, 7000, 12000, 0, 0, 11, 15580, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,    'Anvilrage Overseer - Within 0-5 Range - Cast Strike'),
 (8889, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Overseer - Between 0-15% Health - Flee For Assist'),
 (8890, 0, 0, 0, 9, 0, 100, 0, 0, 0, 13000, 18000, 0, 30, 11, 14030, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Anvilrage Warden - Within 0-30 Range - Cast Hooked Net'),
-(8890, 0, 1, 0, 105, 0, 100, 0, 0, 0, 9000, 12000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Anvilrage Warden - Target Casting - Cast Shield Bash'),
+(8890, 0, 1, 0, 105, 0, 50, 0, 0, 0, 9000, 12000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Anvilrage Warden - Target Casting - Cast Shield Bash'),
 (8890, 0, 2, 0, 54, 0, 100, 512, 0, 0, 0, 0, 0, 0, 53, 1, 8912, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Anvilrage Warden - Just Summoned - Start Waypoint (React State Aggressive)'),
 (8890, 0, 3, 0, 40, 0, 100, 0, 4, 8912, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 19, 9020, 0, 0, 0, 0, 0, 0, 0,               'Anvilrage Warden - On Waypoint 4 Reached - Start Attacking'),
 (8890, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Warden - Between 0-15% Health - Flee For Assist'),
@@ -27,7 +27,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (8891, 0, 5, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Guardsman - Between 0-15% Health - Flee For Assist'),
 (8892, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 674, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Anvilrage Footman - On Aggro - Cast Dual Wield'),
 (8892, 0, 1, 0, 0, 0, 100, 0, 3000, 5000, 5000, 8000, 0, 0, 11, 15580, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,      'Anvilrage Footman - Within 0-5 Range - Cast Strike'),
-(8892, 0, 2, 0, 105, 0, 100, 0, 0, 0, 8000, 12000, 0, 5, 11, 15614, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Anvilrage Footman - Target Casting - Cast Kick'),
+(8892, 0, 2, 0, 105, 0, 50, 0, 0, 0, 8000, 12000, 0, 5, 11, 15614, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Anvilrage Footman - Target Casting - Cast Kick'),
 (8892, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Footman - Between 0-15% Health - Flee For Assist'),
 (8893, 0, 0, 0, 0, 0, 100, 0, 4000, 8000, 6000, 10000, 0, 0, 11, 15284, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,     'Anvilrage Soldier - Within 0-5 Range - Cast Cleave'),
 (8893, 0, 1, 0, 9, 0, 100, 0, 0, 0, 11000, 16000, 0, 5, 11, 9080, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Anvilrage Soldier - Within 0-5 Range - Cast Hamstring'),
@@ -53,11 +53,14 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (8896, 0, 8, 0, 0, 0, 10, 0, 5000, 10000, 120000, 120000, 0, 0, 11, 3604, 32, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,  'Shadowforge Peasant - Within 0-5 Range - Cast Tendon Rip'),
 (8896, 0, 9, 0, 74, 0, 100, 0, 0, 00, 20000, 25000, 50, 40, 11, 11642, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Shadowforge Peasant - Friendly Between 0-50% Health - Cast Heal'),
 (8896, 0, 10, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                     'Shadowforge Peasant - Between 0-15% Health - Flee For Assist'),
+--
 (8897, 0, 0, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 30, 60, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Doomforge Craftsman - Outside 30 Range - Start Combat Movement'),
 (8897, 0, 1, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 5, 30, 21, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Doomforge Craftsman - Within 5-30 Range - Stop Combat Movement'),
 (8897, 0, 2, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 0, 5, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Doomforge Craftsman - Within 0-5 Range - Start Combat Movement'),
 (8897, 0, 3, 0, 9, 0, 100, 0, 0, 0, 2000, 4000, 5, 30, 11, 9143, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Doomforge Craftsman - In Combat - Cast Bomb'),
-(8897, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Doomforge Craftsman - Between 0-15% Health - Flee For Assist (No Repeat)'),
+(8897, 0, 4, 0, 74, 0, 100, 0, 0, 0, 20000, 20000, 50, 20, 11, 13951, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Doomforge Craftsman - Warbringer Contruct below 50% hp - Cast Rebuild'),
+(8897, 0, 5, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Doomforge Craftsman - Between 0-15% Health - Flee For Assist (No Repeat)'),
+--
 (8898, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 8258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Anvilrage Marshal - On Aggro - Cast Devotion Aura'),
 (8898, 0, 1, 0, 9, 0, 100, 0, 0, 0, 6000, 8000, 0, 5, 11, 13953, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Anvilrage Marshal - Within 0-5 Range - Cast Holy Strike'),
 (8898, 0, 2, 0, 14, 0, 100, 0, 3000, 40, 3000, 6000, 0, 0, 11, 15493, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,        'Anvilrage Marshal - Friendly Missing 3000 Health - Cast Holy Light'),
@@ -92,7 +95,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (8902, 0, 9, 0, 0, 0, 100, 0, 7000, 14000, 7000, 14000, 0, 0, 11, 13339, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Shadowforge Citizen - In Combat - Cast Fire Blast'),
 (8902, 0, 10, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                     'Shadowforge Citizen - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (8903, 0, 0, 0, 0, 0, 100, 0, 5000, 8000, 9000, 13000, 0, 0, 11, 13737, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,     'Anvilrage Captain - Within 0-5 Range - Cast Mortal Strike'),
-(8903, 0, 1, 0, 105, 0, 100, 0, 0, 0, 9000, 12000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Anvilrage Captain - Target Casting - Cast Shield Bash'),
+(8903, 0, 1, 0, 105, 0, 50, 0, 0, 0, 9000, 12000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Anvilrage Captain - Target Casting - Cast Shield Bash'),
 (8903, 0, 2, 0, 0, 0, 100, 0, 2000, 4000, 7000, 11000, 0, 0, 11, 12169, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Anvilrage Captain - In Combat - Cast Shield Block'),
 (8903, 0, 3, 0, 9, 0, 100, 0, 0, 0, 14000, 20000, 0, 8, 11, 13730, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Anvilrage Captain - Within 0-8 Range - Cast Demoralizing Shout'),
 (8903, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Captain - Between 0-15% Health - Flee For Assist (No Repeat)'),
@@ -143,12 +146,12 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (8913, 0, 6, 0, 0, 4, 100, 0, 0, 0, 2000, 4000, 0, 0, 11, 13748, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Twilight Emissary - In Combat - Cast Arcane Bolt (Phase 3)'),
 (8913, 0, 7, 0, 106, 4, 100, 0, 0, 0, 10000, 30000, 0, 8, 11, 13745, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Twilight Emissary - Within 0-8 Range - Cast Arcane Explosion (Phase 3)'),
 (8913, 0, 8, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Twilight Emissary - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(8914, 0, 0, 0, 105, 0, 100, 0, 0, 0, 4000, 8000, 0, 5, 11, 15615, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Twilight Bodyguard - Target Casting - Cast Pummel'),
+(8914, 0, 0, 0, 105, 0, 50, 0, 0, 0, 4000, 8000, 0, 5, 11, 15615, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,            'Twilight Bodyguard - Target Casting - Cast Pummel'),
 (8914, 0, 1, 0, 0, 0, 100, 0, 16000, 16000, 14000, 14000, 0, 0, 11, 13902, 0, 0, 0, 0, 0, 21, 10, 0, 0, 0, 0, 0, 0, 0, 'Twilight Bodyguard - Within 0-10 Range - Cast Fist of Ragnaros'),
 (8914, 0, 2, 0, 14, 0, 100, 0, 3500, 40, 31000, 33000, 0, 0, 11, 13903, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,      'Twilight Bodyguard - Friendly Missing 3500 Health - Cast Seal of Sacrifice'),
 (8914, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Twilight Bodyguard - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (8915, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 31, 1, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Twilights Hammer Ambassador - On Respawn - Set Phase Random Between 1-4'), -- test!
-(8915, 0, 1, 0, 105, 1, 100, 0, 0, 0, 1000, 7000, 0, 20, 11, 15501, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Twilights Hammer Ambassador - Target Casting - Cast Earth Shock (Phase 1)'),
+(8915, 0, 1, 0, 105, 1, 50, 0, 0, 0, 1000, 7000, 0, 20, 11, 15501, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Twilights Hammer Ambassador - Target Casting - Cast Earth Shock (Phase 1)'),
 (8915, 0, 2, 0, 0, 1, 100, 0, 0, 0, 12000, 16000, 0, 0, 11, 11980, 32, 0, 0, 0, 0, 21, 30, 0, 0, 0, 0, 0, 0, 0,        'Twilights Hammer Ambassador - In Combat - Cast Curse of Weakness (Phase 1)'),
 (8915, 0, 3, 0, 0, 2, 100, 0, 5000, 8000, 30000, 45000, 0, 0, 11, 15499, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Twilights Hammer Ambassador - In Combat - Cast Frost Shock (Phase 2)'),
 (8915, 0, 4, 0, 1, 2, 100, 0, 1000, 1000, 90000, 90000, 0, 0, 11, 12544, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Twilights Hammer Ambassador - Out of Combat - Cast Frost Armor (Phase 2)'),
@@ -235,11 +238,11 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (9056, 0, 1, 0, 2, 0, 100, 1, 0, 60, 0, 0, 0, 0, 11, 15493, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Fineous Darkvire - Between 0-60% Health - Cast Holy Light (No Repeat)'),
 (9056, 0, 2, 0, 2, 0, 100, 1, 0, 40, 0, 0, 0, 0, 11, 15493, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Fineous Darkvire - Between 0-40% Health - Cast Holy Light (No Repeat)'),
 (9056, 0, 3, 0, 9, 0, 100, 0, 0, 0, 6000, 8500, 0, 5, 11, 13953, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Fineous Darkvire - Within 0-5 Range - Cast Holy Strike'),
-(9056, 0, 4, 0, 105, 0, 100, 0, 0, 0, 11000, 15000, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Fineous Darkvire - Target Casting - Cast Kick'),
+(9056, 0, 4, 0, 105, 0, 50, 0, 0, 0, 11000, 15000, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Fineous Darkvire - Target Casting - Cast Kick'),
 (9056, 0, 5, 0, 2, 0, 100, 1, 0, 20, 0, 0, 0, 0, 11, 15346, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Fineous Darkvire - Between 0-20% Health - Cast Seal of Reckoning (No Repeat)'),
 --
 (9319, 0, 0, 0, 0, 0, 100, 0, 9000, 10000, 15000, 60000, 0, 0, 11, 13730, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Houndmaster Grebmar - In Combat - Cast Demoralizing Shout'),
-(9319, 0, 1, 0, 105, 0, 100, 0, 0, 0, 7000, 25000, 0, 5, 11, 15615, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Houndmaster Grebmar - Target Casting - Cast Pummel'),
+(9319, 0, 1, 0, 105, 0, 50, 0, 0, 0, 7000, 25000, 0, 5, 11, 15615, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Houndmaster Grebmar - Target Casting - Cast Pummel'),
 (9319, 0, 2, 0, 0, 0, 100, 0, 4000, 12000, 4000, 12000, 0, 0, 11, 21049, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Houndmaster Grebmar - In Combat - Cast Bloodlust'), -- https://www.youtube.com/watch?v=RdBpOWNqZeg
 (9319, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Houndmaster Grebmar - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
@@ -264,7 +267,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (9543, 0, 5, 0, 0, 0, 100, 0, 5000, 14000, 5000, 14000, 0, 0, 11, 9080, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,     'Ribbly Screwspigot - Within 0-5 Range - Cast Hamstring'),
 (9543, 0, 6, 0, 2, 0, 100, 1, 0, 30, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Ribbly Screwspigot - Between 0-30% Health - Flee For Assist (No Repeat)'),
 --
-(9545, 0, 0, 0, 105, 0, 100, 0, 0, 0, 11000, 15000, 0, 5, 11, 15610, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Grim Patron - Target Casting - Cast Kick'),
+(9545, 0, 0, 0, 105, 0, 50, 0, 0, 0, 11000, 15000, 0, 5, 11, 15610, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Grim Patron - Target Casting - Cast Kick'),
 (9545, 0, 1, 0, 2, 0, 100, 1, 0, 30, 0, 0, 0, 0, 11, 14822, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Grim Patron - Between 0-30% Health - Cast Drunken Rage (No Repeat)'),
 (9545, 0, 2, 0, 1, 0, 55, 0, 7000, 15000, 7000, 15000, 0, 0, 10, 1, 4, 11, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Grim Patron - OOC - Play Random Emotes'),
 (9545, 0, 3, 0, 38, 0, 100, 0, 1, 1, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 21, 30, 0, 0, 0, 0, 0, 0, 0,                    'Grim Patron - On Data set - Start Attack'),
@@ -288,9 +291,13 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (9956, 0, 5, 0, 9, 0, 100, 0, 0, 0, 12000, 15000, 0, 5, 11, 9080, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Shadowforge Flame Keeper - Within 0-5 Range - Cast Hamstring'),
 (9956, 0, 6, 0, 9, 0, 100, 0, 0, 0, 7000, 12000, 0, 5, 11, 11976, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Shadowforge Flame Keeper - Within 0-5 Range - Cast Strike'),
 (9956, 0, 7, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Shadowforge Flame Keeper - Between 0-15% Health - Flee For Assist (No Repeat)'),
-
 (10043, 0, 0, 0, 0, 0, 100, 0, 10000, 20000, 10000, 20000, 0, 0, 11, 15692, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0, 'Ribbly\'s Crony - Within 0-5 Range - Cast Eviscerate'),
 (10043, 0, 1, 0, 0, 0, 100, 0, 5000, 7000, 6000, 9000, 0, 0, 11, 15581, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,     'Ribbly\'s Crony - Within 0-5 Range - Cast Sinister Strike');
+
+DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 13 AND `SourceGroup` = 1 AND `SourceEntry` = 13951;
+INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`,
+`ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES
+(13, 1, 13951, 0, 0, 31, 0, 3, 8905, 0, 0, 0, 0, "", "Set Warbringer Construct as target for Rebuild spell");
 
 -- fix bridge ambush
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (-91106, -91107, -608891);
@@ -299,74 +306,52 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, 
 `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
 --
-(-91106, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Anvilrage Guardsman - On Respawn - Set Invisible'),
-(-91106, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Anvilrage Guardsman - On Respawn - Set Faction'),
-(-91106, 0, 0, 0, 60, 0, 100, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Anvilrage Guardsman - On Update - Set in Combat with Zone'),
-(-91107, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Anvilrage Guardsman - On Respawn - Set Invisible'),
-(-91107, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Anvilrage Guardsman - On Respawn - Set Faction'),
-(-91107, 0, 0, 0, 60, 0, 100, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Anvilrage Guardsman - On Update - Set in Combat with Zone'),
+(-91106, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Anvilrage Guardsman - On Respawn - Set Invisible'),
+(-91106, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Anvilrage Guardsman - On Respawn - Set Faction'),
+(-91107, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Anvilrage Guardsman - On Respawn - Set Invisible'),
+(-91107, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Anvilrage Guardsman - On Respawn - Set Faction'),
 --
-(-608891, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'BRD Bridge Trigger - On Respawn - Set Invisible'),
-(-608891, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'BRD Bridge Trigger - On Respawn - Set Faction'),
-(-608891, 0, 2, 3, 101, 0, 100, 0, 1, 10, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 10, 91106, 0, 0, 0, 0, 0, 0, 0, 'BRD Bridge Trigger - On Near Player - Set visible Anvilrage Guardsman 91106'),
-(-608891, 0, 3, 4, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 21, 0, 0, 0, 0, 0, 10, 91106, 0, 0, 0, 0, 0, 0, 0,   'BRD Bridge Trigger - On Near Player - Set Faction Anvilrage Guardsman 91106'),
-(-608891, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 10, 91107, 0, 0, 0, 0, 0, 0, 0,   'BRD Bridge Trigger - On Near Player - Set visible Anvilrage Guardsman 91107'),
-(-608891, 0, 5, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 21, 0, 0, 0, 0, 0, 10, 91107, 0, 0, 0, 0, 0, 0, 0,   'BRD Bridge Trigger - On Near Player - Set Faction Anvilrage Guardsman 91107');
+(-608891, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'BRD Bridge Trigger - On Respawn - Set Invisible'),
+(-608891, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'BRD Bridge Trigger - On Respawn - Set Faction'),
+(-608891, 0, 2, 3, 101, 0, 100, 1, 1, 10, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 10, 91106, 0, 0, 0, 0, 0, 0, 0,      'BRD Bridge Trigger - On Near Player - Set visible Anvilrage Guardsman 91106 (No Repeat)'),
+(-608891, 0, 3, 4, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 21, 0, 0, 0, 0, 0, 10, 91106, 0, 0, 0, 0, 0, 0, 0,        'BRD Bridge Trigger - On Near Player - Set Faction Anvilrage Guardsman 91106'),   
+(-608891, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 911060, 0, 0, 0, 0, 0, 10, 91106, 0, 0, 0, 0, 0, 0, 0,  'BRD Bridge Trigger - On Near Player - Start Waypoints Anvilrage Guardsman 91106'),
+(-608891, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 10, 91107, 0, 0, 0, 0, 0, 0, 0,        'BRD Bridge Trigger - On Near Player - Set visible Anvilrage Guardsman 91107'),
+(-608891, 0, 6, 7, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 21, 0, 0, 0, 0, 0, 10, 91107, 0, 0, 0, 0, 0, 0, 0,        'BRD Bridge Trigger - On Near Player - Set Faction Anvilrage Guardsman 91107'),
+(-608891, 0, 7, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 911070, 0, 0, 0, 0, 0, 10, 91107, 0, 0, 0, 0, 0, 0, 0,  'BRD Bridge Trigger - On Near Player - Start Waypoints Anvilrage Guardsman 91107');
 
-DELETE FROM `creature` WHERE `guid` IN (91106, 91107, 608891);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `guid` IN (90728, 91106, 91107, 608891);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(91106,  8891, 0, 0, 230, 0, 0, 1, 1, 1, 642.366, -274.516, -43.1092, 0.471239, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(91107,  8891, 0, 0, 230, 0, 0, 1, 1, 1, 740.114, -283.345, -42.7508, 2.86234, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(608891, 8891, 0, 0, 230, 0, 0, 1, 1, 1, 686.649, -280.075, -43.1966, 0.0844455, 300, 0, 0, 6876, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(90728,  8911, 230, 0, 0, 1, 1, 0, 754.091, -73.9451, -46.2159, 0.84735, 7200, 0, 1, 7599, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(91106,  8891, 230, 0, 0, 1, 1, 1, 642.366, -274.516, -43.1092, 0.471239, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(91107,  8891, 230, 0, 0, 1, 1, 1, 740.114, -283.345, -42.7508, 2.86234, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(608891, 8891, 230, 0, 0, 1, 1, 1, 686.649, -280.075, -43.1966, 0.0844455, 300, 0, 0, 6876, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 UPDATE `creature` SET `MovementType` = 2, `currentwaypoint` = 1 WHERE `guid` = 47738; -- Fireguard Destroyer(8911)
 UPDATE `creature` SET `MovementType` = 2, `currentwaypoint` = 1 WHERE `guid` = 90828; -- Blazing Fireguard(8910)
 
-DELETE FROM `creature_addon` WHERE `guid` IN (47738, 90828);
+DELETE FROM `creature_addon` WHERE `guid` IN (47738, 90828, 91106, 91107);
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 
 (47738, 477380, 0, 0, 1, 0, 0, NULL),
-(90828, 908280, 0, 0, 1, 0, 0, NULL);
+(90828, 908280, 0, 0, 1, 0, 0, NULL),
+(91106, 911060, 0, 0, 1, 0, 0, NULL),
+(91107, 911070, 0, 0, 1, 0, 0, NULL);
 
--- fix Ironhand Guardian's Gout of Flame in room with Magmus
-DELETE FROM `creature_template` WHERE `entry` IN (108982);
-INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `name`, `subname`, `IconName`, `gossip_menu_id`, 
-`minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `scale`, `rank`, `dmgschool`, `DamageModifier`, 
-`BaseAttackTime`, `RangeAttackTime`, `BaseVariance`, `RangeVariance`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, 
-`PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `HoverHeight`, `HealthModifier`, `ManaModifier`, `ArmorModifier`, `ExperienceModifier`, `RacialLeader`, `movementId`, 
-`RegenHealth`, `mechanic_immune_mask`, `spell_school_immune_mask`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES
+DELETE FROM `waypoint_data` WHERE `id` IN (911060, 911070);
+INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES
 --
-(108982, 0, 0, 0, 0, 0, 'Ironhand Guardian', NULL, NULL, 0, 60, 60, 0, 15, 0, 1, 1.14286, 1, 1, 20, 1, 1, 0, 0.1, 2000, 2000, 
-1, 1, 1, 70, 2048, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 'SmartAI', 0, 1, 3, 2, 1, 1, 0, 0, 1, 16384, 0, 2050, '', 0);
-
-DELETE FROM `creature` WHERE `id1` IN (8982, 108982);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
-`wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
+(911060, 1, 642.366, -274.516, -43.1092, NULL, 0, 0, 0, 100, 0),
+(911060, 2, 641.597, -281.793, -43.2417, NULL, 0, 1, 0, 100, 0),
+(911060, 3, 686.649, -280.075, -43.1966, NULL, 0, 1, 0, 100, 0),
 --
-(47323, 108982, 0, 0, 230, 0, 0, 1, 1, 0, 1407.29, -587.299, -91.9711, 3.15905, 7200, 0, 0, 126, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47442, 108982, 0, 0, 230, 0, 0, 1, 1, 0, 1353.43, -587.317, -91.9711, 0.15708, 7200, 0, 0, 126, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47466, 108982, 0, 0, 230, 0, 0, 1, 1, 0, 1406.88, -632.438, -91.9711, 3.14159, 7200, 0, 0, 126, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47472, 108982, 0, 0, 230, 0, 0, 1, 1, 0, 1353.92, -632.75, -91.9711, 0.122173, 7200, 0, 0, 126, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47473, 108982, 0, 0, 230, 0, 0, 1, 1, 0, 1407.67, -677.718, -91.9711, 3.14159, 7200, 0, 0, 126, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47474, 108982, 0, 0, 230, 0, 0, 1, 1, 0, 1353.16, -677.38, -91.9711, 0, 7200, 0, 0, 126, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(911070, 1, 740.114, -283.345, -42.7508, NULL, 0, 0, 0, 100, 0),
+(911070, 2, 739.453, -278.120, -42.8321, NULL, 0, 1, 0, 100, 0),
+(911070, 3, 686.649, -280.075, -43.1966, NULL, 0, 1, 0, 100, 0);
 
-DELETE FROM `creature_template_model` WHERE `CreatureID` = 108982;
-INSERT INTO `creature_template_model` (`CreatureID`, `Idx`, `CreatureDisplayID`, `DisplayScale`, `Probability`, `VerifiedBuild`) VALUES 
-(108982, 0, 9189, 1, 1, 12340);
-
-UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN (108982);
-DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (108982);
-INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
-`event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
-`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, 
-`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
---
-(108982, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 15533, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ironhand Guardian - On Spawn - Cast Stoned Visual'),
-(108982, 0, 1, 0, 1, 0, 100, 0, 4000, 8000, 13000, 18000, 0, 0, 11, 15529, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Ironhand Guardian - Out of Combat - Cast Gout of Flame');
-
--- fix Fireguard patrols near Pyromancer Loregrain and in front of the vault.
-DELETE FROM `waypoint_data` WHERE `id` IN (477380, 908280);
+-- fix Fireguard patrols
+DELETE FROM `waypoint_data` WHERE `id` IN (477380, 907280, 908280);
 INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES 
 --
 (477380, 1, 712.727, -278.328, -43.2147, 0.075571, 0, 0, 0, 100, 0), -- Fireguard Destroyer(8911)
@@ -380,6 +365,25 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (477380, 9, 645.91, -284.733, -43.2395, 0.005052, 0, 0, 0, 100, 0),
 (477380, 10, 660.339, -282.755, -43.2208, 0.10519, 0, 0, 0, 100, 0),
 --
+(907280, 1, 761.283, -65.8021, -46.2337, NULL, 0, 0, 0, 100, 0), -- Fireguard Destroyer(8911)
+(907280, 2, 762.053, -59.3832, -46.2337, NULL, 0, 0, 0, 100, 0),
+(907280, 3, 740.873, -15.4984, -46.2337, NULL, 0, 0, 0, 100, 0),
+(907280, 4, 733.056, -6.43943, -46.1815, NULL, 0, 0, 0, 100, 0),
+(907280, 5, 710.789, -8.89487, -45.9405, NULL, 0, 0, 0, 100, 0),
+(907280, 6, 706.555, 13.0863, -45.5852, NULL, 0, 0, 0, 100, 0),
+(907280, 7, 710.562, 22.7446, -45.4594, NULL, 0, 0, 0, 100, 0),
+(907280, 8, 696.138, 34.8861, -45.467, NULL, 0, 0, 0, 100, 0),
+(907280, 9, 691.576, 46.4976, -45.467, NULL, 0, 0, 0, 100, 0),
+(907280, 10, 696.138, 34.8861, -45.467, NULL, 0, 0, 0, 100, 0),
+(907280, 11, 710.562, 22.7446, -45.4594, NULL, 0, 0, 0, 100, 0),
+(907280, 12, 706.555, 13.0863, -45.5852, NULL, 0, 0, 0, 100, 0),
+(907280, 13, 710.789, -8.89487, -45.9405, NULL, 0, 0, 0, 100, 0),
+(907280, 14, 733.056, -6.43943, -46.1815, NULL, 0, 0, 0, 100, 0),
+(907280, 15, 740.873, -15.4984, -46.2337, NULL, 0, 0, 0, 100, 0),
+(907280, 16, 762.053, -59.3832, -46.2337, NULL, 0, 0, 0, 100, 0),
+(907280, 17, 761.283, -65.8021, -46.2337, NULL, 0, 0, 0, 100, 0),
+(907280, 18, 747.48, -80.9312, -46.2337, NULL, 0, 0, 0, 100, 0),
+--
 (908280, 1, 853.993, -261.658, -49.9364, 1.5072, 0, 0, 0, 100, 0), -- Blazing Fireguard(8910)
 (908280, 2, 853.608, -277.92, -49.9364, 4.93155, 0, 0, 0, 100, 0),
 (908280, 3, 860.549, -295.867, -49.9364, 5.14754, 0, 0, 0, 100, 0),
@@ -388,7 +392,6 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (908280, 6, 880.836, -310.104, -49.9364, 2.56556, 0, 0, 0, 100, 0),
 (908280, 7, 860.108, -296.642, -49.9364, 2.16697, 0, 0, 0, 100, 0),
 (908280, 8, 854.253, -279.573, -49.9364, 1.9019, 0, 0, 0, 100, 0);
-
 
 -- fix officer patrols in Bael'Gar area
 DELETE FROM `creature` WHERE `guid` IN (
@@ -399,44 +402,44 @@ DELETE FROM `creature` WHERE `guid` IN (
 47799, 47800, 47801, 47802, 47803,
 90658, 90659, 90660, 90661, 90662);
 
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(45857, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 734.342, -115.562, -71.8692, 2.29181, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL), -- Anvilrage Officer
-(45858, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 733.265, -108.619, -71.7611, 5.37845, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45859, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 734.991, -118.049, -71.9244, 2.29044, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(90640, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 738.351, -115.109, -71.9528, 2.30947, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45861, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 736.664, -116.583, -71.9382, 2.28651, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45857, 8895, 230, 0, 0, 1, 1, 1, 734.342, -115.562, -71.8692, 2.29181, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL), -- Anvilrage Officer
+(45858, 8893, 230, 0, 0, 1, 1, 1, 733.265, -108.619, -71.7611, 5.37845, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45859, 8894, 230, 0, 0, 1, 1, 1, 734.991, -118.049, -71.9244, 2.29044, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(90640, 8893, 230, 0, 0, 1, 1, 1, 738.351, -115.109, -71.9528, 2.30947, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45861, 8892, 230, 0, 0, 1, 1, 1, 736.664, -116.583, -71.9382, 2.28651, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(45875, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 697.116, -95.4629, -71.4095, 5.41586, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
-(45876, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 696.59, -92.6785, -71.371, 5.37265, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45877, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 694.594, -94.5057, -71.3968, 5.32161, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(45878, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 698.499, -91.3146, -71.3517, 5.34517, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45879, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 692.64, -95.8691, -71.4159, 5.32161, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45875, 8895, 230, 0, 0, 1, 1, 1, 697.116, -95.4629, -71.4095, 5.41586, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
+(45876, 8893, 230, 0, 0, 1, 1, 1, 696.59, -92.6785, -71.371, 5.37265, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45877, 8894, 230, 0, 0, 1, 1, 1, 694.594, -94.5057, -71.3968, 5.32161, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(45878, 8893, 230, 0, 0, 1, 1, 1, 698.499, -91.3146, -71.3517, 5.34517, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45879, 8892, 230, 0, 0, 1, 1, 1, 692.64, -95.8691, -71.4159, 5.32161, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(47781, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 729.238, 160.809, -72.2434, 2.6513, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
-(47782, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 730.246, 158.012, -72.2814, 2.63558, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47783, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 728.826, 155.449, -72.2943, 2.63558, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(47784, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 732.025, 161.222, -72.2645, 2.63558, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47785, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 733.37, 163.649, -72.2518, 2.63558, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47781, 8895, 230, 0, 0, 1, 1, 1, 729.238, 160.809, -72.2434, 2.6513, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
+(47782, 8893, 230, 0, 0, 1, 1, 1, 730.246, 158.012, -72.2814, 2.63558, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47783, 8894, 230, 0, 0, 1, 1, 1, 728.826, 155.449, -72.2943, 2.63558, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(47784, 8892, 230, 0, 0, 1, 1, 1, 732.025, 161.222, -72.2645, 2.63558, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47785, 8892, 230, 0, 0, 1, 1, 1, 733.37, 163.649, -72.2518, 2.63558, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(47786, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 668.276, 135.126, -73.3139, 4.07486, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
-(47787, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 668.086, 137.35, -73.3139, 4.07486, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47788, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 670.624, 135.459, -73.3139, 4.0513, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47789, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 672.606, 134.002, -73.3139, 4.07486, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(47790, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 666.015, 138.885, -73.3139, 4.07486, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(47786, 8895, 230, 0, 0, 1, 1, 1, 668.276, 135.126, -73.3139, 4.07486, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
+(47787, 8893, 230, 0, 0, 1, 1, 1, 668.086, 137.35, -73.3139, 4.07486, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47788, 8893, 230, 0, 0, 1, 1, 1, 670.624, 135.459, -73.3139, 4.0513, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47789, 8894, 230, 0, 0, 1, 1, 1, 672.606, 134.002, -73.3139, 4.07486, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(47790, 8894, 230, 0, 0, 1, 1, 1, 666.015, 138.885, -73.3139, 4.07486, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(47799, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 680.336, -44.8507, -72.9776, 2.23294, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
-(47800, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 680.39, -47.2331, -72.9302, 2.22706, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47801, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 682.422, -45.6471, -72.9302, 2.23099, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(47802, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 678.626, -48.8339, -72.9332, 2.30756, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47803, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 684.191, -44.3128, -72.931, 2.28008, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47799, 8895, 230, 0, 0, 1, 1, 1, 680.336, -44.8507, -72.9776, 2.23294, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
+(47800, 8893, 230, 0, 0, 1, 1, 1, 680.39, -47.2331, -72.9302, 2.22706, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47801, 8894, 230, 0, 0, 1, 1, 1, 682.422, -45.6471, -72.9302, 2.23099, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(47802, 8893, 230, 0, 0, 1, 1, 1, 678.626, -48.8339, -72.9332, 2.30756, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47803, 8892, 230, 0, 0, 1, 1, 1, 684.191, -44.3128, -72.931, 2.28008, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(90658, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 664.806, 195.915, -72.1177, 5.63189, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
-(90659, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 660.53, 193.589, -72.1475, 5.66136, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90660, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 662.061, 195.76, -72.1159, 5.68493, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(90661, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 666.312, 201.408, -72.0624, 5.62013, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90662, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 664.427, 198.963, -72.0682, 5.62602, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(90658, 8895, 230, 0, 0, 1, 1, 1, 664.806, 195.915, -72.1177, 5.63189, 7200, 0, 1, 5502, 3728, 2, 0, 0, 0, '', 0, 0, NULL),  -- Anvilrage Officer
+(90659, 8893, 230, 0, 0, 1, 1, 1, 660.53, 193.589, -72.1475, 5.66136, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90660, 8894, 230, 0, 0, 1, 1, 1, 662.061, 195.76, -72.1159, 5.68493, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(90661, 8893, 230, 0, 0, 1, 1, 1, 666.312, 201.408, -72.0624, 5.62013, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90662, 8892, 230, 0, 0, 1, 1, 1, 664.427, 198.963, -72.0682, 5.62602, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `creature_formations` WHERE `leaderGUID` IN (45857, 45875, 47781, 47786, 47799, 90658);
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES 
@@ -544,24 +547,24 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 
 -- fix officer packs that are misplaced and have wrong movement
 DELETE FROM `creature` WHERE guid IN (90653, 90654, 90655, 90656, 90657, 90680, 90681, 90682, 90683, 90684, 90839, 90840, 90841, 90842, 90843);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(90653, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 678.689, -121.644, -72.0716, 1.21643, 7200, 0, 0, 5502, 3728, 0, 0, 0, 0, '', 0, 0, NULL),
-(90654, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 680.856, -127.272, -72.0552, 1.16142, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90655, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 679.429, -124.626, -72.07, 1.17716, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90656, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 682.052, -123.109, -72.0377, 1.30479, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90657, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 676.695, -125.1, -72.1019, 1.38726, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(90680, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 736.148, -59.2571, -71.8741, 0.258237, 7200, 0, 0, 5502, 3728, 0, 0, 0, 0, '', 0, 0, NULL),
-(90681, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 738.789, -59.5167, -71.8238, 3.39197, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90682, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 738.103, -57.3964, -71.8401, 3.44892, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
-(90683, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 739.379, -61.8249, -71.8085, 3.39197, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90684, 8892, 0, 0, 230, 0, 0, 1, 1, 1, 737.435, -55.3414, -71.8559, 3.40769, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90839, 8895, 0, 0, 230, 0, 0, 1, 1, 1, 667.578, -29.2691, -73.3151, 3.1583, 7200, 0, 0, 5502, 3728, 0, 0, 0, 0, '', 0, 0, NULL),
-(90840, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 667.567, -33.3695, -73.3112, 3.28122, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90841, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 671.155, -30.151, -73.3134, 3.28122, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90842, 8893, 0, 0, 230, 0, 0, 1, 1, 1, 664.043, -28.4768, -73.2895, 3.28122, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90843, 8894, 0, 0, 230, 0, 0, 1, 1, 1, 667.517, -25.1782, -73.8748, 3.28122, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL);
+(90653, 8895, 230, 0, 0, 1, 1, 1, 678.689, -121.644, -72.0716, 1.21643, 7200, 0, 0, 5502, 3728, 0, 0, 0, 0, '', 0, 0, NULL),
+(90654, 8893, 230, 0, 0, 1, 1, 1, 680.856, -127.272, -72.0552, 1.16142, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90655, 8893, 230, 0, 0, 1, 1, 1, 679.429, -124.626, -72.07, 1.17716, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90656, 8893, 230, 0, 0, 1, 1, 1, 682.052, -123.109, -72.0377, 1.30479, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90657, 8894, 230, 0, 0, 1, 1, 1, 676.695, -125.1, -72.1019, 1.38726, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(90680, 8895, 230, 0, 0, 1, 1, 1, 736.148, -59.2571, -71.8741, 0.258237, 7200, 0, 0, 5502, 3728, 0, 0, 0, 0, '', 0, 0, NULL),
+(90681, 8893, 230, 0, 0, 1, 1, 1, 738.789, -59.5167, -71.8238, 3.39197, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90682, 8894, 230, 0, 0, 1, 1, 1, 738.103, -57.3964, -71.8401, 3.44892, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL),
+(90683, 8893, 230, 0, 0, 1, 1, 1, 739.379, -61.8249, -71.8085, 3.39197, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90684, 8892, 230, 0, 0, 1, 1, 1, 737.435, -55.3414, -71.8559, 3.40769, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90839, 8895, 230, 0, 0, 1, 1, 1, 667.578, -29.2691, -73.3151, 3.1583, 7200, 0, 0, 5502, 3728, 0, 0, 0, 0, '', 0, 0, NULL),
+(90840, 8893, 230, 0, 0, 1, 1, 1, 667.567, -33.3695, -73.3112, 3.28122, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90841, 8893, 230, 0, 0, 1, 1, 1, 671.155, -30.151, -73.3134, 3.28122, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90842, 8893, 230, 0, 0, 1, 1, 1, 664.043, -28.4768, -73.2895, 3.28122, 7200, 0, 0, 6645, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90843, 8894, 230, 0, 0, 1, 1, 1, 667.517, -25.1782, -73.8748, 3.28122, 7200, 0, 0, 4653, 8786, 0, 0, 0, 0, '', 0, 0, NULL);
 
 
 -- fix hound patrols
@@ -569,39 +572,39 @@ INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, 
 DELETE FROM `creature` WHERE `guid` IN (
 45896, 45897, 45898, 45915, 45916, 45917, 45924, 45925, 45926, 47825, 47826, 47827, 47830, 47831, 47832, 
 90686, 90687, 90688, 90855, 90856, 90857, 90866, 90867, 90868, 90918, 90917, 90916, 91084, 91085, 91086);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(45896, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 511.225, -178.22, -60.0722, 1.86715, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45897, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 514.334, -177.619, -59.9839, 1.86715, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45898, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 512.227, -175.894, -60.4273, 1.86101, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(45915, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 507.459, -71.1789, -62.69, 3.69728, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45916, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 510.026, -73.5812, -62.3512, 3.69728, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45917, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 507.858, -73.0351, -62.5597, 3.69728, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(45924, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 478.693, -110.303, -63.0834, 1.40623, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(45925, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 479.657, -112.529, -62.8568, 1.40623, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(45926, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 476.957, -112.081, -62.9856, 1.40623, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47825, 8890, 0, 0, 230, 0, 0, 1, 1, 1, 504.533, -124.746, -62.2436, 3.56981, 7200, 0, 1, 6414, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(47826, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 506.133, -126.058, -61.9769, 3.56392, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47827, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 504.648, -122.75, -62.3433, 3.58748, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47830, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 526.491, -65.7319, -62.321, 3.94076, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47831, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 528.867, -67.881, -62.3162, 3.90149, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(47832, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 526.575, -67.7981, -62.2411, 3.90934, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(90686, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 404.613, -73.5161, -62.0615, 2.81372, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90687, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 403.978, -76.3875, -61.827, 2.7823, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90688, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 402.666, -74.5199, -61.9944, 2.76266, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(90855, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 411.893, -181.853, -63.2672, 3.64544, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(90856, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 413.868, -182.603, -63.2194, 3.68864, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90857, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 412.732, -179.844, -63.0809, 3.67293, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90866, 8891, 0, 0, 230, 0, 0, 1, 1, 1, 629.668, -261.28, -83.7515, 3.90067, 7200, 0, 1, 6645, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(90867, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 627.172, -261.771, -83.8865, 3.85347, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90868, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 627.84, -259.833, -83.8041, 3.86532, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90916, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 574.527, -121.285, -65.0588, 0.0706102, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(90917, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 567.774, -120.675, -63.5019, 6.03067, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(90918, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 574.438, -122.639, -65.229, 6.15876, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(91084, 8890, 0, 0, 230, 0, 0, 1, 1, 1, 418.939, -78.2689, -63.3344, 2.68535, 7200, 0, 1, 6414, 0, 2, 0, 0, 0, '', 0, 0, NULL),
-(91085, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 419.301, -80.4187, -63.4199, 2.62539, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(91086, 8921, 0, 0, 230, 0, 0, 1, 1, 0, 420.605, -77.4939, -63.5929, 2.73141, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(45896, 8921, 230, 0, 0, 1, 1, 0, 511.225, -178.22, -60.0722, 1.86715, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45897, 8921, 230, 0, 0, 1, 1, 0, 514.334, -177.619, -59.9839, 1.86715, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45898, 8921, 230, 0, 0, 1, 1, 0, 512.227, -175.894, -60.4273, 1.86101, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(45915, 8921, 230, 0, 0, 1, 1, 0, 507.459, -71.1789, -62.69, 3.69728, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45916, 8921, 230, 0, 0, 1, 1, 0, 510.026, -73.5812, -62.3512, 3.69728, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45917, 8921, 230, 0, 0, 1, 1, 0, 507.858, -73.0351, -62.5597, 3.69728, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(45924, 8921, 230, 0, 0, 1, 1, 0, 478.693, -110.303, -63.0834, 1.40623, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(45925, 8921, 230, 0, 0, 1, 1, 0, 479.657, -112.529, -62.8568, 1.40623, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(45926, 8921, 230, 0, 0, 1, 1, 0, 476.957, -112.081, -62.9856, 1.40623, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47825, 8890, 230, 0, 0, 1, 1, 1, 504.533, -124.746, -62.2436, 3.56981, 7200, 0, 1, 6414, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(47826, 8921, 230, 0, 0, 1, 1, 0, 506.133, -126.058, -61.9769, 3.56392, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47827, 8921, 230, 0, 0, 1, 1, 0, 504.648, -122.75, -62.3433, 3.58748, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47830, 8921, 230, 0, 0, 1, 1, 0, 526.491, -65.7319, -62.321, 3.94076, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47831, 8921, 230, 0, 0, 1, 1, 0, 528.867, -67.881, -62.3162, 3.90149, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(47832, 8921, 230, 0, 0, 1, 1, 0, 526.575, -67.7981, -62.2411, 3.90934, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(90686, 8921, 230, 0, 0, 1, 1, 0, 404.613, -73.5161, -62.0615, 2.81372, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90687, 8921, 230, 0, 0, 1, 1, 0, 403.978, -76.3875, -61.827, 2.7823, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90688, 8921, 230, 0, 0, 1, 1, 0, 402.666, -74.5199, -61.9944, 2.76266, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(90855, 8921, 230, 0, 0, 1, 1, 0, 411.893, -181.853, -63.2672, 3.64544, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(90856, 8921, 230, 0, 0, 1, 1, 0, 413.868, -182.603, -63.2194, 3.68864, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90857, 8921, 230, 0, 0, 1, 1, 0, 412.732, -179.844, -63.0809, 3.67293, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90866, 8891, 230, 0, 0, 1, 1, 1, 629.668, -261.28, -83.7515, 3.90067, 7200, 0, 1, 6645, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(90867, 8921, 230, 0, 0, 1, 1, 0, 627.172, -261.771, -83.8865, 3.85347, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90868, 8921, 230, 0, 0, 1, 1, 0, 627.84, -259.833, -83.8041, 3.86532, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90916, 8921, 230, 0, 0, 1, 1, 0, 574.527, -121.285, -65.0588, 0.0706102, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(90917, 8921, 230, 0, 0, 1, 1, 0, 567.774, -120.675, -63.5019, 6.03067, 7200, 0, 1, 2672, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(90918, 8921, 230, 0, 0, 1, 1, 0, 574.438, -122.639, -65.229, 6.15876, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(91084, 8890, 230, 0, 0, 1, 1, 1, 418.939, -78.2689, -63.3344, 2.68535, 7200, 0, 1, 6414, 0, 2, 0, 0, 0, '', 0, 0, NULL),
+(91085, 8921, 230, 0, 0, 1, 1, 0, 419.301, -80.4187, -63.4199, 2.62539, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(91086, 8921, 230, 0, 0, 1, 1, 0, 420.605, -77.4939, -63.5929, 2.73141, 7200, 0, 0, 2672, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 
 DELETE FROM `creature_formations` WHERE `leaderGUID` IN (45898, 45917, 45924, 47825, 47832, 90688, 90855, 90866, 90917, 91084);
@@ -1005,19 +1008,59 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (910840, 11, 435.508, -82.24, -64.5627, 2.89846, 0, 0, 0, 100, 0),
 (910840, 12, 423.312, -79.215, -64.0575, 2.89846, 0, 0, 0, 100, 0);
 
-
 -- remove default auras from Twilight Emissaries, they cast them on Respawn
 UPDATE `creature_addon` SET `auras` = NULL WHERE `guid` IN 
 (47736, 47741, 47751, 47760, 47765, 47766, 47772, 47773, 90633, 90636, 90644, 90645, 90649, 90820, 90823, 90825, 90832, 90833);
 
--- Group General Angerforge together with the 4 Anvilrage Reservists
-DELETE FROM `creature_formations` WHERE `leaderGUID` = 45954;
+-- link creatures together
+DELETE FROM `creature_formations` WHERE `leaderGUID` IN (45954, 45850, 47796, 90663, 90665, 90844, 47704, 47708, 47712, 47717, 47721, 47725, 47729);
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES 
-(45954, 45954, 0, 0, 515, 0, 0),
-(45954, 45955, 0, 0, 515, 0, 0),
-(45954, 45956, 0, 0, 515, 0, 0),
-(45954, 45958, 0, 0, 515, 0, 0),
-(45954, 45959, 0, 0, 515, 0, 0);
+--
+(45954, 45954, 0, 0, 3, 0, 0), -- General Angerforge
+(45954, 45955, 0, 0, 3, 0, 0),
+(45954, 45956, 0, 0, 3, 0, 0),
+(45954, 45958, 0, 0, 3, 0, 0),
+(45954, 45959, 0, 0, 3, 0, 0),
+--
+(45850, 45850, 0, 0, 3, 0, 0), -- Blazing Fireguard
+(45850, 45851, 0, 0, 3, 0, 0),
+(47796, 47796, 0, 0, 3, 0, 0),
+(47796, 47797, 0, 0, 3, 0, 0),
+(90665, 90665, 0, 0, 3, 0, 0), 
+(90665, 90666, 0, 0, 3, 0, 0),
+(90663, 90663, 0, 0, 3, 0, 0),
+(90663, 90664, 0, 0, 3, 0, 0),
+(90844, 90844, 0, 0, 3, 0, 0),
+(90844, 90845, 0, 0, 3, 0, 0),
+--
+(47704, 47704, 0, 0, 3, 0, 0), -- Warbringer Construct
+(47704, 47705, 0, 0, 3, 0, 0),
+(47704, 47706, 0, 0, 3, 0, 0),
+(47704, 47707, 0, 0, 3, 0, 0),
+(47708, 47708, 0, 0, 3, 0, 0),
+(47708, 47709, 0, 0, 3, 0, 0),
+(47708, 47710, 0, 0, 3, 0, 0),
+(47708, 47711, 0, 0, 3, 0, 0),
+(47712, 47712, 0, 0, 3, 0, 0),
+(47712, 47713, 0, 0, 3, 0, 0),
+(47712, 47714, 0, 0, 3, 0, 0),
+(47712, 47715, 0, 0, 3, 0, 0),
+(47717, 47717, 0, 0, 3, 0, 0),
+(47717, 47718, 0, 0, 3, 0, 0),
+(47717, 47719, 0, 0, 3, 0, 0),
+(47717, 47720, 0, 0, 3, 0, 0),
+(47721, 47721, 0, 0, 3, 0, 0),
+(47721, 47722, 0, 0, 3, 0, 0),
+(47721, 47723, 0, 0, 3, 0, 0),
+(47721, 47724, 0, 0, 3, 0, 0),
+(47725, 47725, 0, 0, 3, 0, 0),
+(47725, 47726, 0, 0, 3, 0, 0),
+(47725, 47727, 0, 0, 3, 0, 0),
+(47725, 47728, 0, 0, 3, 0, 0),
+(47729, 47729, 0, 0, 3, 0, 0),
+(47729, 47730, 0, 0, 3, 0, 0),
+(47729, 47731, 0, 0, 3, 0, 0),
+(47729, 47732, 0, 0, 3, 0, 0);
 
 -- Shadowforge Torch drop rate
 UPDATE `creature_loot_template` SET `Chance` = 80 WHERE `Entry` = 9956 AND `Item` = 11885;

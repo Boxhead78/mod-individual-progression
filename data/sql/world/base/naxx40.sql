@@ -19,15 +19,15 @@ INSERT INTO `areatrigger_scripts` (`entry`, `ScriptName`) VALUES
 (5194, 'naxx_entrance');
 
 UPDATE `creature` SET `spawnMask` = 3 WHERE `spawnMask` = 7 AND `map` = 533;   -- Update spawnMask of all creatures to 10man + 25man
-UPDATE `creature` SET `spawnMask` = `spawnMask`| 4 WHERE `id1` = 16980;        -- Lich King uses same entry in Naxx WotLK and Naxx40 - Allow spawning in all versions
-UPDATE `creature` SET `spawnMask` = `spawnMask`| 4 WHERE `id1` = 16082;        -- Naxxramas Trigger (frogger) should also spawn in Naxx40
+UPDATE `creature` SET `spawnMask` = `spawnMask`| 4 WHERE `id` = 16980;        -- Lich King uses same entry in Naxx WotLK and Naxx40 - Allow spawning in all versions
+UPDATE `creature` SET `spawnMask` = `spawnMask`| 4 WHERE `id` = 16082;        -- Naxxramas Trigger (frogger) should also spawn in Naxx40
 
 UPDATE `gameobject` SET `spawnMask` = 7 WHERE `spawnMask` = 3 AND `map` = 533; -- Update spawnMask of all gameobjects to all
 UPDATE `gameobject` SET `spawnMask` = 3 WHERE `id` IN (202278, 202277);        -- Orb of Naxxramas does not exist in classic
 
 DELETE FROM `dungeon_access_template` WHERE `id` = 122;
 INSERT INTO `dungeon_access_template` (`id`, `map_id`, `difficulty`, `min_level`, `max_level`, `min_avg_item_level`, `comment`) VALUES 
-(122, 533, 2, 60, 0, 0, 'Naxxramas - 40man');
+(122, 533, 2, 60, 70, 0, 'Naxxramas - 40man');
 
 DELETE FROM `dungeonencounter_dbc` WHERE `ID` BETWEEN 1001 AND 1015;
 INSERT INTO `dungeonencounter_dbc` (`ID`, `MapID`, `Difficulty`, `OrderIndex`, `Bit`, `Name_Lang_enUS`, `Name_Lang_enGB`, `Name_Lang_koKR`, `Name_Lang_frFR`, `Name_Lang_deDE`, `Name_Lang_enCN`, `Name_Lang_zhCN`, `Name_Lang_enTW`, `Name_Lang_zhTW`, `Name_Lang_esES`, `Name_Lang_esMX`, `Name_Lang_ruRU`, `Name_Lang_ptPT`, `Name_Lang_ptBR`, `Name_Lang_itIT`, `Name_Lang_Unk`, `Name_Lang_Mask`, `SpellIconID`) VALUES

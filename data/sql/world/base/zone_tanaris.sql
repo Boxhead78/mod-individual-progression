@@ -33,18 +33,18 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (5457, 0, 1, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 8876, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Centipaar Swarmer - On Reset - Cast Thrash'),
 (5465, 0, 0, 1, 2, 0, 100, 1, 0, 50, 0, 0, 0, 0, 11, 8599, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Land Rager - Between 0-50% Health - Cast Enrage (No Repeat)'),
 (5465, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Land Rager - On Enrage - Say Line 0'),
-(5471, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                        'Dunemaul Ogre - On Aggro - Say Line 0'),
+(5471, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                      'Dunemaul Ogre - On Aggro - Say Line 0'),
 (5471, 0, 1, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 7165, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Dunemaul Ogre - Out of Combat - Cast Battle Stance (No Repeat)'),
 (5471, 0, 2, 0, 9, 0, 100, 0, 3000, 6000, 6000, 9000, 0, 5, 11, 25710, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Dunemaul Ogre - Within 0-5 Range - Cast Heroic Strike'),
-(5472, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                        'Dunemaul Enforcer - On Aggro - Say Line 0'),
+(5472, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                      'Dunemaul Enforcer - On Aggro - Say Line 0'),
 (5472, 0, 1, 0, 9, 0, 100, 0, 0, 0, 19000, 38000, 0, 5, 11, 13730, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Dunemaul Enforcer - Within 0-5 Range - Cast Demoralizing Shout'),
-(5473, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                        'Dunemaul Ogre Mage - On Aggro - Say Line 0'),
+(5473, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                      'Dunemaul Ogre Mage - On Aggro - Say Line 0'),
 (5473, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2400, 3800, 0, 0, 11, 9053, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Dunemaul Ogre Mage - In Combat - Cast Fireball'),
 (5473, 0, 2, 0, 0, 0, 100, 0, 4000, 9000, 10000, 10000, 0, 0, 11, 11436, 32, 0, 0, 0, 0, 21, 30, 0, 0, 0, 0, 0, 0, 0, 'Dunemaul Ogre Mage - In Combat - Cast Slow'),
 (5473, 0, 3, 0, 2, 0, 100, 1, 0, 70, 0, 0, 0, 0, 11, 6742, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Dunemaul Ogre Mage - Between 0-70% Health - Cast Bloodlust (No Repeat)'),
-(5474, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                        'Dunemaul Brute - On Aggro - Say Line 0'),
+(5474, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                      'Dunemaul Brute - On Aggro - Say Line 0'),
 (5474, 0, 1, 0, 0, 0, 100, 0, 7000, 19000, 16000, 32000, 0, 0, 11, 10966, 0, 0, 0, 0, 0, 21, 10, 0, 0, 0, 0, 0, 0, 0, 'Dunemaul Brute - In Combat - Cast Uppercut'),
-(5475, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                        'Dunemaul Warlock - On Aggro - Say Line 0'),
+(5475, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 21, 40, 0, 0, 0, 0, 0, 0, 0,                      'Dunemaul Warlock - On Aggro - Say Line 0'),
 (5475, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2400, 3800, 0, 0, 11, 9613, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Dunemaul Warlock - In Combat - Cast Shadow Bolt'),
 (5475, 0, 2, 0, 0, 0, 100, 0, 7000, 11000, 21000, 26000, 0, 0, 11, 2941, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Dunemaul Warlock - In Combat - Cast Immolate'),
 (5475, 0, 3, 0, 0, 0, 100, 0, 3000, 5000, 180000, 190000, 0, 0, 11, 6909, 32, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0, 'Dunemaul Warlock - Within 0-5 Range - Cast Curse of Thorns'),
@@ -102,7 +102,7 @@ INSERT INTO `gameobject` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, 
 
 UPDATE `gameobject_template` SET `ScriptName` = "go_cavernsoftimedoor" WHERE `entry` = 176996;
 
-UPDATE `creature` SET `position_x` = -8175.67, `position_y` = -4718.28, `position_z` = 26.3489, `orientation` = 1.88496 WHERE `id1` = 15192;
+UPDATE `creature` SET `position_x` = -8175.67, `position_y` = -4718.28, `position_z` = 26.3489, `orientation` = 1.88496 WHERE `id` = 15192;
 
 -- fix Omgorn the Lost waypoints, was placed on wrong continent
 UPDATE `creature` SET `map` = 1 WHERE `guid` IN (152280, 152281);
@@ -113,7 +113,7 @@ UPDATE `creature_loot_template` SET `Chance` = 10 WHERE `Item` = 8428;
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 19 AND `ConditionTypeOrReference` = 8 AND `SourceEntry` IN (5065, 10445);
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, 
 `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES 
-(19, 0, 5065, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Prospector Ironboot - Hide \'The Lost Tablets of Mosh\'aru\' until the player reaches Pre-AQ'),
+-- (19, 0, 5065, 0, 0, 8, 0, 66003, 0, 0, 0, 0, 0, '', 'Prospector Ironboot - Hide \'The Lost Tablets of Mosh\'aru\' until the player reaches Pre-AQ'),
 (19, 0, 10445, 0, 0, 8, 0, 66009, 0, 0, 0, 0, 0, '', 'Soridormi - Hide \'The Vials of Eternity\' until the player reaches TBC T2');
     
 DELETE FROM `creature_text` WHERE `CreatureID` IN (5465, 5471, 5472, 5473, 5474, 5475);
@@ -144,10 +144,10 @@ SET @Evee      := 125177;
 SET @Ecton     := 125178;
 
 DELETE FROM `creature` WHERE `guid` IN (@CGUID+41, @CGUID+42);
-DELETE FROM `creature` WHERE `id1` IN (25177, 25178, 26378, @Evee, @Ecton);
-DELETE FROM `creature` WHERE `id1` IN (32359, 32360, 32362, 32407, 33915, 33917, 33920, 33924, 33928, 33929, 33934, 33935, 33939, 34088, 34090, 34093);
+DELETE FROM `creature` WHERE `id` IN (25177, 25178, 26378, @Evee, @Ecton);
+DELETE FROM `creature` WHERE `id` IN (32359, 32360, 32362, 32407, 33915, 33917, 33920, 33924, 33928, 33929, 33934, 33935, 33939, 34088, 34090, 34093);
 
-INSERT INTO `creature` (`guid`, `id1`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
+INSERT INTO `creature` (`guid`, `id`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
 --
 (@CGUID+41, 20278,   1, -7119.02, -3779.06, 8.78404, 0, 180),     -- Vixton Pinchwhistle, WotLK Season 1
 (@CGUID+42, @Vixton, 1, -7119.02, -3779.06, 8.78404, 0, 180),     -- Vixton Pinchwhistle, WotLK Season 2

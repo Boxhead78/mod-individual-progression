@@ -71,7 +71,8 @@ enum Events
     EVENT_FLIGHT_SPELL_EXPLOSION    = 10,
     EVENT_FLIGHT_START_LAND         = 11,
     EVENT_LAND                      = 12,
-    EVENT_GROUND                    = 13
+    EVENT_GROUND                    = 13,
+    EVENT_HUNDRED_CLUB              = 14
 };
 
 // Unlike other Naxx 40 scripts, this overwrites all versions of the UI
@@ -172,6 +173,7 @@ public:
             events.ScheduleEvent(EVENT_LIFE_DRAIN, 17s);
             events.ScheduleEvent(EVENT_BLIZZARD, 17s);
             events.ScheduleEvent(EVENT_FLIGHT_START, 45s);
+            // events.ScheduleEvent(EVENT_HUNDRED_CLUB, 5s);
         }
 
         void JustDied(Unit*  killer) override
@@ -219,6 +221,12 @@ public:
             }
             return true;
         }
+
+        /* void KilledUnit(Unit* who) override
+        {
+            if (who->IsPlayer())
+                instance->StorePersistentData(PERSISTENT_DATA_IMMORTAL_FAIL, 1);
+        } */
 
         void UpdateAI(uint32 diff) override
         {
@@ -322,17 +330,17 @@ public:
                         }
 
                         std::vector<Unit*> targets;
-                        auto i = me->GetThreatMgr().GetThreatList().begin();
-                        for (; i != me->GetThreatMgr().GetThreatList().end(); ++i)
+                        auto i = me->GetThreatMgr().GetUnsortedThreatList().begin();
+                        for (; i != me->GetThreatMgr().GetUnsortedThreatList().end(); ++i)
                         {
-                            if ((*i)->getTarget()->IsPlayer())
+                            if ((*i)->GetVictim()->IsPlayer())
                             {
                                 bool inList = false;
                                 if (!blockList.empty())
                                 {
                                     for (GuidList::const_iterator itr = blockList.begin(); itr != blockList.end(); ++itr)
                                     {
-                                        if ((*i)->getTarget()->GetGUID() == *itr)
+                                        if ((*i)->GetVictim()->GetGUID() == *itr)
                                         {
                                             inList = true;
                                             break;
@@ -341,7 +349,7 @@ public:
                                 }
                                 if (!inList)
                                 {
-                                    targets.push_back((*i)->getTarget());
+                                    targets.push_back((*i)->GetVictim());
                                 }
                             }
                         }
@@ -397,6 +405,20 @@ public:
                     me->SetReactState(REACT_AGGRESSIVE);
                     me->SetInCombatWithZone();
                     return;
+                case EVENT_HUNDRED_CLUB:
+                    {
+                        Map::PlayerList const& pList = me->GetMap()->GetPlayers();
+                        for (auto const& itr : pList)
+                        {
+                            if (itr.GetSource()->GetResistance(SPELL_SCHOOL_FROST) > 100)
+                            {
+                                instance->SetData(DATA_HUNDRED_CLUB, 0);
+                                return;
+                            }
+                        }
+                        events.Repeat(5s);
+                        return;
+                    }
             }
             DoMeleeAttackIfReady();
         }

@@ -1,6 +1,9 @@
 SET @IPPPHASE     := 65536;  -- this method of phasing is useful for aggressive creatures
 SET @IPPPHASE_II  := 131072;
 SET @IPPPHASE_III := 262144;
+SET @IPPPHASE_IV  := 524288;
+SET @IPPPHASE_V   := 1048576;
+SET @IPPPHASE_VI  := 2097152;
 
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN 
 (16841, 19254, 16840, 20026, 20027, 20053, 20054, 20069, 18542, 20080, 20081, 20082, 21643, 20130, 19934, 19936, 19950, 19951, 19959, 22889, 22902, 22835, 22837);
@@ -10,11 +13,11 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN
 (19915, 19909, 19911, 26012, 26007, 26075, 26307, 26309, 26760, 19912, 19859, 19860, 19861, 20499, 20497, 30610, 30611, 32832);
 
 -- Stormwind
-UPDATE `creature` SET `phaseMask` = @IPPPHASE     WHERE `id1` = 1749;  -- Lady Katrana Prestor
-UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id1` = 29611; -- King Varian Wrynn
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_II  WHERE `id` = 1749;  -- Lady Katrana Prestor
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id` = 29611; -- King Varian Wrynn
 
 -- Orgrimmar
-UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id1` = 29346; -- Apothecary Karlov
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id` = 29346; -- Apothecary Karlov
 
 -- Phasing NPCs related to AllowEarlyDungeonSet2
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_ds2' WHERE `entry` IN (15270, 15282, 16012, 16013);
@@ -26,15 +29,15 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_preaq' WHERE `entry` IN
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_aqwewar' WHERE `entry` IN (15693); -- Jonathan the Revelator
 
 -- Phasing Cenarion Hold guards
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id1` = 15184 AND `guid` IN (42782, 42783, 42768);
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id` = 15184 AND `guid` IN (42782, 42783, 42768);
 
--- Phasing ZG quest NPCs on YoJamba Isle
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_preaq' WHERE `id1` IN (14902, 14903, 14904, 14905, 14910, 15070);
+-- Phasing ZG quest NPCs on YoJamba Isle and in Tanaris
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_zg' WHERE `id` IN (10460, 14902, 14903, 14904, 14905, 14910, 15070);
 
 -- Phasing NPCs until after the outdoors AQ war has been completed
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_aq' WHERE `entry` IN  (15498, 15499, 15500, 15540, 16091);                -- Cenarion Hold
 
-UPDATE `creature` SET `phaseMask` = @IPPPHASE_II WHERE `id1` IN (15612, 15613, 15615, 15616, 15617, 17070, 17079, 17766,         -- Orgrimmar Legion Post
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_II WHERE `id` IN (15612, 15613, 15615, 15616, 15617, 17070, 17079, 17766,         -- Orgrimmar Legion Post
                                                                  15440, 15441, 15442, 15443, 15444, 15903, 17068, 17080, 17765); -- Ironforge Brigade post
 -- Phasing Wanted Poster Deathclasp
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_preaq' WHERE `entry` IN (180448);
@@ -64,36 +67,83 @@ UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_ipp_wotlk'
 UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_ipp_pre_wotlk' WHERE `entry` IN (347, 2804, 14942, 15007);
 UPDATE `creature_template` SET `flags_extra` = 2, `ScriptName` = 'npc_ipp_tbc'   WHERE `entry` IN (20374, 20381, 20383, 20385, 20386, 20388);
 
+-- pvp officer room doors
+DELETE FROM `gameobject` WHERE `guid` IN (626262, 631660, 631661);
+INSERT INTO `gameobject` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `position_x`, `position_y`, `position_z`, `orientation`, 
+`rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`, `ScriptName`, `VerifiedBuild`, `Comment`) VALUES 
+--
+(626262, 176576, 0, 1519, 1519, 1, 1, -8765.82, 403.164, 104.162, -0.898844, 0, 0, -0.434445, 0.900698, 900, 100, 1, 'gobject_ipp_pvp_closed', 0, NULL),
+(631660, 176562, 1, 0, 0, 1, 1, 1634.87, -4247.86, 55.8397, 4.19752, 0, 0, -0.863835, 0.503774, 180, 0, 1, 'gobject_ipp_pvp_closed', NULL, NULL),
+(631661, 176562, 1, 0, 0, 1, 1, 1634.87, -4247.86, 55.8397, 4.19752, 0, 0, -0.863835, 0.503774, 180, 0, 0, 'gobject_ipp_pvp_open', NULL, NULL); 
+-- I can't figure out why gate 31660 is not visible in Orgrimmar. something is blocking guid 31660 specifically. until someone figures it out, I created a new door. (631661)
+
+UPDATE `gameobject` SET `state` = 0, `ScriptName` = 'gobject_ipp_pvp_open' WHERE `guid` = 26262;
+
 -- Phasing emissaries
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (22013, 22015);
 UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_wotlk' WHERE `entry` IN (30566, 30567, 34948, 34949, 34950, 34951);
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc' WHERE `entry` IN (185106, 185107);
 UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_wotlk' WHERE `entry` IN (195532, 195533);
 
--- Phasing Zul'Aman quest npcs until TBC T4.
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN (23761);
+-- Phasing Zul'Aman quest npcs
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_za' WHERE `entry` IN (23559, 23761);
 
--- Phasing TBC vendors and trainers - Copies are added to replace them until TBC T4.
-UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t4' WHERE `entry` IN (18754, 18771, 19187, 21087);
+-- Phasing TBC vendors and trainers - Copies are added to replace them.
+UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc_t3' WHERE `entry` IN (18754, 18771, 19187, 21087);
 
 -- TBC, phasing Shattered Sun offensive NPCs in Shattrath
-UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id1` IN 
-(17076, 19475, 24932, 24938, 25115, 25134, 25135, 25136, 25137, 25138, 25141, 25142, 25143, 25153, 25155, 25167, 25885, 27666, 27667);
+UPDATE `creature_template` SET `ScriptName` = '' WHERE `entry` IN (15599, 18594, 19227, 25167, 27666); -- 00_cleanup, undo previous method of phasing
+UPDATE `creature` SET `phaseMask` = 1 WHERE `id` IN (24938, 25115, 27667); -- 00_cleanup
+
+UPDATE `creature` SET `phaseMask` = @IPPPHASE     WHERE `id`  IN (17076, 19475, 24932, 25134, 25135, 25136, 25137, 25138, 25141, 25142, 25143, 25153, 25155, 25167, 25885, 27666);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `guid` IN (165102, 165103, 165104, 165105, 165106, 165107, 165108, 165109);
+
+-- Silvermoon City, M'uru
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_II WHERE `guid` IN (96982, 96980, 96981, 96979, 96978, 352043);
 
 -- TBC, Terrace of Light, phasing T5 game objects
-UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc_t4' WHERE `entry` IN
-(187056,  -- Shattrath portal to Isle of Quel'Danas
- 187345,  -- Sunwell Plateau model
- 187356,  -- Shattered Sun Banner
- 187357); -- Shattered Sun Banner
+UPDATE `gameobject_template` SET `ScriptName` = '' WHERE `entry` IN (187356, 187357); -- 00_cleanup
+UPDATE `gameobject_template` SET `ScriptName` = 'gobject_ipp_tbc_t4' WHERE `entry` = 187345; -- Sunwell Plateau model
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ipp_tbc_t4' WHERE `guid` IN (47205, 47206); -- Shattered Sun Banners
+
+-- TBC, Isle of Quel'Danas
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_II  WHERE `guid` IN (54113, 54114, 54143, 54165, 54176, 54177, 54178, 54181, 54182, 54183, 54184, 54185, 56315, 65680, 65681,
+                                                                   71925, 71926, 76576, 76577, 76578, 76581, 76582, 78387, 84003, 84004, 93950, 93951, 93952, 93853, 93953);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `guid` IN (59473, 59515, 62841, 62842, 62843, 62844, 65682, 65683, 65684, 65685, 65686, 65687, 65688, 65689, 
+                                                                   65690, 65691, 65692, 65693, 65694, 65695, 65696, 65697, 65698, 65699, 65700, 65702,
+                                                                   71927, 71928, 72677, 72989, 76579, 76580, 77479, 78385, 78386, 78388, 78389, 83999, 84002,
+																   93955, 93956, 93957, 93958, 93959, 93690, 93961, 93964);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_IV  WHERE `guid` IN (984, 12719, 43498, 62847, 83998, 84005, 84006, 94377, 94378, 94379, 94380, 94381, 94382, 94383, 94384, 94385, 94386, 94387, 
+                                                                   94401, 94402, 94403, 94406, 94407, 94408, 94409, 94410, 94411, 94412, 94413, 94414, 94415, 94417, 94418, 94419, 
+																   94420, 94422, 94423, 94424, 94425, 94426, 94427, 94428, 94429, 94430, 94431, 
+																   94432, 94433, 94434, 94435, 94436, 94437, 94438, 1976590, 1976591);
+
+UPDATE `creature` SET `phaseMask` = @IPPPHASE     WHERE `guid` IN (54030, 54031, 71916, 71917, 71919, 5300293, 5300294, 5300309, 5300313, 5300314, 5300315, 5300368, 5300369, 5300370, 
+                                                                   5300401, 5300402, 5300411, 5300412, 5300414);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_V   WHERE `guid` IN (5300031, 5300032, 5300033, 5300034, 5300035, 5300403, 5300404, 5300405, 5300406, 5300407, 5300408, 5300460, 5300461, 5300462, 5300463, 5300464, 5300465);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_VI  WHERE `guid` IN (5300295, 5300296, 5300297, 5300298, 5300299, 5300300, 5300301, 5300302, 5300303, 5300304, 5300305, 5300306, 5300307, 5300308, 5300310, 5300311, 5300312, 
+                                                                   5300355, 5300356, 5300357, 5300358, 5300359, 5300360, 5300361, 5300362, 5300363, 5300364, 5300365, 5300366, 5300367, 
+                                                                   5300388, 5300389, 5300390, 5300391, 5300392, 5300393, 5300394, 5300395, 5300396, 5300397, 5300398, 5300399, 5300400, 5300409, 5300410, 5300413, 5300415);
+
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_mana_cells' WHERE `guid` IN (27755, 47196);
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_making_ready' WHERE `guid` IN (27811);
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_charitable_donation' WHERE `guid` IN (27862);
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_discovering_roots' WHERE `guid` IN (5300290);
+UPDATE `creature_template` SET `ScriptName` = 'npc_ioq_making_ready' WHERE `entry` IN (27667);
+
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_P2' WHERE `guid` IN (27829, 27832, 27833, 27839);
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_P3' WHERE `guid` IN (27810, 27834, 27835, 27837, 27838, 27840, 27841, 27842, 27843, 27844);
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_P4' WHERE `guid` IN (27827, 27828, 27830, 27831, 27836, 27845, 27861);
+
+UPDATE `gameobject` SET `ScriptName` = 'gobject_ioq_before_P3' WHERE `guid` IN (5300500, 5300501, 5300502, 5300503, 5300504);
 
 -- Dragons of Nightmare
-UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id1` IN (14887, 14888, 14889, 14890);
+UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `id` IN (14887, 14888, 14889, 14890);
 
 -- Vault of Archavon
-UPDATE `creature` SET `phaseMask` = @IPPPHASE     WHERE `id1` = 33993; -- Emalon the Storm Watcher
-UPDATE `creature` SET `phaseMask` = @IPPPHASE_II  WHERE `id1` = 35013; -- Koralon the Flame Watcher
-UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id1` = 38433; -- Toravon the Ice Watcher
+UPDATE `creature` SET `phaseMask` = @IPPPHASE     WHERE `id` = 33993; -- Emalon the Storm Watcher
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_II  WHERE `id` = 35013; -- Koralon the Flame Watcher
+UPDATE `creature` SET `phaseMask` = @IPPPHASE_III WHERE `id` = 38433; -- Toravon the Ice Watcher
 
 -- Argent Tournament
 UPDATE `creature` SET `phaseMask` = @IPPPHASE WHERE `guid` IN (25, 63129, 63236, 63370, 63371, 65274, 65275, 65283, 65284, 65285, 65325, 65327, 65350, 65351, 65371, 65451,

@@ -60,7 +60,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (3128, 0, 0, 0, 9, 0, 100, 1, 0, 0, 0, 0, 5, 30, 11, 6268, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Kul Tiras Sailor - Between 5-30 Range - Cast Rushing Charge (No Repeat)'),
 (3128, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Kul Tiras Sailor - Between 0-15% Health - Flee For Assist (No Repeat)'),
-(3129, 0, 0, 0, 105, 0, 100, 0, 0, 0, 16000, 32000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Kul Tiras Marine - Target Casting - Cast Shield Bash'),
+(3129, 0, 0, 0, 105, 0, 50, 0, 0, 0, 16000, 32000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Kul Tiras Marine - Target Casting - Cast Shield Bash'),
 (3129, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Kul Tiras Marine - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
 (3130, 0, 0, 0, 0, 0, 100, 0, 4000, 9000, 6000, 11000, 0, 0, 11, 5401, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,       'Thunder Lizard - In Combat - Cast Lizard Bolt'),
@@ -69,7 +69,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3183, 0, 0, 0, 9, 0, 100, 0, 0, 0, 19000, 25000, 0, 30, 11, 172, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Yarrog Baneshadow - Within 0-30 Range - Cast Corruption'),
 (3183, 0, 1, 0, 0, 0, 100, 0, 8000, 12000, 22000, 29000, 0, 0, 11, 348, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Yarrog Baneshadow - In Combat - Cast Immolate'),
 (3192, 0, 0, 0, 1, 0, 100, 0, 1000, 1000, 200000, 200000, 0, 0, 11, 7164, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Lieutenant Benedict - Out of Combat - Cast Defensive Stance'),
-(3192, 0, 1, 0, 105, 0, 100, 0, 0, 0, 20000, 30000, 0, 5, 11, 72, 2, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,            'Lieutenant Benedict - Target Casting - Cast Shield Bash'),
+(3192, 0, 1, 0, 105, 0, 50, 0, 0, 0, 20000, 30000, 0, 5, 11, 72, 2, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,             'Lieutenant Benedict - Target Casting - Cast Shield Bash'),
 (3192, 0, 2, 0, 9, 0, 100, 0, 0, 0, 15000, 21000, 0, 5, 11, 3248, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Lieutenant Benedict - Within 0-5 Range - Cast Improved Blocking'),
 (3192, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Lieutenant Benedict - Between 0-15% Health - Flee For Assist'),
 --
@@ -101,10 +101,11 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (3226, 0, 0, 0, 9, 0, 100, 0, 0, 0, 30000, 35000, 0, 5, 11, 5413, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Corrupted Scorpid - Within 0-5 Range - Cast Noxious Catalyst'),
 (3227, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 6268, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Corrupted Bloodtalon Scythemaw - On Aggro - Cast Rushing Charge'),
 (3281, 0, 0, 0, 0, 0, 60, 0, 1000, 5000, 1000, 8000, 0, 0, 11, 11918, 32, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,      'Sarkoth - Within 0-5 Range - Cast Poison'),
+--
 (5808, 0, 0, 0, 0, 0, 100, 0, 8000, 25000, 21000, 44000, 0, 0, 11, 8078, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Warlord Kolkanis - In Combat - Cast Thunderclap'),
-(5808, 0, 1, 0, 105, 0, 100, 0, 5000, 20000, 40000, 40000, 0, 5, 11, 12555, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,  'Warlord Kolkanis - Target Casting - Cast Pummel'),
+(5808, 0, 1, 0, 105, 0, 50, 0, 5000, 20000, 40000, 40000, 0, 5, 11, 12555, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,   'Warlord Kolkanis - Target Casting - Cast Pummel'),
 (5809, 0, 0, 0, 1, 0, 100, 0, 1000, 1000, 90000, 90000, 0, 0, 11, 7164, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Watch Commander Zalaphil - Out of Combat - Cast Defensive Stance'),
-(5809, 0, 1, 0, 105, 0, 100, 0, 0, 0, 8000, 20000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Watch Commander Zalaphil - Target Casting - Cast Shield Bash'),
+(5809, 0, 1, 0, 105, 0, 50, 0, 0, 0, 8000, 20000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Watch Commander Zalaphil - Target Casting - Cast Shield Bash'),
 (5809, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Watch Commander Zalaphil - Between 0-15% Health - Flee For Assist'),
 (5822, 0, 0, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 9613, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Felweaver Scornn - In Combat - Cast Shadow Bolt'),
 (5822, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Felweaver Scornn - Between 0-15% Health - Flee For Assist (No Repeat)'),
@@ -118,28 +119,28 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 
 
 -- fix multiple spawn locations and respawn times
-DELETE FROM `creature` WHERE `id1` IN (3204, 5809, 5822, 5824, 5826);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
+DELETE FROM `creature` WHERE `id` IN (3204, 5809, 5822, 5824, 5826);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
 `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(695041, 3204, 0, 0, 1, 0, 0, 1, 1, 1, 1454.2, -4701.82, -2.62193, 4.57276, 300, 0, 0, 178, 382, 0, 0, 0, 0, '', 0, 0, NULL),   -- Gazz'uz
-(695042, 3204, 0, 0, 1, 0, 0, 1, 1, 1, 1470.49, -4706.11, 2.22037, 0.820305, 300, 0, 0, 178, 382, 0, 0, 0, 0, '', 0, 0, NULL),
-(695043, 3204, 0, 0, 1, 0, 0, 1, 1, 1, 1465.78, -4683.74, 6.62599, 5.71567, 300, 0, 0, 178, 382, 0, 0, 0, 0, '', 0, 0, NULL),
+(695041, 3204, 1, 0, 0, 1, 1, 1, 1454.2, -4701.82, -2.62193, 4.57276, 300, 0, 0, 178, 382, 0, 0, 0, 0, '', 0, 0, NULL),   -- Gazz'uz
+(695042, 3204, 1, 0, 0, 1, 1, 1, 1470.49, -4706.11, 2.22037, 0.820305, 300, 0, 0, 178, 382, 0, 0, 0, 0, '', 0, 0, NULL),
+(695043, 3204, 1, 0, 0, 1, 1, 1, 1465.78, -4683.74, 6.62599, 5.71567, 300, 0, 0, 178, 382, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(695045, 5809, 0, 0, 1, 0, 0, 1, 1, 1, -254.436, -5094.49, 41.2355, 6.23083, 3600, 5, 0, 176, 0, 1, 0, 0, 0, '', 0, 0, NULL),   -- Watch Commander Zalaphi
-(695046, 5809, 0, 0, 1, 0, 0, 1, 1, 1, -272.183, -5131.39, 24.23, 1.02974, 3600, 0, 0, 176, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695045, 5809, 1, 0, 0, 1, 1, 1, -254.436, -5094.49, 41.2355, 6.23083, 3600, 5, 0, 176, 0, 1, 0, 0, 0, '', 0, 0, NULL),   -- Watch Commander Zalaphi
+(695046, 5809, 1, 0, 0, 1, 1, 1, -272.183, -5131.39, 24.23, 1.02974, 3600, 0, 0, 176, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(695048, 5822, 0, 0, 1, 0, 0, 1, 1, 1, 1492.44, -4753.37, 21.1028, 4.04916, 19800, 0, 0, 624, 308, 0, 0, 0, 0, '', 0, 0, NULL), -- Felweaver Scornn
-(695049, 5822, 0, 0, 1, 0, 0, 1, 1, 1, 1470.19, -4695.29, 6.53009, 4.15388, 19800, 0, 0, 624, 308, 0, 0, 0, 0, '', 0, 0, NULL),
-(695050, 5822, 0, 0, 1, 0, 0, 1, 1, 1, 1552.74, -4767.29, 12.937, 3.75246, 19800, 0, 0, 624, 308, 0, 0, 0, 0, '', 0, 0, NULL),
+(695048, 5822, 1, 0, 0, 1, 1, 1, 1492.44, -4753.37, 21.1028, 4.04916, 19800, 0, 0, 624, 308, 0, 0, 0, 0, '', 0, 0, NULL), -- Felweaver Scornn
+(695049, 5822, 1, 0, 0, 1, 1, 1, 1470.19, -4695.29, 6.53009, 4.15388, 19800, 0, 0, 624, 308, 0, 0, 0, 0, '', 0, 0, NULL),
+(695050, 5822, 1, 0, 0, 1, 1, 1, 1552.74, -4767.29, 12.937, 3.75246, 19800, 0, 0, 624, 308, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(695051, 5824, 0, 0, 1, 0, 0, 1, 1, 1, 432.488, -4213.4, 24.5885, 5.28835, 5400, 0, 0, 666, 0, 0, 0, 0, 0, '', 0, 0, NULL),     -- Captain Flat Tusk
-(695052, 5824, 0, 0, 1, 0, 0, 1, 1, 1, -94.3403, -4010.99, 62.5894, 0.418879, 5400, 0, 0, 666, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695053, 5824, 0, 0, 1, 0, 0, 1, 1, 1, -94.3403, -4010.99, 62.5894, 0.418879, 5400, 0, 0, 666, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695051, 5824, 1, 0, 0, 1, 1, 1, 432.488, -4213.4, 24.5885, 5.28835, 5400, 0, 0, 666, 0, 0, 0, 0, 0, '', 0, 0, NULL),     -- Captain Flat Tusk
+(695052, 5824, 1, 0, 0, 1, 1, 1, -94.3403, -4010.99, 62.5894, 0.418879, 5400, 0, 0, 666, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695053, 5824, 1, 0, 0, 1, 1, 1, -94.3403, -4010.99, 62.5894, 0.418879, 5400, 0, 0, 666, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(695055, 5826, 0, 0, 1, 0, 0, 1, 1, 1, 50.8229, -4457.19, 48.4233, 5.58505, 3600, 0, 0, 166, 178, 0, 0, 0, 0, '', 0, 0, NULL),  -- Geolord Mottle
-(695056, 5826, 0, 0, 1, 0, 0, 1, 1, 1, 424.321, -4245.13, 26.3462, 1.74533, 3600, 5, 0, 166, 178, 1, 0, 0, 0, '', 0, 0, NULL),
-(695057, 5826, 0, 0, 1, 0, 0, 1, 1, 1, 29.7214, -4278.99, 69.91, 0.785398, 3600, 0, 0, 166, 178, 0, 0, 0, 0, '', 0, 0, NULL);
+(695055, 5826, 1, 0, 0, 1, 1, 1, 50.8229, -4457.19, 48.4233, 5.58505, 3600, 0, 0, 166, 178, 0, 0, 0, 0, '', 0, 0, NULL),  -- Geolord Mottle
+(695056, 5826, 1, 0, 0, 1, 1, 1, 424.321, -4245.13, 26.3462, 1.74533, 3600, 5, 0, 166, 178, 1, 0, 0, 0, '', 0, 0, NULL),
+(695057, 5826, 1, 0, 0, 1, 1, 1, 29.7214, -4278.99, 69.91, 0.785398, 3600, 0, 0, 166, 178, 0, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `creature_addon` WHERE `guid` IN (6456, 12209, 12218, 12384); -- using custom guids now
 DELETE FROM `creature_addon` WHERE `guid` BETWEEN 695041 AND 695057;
@@ -191,10 +192,10 @@ INSERT INTO `pool_template` (`entry`, `max_limit`, `description`) VALUES
 UPDATE `creature` SET `spawntimesecs` = 3600, `MovementType` = 1, `Wander_distance` = 5 WHERE `guid` = 12260;
 
 -- Death Flayer, fix waypoints and respawn time
-DELETE FROM `creature` WHERE `id1` = 5823;
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
+DELETE FROM `creature` WHERE `id` = 5823;
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
 `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(12322, 5823, 0, 0, 1, 0, 0, 1, 1, 0, 57.4579, -3894.15, 42.8933, 0.345736, 5400, 0, 1, 222, 0, 2, 0, 0, 0, '', 0, 0, NULL);
+(12322, 5823, 1, 0, 0, 1, 1, 0, 57.4579, -3894.15, 42.8933, 0.345736, 5400, 0, 1, 222, 0, 2, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `creature_addon` WHERE `guid` = 12322;
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 

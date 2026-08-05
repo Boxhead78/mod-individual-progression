@@ -158,7 +158,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (10996, 0, 4, 0, 9, 0, 100, 0, 0, 0, 8000, 14000, 0, 5, 11, 15618, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Fallen Hero - Within 0-5 Range - Cast Snap Kick'),
 --
 (11022, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Alexi Barov - On Aggro - Say Line 1'),
-(11022, 0, 1, 0, 105, 0, 100, 0, 0, 0, 9000, 12000, 0, 5, 11, 15614, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Alexi Barov - Within 0-5 Range - Cast Kick'),
+(11022, 0, 1, 0, 105, 0, 50, 0, 0, 0, 9000, 12000, 0, 5, 11, 15614, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Alexi Barov - Within 0-5 Range - Cast Kick'),
 (11022, 0, 2, 0, 0, 0, 100, 0, 5000, 9000, 9000, 13000, 0, 0, 11, 11976, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,    'Alexi Barov - Within 0-5 Range - Cast Sinister Strike'),
 (11022, 0, 3, 0, 67, 0, 100, 0, 0, 0, 7000, 12000, 0, 5, 11, 7159, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Alexi Barov - Behind Target - Cast Backstab'),
 (11022, 0, 4, 0, 9, 0, 100, 0, 0, 0, 13000, 18000, 0, 5, 11, 15583, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Alexi Barov - Within 0-5 Range - Cast Rupture'),
@@ -205,16 +205,16 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 
 
 -- Bloodshot gets summoned by Huntsman Radley
-DELETE FROM `creature` WHERE `id1` = 11614;
+DELETE FROM `creature` WHERE `id` = 11614;
 DELETE FROM `creature_addon` WHERE `guid` = 52640;
 
 -- Lord Maldazzar, fix spawn locations, respawn and movement
-DELETE FROM `creature` WHERE `id1` = 1848;
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `id` = 1848;
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(52725,  1848, 0, 0, 0, 0, 0, 1, 1, 1, 1061.03, -1912.26, 31.1128, 4.71571, 18000, 5, 0, 2915, 2163, 1, 0, 0, 0, '', 0, 0, NULL),
-(695026, 1848, 0, 0, 0, 0, 0, 1, 1, 1, 1123.73, -1714.49, 62.33, 0, 18000, 5, 0, 2915, 2163, 1, 0, 0, 0, '', 0, 0, NULL),          -- https://www.youtube.com/watch?v=pCwj-bglyV8
-(695027, 1848, 0, 0, 0, 0, 0, 1, 1, 1, 1071.86, -1766.24, 62.0725, 0.388769, 18000, 5, 0, 2915, 2163, 1, 0, 0, 0, '', 0, 0, NULL); -- https://www.youtube.com/watch?v=flejEU2n5EQ
+(52725,  1848, 0, 0, 0, 1, 1, 1, 1061.03, -1912.26, 31.1128, 4.71571, 18000, 5, 0, 2915, 2163, 1, 0, 0, 0, '', 0, 0, NULL),
+(695026, 1848, 0, 0, 0, 1, 1, 1, 1123.73, -1714.49, 62.33, 0, 18000, 5, 0, 2915, 2163, 1, 0, 0, 0, '', 0, 0, NULL),          -- https://www.youtube.com/watch?v=pCwj-bglyV8
+(695027, 1848, 0, 0, 0, 1, 1, 1, 1071.86, -1766.24, 62.0725, 0.388769, 18000, 5, 0, 2915, 2163, 1, 0, 0, 0, '', 0, 0, NULL); -- https://www.youtube.com/watch?v=flejEU2n5EQ
 
 DELETE FROM `pool_creature` WHERE `pool_entry` = 368;
 INSERT INTO `pool_creature` (`guid`, `pool_entry`, `chance`, `description`) VALUES 
@@ -223,5 +223,5 @@ INSERT INTO `pool_creature` (`guid`, `pool_entry`, `chance`, `description`) VALU
 (695027, 368, 0, 'Lord Maldazzar Sorrow hill');
 
 -- fix npc movement
-UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id1` = 1850; -- Putridius, 
-UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id1` = 1844; -- Foreman Marcrid
+UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id` = 1850; -- Putridius, 
+UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id` = 1844; -- Foreman Marcrid

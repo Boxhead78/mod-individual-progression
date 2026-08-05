@@ -1,6 +1,6 @@
 # Individual Player Progression
 
-## Azerothcore Module
+## Azerothcore Playerbots Module
 
 This module simulates progress through expansions and expansion tiers for individual players.
 
@@ -13,19 +13,25 @@ Note that this module either requires many players working together, or adjustme
 Lower-level content added in later expansions that is not "catch-up" content has NOT been removed. This includes Draenei and Blood Elf starting zones, Inscription and Jewelcrafting skills, new quests and hubs added to the Vanilla world in TBC, and so on. I feel this content does not negatively impact the player journey like "catch-up" content. Some of this content can optionally be phased until the appropriate patch in which it was introduced for those who prefer an even more authentic Vanilla world - see the optional SQL files for more details.
 
 ## Some Included Features
-* NPCs and Game Objects are aware of individual player progress, visible based on player progression to each player
-* Restoration of content that was removed, nerfed or released in a later patch. Such as the original Naxxramas, Onyxia and TBC Attunement quests, elite creatures in outdoor areas and riding skills.
-* Complete overhaul of all vanilla creatures and quests. Smart AI, quest drop chances, creature respawn times, spells, patrols and spawn locations have all been restored.
-* Optional power and health adjustment for Vanilla and TBC content to simulate the original world difficulty.
-* WotLK emblems drop based on your progression.
+* NPCs and Game Objects are aware of individual player progress, visible depending on player progression
+* Restoration of content that was removed, nerfed or released in a later patch. (examples: original Naxxramas, Onyxia, TBC Attunement quests and open world elites)
+* Overhaul of vanilla creatures and quests. (Smart AI, quest drop chances, creature respawn times, patrols and spawn locations have all been restored.)
+* Optional power and healing adjustment for Vanilla and TBC content to simulate the original world difficulty.
+* WotLK emblems progression.
+* Original vanilla AV
+* Isle of Quel'Danas Progression
 * Playerbots support
 
-For a complete list of changes, please see [here](https://github.com/ZhengPeiRu21/mod-individual-progression/wiki/List-of-Changes).
+Here you can find a list of all the [changes](https://github.com/ZhengPeiRu21/mod-individual-progression/wiki/List-of-Changes) and [progression tiers](https://github.com/ZhengPeiRu21/mod-individual-progression/wiki/List-of-Progression-Tiers).
 
 Options are provided that allow changes to the player experience, based on preference. Please see the config file.
 
 ## How to Install
 Please see [How to Install](https://github.com/ZhengPeiRu21/mod-individual-progression/wiki/How-to-Install)
+
+- You need my fork of AzerothCore for this module! https://github.com/Grimfeather/azerothcore-wotlk
+- This fork uses the default branch of mod-playerbots/azerothcore-wotlk as it's base. I need to do this to be able to make my own changes to AzerothCore. 
+Going through the process of making pull requests for AzerothCore and test phases on the playerbots fork takes months. This no longer makes sense. I can't wait months for every small change I want to make.
 
 ## Please Note!
 This module uses Player Settings to save individual character progress. *Please ensure that EnablePlayerSettings is set to 1 in worldserver.conf or progress will not be saved!* Also, for item changes to take effect, please ensure *DBC.EnforceItemAttributes is set to 0*! This will allow the module to override item stats with their correct Vanilla stats.
@@ -33,20 +39,20 @@ This module uses Player Settings to save individual character progress. *Please 
 ### Optional Data Files
 Some changes for Vanilla and TBC content require DBC modification. The .mpq file for the client and .dbc files for the server can be found in the "optional" directory. These changes include requiring Vanilla reagents such as Flint and Steel for campfires, changing Level 60 enchanting to use Vanilla and not TBC reagents, profession leveling adjustments, etc. These files are all optional and the module will work without the patch, but these recipes will remain their WotLK versions.
 
-### Optional Recommended Addon
-For a more authentic experience, some players may prefer to have pre-3.2 behavior of item prices only being displayed in tooltips when at a vendor. 
-This is handled by the client, so I have created an addon that will restore this behavior. The addon can be found here: https://github.com/ZhengPeiRu21/hide-vendor-price
+### Optional Recommended Addons
+- MultiBot: https://github.com/Wishmaster117/MultiBot-Chatless
+- Character Services: https://github.com/Badgermilk0/mod-character-services
+- Reagent Bank Account: https://github.com/Grimfeather/mod-reagent-bank-account
 
-## Discord (new!)
+## Discord
 [https://discord.gg/PTXxh3KSgQ](https://discord.gg/PTXxh3KSgQ)
 
 ## Thank You
-Special thanks to all contributors of the following projects who made this module possible:
-* AzerothCore and TrinityCore, along with ancestors Mangos, etc.
-* AzerothCore Progression Module for Vanilla content and scripts
+Special thanks to the following contributors and projects that made this module possible:
+* AzerothCore and TrinityCore, along with ancestors Mangos.
 * AzerothCore mod-war-effort
 * AzerothCore mod-pvp-titles
-* Wrath of the Vanilla Module for more Vanilla world adjustments
-* Vmangos for Vanilla game and patch progression data
-* Sogladev for many Naxx 40 scripts and data
-* 55Honey for Acore_ZoneDebuff module, used as basis for damage and HP scaling
+* vMangos for Vanilla game and patch progression data
+* cMangos for TBC game data
+* Sogladev for Naxx 40 scripts and data
+* ZhengPeiRu21 for creating the original version of this module.

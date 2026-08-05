@@ -200,10 +200,13 @@ public:
             });
         }
 
-        void KilledUnit(Unit*) override
+        void KilledUnit(Unit* /*who*/) override
         {
             if (roll_chance_i(30))
                 Talk(SAY_SLAY);
+
+            /* if (who->IsPlayer())
+                instance->StorePersistentData(PERSISTENT_DATA_IMMORTAL_FAIL, 1); */
         }
 
         void DamageTaken(Unit* who, uint32& damage, DamageEffectType, SpellSchoolMask) override
@@ -260,14 +263,11 @@ public:
                     events.Repeat(30s);
                     break;
                 case EVENT_DISRUPTING_SHOUT:
-                    if (sIndividualProgression->doableNaxx40Bosses)
-                    {
+                    if (sIndividualProgression->doableNaxx40Bosses_Razuvious)
                         me->CastSpell(me, SPELL_DISRUPTING_SHOUT, false);
-                    }
                     else
-                    {
                         me->CastSpell(me, SPELL_MANA_BURN, false);
-                    }
+
                     events.Repeat(25s);
                     break;
                 /* case EVENT_JAGGED_KNIFE:
@@ -346,6 +346,12 @@ public:
                     break;
             }
         }
+
+        /* void KilledUnit(Unit* who) override
+        {
+            if (who->IsPlayer())
+                me->GetInstanceScript()->StorePersistentData(PERSISTENT_DATA_IMMORTAL_FAIL, 1);
+        } */
 
         void JustEngagedWith(Unit* who) override
         {

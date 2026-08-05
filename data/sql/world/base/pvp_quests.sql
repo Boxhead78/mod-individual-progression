@@ -7,15 +7,15 @@ SET @ABG_TBC := 215351; -- Alliance Brigadier General - TBC
 
 DELETE FROM `creature_template` WHERE `entry` IN (@HW, @ABG, @HW_TBC, @ABG_TBC);
 INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `name`, `subname`, `IconName`, `gossip_menu_id`, 
-`minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `scale`, `rank`, `dmgschool`, `DamageModifier`, 
+`minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `rank`, `dmgschool`, `DamageModifier`, 
 `BaseAttackTime`, `RangeAttackTime`, `BaseVariance`, `RangeVariance`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`,  
 `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `HoverHeight`, `HealthModifier`, `ManaModifier`, 
-`ArmorModifier`, `ExperienceModifier`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `spell_school_immune_mask`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES 
+`ArmorModifier`, `ExperienceModifier`, `RacialLeader`, `movementId`, `RegenHealth`, `CreatureImmunitiesId`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES 
 --
-(@HW,0,0,0,0,0,'Horde Warbringer',NULL,NULL,6598,60,60,2,1074,3,1,1.14286,1,1,18,1,1,0,1,2000,2000,1,1,1,832,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,1,1,1,1,0,0,1,0,0,2,'',0),
-(@ABG,0,0,0,0,0,'Alliance Brigadier General',NULL,NULL,6597,60,60,2,534,3,1,1.14286,1,1,18,1,0,0,2.4,2000,2000,1,1,1,320,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,10,1,1.4,1,0,0,1,0,0,2,'',0),
-(@HW_TBC,0,0,0,0,0,'Horde Warbringer',NULL,NULL,6598,60,60,2,1074,3,1,1.14286,1,1,18,1,1,0,1,2000,2000,1,1,1,832,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,1,1,1,1,0,0,1,0,0,2,'',0),
-(@ABG_TBC,0,0,0,0,0,'Alliance Brigadier General',NULL,NULL,6597,60,60,2,534,3,1,1.14286,1,1,18,1,0,0,2.4,2000,2000,1,1,1,320,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,10,1,1.4,1,0,0,1,0,0,2,'',0);
+(@HW,0,0,0,0,0,'Horde Warbringer',NULL,NULL,6598,60,60,2,1074,3,1,1.14286,1,1,18,1,0,1,2000,2000,1,1,1,832,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,1,1,1,1,0,0,1,0,2,'',0),
+(@ABG,0,0,0,0,0,'Alliance Brigadier General',NULL,NULL,6597,60,60,2,534,3,1,1.14286,1,1,18,0,0,2.4,2000,2000,1,1,1,320,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,10,1,1.4,1,0,0,1,0,2,'',0),
+(@HW_TBC,0,0,0,0,0,'Horde Warbringer',NULL,NULL,6598,60,60,2,1074,3,1,1.14286,1,1,18,1,0,1,2000,2000,1,1,1,832,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,1,1,1,1,0,0,1,0,2,'',0),
+(@ABG_TBC,0,0,0,0,0,'Alliance Brigadier General',NULL,NULL,6597,60,60,2,534,3,1,1.14286,1,1,18,0,0,2.4,2000,2000,1,1,1,320,2048,0,0,7,134217728,0,0,0,0,0,0,0,'',0,1,10,1,1.4,1,0,0,1,0,2,'',0);
 
 DELETE FROM `creature_template_locale` WHERE `entry` IN (@HW, @ABG, @HW_TBC, @ABG_TBC);
 INSERT INTO `creature_template_locale` (`entry`, `locale`, `Name`, `Title`, `VerifiedBuild`) VALUES 
@@ -74,35 +74,35 @@ INSERT INTO `creature_template_model` (`CreatureID`, `Idx`, `CreatureDisplayID`,
 (@HW_TBC, 0, 15387, 1, 1, 12340),
 (@ABG_TBC, 0, 27154, 1, 1, 12340);
 
-DELETE FROM `creature` WHERE `id1` IN (@HW, @ABG, @HW_TBC, @ABG_TBC);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `id` IN (@HW, @ABG, @HW_TBC, @ABG_TBC);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(@CGUID+201, @HW, 0, 0, 1, 0, 0, 1, 1, 1, -1381.13, -87.0034, 159.532, 3.14159, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+202, @HW, 0, 0, 1, 0, 0, 1, 1, 1, 1988.5, -4812.28, 56.8494, 1.5708, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+203, @HW, 0, 0, 0, 0, 0, 1, 1, 1, 1251.41, 313.892, -63.6062, 0.139626, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+204, @HW, 0, 0, 0, 0, 0, 1, 1, 1, -832.362, -3512.62, 72.3318, 4.55531, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+205, @HW, 0, 0, 0, 0, 0, 1, 1, 1, 382.498, -983.076, 109.979, 2.82743, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+206, @HW, 0, 0, 1, 0, 0, 1, 1, 1, 1026.33, -2110.51, 123.1, 5.49779, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+201, @HW, 1, 0, 0, 1, 1, 1, -1381.13, -87.0034, 159.532, 3.14159, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+202, @HW, 1, 0, 0, 1, 1, 1, 1988.5, -4812.28, 56.8494, 1.5708, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+203, @HW, 0, 0, 0, 1, 1, 1, 1251.41, 313.892, -63.6062, 0.139626, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+204, @HW, 0, 0, 0, 1, 1, 1, -832.362, -3512.62, 72.3318, 4.55531, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+205, @HW, 0, 0, 0, 1, 1, 1, 382.498, -983.076, 109.979, 2.82743, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+206, @HW, 1, 0, 0, 1, 1, 1, 1026.33, -2110.51, 123.1, 5.49779, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(@CGUID+211, @ABG, 0, 0, 0, 0, 0, 1, 1, 0, -5049.99, -1270.26, 510.408, 0.0349066, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+212, @ABG, 0, 0, 1, 0, 0, 1, 1, 0, 9994.73, 2324.28, 1330.87, 3.24631, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+213, @ABG, 0, 0, 0, 0, 0, 1, 1, 0, -8441.76, 311.67, 120.969, 1.53589, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+214, @ABG, 0, 0, 0, 0, 0, 1, 1, 0, -1231.22, -2510.21, 23.1758, 4.36332, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+215, @ABG, 0, 0, 0, 0, 0, 1, 1, 0, -36.7805, -316.826, 130.69, 4.7822, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+216, @ABG, 0, 0, 1, 0, 0, 1, 1, 0, 1450.77, -1872.06, 126.998, 0.436332, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+211, @ABG, 0, 0, 0, 1, 1, 0, -5049.99, -1270.26, 510.408, 0.0349066, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+212, @ABG, 1, 0, 0, 1, 1, 0, 9994.73, 2324.28, 1330.87, 3.24631, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+213, @ABG, 0, 0, 0, 1, 1, 0, -8441.76, 311.67, 120.969, 1.53589, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+214, @ABG, 0, 0, 0, 1, 1, 0, -1231.22, -2510.21, 23.1758, 4.36332, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+215, @ABG, 0, 0, 0, 1, 1, 0, -36.7805, -316.826, 130.69, 4.7822, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+216, @ABG, 1, 0, 0, 1, 1, 0, 1450.77, -1872.06, 126.998, 0.436332, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(@CGUID+221, @HW_TBC, 0, 0, 1, 0, 0, 1, 1, 1, 1991.28, -4797.15, 56.1305, 2.77507, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+222, @HW_TBC, 0, 0, 1, 0, 0, 1, 1, 1, -1385.16, -91.2934, 159.055, 3.12414, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+223, @HW_TBC, 0, 0, 1, 0, 0, 1, 1, 1, 1663.62, -4196.58, 56.4659, 4.19403, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+224, @HW_TBC, 0, 0, 0, 0, 0, 1, 1, 1, 1316.82, 291.133, -63.6295, 2.04204, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+225, @HW_TBC, 0, 0, 530, 0, 0, 1, 1, 1, -1966.8800, 5260.6201, -38.8442, 4.1024, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+221, @HW_TBC, 1, 0, 0, 1, 1, 1, 1991.28, -4797.15, 56.1305, 2.77507, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+222, @HW_TBC, 1, 0, 0, 1, 1, 1, -1385.16, -91.2934, 159.055, 3.12414, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+223, @HW_TBC, 1, 0, 0, 1, 1, 1, 1663.62, -4196.58, 56.4659, 4.19403, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+224, @HW_TBC, 0, 0, 0, 1, 1, 1, 1316.82, 291.133, -63.6295, 2.04204, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+225, @HW_TBC, 530, 0, 0, 1, 1, 1, -1966.8800, 5260.6201, -38.8442, 4.1024, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
 --
-(@CGUID+226, @ABG_TBC, 0, 0, 0, 0, 0, 1, 1, 0, -8385.67, 272.605, 120.886, 2.20103, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+227, @ABG_TBC, 0, 0, 0, 0, 0, 1, 1, 0, -5042.4, -1265.32, 510.325, 4.62873, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
-(@CGUID+228, @ABG_TBC, 0, 0, 0, 0, 0, 1, 1, 0, -8766.67, 408.102, 109.785, 2.22503, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+229, @ABG_TBC, 0, 0, 1, 0, 0, 1, 1, 0, 9994.73, 2324.28, 1330.87, 3.24631, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(@CGUID+230, @ABG_TBC, 0, 0, 530, 0, 0, 1, 1, 0, -1768.1700, 5255.3599, -38.7639, 5.2011, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(@CGUID+226, @ABG_TBC, 0, 0, 0, 1, 1, 0, -8385.67, 272.605, 120.886, 2.20103, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+227, @ABG_TBC, 0, 0, 0, 1, 1, 0, -5042.4, -1265.32, 510.325, 4.62873, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
+(@CGUID+228, @ABG_TBC, 0, 0, 0, 1, 1, 0, -8766.67, 408.102, 109.785, 2.22503, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+229, @ABG_TBC, 1, 0, 0, 1, 1, 0, 9994.73, 2324.28, 1330.87, 3.24631, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(@CGUID+230, @ABG_TBC, 530, 0, 0, 1, 1, 0, -1768.1700, 5255.3599, -38.7639, 5.2011, 300, 0, 0, 1, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 
 DELETE FROM `creature_queststarter` WHERE `id` IN (@HW, @ABG, @HW_TBC, @ABG_TBC);
@@ -381,6 +381,8 @@ UPDATE `quest_template` SET `RewardItem1` = 20559, `RewardAmount1` = 3 WHERE `ID
 UPDATE `quest_template` SET `RewardItem1` = 20560, `RewardAmount1` = 3 WHERE `ID` IN (11336, 11340); -- Call to Arms: Alterac Valley (repeatable)
 UPDATE `quest_template` SET `RewardItem1` = 29024, `RewardAmount1` = 3 WHERE `ID` IN (11337, 11341); -- Call to Arms: Eye of the Storm (repeatable)
 UPDATE `quest_template` SET `RewardItem1` = 20558, `RewardAmount1` = 3 WHERE `ID` IN (11338, 11342); -- Call to Arms: Warsong Gulch (repeatable)
+
+UPDATE `quest_template` SET `Flags` = 4162 WHERE `ID` IN (11335, 11339, 11336, 11340, 11337, 11341, 11338, 11342); -- set completable in a raid
 
 UPDATE `quest_template_addon` SET `PrevQuestID` = 13476, `SpecialFlags` = 1 WHERE `ID` = 13475;
 UPDATE `quest_template_addon` SET `PrevQuestID` = 13478, `SpecialFlags` = 1 WHERE `ID` = 13477;

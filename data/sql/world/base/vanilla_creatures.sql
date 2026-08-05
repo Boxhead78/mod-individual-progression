@@ -12418,9 +12418,6 @@ UPDATE `creature_template` SET `speed_walk` = 1.0, `DamageModifier` = 3.120567, 
 /*  Flawless Draenethyst Fragment  */
 UPDATE `creature_template` SET `speed_walk` = 1.0, `DamageModifier` = 1.925466, `ArmorModifier` = 1.5, `BaseAttackTime` = 1610, `RangeAttackTime` = 1771 WHERE `entry` = 7365;
 
-/*  Restless Shade  */
-UPDATE `creature_template` SET `minlevel` = 58, `maxlevel` = 60, `HealthModifier` = 1.35, `ArmorModifier` = 1.45, `unit_class` = 1 WHERE `entry` = 7370;
-
 /*  Deadwind Mauler  */
 UPDATE `creature_template` SET `DamageModifier` = 1.5, `ArmorModifier` = 0.5 WHERE `entry` = 7371;
 
@@ -13256,7 +13253,7 @@ UPDATE `creature_template` SET `DamageModifier` = 9.0 WHERE `entry` = 8197;
 UPDATE `creature_template` SET `DamageModifier` = 2.9 WHERE `entry` = 8198;
 
 /*  Warleader Krazzilak  */
-UPDATE `creature_template` SET `DamageModifier` = 3.15 WHERE `entry` = 8199;
+UPDATE `creature_template` SET `DamageModifier` = 3.15, `Rank` = 2 WHERE `entry` = 8199;
 
 /*  Jin'Zallah the Sandbringer  */
 UPDATE `creature_template` SET `DamageModifier` = 3.25 WHERE `entry` = 8200;
@@ -18112,18 +18109,6 @@ UPDATE `creature_template` SET `maxlevel` = 1, `DamageModifier` = 1.3, `RangeAtt
 /*  Frost Ram  */
 UPDATE `creature_template` SET `maxlevel` = 1, `DamageModifier` = 1.3, `RangeAttackTime` = 2200 WHERE `entry` = 12371;
 
-/*  Wailing Spectre  */
-UPDATE `creature_template` SET `minlevel` = 58, `maxlevel` = 60, `DamageModifier` = 0.95, `HealthModifier` = 1.35, `ArmorModifier` = 0.95 WHERE `entry` = 12377;
-
-/*  Damned Soul  */
-UPDATE `creature_template` SET `minlevel` = 59, `maxlevel` = 60, `DamageModifier` = 2.15, `HealthModifier` = 1.35 WHERE `entry` = 12378;
-
-/*  Unliving Caretaker  */
-UPDATE `creature_template` SET `minlevel` = 59, `maxlevel` = 60, `DamageModifier` = 1.0, `HealthModifier` = 1.35, `ArmorModifier` = 1.05, `unit_class` = 1 WHERE `entry` = 12379;
-
-/*  Unliving Resident  */
-UPDATE `creature_template` SET `minlevel` = 59, `maxlevel` = 60, `DamageModifier` = 1.25, `HealthModifier` = 1.35, `ArmorModifier` = 1.05, `unit_class` = 1 WHERE `entry` = 12380;
-
 /*  Ley Sprite  */
 UPDATE `creature_template` SET `DamageModifier` = 1.5 WHERE `entry` = 12381;
 
@@ -18366,9 +18351,6 @@ UPDATE `creature_template` SET `speed_run` = 1.14286, `DamageModifier` = 1.15 WH
 
 /*  Hraug  */
 UPDATE `creature_template` SET `subname` = 'Demon Trainer', `DamageModifier` = 0.8, `RangeAttackTime` = 2112 WHERE `entry` = 12776;
-
-/*  Captain Dirgehammer  */
-UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55, `DamageModifier` = 2.2, `ArmorModifier` = 1.65 WHERE `entry` = 26393;
 
 /*  Lieutenant Rachel Vaccar  */
 UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55, `DamageModifier` = 1.05, `ArmorModifier` = 2.6 WHERE `entry` = 12778;
@@ -19327,7 +19309,7 @@ UPDATE `creature_template` SET `speed_walk` = 1.0, `DamageModifier` = 6.131261, 
 UPDATE `creature_template` SET `speed_walk` = 1.0, `DamageModifier` = 6.518010, `ArmorModifier` = 1.25, `RangeAttackTime` = 1283, `unit_class` = 2 WHERE `entry` = 13958;
 
 /*  Alterac Yeti  */
-UPDATE `creature_template` SET `DamageModifier` = 5.9, `ArmorModifier` = 1.15, `mingold` = 157, `maxgold` = 3066, `speed_walk` = 0.5, `mechanic_immune_mask` = 72785 WHERE `entry` = 13959;
+UPDATE `creature_template` SET `DamageModifier` = 5.9, `ArmorModifier` = 1.15, `mingold` = 157, `maxgold` = 3066, `speed_walk` = 0.5 WHERE `entry` = 13959;
 
 /*  Tortured Drake  */
 UPDATE `creature_template` SET `minlevel` = 40, `maxlevel` = 40, `DamageModifier` = 0.15 WHERE `entry` = 13976;

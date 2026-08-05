@@ -25,7 +25,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (7434, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Frostsaber Pride Watcher - On Enrage - Say Line 0'),
 --
 (7436, 0, 0, 0, 0, 0, 100, 0, 1700, 1900, 16700, 16900, 0, 0, 11, 11977, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Cobalt Scalebane - In Combat - Cast Rend'),
-(7436, 0, 1, 0, 105, 0, 100, 0, 0, 0, 17000, 21000, 0, 5, 11, 15655, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Cobalt Scalebane - Target Casting - Cast Shield Slam'),
+(7436, 0, 1, 0, 105, 0, 50, 0, 0, 0, 17000, 21000, 0, 5, 11, 15655, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Cobalt Scalebane - Target Casting - Cast Shield Slam'),
 (7436, 0, 2, 0, 9, 0, 100, 0, 0, 0, 9000, 13000, 0, 5, 11, 6713, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Cobalt Scalebane - Within 0-5 Range - Cast Disarm'),
 (7437, 0, 0, 0, 1, 0, 100, 0, 1000, 1000, 900000, 900000, 0, 0, 11, 12544, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Cobalt Mageweaver - Out of Combat - Cast Frost Armor'),
 (7437, 0, 1, 0, 0, 0, 100, 0, 0, 0, 2000, 2000, 0, 0, 11, 15043, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,             'Cobalt Mageweaver - In Combat - Cast Frostbolt'),
@@ -152,9 +152,9 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 
 
 -- update Respawn Times and Movement
-UPDATE `creature` SET `spawntimesecs` = 115200, `MovementType` = 1, `Wander_distance` = 5 WHERE `id1` = 10201; -- Lady Hederine
-UPDATE `creature` SET `spawntimesecs` = 37800,  `MovementType` = 1, `Wander_distance` = 5 WHERE `id1` = 10196; -- General Colbatann
-UPDATE `creature` SET `spawntimesecs` = 75600                                             WHERE `id1` = 10198; -- Kashoch the Reaver
+UPDATE `creature` SET `spawntimesecs` = 115200, `MovementType` = 1, `Wander_distance` = 5 WHERE `id` = 10201; -- Lady Hederine
+UPDATE `creature` SET `spawntimesecs` = 37800,  `MovementType` = 1, `Wander_distance` = 5 WHERE `id` = 10196; -- General Colbatann
+UPDATE `creature` SET `spawntimesecs` = 75600                                             WHERE `id` = 10198; -- Kashoch the Reaver
 
 
 DELETE FROM `creature_text` WHERE `CreatureID` IN (7451, 7454, 10200);

@@ -39,79 +39,91 @@ SET @Clate      := 112785; -- Stone Guard Zarg <Food and Drink>, Vanilla
 SET @Vixton     := 120278; -- Vixton Pinchwhistle - Season 2
 SET @Krixel     := 123396; -- Krixel Pinchwhistle - Season 3
 SET @Leeni      := 124392; -- Leeni "Smiley" Smalls - Season 4
+SET @Dirge      := 126393; -- Captain Dirgehammer - Season 4
 
 SET @CGUID      := 659000;
 
 UPDATE `creature_template` SET `subname` = 'Mount Vendor' WHERE `entry` = 12783;
 UPDATE `creature_template` SET `subname` = 'Weapons Quartermaster' WHERE `entry` = 12784; 
-UPDATE `creature_template` SET `subname` = 'Armor Quartermaster' WHERE `entry` = 12785;
+UPDATE `creature_template` SET `subname` = 'Armor Quartermaster' WHERE `entry` IN (12785, 34073, 34074);
+
 UPDATE `creature_template` SET `npcflag` = 4224 WHERE `entry` IN (24671, 24672);
 
 UPDATE `creature_template_addon` SET `mount` = 0 WHERE `entry` = 12783;
 
-DELETE FROM `creature` WHERE `guid` IN (133928, 133926, 133929, 612781, 133927, 612783, 612785, 623446, 624671, 624672, 612777, 626394);
-DELETE FROM `creature` WHERE `id1`  IN (7410, 7798, 112778, 12779, 12780, 12805, 14981, 15008, 32380, 32381, 34073, 34074, 34075, 34076, 34077, 34078, 40607);
-DELETE FROM `creature` WHERE `guid` IN (720278, 723396); -- 00_cleanup
+DELETE FROM `creature` WHERE `guid` IN (133928, 133926, 133929, 612781, 133927, 612783, 612785, 623446, 624671, 624672, 612777, 612778, 626394, 720278, 723396); -- 00_cleanup
+DELETE FROM `creature` WHERE `id`  IN (7410, 7798, 12779, 12780, 12805, 14981, 15008, 32380, 32381, 34073, 34074, 34075, 34076, 34077, 34078, 40607);
 DELETE FROM `creature` WHERE `guid` BETWEEN @CGUID+21 AND @CGUID+38;
+DELETE FROM `creature` WHERE `guid` BETWEEN @CGUID+121 AND @CGUID+142;
 
-INSERT INTO `creature` (`guid`, `id1`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
+INSERT INTO `creature` (`guid`, `id`, `map`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
 --
-(612781, @Biggins, 0, -8777.4, 417.124, 103.921, 6.23553, 180),      -- Master Sergeant Biggins <Officer Accessories Quartermaster>, Vanilla
-(133926, 12781, 0, -8777.4, 417.124, 103.921, 6.23553, 180),         -- Master Sergeant Biggins <Officer Accessories Quartermaster>, TBC
-(612785, @Clate, 0, -8771.31, 401.973, 109.665, 0.659191, 180),      -- Sergeant Major Clate <Food and Drink>, Vanilla
-(133929, 12785, 0, -8771.31, 401.973, 109.665, 0.659191, 180),       -- Sergeant Major Clate <Armor Quartermaster>, TBC 
-(626394, 26394, 0, -8778.3, 432.142, 105.309, 4.17386, 180),         -- Captain O'Neal <Weapons Quartermaster>, Vanilla
-(624671, 24671, 0, -8778.3, 432.142, 105.309, 4.17386, 180),         -- Captain O'Neal <Weapons Quartermaster>, TBC
-(612777, 12777, 0, -8768.77, 401.647, 109.665, 2.22999, 180),        -- Captain Dirgehammer <Armor Quartermaster>, Vanilla
-(624672, 24672, 0, -8773.33, 427.279, 105.233, 3.84677, 180),        -- Captain Dirgehammer <Armor Quartermaster>, TBC
-(133928, 12784, 0, -8764.6, 413.632, 103.922, 0.693375, 180),        -- Lieutenant Jackspring <Weapons Quartermaster>, TBC 
-(623446, 23446, 0, -8785.74, 420.484, 105.233, 0.701937, 180),       -- Lieutenant Tristia <Armor Quartermaster>, TBC
-(133927, 12783, 0, -8779.7, 432.158, 105.233, 5.36374, 180),         -- Lieutenant Karter <Mount Vendor>, TBC
-(612783, @Karter, 0, -8779.7, 432.158, 105.233, 5.36374, 180),       -- Lieutenant Karter <Mount Vendor>, Vanilla
+(@CGUID+121, @Biggins, 0, 1, -8777.4, 417.124, 103.921, 6.23553, 180),  -- Master Sergeant Biggins <Officer Accessories Quartermaster>, Vanilla
+(@CGUID+122, 12781, 0, 1, -8777.4, 417.124, 103.921, 6.23553, 180),     -- Master Sergeant Biggins <Officer Accessories Quartermaster>, TBC
+(@CGUID+123, @Clate, 0, 1, -8771.31, 401.973, 109.665, 0.659191, 180),  -- Sergeant Major Clate <Food and Drink>, Vanilla
+(@CGUID+124, 12785, 0, 1, -8771.31, 401.973, 109.665, 0.659191, 180),   -- Sergeant Major Clate <Armor Quartermaster>, TBC 
+(@CGUID+125, 26394, 0, 1, -8778.3, 432.142, 105.309, 4.17386, 180),     -- Captain O'Neal <Weapons Quartermaster>, Vanilla
+(@CGUID+126, 24671, 0, 1, -8778.3, 432.142, 105.309, 4.17386, 180),     -- Captain O'Neal <Weapons Quartermaster>, TBC
 
-(607410, 7410,   0, -8424.43, 342.967, 120.886, 3.82018,  300),      -- Thelman Slatefist <Alterac Valley Battlemaster>
-(607798, 7798,   0, -8422.17, 630.877, 95.8402, 5.044,    430),      -- Hank the Hammer <The Mitrhil Order>
-(612778, @Rachel, 0, -8783.7,  423.749, 105.276, 0.651345, 300),     -- Lieutenant Rachel Vaccar
-(612779, 12779,  0, -8783.33, 426.686, 105.276, 5.37159,  300),      -- Archmage Gaiman
-(612780, 12780,  0, -8779.46, 427.206, 105.275, 3.80473,  300),      -- Sergeant Major Skyshadow
-(612805, 12805,  0, -8759.18, 389.112, 101.056, 0.648394, 430),      -- Officer Areyn <Accessories Quartermaster>
-(614981, 14981,  0, -8454.62, 318.853, 120.969, 0.698132, 180),      -- Elfarran <Warsong Gulch Battlemaster>
-(615008, 15008,  0, -8420.48, 328.711, 120.886, 3.06638,  180),      -- Lady Hoteshem <Arathi Basin Battlemaster>
+(@CGUID+127, 12784, 0, 1, -8764.6, 413.632, 103.922, 0.693375, 180),    -- Lieutenant Jackspring <Weapons Quartermaster>, TBC 
+(@CGUID+128, 12783, 0, 1, -8779.7, 432.158, 105.233, 5.36374, 180),     -- Lieutenant Karter <Mount Vendor>, TBC
+(@CGUID+129, @Karter, 0, 0, -8779.7, 432.158, 105.233, 5.36374, 180),   -- Lieutenant Karter <Mount Vendor>, Vanilla
+(@CGUID+130, 12777, 0, 1, -8768.77, 401.647, 109.665, 2.22999, 180),    -- Captain Dirgehammer <Armor Quartermaster>, Vanilla
+(@CGUID+131, 24672, 0, 1, -8773.33, 427.279, 105.233, 3.84677, 180),    -- Captain Dirgehammer <Armor Quartermaster>, TBC Season 1
+(@CGUID+132, 23446, 0, 0, -8785.74, 420.484, 105.233, 0.701937, 180),   -- Lieutenant Tristia <Armor Quartermaster>,  TBC Season 2
+(@CGUID+133, 26393, 0, 1, -8773.33, 427.279, 105.233, 3.84677, 180),    -- Captain Dirgehammer <Armor Quartermaster>, TBC Season 3
+(@CGUID+134, @Dirge, 0, 1, -8773.33, 427.279, 105.233, 3.84677, 180),   -- Captain Dirgehammer <Armor Quartermaster>, TBC Season 4
 
-(@CGUID+21, 20278, 0, -8789.08, 425.681, 105.233, 5.68294, 180),     -- Vixton Pinchwhistle <Arena Vendor>, TBC, Season 1
-(@CGUID+22, @Vixton, 0, -8789.08, 425.681, 105.233, 5.68294, 180),   -- Vixton Pinchwhistle <Arena Vendor>, TBC, Season 2
-(@CGUID+23, 23396, 0, -8786.12, 428.386, 105.233, 5.5871, 180),      -- Krixel Pinchwhistle <Arena Vendor>, TBC, Season 2
-(@CGUID+24, 24392, 0, -8789.08, 425.681, 105.233, 5.68294, 180),     -- Leeni "Smiley" Smalls <Arena Vendor>, TBC, Season 3
-(@CGUID+25, @Krixel, 0, -8786.12, 428.386, 105.233, 5.5871, 180),    -- Krixel Pinchwhistle <Arena Vendor>, TBC, Season 3
-(@CGUID+26, @Leeni, 0, -8789.08, 425.681, 105.233, 5.68294, 180),    -- Leeni "Smiley" Smalls <Arena Vendor>, TBC, Season 4
-(@CGUID+27, 26352, 0, -8786.12, 428.386, 105.233, 5.5871, 180),      -- Big Zokk Torquewrench <Arena Vendor>, TBC, Season 4
+(@CGUID+135, 7798, 0, 1, -8422.17, 630.877, 95.8402, 5.044, 430),       -- Hank the Hammer <The Mitrhil Order>
+(@CGUID+136, @Rachel, 0, 1, -8783.7,  423.749, 105.276, 0.651345, 300), -- Lieutenant Rachel Vaccar
+(@CGUID+137, 12779, 0, 1, -8783.33, 426.686, 105.276, 5.37159, 300),    -- Archmage Gaiman
+(@CGUID+138, 12780, 0, 1, -8779.46, 427.206, 105.275, 3.80473, 300),    -- Sergeant Major Skyshadow
+(@CGUID+139, 12805, 0, 1, -8759.18, 389.112, 101.056, 0.648394, 430),   -- Officer Areyn <Accessories Quartermaster>
+(@CGUID+140, 14981, 0, 1, -8454.62, 318.853, 120.969, 0.698132, 180),   -- Elfarran <Warsong Gulch Battlemaster>
+(@CGUID+141, 15008, 0, 1, -8420.48, 328.711, 120.886, 3.06638, 180),    -- Lady Hoteshem <Arathi Basin Battlemaster>
+(@CGUID+142, 7410, 0, 1, -8424.43, 342.967, 120.886, 3.82018, 300),     -- Thelman Slatefist <Alterac Valley Battlemaster>
 
-(@CGUID+31, 32381, 0, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 5
-(@CGUID+32, 34073, 0, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 6
-(@CGUID+33, 34074, 0, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 7
-(@CGUID+34, 34075, 0, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 8
-(@CGUID+35, 32380, 0, -8773.78, 425.804, 105.233, 4.80621, 180),     -- Lieutenant Tristia, WotLK Season 5
-(@CGUID+36, 34076, 0, -8773.78, 425.804, 105.233, 4.80621, 180),     -- Lieutenant Tristia, WotLK Season 6
-(@CGUID+37, 34077, 0, -8773.78, 425.804, 105.233, 4.80621, 180),     -- Lieutenant Tristia, WotLK Season 7
-(@CGUID+38, 34078, 0, -8773.78, 425.804, 105.233, 4.80621, 180);     -- Lieutenant Tristia, WotLK Season 8
+(@CGUID+21, 20278, 0, 0, -8789.08, 425.681, 105.233, 5.68294, 180),     -- Vixton Pinchwhistle <Arena Vendor>, TBC, Season 1
+(@CGUID+22, @Vixton, 0, 0, -8789.08, 425.681, 105.233, 5.68294, 180),   -- Vixton Pinchwhistle <Arena Vendor>, TBC, Season 2
+(@CGUID+23, 23396, 0, 0, -8786.12, 428.386, 105.233, 5.5871, 180),      -- Krixel Pinchwhistle <Arena Vendor>, TBC, Season 2
+(@CGUID+24, 24392, 0, 0, -8789.08, 425.681, 105.233, 5.68294, 180),     -- Leeni "Smiley" Smalls <Arena Vendor>, TBC, Season 3
+(@CGUID+25, @Krixel, 0, 0, -8786.12, 428.386, 105.233, 5.5871, 180),    -- Krixel Pinchwhistle <Arena Vendor>,   TBC, Season 3
+(@CGUID+26, @Leeni, 0, 0, -8789.08, 425.681, 105.233, 5.68294, 180),    -- Leeni "Smiley" Smalls <Arena Vendor>, TBC, Season 4
+(@CGUID+27, 26352, 0, 1, -8786.12, 428.386, 105.233, 5.5871, 180),      -- Big Zokk Torquewrench <Arena Vendor>, TBC, Season 4
 
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_pre_tbc'   WHERE `guid` IN (612777, 612781, 612783, 612785, 612805, 626394); -- only visible during vanilla
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_pvp'   WHERE `guid` IN (623446, 624672, 720278, 723396);                 -- only visible during tbc
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc'       WHERE `guid` IN (133921, 133926, 133927, 133928, 133929, 624671); -- visible during tbc & wotlk
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_pre_wotlk' WHERE `guid` IN (612778);
+(@CGUID+31, 32381, 0, 1, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 5
+(@CGUID+32, 34073, 0, 1, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 6
+(@CGUID+33, 34074, 0, 1, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 7
+(@CGUID+34, 34075, 0, 1, -8781.18, 419.883, 105.233, 6.18459, 180),     -- Captain Dirgehammer, WotLK Season 8
+(@CGUID+35, 32380, 0, 1, -8773.78, 425.804, 105.233, 4.80621, 180),     -- Lieutenant Tristia, WotLK Season 5
+(@CGUID+36, 34076, 0, 1, -8773.78, 425.804, 105.233, 4.80621, 180),     -- Lieutenant Tristia, WotLK Season 6
+(@CGUID+37, 34077, 0, 1, -8773.78, 425.804, 105.233, 4.80621, 180),     -- Lieutenant Tristia, WotLK Season 7
+(@CGUID+38, 34078, 0, 1, -8773.78, 425.804, 105.233, 4.80621, 180);     -- Lieutenant Tristia, WotLK Season 8
+
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_pre_tbc'   WHERE `guid` IN (@CGUID+130, @CGUID+121, @CGUID+129, @CGUID+123, @CGUID+139, @CGUID+125); -- only visible during vanilla
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_pvp'   WHERE `guid` IN (720278, 723396);                         -- only visible during tbc
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc'       WHERE `guid` IN (133921, @CGUID+122, @CGUID+128, @CGUID+127, @CGUID+124, @CGUID+126); -- visible during tbc & wotlk
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_pre_wotlk' WHERE `guid` IN (@CGUID+136);
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_wotlk'     WHERE `guid` IN (133922);
 
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S1'    WHERE `guid` IN (@CGUID+21);
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S2'    WHERE `guid` IN (@CGUID+22, @CGUID+23);
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S3'    WHERE `guid` IN (@CGUID+24, @CGUID+25);
-UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S4'    WHERE `guid` IN (@CGUID+26, @CGUID+27);
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S1'    WHERE `guid` IN (@CGUID+21, @CGUID+131);
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S2'    WHERE `guid` IN (@CGUID+22, @CGUID+23, @CGUID+132);
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S3'    WHERE `guid` IN (@CGUID+24, @CGUID+25, @CGUID+133);
+UPDATE `creature` SET `ScriptName` = 'npc_ipp_tbc_S4'    WHERE `guid` IN (@CGUID+26, @CGUID+27, @CGUID+134);
 
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_wotlk_S5'  WHERE `guid` IN (@CGUID+31, @CGUID+35);
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_wotlk_S6'  WHERE `guid` IN (@CGUID+32, @CGUID+36);
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_wotlk_S7'  WHERE `guid` IN (@CGUID+33, @CGUID+37);
 UPDATE `creature` SET `ScriptName` = 'npc_ipp_wotlk_S8'  WHERE `guid` IN (@CGUID+34, @CGUID+38);
 
-UPDATE `creature` SET `equipment_id` = 1 WHERE `id1` = 12805; -- Officer Areyn <Accessories Quartermaster>
+/*  Captain Dirgehammer  */
+UPDATE `creature_template` SET `minlevel` = 55, `maxlevel` = 55 WHERE `entry` IN (12777);
+UPDATE `creature_template` SET `minlevel` = 65, `maxlevel` = 65 WHERE `entry` IN (26393, 34075);
+
+DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+122, @CGUID+127, 133926, 133928);
+INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES
+(@CGUID+122, 0, 0, 0, 1, 0, 0, NULL), -- Master Sergeant Biggins
+(@CGUID+127, 0, 0, 0, 1, 0, 0, NULL); -- Lieutenant Jackspring
 
 /* Hide certain vendor items until the player has reached the progression tier for them */
 DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 23 AND `SourceGroup` IN (12777, 12782, 12783, 26394) AND `ConditionValue1` IN (66002, 66006, 66008);
@@ -289,12 +301,17 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 --
 (23, 12783, 35906, 0, 0, 8, 0, 66008, 0, 0, 0, 0, 0, '', 'Lieutenant Karter will not sell Reins of the Black War Elekk until the player has completed PROGRESSION_PRE_TBC');
 
+-- Quest: Alicia's Poem (11451)
+DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 19 AND `SourceEntry` = 11451;
+INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`,
+`ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES
+(19, 0, 11451, 0, 0, 8, 0, 66008, 0, 0, 0, 0, 0, '', 'Quest \'Alicia\'s Poem\' only available after the player has reached PROGRESSION_TBC_TIER_1');
+
 UPDATE `gameobject` SET `ScriptName` = 'gobject_ipp_pre_tbc' WHERE `guid` IN (61936, 61940, 61942, 61944, 61945, 61946, 61947, 61949, 61951);
 
 -- WotLK pvp vendors
-DELETE FROM `creature` WHERE `id1` IN 
+DELETE FROM `creature` WHERE `id` IN 
 (12782,  -- Captain O'Neal <Weapons Quartermaster>
- 26393,  -- Captain Dirgehammer <Armor Quartermaster>
  34081); -- Captain O'Neal <Jewelcrafting Quartermaster>
 
 /* NPC Rebecca Laughlin - Remove non-Vanilla Tabards */
@@ -323,6 +340,7 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 -- smart scripts
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN (1284, 12739);
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (1284, 12739);
+DELETE FROM `smart_scripts` WHERE `event_type` = 10 AND `target_type` = 7 AND `entryorguid` = 28347;
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
 `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
 `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, 
@@ -335,4 +353,5 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (1284, 0, 4, 0, 0, 0, 100, 0, 12000, 18000, 12000, 18000, 0, 0, 11, 20697, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Archbishop Benedictus - In Combat - Cast Power Word: Shield'),
 --
 (12739, 0, 0, 1, 2, 0, 100, 0, 0, 30, 0, 0, 0, 0, 11, 8599, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Onyxias Elite Guard - Between 0-30% Health - Cast Enrage'),
-(12739, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Onyxias Elite Guard - On Enrage - Say Line 0');
+(12739, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Onyxias Elite Guard - On Enrage - Say Line 0'),
+(28347, 0, 1, 0, 10, 0, 100, 0, 1, 20, 30000, 60000, 1, 0, 1, 5, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,            'Miles Sidney - OOC LOS - Say Line 5');

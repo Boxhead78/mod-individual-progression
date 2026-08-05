@@ -47,7 +47,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (1539, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Scarlet Neophyte - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (1540, 0, 0, 0, 4, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                         'Scarlet Vanguard - On Aggro - Say Line 0'),
 (1540, 0, 1, 0, 0, 0, 100, 0, 1000, 3000, 180000, 184000, 0, 0, 11, 7164, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Scarlet Vanguard - In Combat - Cast Defensive Stance'),
-(1540, 0, 2, 0, 105, 0, 100, 0, 0, 0, 9000, 16000, 0, 5, 11, 72, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,             'Scarlet Vanguard - Target Casting - Cast Shield Bash'),
+(1540, 0, 2, 0, 105, 0, 50, 0, 0, 0, 9000, 16000, 0, 5, 11, 72, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,              'Scarlet Vanguard - Target Casting - Cast Shield Bash'),
 (1540, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Scarlet Vanguard - Between 0-15% Health - Flee For Assist (No Repeat)'),
 --
 (1544, 0, 0, 0, 1, 0, 100, 0, 1000, 1000, 600000, 600000, 0, 0, 11, 324, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Vile Fin Minor Oracle - Out of Combat - Cast Lightning Shield'),
@@ -67,7 +67,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (1660, 0, 1, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Scarlet Bodyguard - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (1662, 0, 0, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Captain Perrine - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (1664, 0, 0, 0, 0, 0, 100, 0, 1000, 3000, 182000, 186000, 0, 0, 11, 7164, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Captain Vachon - In Combat - Cast Defensive Stance'),
-(1664, 0, 1, 0, 105, 0, 100, 0, 0, 0, 16000, 24000, 0, 5, 11, 72, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,            'Captain Vachon - Target Casting - Cast Shield Bash'),
+(1664, 0, 1, 0, 105, 0, 50, 0, 0, 0, 16000, 24000, 0, 5, 11, 72, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,             'Captain Vachon - Target Casting - Cast Shield Bash'),
 (1664, 0, 2, 0, 0, 0, 100, 0, 8000, 14000, 18000, 30000, 0, 0, 11, 3248, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Captain Vachon - In Combat - Cast Improved Blocking'),
 (1664, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Captain Vachon - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (1665, 0, 0, 0, 0, 0, 100, 0, 1000, 3000, 240000, 300000, 0, 0, 11, 8258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Captain Melrache - In Combat - Cast Devotion Aura'),
@@ -113,10 +113,14 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 /* Drop chance for Rattlecage Skull was incorrectly set to 15 - updated to 80 */
 UPDATE `creature_loot_template` SET `Chance` = 80 WHERE `Entry` = 1890 AND `Item` = 6281;
 
--- Undertaker Mordo
-DELETE FROM `creature` WHERE `id1` = 1568;
-INSERT INTO `creature` (`guid`, `id1`, `map`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
-(601568, 1568, 0, 1678.99, 1667.86, 135.855, 3.76991, 300);
+-- Undertaker Mordo (not sure why we creating a new version of this guy, we only seem to be moving him)
+DELETE FROM `creature` WHERE `id` = 1568;
+INSERT INTO `creature` (`guid`, `id`, `map`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`) VALUES 
+(601568, 1568, 0, 1, 1678.99, 1667.86, 135.855, 3.76991, 300);
+
+DELETE FROM `creature_addon` WHERE `guid` IN (29803, 601568);
+INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 
+(601568, 0, 0, 0, 1, 0, 0, NULL);
 
 -- update npc names
 UPDATE `creature_template` SET `name` = 'Wretched Zombie' WHERE `entry` = 1502; -- Wretched Zombie
@@ -188,24 +192,24 @@ DELETE FROM `creature_queststarter` WHERE `id` = 5667 AND `quest` = 1470;
 INSERT INTO `creature_queststarter` (`id`, `quest`) VALUES (5667, 1470);
 
 -- fix respawn times and movement
-UPDATE `creature` SET `spawntimesecs` = 5400 WHERE `id1` = 1910; -- Muad
-UPDATE `creature` SET `spawntimesecs` = 7200 WHERE `id1` = 1911; -- Deeb
-UPDATE `creature` SET `spawntimesecs` = 5400 WHERE `id1` = 1936; -- Farmer Solliden
+UPDATE `creature` SET `spawntimesecs` = 5400 WHERE `id` = 1910; -- Muad
+UPDATE `creature` SET `spawntimesecs` = 7200 WHERE `id` = 1911; -- Deeb
+UPDATE `creature` SET `spawntimesecs` = 5400 WHERE `id` = 1936; -- Farmer Solliden
 
-UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id1` = 1911;
+UPDATE `creature` SET `MovementType` = 1, `wander_distance` = 5 WHERE `id` = 1911;
 
 -- fix patrols
 DELETE FROM `creature` WHERE `guid` IN (37920, 38292, 42142, 44762, 44763, 44990, 49222);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, 
 `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES
 --
-(37920, 1540, 0, 0, 0, 0, 0, 1, 1, 1, 2943.75, -554.264, 109.317, 3.22052, 300,  0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Vanguard
-(38292, 3547, 0, 0, 0, 0, 0, 1, 1, 1, 2282.38, 343.513, 34.21, 4.52215,    300,  0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Hamlin Atkins
-(42142, 10356, 0, 0, 0, 0, 0, 1, 1, 0, 2405.87, 974.879, 71.1481, 4.45794, 5400, 0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Bayne
-(44762, 1539, 0, 0, 0, 0, 0, 1, 1, 1, 3066.25, -538.546, 126.765, 3.39442, 300,  0, 1, 186, 191, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Neophyte
-(44763, 1538, 0, 0, 0, 0, 0, 1, 1, 1, 3054.86, -558.552, 125.615, 4.58007, 300,  0, 1, 166, 178, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Friar
-(44990, 1655, 0, 0, 0, 0, 0, 1, 1, 0, 2742.71, 785.519, 119.133, 0.453786, 300,  0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Nissa Agamand
-(49222, 1533, 0, 0, 0, 0, 0, 1, 1, 0, 2885.04, 973.306, 116.983, 0.199966, 5400, 0, 1, 187, 0,   2, 0, 0, 0, '', 0, 0, NULL); -- Tormented Spirit
+(37920, 1540, 0, 0, 0, 1, 1, 1, 2943.75, -554.264, 109.317, 3.22052, 300,  0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Vanguard
+(38292, 3547, 0, 0, 0, 1, 1, 1, 2282.38, 343.513, 34.21, 4.52215,    300,  0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Hamlin Atkins
+(42142, 10356, 0, 0, 0, 1, 1, 0, 2405.87, 974.879, 71.1481, 4.45794, 5400, 0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Bayne
+(44762, 1539, 0, 0, 0, 1, 1, 1, 3066.25, -538.546, 126.765, 3.39442, 300,  0, 1, 186, 191, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Neophyte
+(44763, 1538, 0, 0, 0, 1, 1, 1, 3054.86, -558.552, 125.615, 4.58007, 300,  0, 1, 166, 178, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Friar
+(44990, 1655, 0, 0, 0, 1, 1, 0, 2742.71, 785.519, 119.133, 0.453786, 300,  0, 1, 198, 0,   2, 0, 0, 0, '', 0, 0, NULL), -- Nissa Agamand
+(49222, 1533, 0, 0, 0, 1, 1, 0, 2885.04, 973.306, 116.983, 0.199966, 5400, 0, 1, 187, 0,   2, 0, 0, 0, '', 0, 0, NULL); -- Tormented Spirit
 
 DELETE FROM `creature_addon` WHERE `guid` IN (37920, 38292, 42142, 44762, 44763, 44990, 49222);
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 

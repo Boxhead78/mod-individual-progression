@@ -128,6 +128,15 @@ public:
         uint32 resetTimer{};
         bool ballLightningEnabled;
 
+        bool IsAnyPlayerInMeleeRange() const
+        {
+            for (auto const* ref : me->GetThreatMgr().GetUnsortedThreatList())
+                if (Unit* target = ref->GetVictim())
+                    if (target->IsPlayer() && me->IsWithinMeleeRange(target))
+                        return true;
+            return false;
+        }
+
         void DoAction(int32 param) override
         {
             if (param == ACTION_SUMMON_DIED)
@@ -334,11 +343,9 @@ public:
                     break;
             }
 
-            if (me->IsWithinMeleeRange(me->GetVictim()))
-            {
+            if (IsAnyPlayerInMeleeRange())
                 DoMeleeAttackIfReady();
-            }
-            else if (ballLightningEnabled)
+            else if (ballLightningEnabled && !IsAnyPlayerInMeleeRange() && !me->HasUnitState(UNIT_STATE_CASTING))
             {
                 if (Unit* target = SelectTarget(SelectTargetMethod::MaxThreat))
                 {
@@ -590,9 +597,7 @@ class spell_thaddius_pos_neg_charge : public SpellScript
                 if (Player* target = ihit->ToPlayer())
                 {
                     if (target->HasAura(GetTriggeringSpell()->Id))
-                    {
                         ++count;
-                    }
                 }
             }
         }
@@ -620,11 +625,10 @@ class spell_thaddius_pos_neg_charge : public SpellScript
         else if (target->GetInstanceScript())
         {
             target->GetInstanceScript()->SetData(DATA_CHARGES_CROSSED, 0);
-        }
-        // Adjust damage to 2000 from 4500 for naxx40
-        if (target->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_HEROIC)
-        {
-            SetHitDamage(2000);
+
+            // Adjust damage to 2000 from 4500 for naxx40
+            if (target->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_HEROIC)
+                SetHitDamage(2000);
         }
     }
 

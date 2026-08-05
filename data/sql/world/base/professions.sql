@@ -39,7 +39,10 @@ UPDATE `trainer_spell` SET `ReqLevel` = 71 WHERE `SpellID` = 47280;
 DELETE FROM `trainer_spell` WHERE `SpellID` IN (18261, 19886, 54257, 54256);
 UPDATE `quest_template` SET `RewardItem1` = 16073, `RewardAmount1` = 1 WHERE id = 6610;
 UPDATE `item_template` SET `spellid_1` = 19887, `spellcharges_1` = -1, `spellppmRate_1` = -1 WHERE `entry` = 16073;
-INSERT IGNORE INTO `item_template_locale` (`ID`, `locale`, `Name`, `Description`, `VerifiedBuild`) VALUES 
+
+DELETE FROM `item_template_locale` WHERE `ID` = 16073;
+INSERT INTO `item_template_locale` (`ID`, `locale`, `Name`, `Description`, `VerifiedBuild`) VALUES 
+(16073, 'deDE', 'Fachmannkochbuch', '', 0),
 (16073, 'frFR', 'Livre de cuisine pour artisan', '', 0);
 
 -- Fishing needs to be learned from Quests and Books, remove from trainers
@@ -110,11 +113,11 @@ UPDATE `creature_template` SET `subname` = 'Expert Tailor'            WHERE `ent
 
 /*
 -- Delete added riding trainers
-DELETE FROM creature WHERE `id1` IN (35093, 35100);
+DELETE FROM creature WHERE `id` IN (35093, 35100);
 DELETE FROM creature_addon WHERE `guid` IN (88165, 88166);
 
 -- Optional - delete TBC trainers added in WotLK 3.1
-DELETE FROM creature WHERE `id1` IN 
+DELETE FROM creature WHERE `id` IN 
 (33608, 33609, 33610, 33611, 33612, 33613, 33614, 33615, 33616, 33617, 33618, 33619, 
 33621, 33623, 33630, 33631, 33633, 33634, 33635, 33636, 33637, 33639, 33640, 33641, 
 33674, 33675, 33676, 33677, 33678, 33680, 33681, 33682, 33683, 33684, 35099, 35101);
@@ -157,16 +160,16 @@ SET @Grikka  := 121087;
 /* Add copies with script npc_ipp_tbc_pre_t4 */
 DELETE FROM `creature_template` WHERE `entry` IN (@Darmari, @Barim, @Brumman, @Grikka);
 INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `name`, `subname`, `IconName`, `gossip_menu_id`, 
-`minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `scale`, `rank`, `dmgschool`, `DamageModifier`, 
+`minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `speed_swim`, `speed_flight`, `detection_range`, `rank`, `dmgschool`, `DamageModifier`, 
 `BaseAttackTime`, `RangeAttackTime`, `BaseVariance`, `RangeVariance`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, 
 `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `HoverHeight`, `HealthModifier`, `ManaModifier`, `ArmorModifier`, `ExperienceModifier`, `RacialLeader`, `movementId`, 
-`RegenHealth`, `mechanic_immune_mask`, `spell_school_immune_mask`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES
+`RegenHealth`, `CreatureImmunitiesId`, `flags_extra`, `ScriptName`, `VerifiedBuild`) VALUES
 --
-(@Darmari,0,0,0,0,0,'Darmari','Master Leatherworking Trainer',NULL,7816,63,63,0,1818,81,1,1.14286,1,1,20,1,0,0,1,2000,2000,1,1,1,33024,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.05,1,1,1,0,0,1,0,0,2,'npc_ipp_tbc_pre_t4',0),
-(@Barim,0,0,0,0,0,'Barim Spilthoof','Master Leatherworking Trainer',NULL,7816,60,60,0,29,209,1,1.14286,1,1,20,1,0,0,1,2000,2000,1,1,1,512,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.02,1,1,1,0,0,1,0,0,2,'npc_ipp_tbc_pre_t4',0),
-(@Brumman,0,0,0,0,0,'Brumman','Master Leatherworking Trainer',NULL,0,60,60,0,1737,209,1,1.14286,1,1,20,1,0,0,1,2000,2000,1,1,1,512,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.02,1,1,1,0,0,1,0,0,2,'npc_ipp_tbc_pre_t4',0),
-(@Grikka,0,0,0,0,0,'Grikka','Master Leatherworking Trainer',NULL,0,60,60,0,1735,80,1.125,1.14286,1,1,20,1,0,0,1,2000,2000,1,1,1,4608,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.25,1,1,1,0,0,1,0,0,2,'npc_ipp_tbc_pre_t4',0);
-
+(@Darmari,0,0,0,0,0,'Darmari','Master Leatherworking Trainer',NULL,7816,63,63,0,1818,81,1,1.14286,1,1,20,0,0,1,2000,2000,1,1,1,33024,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.05,1,1,1,0,0,1,0,2,'npc_ipp_tbc_pre_t3',0),
+(@Barim,0,0,0,0,0,'Barim Spilthoof','Master Leatherworking Trainer',NULL,7816,60,60,0,29,209,1,1.14286,1,1,20,0,0,1,2000,2000,1,1,1,512,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.02,1,1,1,0,0,1,0,2,'npc_ipp_tbc_pre_t3',0),
+(@Brumman,0,0,0,0,0,'Brumman','Master Leatherworking Trainer',NULL,0,60,60,0,1737,209,1,1.14286,1,1,20,0,0,1,2000,2000,1,1,1,512,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.02,1,1,1,0,0,1,0,2,'npc_ipp_tbc_pre_t3',0),
+(@Grikka,0,0,0,0,0,'Grikka','Master Leatherworking Trainer',NULL,0,60,60,0,1735,80,1.125,1.14286,1,1,20,0,0,1,2000,2000,1,1,1,4608,2048,0,0,7,0,0,0,0,0,0,0,0,'',1,1,1.25,1,1,1,0,0,1,0,2,'npc_ipp_tbc_pre_t3',0);
+    
 DELETE FROM `creature_template_addon` WHERE `entry` IN (@Darmari, @Barim, @Brumman, @Grikka);
 INSERT INTO `creature_template_addon` (`entry`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 
 (@Darmari, 0, 0, 0, 1, 0, 0, NULL),
@@ -216,12 +219,12 @@ INSERT INTO `creature_template_model` (`CreatureID`, `Idx`, `CreatureDisplayID`,
 (@Brumman, 0, 18177, 1, 1, 12340),
 (@Grikka, 0, 20059, 1, 1, 12340);
 
-DELETE FROM `creature` WHERE `id1` IN (@Darmari, @Barim, @Brumman, @Grikka);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(619187, @Darmari, 0, 0, 530, 0, 0, 1, 1, 1, -2060.92, 5256.68, -38.3819, 0.767945, 300, 0, 0, 3498, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(618754, @Barim, 0, 0, 530, 0, 0, 1, 1, 1, 148.588, 2636.02, 86.018, 1.27409, 300, 0, 0, 3113, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(618771, @Brumman, 0, 0, 530, 0, 0, 1, 1, 1, -721.657, 2745.26, 94.0548, 3.45575, 300, 0, 0, 3113, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(621087, @Grikka, 0, 0, 530, 0, 0, 1, 1, 0, 2039.82, 4675.43, 150.074, 0.977384, 300, 0, 0, 3815, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+DELETE FROM `creature` WHERE `id` IN (@Darmari, @Barim, @Brumman, @Grikka);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
+(619187, @Darmari, 530, 0, 0, 1, 1, 1, -2060.92, 5256.68, -38.3819, 0.767945, 300, 0, 0, 3498, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(618754, @Barim, 530, 0, 0, 1, 1, 1, 148.588, 2636.02, 86.018, 1.27409, 300, 0, 0, 3113, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(618771, @Brumman, 530, 0, 0, 1, 1, 1, -721.657, 2745.26, 94.0548, 3.45575, 300, 0, 0, 3113, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(621087, @Grikka, 530, 0, 0, 1, 1, 0, 2039.82, 4675.43, 150.074, 0.977384, 300, 0, 0, 3815, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `creature_equip_template` WHERE `CreatureID` IN (@Darmari, @Barim, @Brumman);
 INSERT INTO `creature_equip_template` (`CreatureID`, `ID`, `ItemID1`, `ItemID2`, `ItemID3`, `VerifiedBuild`) VALUES 

@@ -123,7 +123,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (4298, 0, 0, 0, 0, 0, 100, 0, 8000, 13000, 8000, 19000, 0, 0, 11, 3639, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Scarlet Defender - In Combat - Cast Improved Blocking'),
 (4298, 0, 1, 0, 4, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Scarlet Defender - On Aggro - Say Line 1'),
 (4298, 0, 2, 0, 0, 0, 100, 1, 0, 0, 0, 0, 0, 0, 11, 7164, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Scarlet Defender - In Combat - Cast Defensive Stance (No Repeat)'),
-(4298, 0, 3, 0, 105, 0, 100, 0, 4000, 14000, 9000, 18000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 'Scarlet Defender - Victim Casting - Cast Shield Bash'),
+(4298, 0, 3, 0, 105, 0, 50, 0, 4000, 14000, 9000, 18000, 0, 5, 11, 11972, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,  'Scarlet Defender - Victim Casting - Cast Shield Bash'),
 (4298, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                    'Scarlet Defender - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (4298, 0, 5, 0, 8, 0, 100, 769, 28441, 0, 0, 0, 0, 0, 80, 429400, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Scarlet Defender - spellhit_target - AshbringerEvent'),
 (4299, 0, 0, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 1006, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Scarlet Chaplain - On Reset - Cast Inner Fire'),
@@ -157,7 +157,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (4306, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                    'Scarlet Torturer - Between 0-15% Health - Flee For Assist'),
 (4540, 0, 0, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 3391, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Scarlet Monk - On Reset - Cast Thrash'),
 (4540, 0, 1, 0, 4, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Scarlet Monk - On Aggro - Say Line 1'),
-(4540, 0, 2, 0, 105, 0, 100, 0, 3600, 12800, 3600, 12800, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 'Scarlet Monk - Victim Casting - Cast Kick'),
+(4540, 0, 2, 0, 105, 0, 50, 0, 3600, 12800, 3600, 12800, 0, 5, 11, 11978, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,  'Scarlet Monk - Victim Casting - Cast Kick'),
 (4540, 0, 3, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Scarlet Monk - Between 0-15% Health - Flee For Assist'),
 (4540, 0, 4, 0, 8, 0, 100, 769, 28441, 0, 0, 0, 0, 0, 80, 429400, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Scarlet Monk - spellhit_target - AshbringerEvent'),
 --
@@ -169,8 +169,11 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (4543, 0, 5, 0, 0, 0, 100, 0, 0, 16000, 16000, 60000, 0, 0, 11, 8053, 0, 0, 0, 0, 0, 5, 20, 0, 0, 0, 0, 0, 0, 0,     'Bloodmage Thalnos - Within 0-20 Range - Cast Flame Shock'),
 (4543, 0, 6, 0, 106, 0, 100, 0, 0, 9000, 9000, 12000, 0, 10, 11, 12470, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Bloodmage Thalnos - In Combat - Cast Fire Nova'),
 (4543, 0, 7, 0, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, 14693, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0, 1797.84, 1233.68, 18.3153, 1.58286,  'Bloodmage Thalnos - On Just Died - Summon Creature \'Scorn\''), -- AC's wotlk version
-(4543, 0, 8, 0, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, 614693, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0, 1797.84, 1233.68, 18.3153, 1.58286, 'Bloodmage Thalnos - On Just Died - Summon Creature \'Scorn\''), -- IP's vanilla version
-
+-- (4543, 0, 8, 0, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 10, 660595, 614693, 0, 0, 0, 0, 0, 0,          'Bloodmage Thalnos - On Just Died - Respawn Scorn'), -- IP's vanilla version
+(4543, 0, 8, 9, 6, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 10, 660595, 614693, 0, 0, 0, 0, 0, 0,          'Bloodmage Thalnos - On Just Died - Respawn Scorn'), -- IP's vanilla version
+(4543, 0, 9, 10, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 10, 660595, 614693, 0, 0, 0, 0, 0, 0,         'Bloodmage Thalnos - On Just Died - Reset Faction Scorn'),
+(4543, 0, 10, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 146930, 1, 0, 0, 0, 0, 10, 660595, 614693, 0, 0, 0, 0, 0, 0,  'Bloodmage Thalnos - On Just Died - Start Patrol Path Scorn'),
+--
 (6426, 0, 0, 0, 9, 0, 100, 0, 3000, 9000, 10000, 20000, 0, 20, 11, 7068, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,  'Anguished Dead - Within 0-20 Range - Cast Veil of Shadows'),
 (6488, 0, 0, 0, 37, 0, 90, 512, 0, 0, 0, 0, 0, 0, 41, 500, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Fallen Champion - On AI Init - Despawn'),
 (6488, 0, 1, 0, 9, 0, 100, 0, 5000, 8000, 6000, 14000, 0, 5, 11, 15496, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,    'Fallen Champion - Within 0-5 Range - Cast Cleave'),
@@ -189,19 +192,19 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 
 DELETE FROM `creature` WHERE `guid` IN (40068, 40070);
 DELETE FROM `creature` WHERE `guid` BETWEEN 695001 AND 695007;
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
-(40068, 4288, 0, 0, 189, 0, 0, 1, 1, 1, 201.223, -232.896, 18.5307, 3.14066, 86400, 0, 1, 3489, 0, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Beastmaster
-(40070, 4304, 0, 0, 189, 0, 0, 1, 1, 0, 201.061, -230.432, 18.5307, 3.13901, 86400, 0, 0, 3330, 0, 0, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Tracking Hound
+(40068, 4288, 189, 0, 0, 1, 1, 1, 201.223, -232.896, 18.5307, 3.14066, 86400, 0, 1, 3489, 0, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Beastmaster
+(40070, 4304, 189, 0, 0, 1, 1, 0, 201.061, -230.432, 18.5307, 3.13901, 86400, 0, 0, 3330, 0, 0, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Tracking Hound
 --
-(695001, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1759.54, 1121.24, 7.49103, 4.75209, 86400, 0, 1, 2865, 0, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Scryer
-(695002, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1784.03, 1118.32, 7.57362, 2.87979, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695003, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1755.47, 1146.65, 7.57362, 0,       86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695004, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1759.29, 1144.24, 7.57362, 3.14159, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695005, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1793.07, 1146.38, 7.57362, 5.37561, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695006, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1807.48, 1170.39, 6.90373, 4.95674, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
-(695007, 4293, 0, 0, 189, 0, 0, 1, 1, 1, 1807.84, 1165.98, 6.90374, 1.51844, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL);
+(695001, 4293, 189, 0, 0, 1, 1, 1, 1759.54, 1121.24, 7.49103, 4.75209, 86400, 0, 1, 2865, 0, 2, 0, 0, 0, '', 0, 0, NULL), -- Scarlet Scryer
+(695002, 4293, 189, 0, 0, 1, 1, 1, 1784.03, 1118.32, 7.57362, 2.87979, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695003, 4293, 189, 0, 0, 1, 1, 1, 1755.47, 1146.65, 7.57362, 0,       86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695004, 4293, 189, 0, 0, 1, 1, 1, 1759.29, 1144.24, 7.57362, 3.14159, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695005, 4293, 189, 0, 0, 1, 1, 1, 1793.07, 1146.38, 7.57362, 5.37561, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695006, 4293, 189, 0, 0, 1, 1, 1, 1807.48, 1170.39, 6.90373, 4.95674, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL),
+(695007, 4293, 189, 0, 0, 1, 1, 1, 1807.84, 1165.98, 6.90374, 1.51844, 86400, 0, 0, 2865, 0, 0, 0, 0, 0, '', 0, 0, NULL);
 
 DELETE FROM `pool_creature` WHERE `pool_entry` BETWEEN 601001 AND 601007;
 INSERT INTO `pool_creature` (`guid`, `pool_entry`, `chance`, `description`) VALUES 

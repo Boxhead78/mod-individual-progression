@@ -131,7 +131,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (10824, 0, 2, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 0, 5, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Ranger Lord Hawkspear - Within 0-5 Range - Start Combat Movement'),
 (10824, 0, 3, 0, 9, 0, 100, 0, 0, 0, 2000, 4000, 5, 30, 11, 15547, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Ranger Lord Hawkspear - Within 5-30 Range - Cast Shoot'),
 (10824, 0, 4, 0, 9, 0, 100, 0, 0, 0, 4000, 7000, 0, 5, 11, 12057, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Ranger Lord Hawkspear - 0-5 Range - Cast Strike'),
-(10824, 0, 5, 0, 105, 0, 100, 0, 0, 0, 7000, 9000, 0, 5, 11, 11978, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Ranger Lord Hawkspear - Target Casting - Cast Kick'),
+(10824, 0, 5, 0, 105, 0, 50, 0, 0, 0, 7000, 9000, 0, 5, 11, 11978, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,           'Ranger Lord Hawkspear - Target Casting - Cast Kick'),
 (10824, 0, 6, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                     'Ranger Lord Hawkspear - Between 0-15% Health - Flee For Assist'),
 (10825, 0, 0, 0, 0, 0, 100, 0, 3000, 5000, 5000, 7000, 0, 0, 11, 16564, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Gish the Unmoving - In Combat - Cast Gargoyle Strike'),
 (10825, 0, 1, 0, 0, 0, 100, 0, 6000, 9000, 18000, 21000, 0, 0, 11, 13445, 0, 0, 0, 0, 0, 21, 5, 0, 0, 0, 0, 0, 0, 0,   'Gish the Unmoving - Within 0-5 Range - Cast Rend'),
@@ -174,7 +174,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (12322, 0, 2, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 0, 5, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Quel Lithien Protector - Within 0-5 Range - Start Combat Movement'),
 (12322, 0, 3, 0, 0, 0, 100, 0, 0, 0, 2000, 4000, 0, 0, 11, 15547, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Quel Lithien Protector - Combat - Cast Shoot'),
 (12322, 0, 4, 0, 9, 0, 100, 0, 0, 0, 5000, 7000, 0, 5, 11, 12057, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Quel Lithien Protector - 0-5 Range - Cast Strike'),
-(12322, 0, 5, 0, 105, 0, 100, 0, 0, 0, 8000, 13000, 0, 5, 11, 11978, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Quel Lithien Protector - 0-5 Range - Cast Kick'),
+(12322, 0, 5, 0, 105, 0, 50, 0, 0, 0, 8000, 13000, 0, 5, 11, 11978, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,          'Quel Lithien Protector - 0-5 Range - Cast Kick'),
 (12322, 0, 6, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                     'Quel Lithien Protector - 0-15% Health - Flee For Assist (No Repeat)'),
 --
 (12337, 0, 0, 0, 1, 0, 100, 0, 30000, 60000, 120000, 180000, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Crimson Courier - Out of Combat - Say Line 0'),
@@ -194,16 +194,16 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 
 
 -- fix spawn locations, respawn and movement
-DELETE FROM `creature` WHERE `id1` IN (10822, 10823, 10827);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
+DELETE FROM `creature` WHERE `id` IN (10822, 10823, 10827);
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
-(86607,  10822, 0, 0, 0, 0, 0, 1, 1, 1, 3314, -4855.85, 167.322, 2.50322, 18000, 5, 0, 3876, 0, 1, 0, 0, 0, '', 0, 0,        'Warlord Thresh\'jin'),
-(695028, 10822, 0, 0, 0, 0, 0, 1, 1, 1, 3221.36, -4710.45, 158.034, 5.60277, 18000, 0, 0, 3876, 0, 0, 0, 0, 0, '', 0, 0,     'Warlord Thresh\'jin'), -- https://www.youtube.com/watch?v=1fU3H5dqXZI
+(86607,  10822, 0, 0, 0, 1, 1, 1, 3314, -4855.85, 167.322, 2.50322, 18000, 5, 0, 3876, 0, 1, 0, 0, 0, '', 0, 0,        'Warlord Thresh\'jin'),
+(695028, 10822, 0, 0, 0, 1, 1, 1, 3221.36, -4710.45, 158.034, 5.60277, 18000, 0, 0, 3876, 0, 0, 0, 0, 0, '', 0, 0,     'Warlord Thresh\'jin'), -- https://www.youtube.com/watch?v=1fU3H5dqXZI
 --
-(86625,  10823, 0, 0, 0, 0, 0, 1, 1, 1, 3363.57, -4979.87, 159.273, 3.51245, 37000, 5, 0, 2799, 5598, 1, 0, 0, 0, '', 0, 0,  'Zul\'Brin Warpbranch'), -- https://www.youtube.com/watch?v=0IpkbS4kNoQ
-(695030, 10823, 0, 0, 0, 0, 0, 1, 1, 1, 3405.73, -4899.5, 159.417, 5.77662, 37000, 0, 0, 2799, 5598, 0, 0, 0, 0, '', 0, 0,   'Zul\'Brin Warpbranch'), -- https://www.youtube.com/watch?v=nHQPuMWENsc
+(86625,  10823, 0, 0, 0, 1, 1, 1, 3363.57, -4979.87, 159.273, 3.51245, 37000, 5, 0, 2799, 5598, 1, 0, 0, 0, '', 0, 0,  'Zul\'Brin Warpbranch'), -- https://www.youtube.com/watch?v=0IpkbS4kNoQ
+(695030, 10823, 0, 0, 0, 1, 1, 1, 3405.73, -4899.5, 159.417, 5.77662, 37000, 0, 0, 2799, 5598, 0, 0, 0, 0, '', 0, 0,   'Zul\'Brin Warpbranch'), -- https://www.youtube.com/watch?v=nHQPuMWENsc
 --
-(86755,  10827, 0, 0, 0, 0, 0, 1, 1, 1, 2606.22, -5504.18, 158.046, 0.176863, 18000, 0, 0, 2550, 5206, 0, 0, 0, 0, '', 0, 0, 'Deathspeaker Selendre'); -- https://www.youtube.com/watch?v=qFI1e0g6Rwg
+(86755,  10827, 0, 0, 0, 1, 1, 1, 2606.22, -5504.18, 158.046, 0.176863, 18000, 0, 0, 2550, 5206, 0, 0, 0, 0, '', 0, 0, 'Deathspeaker Selendre'); -- https://www.youtube.com/watch?v=qFI1e0g6Rwg
 
 DELETE FROM `pool_creature` WHERE `pool_entry` IN (601014, 601015);
 INSERT INTO `pool_creature` (`guid`, `pool_entry`, `chance`, `description`) VALUES 
