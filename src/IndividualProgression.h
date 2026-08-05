@@ -49,7 +49,11 @@ enum ProgressionBossIDs
     HALION               = 39863,
     RHAHK_ZOR            = 644,
     SNEED                = 643,
-    GILNID               = 1763
+    GILNID               = 1763,
+    COLOSSUS_ZORA        = 15740,
+    COLOSSUS_REGAL       = 15741,
+    COLOSSUS_ASHI        = 15742,
+    GENERAL_NOKHOR       = 15818
 };
 
 enum BuffSpells
@@ -62,7 +66,10 @@ enum BuffSpells
     SPELL_CANNIBALISE    = 20578,
     IPP_PHASE            = 89509,
     IPP_PHASE_II         = 89511,
-    IPP_PHASE_III        = 89513
+    IPP_PHASE_III        = 89513,
+    IPP_PHASE_IV         = 89515,
+    IPP_PHASE_V          = 89517,
+    IPP_PHASE_VI         = 89519
 };
 
 enum ProgressionQuestIDs
@@ -81,7 +88,10 @@ enum ProgressionQuestIDs
     BATTLE_UNDERCITY_HORDE    = 13267,
     BATTLE_UNDERCITY_ALLIANCE = 13377,
     SIMPLY_BANG_A_GONG        = 108743,
-    CHAOS_AND_DESTRUCTION     = 108744
+    CHAOS_AND_DESTRUCTION     = 108744,
+    QUEST_COLOSSUS_ZORA       = 108745,
+    QUEST_COLOSSUS_REGAL      = 108746,
+    QUEST_COLOSSUS_ASHI       = 108747
 };
 
 enum WarEffortQuestIDs
@@ -122,8 +132,9 @@ enum WarEffortQuestIDs
 
 enum ProgressionAchievements
 {
+    KEL_THUZAD_40_KILL   = 533,
     KEL_THUZAD_KILL      = 575, // WotLK
-    ONYXIAS_KILL         = 684,
+    ONYXIA_KILL          = 684,
     NEFARIAN_KILL        = 685,
     RAGNAROS_KILL        = 686,
     C_THUN_KILL          = 687,
@@ -134,25 +145,13 @@ enum ProgressionAchievements
     KIL_JAEDEN_KILL      = 698,
     ANUB_ARAK_KILL       = 3916,
     LICH_KING_KILL       = 4597,
-    HALION_KILL          = 4815,
-    KEL_THUZAD_40_KILL   = 5004, // Classic
-};
-
-enum ProgressionZones
-{
-    ZONE_AZUREMYST       = 3524,
-    ZONE_BLOODMYST       = 3525,
-    ZONE_GHOSTLANDS      = 3433,
-    ZONE_EVERSONG        = 3430,
-    ZONE_EXODAR          = 3557,
-    ZONE_SILVERMOON      = 3487,
-    ZONE_QUELDANAS       = 4080,
-    ZONE_VEILED_SEA      = 3479
+    HALION_KILL          = 4815
 };
 
 enum ProgressionAreas
 {
     AREA_THE_DARK_PORTAL                 = 72,
+    AREA_RUINS_OF_LORDAERON_B            = 153,
     AREA_DREADMAUL_ROCK                  = 249,
     AREA_RUINS_OF_THAURISSAN             = 250,
     AREA_BLACKROCK_MOUNTAIN              = 254,
@@ -181,6 +180,7 @@ enum ProgressionAreas
     AREA_MAZTHORIL                       = 2245,
     AREA_ICE_THISTLE_HILLS               = 2247,
     AREA_THE_MARRIS_STEAD                = 2260,
+    AREA_CORINS_CROSSING                 = 2264,
     AREA_LIGHTS_HOPE                     = 2268,
     AREA_FOREST_SONG                     = 2358,
     AREA_DRACO_DAR                       = 2421,
@@ -191,6 +191,9 @@ enum ProgressionAreas
     AREA_HIVE_ASHI                       = 2742,
     AREA_HIVE_ZORA                       = 2743,
     AREA_HIVE_REGAL                      = 2744,
+    AREA_VEILED_SEA                      = 3479,
+	AREA_AMMEN_VALE                      = 3526,
+    AREA_THRONE_OF_KILJAEDEN             = 3547,
     AREA_TERRACE_OF_LIGHT                = 3897,
     AREA_ARGENT_SUNREAVER_PAVILION       = 4666,
     AREA_ARGENT_SILVER_COVENANT_PAVILION = 4667,
@@ -205,6 +208,11 @@ enum ProgressionAreas
     AREA_VUL_GOL_OGRE_MOUND              = 93
 };
 
+enum ProgressionSoundEntries : uint32
+{
+    MUSIC_RAGEFIRE_CHASM_HEROIC_LIGHT = 70001
+};
+
 enum DungeonKeys
 {
     ITEM_DRAKEFIRE_AMULET                = 16309,
@@ -215,47 +223,68 @@ enum DungeonKeys
 
 enum ProgressionSettings
 {
-    SETTING_PROGRESSION_STATE   = 0
-};
-
-enum DungeonKeys
-{
-    ITEM_DRAKEFIRE_AMULET       = 16309
+    SETTING_PROGRESSION_STATE = 0
 };
 
 enum AchievementSpellEvents
 {
-    ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE     = 95000, 
-    ACHIEVEMENT_SPELL_EVENT_ONYXIA          = 95001,
-    ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR  = 95002,
-    ACHIEVEMENT_SPELL_EVENT_PRE_AQ          = 95003,
-    ACHIEVEMENT_SPELL_EVENT_AQ_WAR          = 95004,
-    ACHIEVEMENT_SPELL_EVENT_AQ              = 95005,
-    ACHIEVEMENT_SPELL_EVENT_NAXX40          = 95006,
-    ACHIEVEMENT_SPELL_EVENT_PRE_TBC         = 95007,
-    ACHIEVEMENT_SPELL_EVENT_KARAZHAN        = 95022, 
-    ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP    = 95008,
-    ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE    = 95009,
-    ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN        = 95010,
-    ACHIEVEMENT_SPELL_EVENT_SUNWELL         = 95011,
-    ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS       = 95012,
-    ACHIEVEMENT_SPELL_EVENT_ULDUAR          = 95013,
-    ACHIEVEMENT_SPELL_EVENT_TOTC            = 95014,
-    ACHIEVEMENT_SPELL_EVENT_ICC             = 95015,
-    ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM    = 95016,
-    ACHIEVEMENT_SPELL_EVENT_BWD             = 99999, // NYI AchievementCriteria.dbc
-    ACHIEVEMENT_SPELL_EVENT_TOTFW           = 99999, // NYI AchievementCriteria.dbc
-    ACHIEVEMENT_SPELL_EVENT_FIRELANDS       = 99999, // NYI AchievementCriteria.dbc
-    ACHIEVEMENT_SPELL_EVENT_DRAGONSOUL      = 99999, // NYI AchievementCriteria.dbc
+    ACHIEVEMENT_SPELL_EVENT_MOLTEN_CORE    = 95000,
+    ACHIEVEMENT_SPELL_EVENT_ONYXIA         = 95001,
+    ACHIEVEMENT_SPELL_EVENT_BLACKWING_LAIR = 95002,
+    ACHIEVEMENT_SPELL_EVENT_PRE_AQ         = 95003,
+    ACHIEVEMENT_SPELL_EVENT_AQ_WAR         = 95004,
+    ACHIEVEMENT_SPELL_EVENT_AQ             = 95005,
+    ACHIEVEMENT_SPELL_EVENT_NAXX40         = 95006,
+    ACHIEVEMENT_SPELL_EVENT_PRE_TBC        = 95007,
+    ACHIEVEMENT_SPELL_EVENT_TEMPEST_KEEP   = 95008,
+    ACHIEVEMENT_SPELL_EVENT_BLACK_TEMPLE   = 95009,
+    ACHIEVEMENT_SPELL_EVENT_ZUL_AMAN       = 95010,
+    ACHIEVEMENT_SPELL_EVENT_SUNWELL        = 95011,
+    ACHIEVEMENT_SPELL_EVENT_NAXXRAMAS      = 95012,
+    ACHIEVEMENT_SPELL_EVENT_ULDUAR         = 95013,
+    ACHIEVEMENT_SPELL_EVENT_TOTC           = 95014,
+    ACHIEVEMENT_SPELL_EVENT_ICC            = 95015,
+    ACHIEVEMENT_SPELL_EVENT_RUBY_SANCTUM   = 95016,
+    ACHIEVEMENT_SPELL_EVENT_KARAZHAN       = 95022,
+    ACHIEVEMENT_SPELL_EVENT_BWD            = 99999,
+    ACHIEVEMENT_SPELL_EVENT_TOTFW          = 99999,
+    ACHIEVEMENT_SPELL_EVENT_FIRELANDS      = 99999,
+    ACHIEVEMENT_SPELL_EVENT_DRAGONSOUL     = 99999
+};
+
+enum ShatteredSunOffensive
+{
+    FACTION_SHATTERED_SUN                = 1077,
+    AREA_SILVERMOONS_PRIDE               = 4083,
+    AREA_SHATTERED_SUN_STAGING           = 4085,
+    AREA_SUNS_REACH_SANCTUM              = 4086,
+    AREA_SUNS_REACH_HARBOR               = 4087,
+    AREA_SUNS_REACH_ARMORY               = 4088,
+    AREA_DAWNSTAR_VILLAGE                = 4089,
+    AREA_THE_DAWNING_SQUARE              = 4090,
+    AREA_SUNWELL_PLATEAU_B               = 4094,
+    QUEST_SANCTUM_WARDS                  = 11496,
+    QUEST_MANA_CELLS                     = 11513,
+    QUEST_DISCOVERING_ROOTS              = 11520,
+    QUEST_ERRATIC_BEHAVIOR               = 11524,
+    QUEST_MISSING_MAGISTRIX              = 11526,
+    QUEST_DISTRACTION_DEAD_SCAR          = 11532,
+    QUEST_MAKING_READY                   = 11535,
+    QUEST_BATTLE_FOR_ARMORY              = 11538,
+    QUEST_TAKING_THE_HARBOR              = 11539,
+    QUEST_INTERCEPT_REINFORCEMENTS       = 11542,
+    QUEST_ATAMAL_ARMAMENTS               = 11544,
+    QUEST_CHARITABLE_DONATION            = 11545,
+    SONG_OF_VICTORY                      = 46302
 };
 
 enum ProgressionState : uint8         // Progression stands for what has been completed
 {
     PROGRESSION_START           = 0,
-    PROGRESSION_MOLTEN_CORE     = 1,  // BWL available
-    PROGRESSION_ONYXIA          = 2,
+    PROGRESSION_MOLTEN_CORE     = 1,
+    PROGRESSION_ONYXIA          = 2,  // BWL available
     PROGRESSION_BLACKWING_LAIR  = 3,  // ZG, AQ War effort, AQ quest line
-    PROGRESSION_PRE_AQ          = 4,  // AQ gates open, raids available, AQ outdoors war 
+    PROGRESSION_PRE_AQ          = 4,  // AQ gates open, raids available, AQ outdoors war
     PROGRESSION_AQ_WAR          = 5,  // AQ gates open, raids, Field Duty quests and all Cenarion Hold npcs available
     PROGRESSION_AQ              = 6,  // Naxx40 and Scourge Invasion
     PROGRESSION_NAXX40          = 7,  // Into the Breach
@@ -269,11 +298,18 @@ enum ProgressionState : uint8         // Progression stands for what has been co
     PROGRESSION_WOTLK_TIER_2    = 15, // TotC
     PROGRESSION_WOTLK_TIER_3    = 16, // ICC
     PROGRESSION_WOTLK_TIER_4    = 17, // Ruby Sanctum
-    PROGRESSION_WOTLK_TIER_5    = 18, // Baradin Hold, Blackwing Descent
-    PROGRESSION_CATA_TIER_1     = 19, // The Bastion of Twilight, Throne of the Four Winds
-    PROGRESSION_CATA_TIER_2     = 20, // Firelands
-    PROGRESSION_CATA_TIER_3     = 21, // Dragonsoul
-    PROGRESSION_CATA_TIER_4     = 22,
+    PROGRESSION_WOTLK_TIER_5    = 18,
+    PROGRESSION_CATA_TIER_1     = 19,
+    PROGRESSION_CATA_TIER_2     = 20,
+    PROGRESSION_CATA_TIER_3     = 21,
+    PROGRESSION_CATA_TIER_4     = 22
+};
+
+enum ProgressionMovies : uint8
+{
+    MOVIE_TBC   = 18,
+    MOVIE_WOTLK = 20,
+    MOVIE_FOTLK = 22
 };
 
 enum RandomDungeonIds : uint16
@@ -358,66 +394,54 @@ enum PvPAchievements
 enum IppTitles
 {
     // Alliance
-    TITLE_PRIVATE                  = 1,
-    TITLE_CORPORAL                 = 2,
-    TITLE_SERGEANT                 = 3,
-    TITLE_MASTER_SERGEANT          = 4,
-    TITLE_SERGEANT_MAJOR           = 5,
-    TITLE_KNIGHT                   = 6,
-    TITLE_KNIGHT_LIEUTENANT        = 7,
-    TITLE_KNIGHT_CAPTAIN           = 8,
-    TITLE_KNIGHT_CHAMPION          = 9,
-    TITLE_LIEUTENANT_COMMANDER     = 10,
-    TITLE_COMMANDER                = 11,
-    TITLE_MARSHAL                  = 12,
-    TITLE_FIELD_MARSHAL            = 13,
-    TITLE_GRAND_MARSHAL            = 14,
+    IPP_TITLE_PRIVATE              = 1,
+    IPP_TITLE_CORPORAL             = 2,
+    IPP_TITLE_SERGEANT             = 3,
+    IPP_TITLE_MASTER_SERGEANT      = 4,
+    IPP_TITLE_SERGEANT_MAJOR       = 5,
+    IPP_TITLE_KNIGHT               = 6,
+    IPP_TITLE_KNIGHT_LIEUTENANT    = 7,
+    IPP_TITLE_KNIGHT_CAPTAIN       = 8,
+    IPP_TITLE_KNIGHT_CHAMPION      = 9,
+    IPP_TITLE_LIEUTENANT_COMMANDER = 10,
+    IPP_TITLE_COMMANDER            = 11,
+    IPP_TITLE_MARSHAL              = 12,
+    IPP_TITLE_FIELD_MARSHAL        = 13,
+    IPP_TITLE_GRAND_MARSHAL        = 14,
 
     // Horde
-    TITLE_SCOUT                    = 15,
-    TITLE_GRUNT                    = 16,
-    TITLE_SERGEANT_H               = 17,
-    TITLE_SENIOR_SERGEANT          = 18,
-    TITLE_FIRST_SERGEANT           = 19,
-    TITLE_STONE_GUARD              = 20,
-    TITLE_BLOOD_GUARD              = 21,
-    TITLE_LEGIONNAIRE              = 22,
-    TITLE_CENTURION                = 23,
-    TITLE_CHAMPION                 = 24,
-    TITLE_LIEUTENANT_GENERAL       = 25,
-    TITLE_GENERAL                  = 26,
-    TITLE_WARLORD                  = 27,
-    TITLE_HIGH_WARLORD             = 28
-};
-
-enum ProgressionSoundEntries : uint32
-{
-    MUSIC_RAGEFIRE_CHASM_HEROIC_LIGHT = 70001
-};
-
-enum ProgressionMovies : uint8
-{
-    MOVIE_TBC   = 18,
-    MOVIE_WOTLK = 20,
-    MOVIE_FOTLK = 22
+    IPP_TITLE_SCOUT              = 15,
+    IPP_TITLE_GRUNT              = 16,
+    IPP_TITLE_SERGEANT_H         = 17,
+    IPP_TITLE_SENIOR_SERGEANT    = 18,
+    IPP_TITLE_FIRST_SERGEANT     = 19,
+    IPP_TITLE_STONE_GUARD        = 20,
+    IPP_TITLE_BLOOD_GUARD        = 21,
+    IPP_TITLE_LEGIONNAIRE        = 22,
+    IPP_TITLE_CENTURION          = 23,
+    IPP_TITLE_CHAMPION           = 24,
+    IPP_TITLE_LIEUTENANT_GENERAL = 25,
+    IPP_TITLE_GENERAL            = 26,
+    IPP_TITLE_WARLORD            = 27,
+    IPP_TITLE_HIGH_WARLORD       = 28
 };
 
 IppPvPTitleData const TitleData[14] =
 {
-    { TITLE_PRIVATE,              TITLE_SCOUT              },
-    { TITLE_CORPORAL,             TITLE_GRUNT              },
-    { TITLE_SERGEANT,             TITLE_SERGEANT_H         },
-    { TITLE_MASTER_SERGEANT,      TITLE_SENIOR_SERGEANT    },
-    { TITLE_SERGEANT_MAJOR,       TITLE_FIRST_SERGEANT     },
-    { TITLE_KNIGHT,               TITLE_STONE_GUARD        },
-    { TITLE_KNIGHT_LIEUTENANT,    TITLE_BLOOD_GUARD        },
-    { TITLE_KNIGHT_CAPTAIN,       TITLE_LEGIONNAIRE        },
-    { TITLE_KNIGHT_CHAMPION,      TITLE_CENTURION          },
-    { TITLE_LIEUTENANT_COMMANDER, TITLE_CHAMPION           },
-    { TITLE_COMMANDER,            TITLE_LIEUTENANT_GENERAL },
-    { TITLE_MARSHAL,              TITLE_GENERAL            },
-    { TITLE_FIELD_MARSHAL,        TITLE_WARLORD            },
-    { TITLE_GRAND_MARSHAL,        TITLE_HIGH_WARLORD       }
+    { IPP_TITLE_PRIVATE,              IPP_TITLE_SCOUT              },
+    { IPP_TITLE_CORPORAL,             IPP_TITLE_GRUNT              },
+    { IPP_TITLE_SERGEANT,             IPP_TITLE_SERGEANT_H         },
+    { IPP_TITLE_MASTER_SERGEANT,      IPP_TITLE_SENIOR_SERGEANT    },
+    { IPP_TITLE_SERGEANT_MAJOR,       IPP_TITLE_FIRST_SERGEANT     },
+    { IPP_TITLE_KNIGHT,               IPP_TITLE_STONE_GUARD        },
+    { IPP_TITLE_KNIGHT_LIEUTENANT,    IPP_TITLE_BLOOD_GUARD        },
+    { IPP_TITLE_KNIGHT_CAPTAIN,       IPP_TITLE_LEGIONNAIRE        },
+    { IPP_TITLE_KNIGHT_CHAMPION,      IPP_TITLE_CENTURION          },
+    { IPP_TITLE_LIEUTENANT_COMMANDER, IPP_TITLE_CHAMPION           },
+    { IPP_TITLE_COMMANDER,            IPP_TITLE_LIEUTENANT_GENERAL },
+    { IPP_TITLE_MARSHAL,              IPP_TITLE_GENERAL            },
+    { IPP_TITLE_FIELD_MARSHAL,        IPP_TITLE_WARLORD            },
+    { IPP_TITLE_GRAND_MARSHAL,        IPP_TITLE_HIGH_WARLORD       }
 };
 
 PvPTitleData const AchievementData[14] =
@@ -446,30 +470,43 @@ public:
     std::map<uint32, uint8> customProgressionMap;
     questXpMapType questXpMap;
     float vanillaPowerAdjustment, vanillaHealthAdjustment, tbcPowerAdjustment, tbcHealthAdjustment, vanillaHealingAdjustment, tbcHealingAdjustment;
-    bool enabled, questXpFix, hunterPetLevelFix, enforceGroupRules, fishingFix, simpleConfigOverride, questMoneyAtLevelCap, repeatableVanillaQuestsXp, disableDefaultProgression, earlyDungeonSet2, doableNaxx40Bosses, DisableRDF, VanillaPvpTitlesKeepPostVanilla, VanillaPvpTitlesEarnPostVanilla, progressionSetterAlwaysVisible;
-    int progressionLimit, startingProgression, tbcRacesProgressionLevel, tbcRacesStartingProgression, cataRacesProgressionLevel, cataRacesStartingProgression, deathKnightProgressionLevel, deathKnightStartingProgression, RequiredZulGurubProgression;
+    bool enabled, questXpFix, enforceGroupRules, EnableAllSpellRanks, fishingFix, VanillaHunterPets, WarlockDemonTrainers, simpleConfigOverride, MaxMonsterSight, questMoneyAtLevelCap, repeatableVanillaQuestsXp, disableDefaultProgression, earlyDungeonSet2, earlyScourgeBosses, requireNaxxStrath, doableNaxx40Bosses_4H, doableNaxx40Bosses_Gluth, doableNaxx40Bosses_Patchwerk, doableNaxx40Bosses_Razuvious, DisableQuestMarkers, DisableRDF, VanillaPvpTitlesKeepPostVanilla, VanillaPvpTitlesEarnPostVanilla, BotAccountsEarnPvPTitles, BotOnlyAdjustments, progressionSetterAlwaysVisible;
+    int progressionLimit, startingProgression, tbcRacesProgressionLevel, tbcRacesStartingProgression, cataRacesProgressionLevel, cataRacesStartingProgression, deathKnightProgressionLevel, deathKnightStartingProgression, RequiredZulGurubProgression, RequiredZulAmanProgression, tbcArenaSeason, wotlkArenaSeason, BotAccountsMaxLevel;
     uint32 VanillaPvpKillRank1, VanillaPvpKillRank2, VanillaPvpKillRank3, VanillaPvpKillRank4, VanillaPvpKillRank5, VanillaPvpKillRank6, VanillaPvpKillRank7, VanillaPvpKillRank8, VanillaPvpKillRank9, VanillaPvpKillRank10, VanillaPvpKillRank11, VanillaPvpKillRank12, VanillaPvpKillRank13, VanillaPvpKillRank14;
-    std::string excludedAccountsRegex;
-
     ProgressionState GetCurrentProgressionState(Player* player) const;
+    // Compatibility name used by current upstream code; progression remains stored in PlayerSettings.
+    uint8 GetPlayerProgressionFromQuests(Player* player) const;
+
     bool hasPassedProgression(Player* player, ProgressionState state) const;
     static bool isBeforeProgression(Player* player, ProgressionState state) ;
     void UpdateProgressionState(Player* player, ProgressionState newState) const;
     static void ForceUpdateProgressionState(Player* player, ProgressionState newState);
-    void AdjustVanillaStats(Player* player) const;
-    void AdjustTBCStats(Player* player) const;
-    void AdjustWotLKStats(Player* player) const;
+    void UpdateProgressionQuests(Player* player) const;
+
+    void CheckAdjustments(Player* player) const;
     bool hasCustomProgressionValue(uint32 creatureEntry);
+    bool isExcludedAccount(Player* player);
+    bool isBotAccount(Player* player);
+    bool isNormalAccount(Player* player);
+    void SyncBotsProgressionToLeader(Group* group);
+    void checkHunterPetSpells(Player* player);
+    void checkWarlockPetSpells(Player* player);
     bool isAttuned(Player* player);
-	void checkIPPhasing(Player* player, uint32 newArea);	
-    void UpdateProgressionQuests(Player* player);
+    bool isPlayerInDungeonOrRaid(Player* player);
+    void checkIPPhasing(Player* player, uint32 newArea);
+    void checkIPProgression(Player* player);
+    void UpdateProgressionAchievements(Player* player, uint16 achievementID);
+    void UpdateGroupAttunement(Player* player, std::string location);
+    void UpdateRNDbotSpells(Player* player);
     void checkKillProgression(Player* player, Creature* killed);
+    bool checkCustomKillProgression(Player* killer, Creature* killed);
     void CleanUpVanillaPvpTitles(Player* player);
     void AwardEarnedVanillaPvpTitles(Player* player);
-    void setProgressionSpell(Player* player, ProgressionState newState);
-    void removeAllProgressionSpells(Player* player);
+    void setProgressionSpell(Player* player, ProgressionState newState) const;
+    void removeAllProgressionSpells(Player* player) const;
     static void LoadCustomProgressionEntries(const std::string& customProgressionString);
     static void RemovePlayerAchievement(uint16 playerGUID, uint16 achievementId);
+    static float ComputeVanillaAdjustment(uint8 playerLevel, float configAdjustmentValue);
     static uint8 GetAccountProgression(uint32 accountId);
 };
 

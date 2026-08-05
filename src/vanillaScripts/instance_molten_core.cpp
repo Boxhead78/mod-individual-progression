@@ -321,7 +321,7 @@ public:
             {
                 if (GameObject* rune = instance->GetGameObject(_runesGUIDs[bossId]))
                 {
-                    if (sConfigMgr->GetOption<int>("IndividualProgression.MoltenCore.ManualRuneHandling", 1) == 1)
+                    if (sConfigMgr->GetOption<int>("IndividualProgression.MoltenCore.ManualRuneHandling", 0) == 1)
                     {
                         if (GameObject* circle = instance->GetGameObject(_circlesGUIDs[bossId]))
                         {
@@ -441,7 +441,7 @@ public:
                 return false;
             }
 
-            if (sConfigMgr->GetOption<int>("IndividualProgression.MoltenCore.ManualRuneHandling", 1) == 1)
+            if (sConfigMgr->GetOption<int>("IndividualProgression.MoltenCore.ManualRuneHandling", 0) == 1)
             {
                 return CheckFirelordRunes();
             }

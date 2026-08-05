@@ -51,11 +51,10 @@ IndividualProgression.VanillaPowerAdjustment = 0.5
 #
 IndividualProgression.VanillaHealingAdjustment = 0.5
 
-# IndividualProgression.VanillaHealthAdjustmnet
+# IndividualProgression.VanillaHealthAdjustment
 #
-#        Description: Adjustment to player's max HP before completing Vanilla content and opening the Dark Portal
-#                     This is meant to provide a more accurate Vanilla feeling in Vanilla content
-#                     Applied linearly per level between levels 11 and 60
+#        Description: Adjustment to player's maximum health before completing Vanilla content.
+#                     This multiplier is not applied in battlegrounds or arenas.
 #
 #        Default:     1 - No Adjustment
 #
@@ -83,15 +82,25 @@ IndividualProgression.TBCPowerAdjustment = 0.7
 #
 IndividualProgression.TBCHealingAdjustment = 0.7
 
-# IndividualProgression.TBCHealthAdjustmnet
+# IndividualProgression.TBCHealthAdjustment
 #
-#        Description: Adjustment to player's max HP after completing Vanilla content.
-#                     This is meant to provide a more accurate TBC feeling in TBC content
-#                     Applied linearly per level between levels 61 and 70
+#        Description: Adjustment to player's maximum health after opening the Dark Portal but before completing TBC content.
+#                     Unlike the Vanilla adjustment, a flat multiplier is always used.
+#                     This multiplier is not applied in battlegrounds or arenas.
 #
 #        Default:     1 - No Adjustment
 #
 IndividualProgression.TBCHealthAdjustment = 0.7
+
+# IndividualProgression.BotOnlyAdjustments
+#
+#        Description: In dungeons and raids, the Vanilla and TBC adjustments effect RNDbots only.
+#                     Make dungeons and raids harder without effecting real players.
+#
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+IndividualProgression.BotOnlyAdjustments = 0
 
 # IndividualProgression.QuestXPFix
 #
@@ -241,12 +250,6 @@ IndividualProgression.DisableRDF = 0
 #        Description: Number of Armor Scraps quest TURN-INS (20 scraps each) a team needs before its graveyard defenders upgrade to the next tier.
 #        Default:     25 / 50 / 75  (= 500 / 1000 / 1500 scraps) (suggested: 12 / 24 / 36)
 #
-#        Default:     0 - Disabled (players may progress up to the maximum progression stage of 18, which is the completion of WotLK content)
-#                     1-18 - Set a lower maximum attainable progression stage 
-#
-IndividualProgression.ProgressionLimit = 17
-
-# IndividualProgression.StartingProgression
 #        Description: Turn-in points required to summon the elemental boss
 #                     (5-item turn-in = 5 points, single turn-in = 1 point).
 #        Default:     200 (suggested: 100)
@@ -306,10 +309,10 @@ IndividualProgression.RepeatableVanillaQuestsXP = 0
 #                     Please refer to IndividualProgression.h/ProgressionState enum for progression stage values.
 #                     For example, a value of 7 will limit players to Vanilla content.
 #
-#        Default:     0 - Disabled (players may progress up to the maximum progression stage of 18, which is the completion of WotLK content)
-#                     1-17 - Set a lower maximum attainable progression stage
+#        Default:     0 - Disabled
+#                     1-22 - Set the maximum attainable progression stage
 #
-IndividualProgression.ProgressionLimit = 0
+IndividualProgression.ProgressionLimit = 17
 
 # IndividualProgression.StartingProgression
 #
@@ -334,51 +337,33 @@ IndividualProgression.StartingProgression = 0
 #                     8 - Vanilla must be completed to create Draenei and Blood Elves
 #                     1-7, 9-18 - Set a different required progression stage to create TBC race characters
 #
-#
 IndividualProgression.TbcRacesUnlockProgression = 6
 
-#
 # IndividualProgression.TbcRacesStartingProgression
-#        Description: The progression level at which TBC races characters will begin.
-#
-#        Default:   6 - TBC Races start at the beginning of TBC
-#                   0-18 - Progression level
-#
-#
-IndividualProgression.TbcRacesStartingProgression = 0
-
-#
-# IndividualProgression.CataRacesUnlockProgression
-#        Description: The progression level at which Cata races will be unlocked.
-#                     Races will be unlocked when the player reaches this level with any character on the account.
-#                     Disable to have Cata races available by default.
-#                     Please refer to IndividualProgression.h/ProgressionState enum for progression stage values.
-#
-#        Default:   0 - Cata Races always available
-#                   6 - Classic must be complete to create Cata Races
-#                   1-18 - Required progression level to create Cata Race characters
-#
-#
-IndividualProgression.CataRacesUnlockProgression = 17
-
-#
-# IndividualProgression.CataRacesStartingProgression
-#        Description: The progression level at which Cata races characters will begin.
-#
-#        Default:   6 - Cata Races start at the beginning of Cata
-#                   0-18 - Progression level
-#
-#
-IndividualProgression.CataRacesStartingProgression = 0
-
-# IndividualProgression.tbcRacesStartingProgression
 #
 #        Description: The progression stage at which Draenei and Blood Elf characters will begin.
 #
 #        Default:     0 - Draenei and Blood Elves start at progression 0
 #                     8 - Draenei and Blood Elves start at the beginning of TBC
 #
-IndividualProgression.tbcRacesStartingProgression = 0
+IndividualProgression.TbcRacesStartingProgression = 0
+
+# IndividualProgression.CataRacesUnlockProgression
+#
+#        Description: The progression stage at which Goblin and Worgen characters will be unlocked.
+#
+#        Default:     0 - Goblins and Worgen are always available
+#                     1-22 - Required progression stage
+#
+IndividualProgression.CataRacesUnlockProgression = 17
+
+# IndividualProgression.CataRacesStartingProgression
+#
+#        Description: The progression stage at which Goblin and Worgen characters will begin.
+#
+#        Default:     0
+#
+IndividualProgression.CataRacesStartingProgression = 0
 
 # IndividualProgression.DeathKnightUnlockProgression
 #
@@ -523,10 +508,6 @@ IndividualProgression.VanillaPvpEarnTitlesAfterVanilla = 1
 #
 #        Description: Enable / Disable bot accounts earning pvp titles.
 #
-# IndividualProgression.ProgressionSetterAlwaysVisible
-#        Description: Normally the individual progression setter (ID 50000) is only visible if one character of an account has 
-#        either reached max progression or the IndividualProgression.ProgressionLimit. With ProgressionSetterAlwaysVisible enabled
-#        the player can always see the progression setter npc.
 #        Default:     0 - Disabled
 #                     1 - Enabled
 #
@@ -553,54 +534,11 @@ IndividualProgression.BotAccountsMaxLevel = 80
 #
 IndividualProgression.EnableAllSpellRanks = 0
 
-# IndividualProgression.EnableSetRepCommand
-#
-#        Description: Enable the .ip setrep command for normal AND gm accounts
-#                     This command will set the reputation of certain factions to the same value as the character that has the highest value on your account.
-#                     To avoid abuse this command will by default not work for factions you aren't already neutral/friendly/honored with. (depending on the faction)
-#                     Use IndividualProgression.sharedFactionIdsRegex to set the allowed factions players can share with the characters on their account.
-#
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-IndividualProgression.EnableSetRepCommand = 0
-
-# IndividualProgression.LimitedSetRepCommand
-#
-#        Description: To avoid abuse, the player needs to be at least neutral/friendly/honored already with a faction to gain reputation for it. (depending on the faction)
-#                     This will help prevent a group of 5 characters to hand in a quest 1 by 1 and use the '.ip setrep' command in between each time to get 5x the reputation.
-#                     Needing to be honored means you already did most quests or already put in some reputation grind yourself.
-#                     PvP factions will require neutral reputation, so they are not effected. (see: cs_individualProgression.cpp for the full list)
-#                     The Aldor, The Scryers and the Brood of Nozdormu are exceptions. You need to be honored with them, even if this setting is disabled.
-#
-#        Default:     1 - Enabled
-#                     0 - Disabled
-#
-IndividualProgression.LimitedSetRepCommand = 1
-
-# IndividualProgression.sharedFactionIdsRegex
-#
-#        Description: This is a list of faction ids that the player can share with other characters on their account.
-#                     EnableSetRepCommand needs to be enabled.
-#                     Valid faction ids are: 
-#                     - vanilla = 59|270|349|509|510|529|576|589|609|729|730|749|889|890|909|910
-#                     - tbc     = 922|932|933|934|935|941|942|946|947|967|970|978|989|990|1011|1012|1015|1031|1038|1077
-#                     - wotlk   = 1037|1052|1073|1090|1091|1094|1098|1119|1124|1156
-#
-#                     see also: https://www.wowhead.com/wotlk/factions
-#
-#        Default:     "59|270|349|509|510|529|576|589|609|729|730|749|889|890|909"
-#
-IndividualProgression.sharedFactionIdsRegex = "59|270|349|509|510|529|576|589|609|729|730|749|889|890|909"
-
-##############################################
-# Twilborne Custom                           #
-##############################################
-#
 # IndividualProgression.ProgressionSetterAlwaysVisible
-#        Description: Normally the individual progression setter (ID 50000) is only visible if one character of an account has 
-#        either reached max progression or the IndividualProgression.ProgressionLimit. With ProgressionSetterAlwaysVisible enabled
-#        the player can always see the progression setter npc.
+#
+#        Description: Always show the individual progression setter instead of waiting until the account reaches
+#                     the configured progression limit.
+#
 #        Default:     0 - Disabled
 #                     1 - Enabled
 #

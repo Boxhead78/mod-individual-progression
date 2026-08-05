@@ -136,7 +136,10 @@ public:
     onyxia_entrance_trigger() : AreaTriggerScript("onyxia_entrance_trigger") { }
 
     bool OnTrigger(Player* player, AreaTrigger const* /*areaTrigger*/) override
-    {       
+    {
+        if (!player || !player->IsInWorld() || !player->GetSession())
+            return false;
+
         // Bots are always allowed to teleport, skip all checks
         if (player->GetSession()->IsBot())
         {
